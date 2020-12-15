@@ -23,7 +23,7 @@ from inflector import English, Inflector
 from nark.managers.query_terms import QueryTerms
 
 from dob_bright.reports.render_results import render_results
-from dob_bright.termio import (
+from easy_as_pypi_termio import (
     click_echo,
     dob_in_user_exit,
     dob_in_user_warning,

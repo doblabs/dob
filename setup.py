@@ -49,6 +49,9 @@ requirements = [
     # Get-package-or-Git-version helper.
     #  https://github.com/tallybark/easy-as-pypi-getver
     'easy-as-pypi-getver',
+    # Click + ansi_escape_room (color) + convenience.
+    #  https://github.com/tallybark/easy-as-pypi-termio
+    'easy-as-pypi-termio',
     # Elapsed timedelta formatter, e.g., "1.25 days".
     # - Imports as `pedantic_timedelta`.
     #  https://github.com/hotoffthehamster/human-friendly_pedantic-timedelta

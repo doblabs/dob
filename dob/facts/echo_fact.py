@@ -22,7 +22,7 @@ import click_hotoffthehamster as click
 from click_hotoffthehamster.formatting import wrap_text
 from click_hotoffthehamster._textwrap import TextWrapper
 
-from dob_bright.termio import attr, click_echo, dob_in_user_exit, fg
+from easy_as_pypi_termio import attr, click_echo, dob_in_user_exit, fg
 
 from ..clickux.help_strings import NO_ACTIVE_FACT_HELP
 

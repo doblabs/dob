@@ -25,8 +25,8 @@ import click_hotoffthehamster as click
 # BREADCRUMB: PROFILING
 from nark.helpers.dev.profiling import profile_elapsed, timefunct
 
-from dob_bright.termio import click_echo, echo_exit
-from dob_bright.termio.paging import ClickEchoPager
+from easy_as_pypi_termio import click_echo, echo_exit
+from easy_as_pypi_termio.paging import ClickEchoPager
 
 from .clickux import help_strings
 from .clickux.aliasable_bunchy_plugin import ClickAliasableBunchyPluginGroup

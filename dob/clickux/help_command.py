@@ -17,7 +17,7 @@
 
 from gettext import gettext as _
 
-from dob_bright.termio import attr, fg, click_echo, echo_exit
+from easy_as_pypi_termio import attr, fg, click_echo, echo_exit
 
 from ..run_cli import run
 

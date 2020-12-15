@@ -20,7 +20,7 @@ from gettext import gettext as _
 from functools import update_wrapper
 
 from dob_bright.crud.fact_dressed import FactDressed
-from dob_bright.termio import click_echo, dob_in_user_exit, echo_block_header
+from easy_as_pypi_termio import click_echo, dob_in_user_exit, echo_block_header
 
 from .. import __arg0name__, migrate
 

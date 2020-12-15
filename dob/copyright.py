@@ -22,7 +22,7 @@ from datetime import datetime
 
 from gettext import gettext as _
 
-from dob_bright.termio import click_echo
+from easy_as_pypi_termio import click_echo
 
 from . import (
     get_version,

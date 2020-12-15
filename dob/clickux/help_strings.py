@@ -21,7 +21,7 @@ from gettext import gettext as _
 
 from dob_bright.config.fileboss import default_config_path, default_config_path_abbrev
 from dob_bright.config.urable import ConfigUrable
-from dob_bright.termio import attr, bg, coloring, fg, highlight_value
+from easy_as_pypi_termio import attr, bg, coloring, fg, highlight_value
 
 from ..copyright import assemble_copyright
 

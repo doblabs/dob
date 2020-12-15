@@ -17,7 +17,7 @@
 
 from gettext import gettext as _
 
-from dob_bright.termio import attr, coloring
+from easy_as_pypi_termio import attr, coloring
 
 __all__ = (
     'help_header_format',

@@ -23,7 +23,7 @@ import click_hotoffthehamster as click
 from inflector import English, Inflector
 
 from dob_bright.crud.fix_times import mend_fact_timey_wimey
-from dob_bright.termio import (
+from easy_as_pypi_termio import (
     attr,
     click_echo,
     dob_in_user_exit,

@@ -23,7 +23,7 @@ from nark.items.fact import Fact
 
 # Profiling: load AppDirs: ~ 0.011 secs.
 from dob_bright.config.app_dirs import AppDirs
-from dob_bright.termio import ascii_art, attr, click_echo, fg, highlight_value
+from easy_as_pypi_termio import ascii_art, attr, click_echo, fg, highlight_value
 
 from .clickux.plugin_group import ClickPluginGroup
 

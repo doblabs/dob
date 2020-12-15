@@ -21,7 +21,7 @@ from gettext import gettext as _
 
 from dob_bright.crud.fact_from_factoid import must_create_fact_from_factoid
 from dob_bright.crud.fix_times import mend_fact_timey_wimey
-from dob_bright.termio import dob_in_user_exit
+from easy_as_pypi_termio import dob_in_user_exit
 
 from dob_prompt.prompters.triple_prompter import ask_user_for_edits
 

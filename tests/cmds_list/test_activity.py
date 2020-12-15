@@ -15,7 +15,7 @@
 # You can find the GNU General Public License reprinted in the file titled 'LICENSE',
 # or visit <http://www.gnu.org/licenses/>.
 
-from dob_bright.termio import ascii_table
+from easy_as_pypi_termio import ascii_table
 
 from dob import cmds_list
 

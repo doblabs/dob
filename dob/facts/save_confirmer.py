@@ -17,13 +17,13 @@
 
 from gettext import gettext as _
 
-from dob_bright.termio import (
+from easy_as_pypi_termio import (
     attr,
     click_echo,
     echo_block_header,
     highlight_value
 )
-from dob_bright.termio.crude_progress import CrudeProgress
+from easy_as_pypi_termio.crude_progress import CrudeProgress
 
 from .echo_fact import echo_fact, write_fact_block_format
 from .simple_prompts import mend_facts_confirm_and_save_maybe

@@ -18,7 +18,7 @@
 """A time tracker for the command line. Utilizing the power of nark."""
 
 from dob_bright.crud.parse_input import parse_input
-from dob_bright.termio.crude_progress import CrudeProgress
+from easy_as_pypi_termio.crude_progress import CrudeProgress
 
 from .save_backedup import prompt_and_save_backedup
 

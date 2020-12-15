@@ -53,9 +53,9 @@ from dob_bright.styling.styles_cmds import (
     echo_styles_table,
     edit_styles_conf
 )
-from dob_bright.termio.echoes import click_echo
-from dob_bright.termio.errors import dob_in_user_exit
-from dob_bright.termio.paging import flush_pager
+from easy_as_pypi_termio.echoes import click_echo
+from easy_as_pypi_termio.errors import dob_in_user_exit
+from easy_as_pypi_termio.paging import flush_pager
 
 from .clickux import help_strings
 from .clickux import help_string_add_fact

@@ -25,7 +25,7 @@ from nark import __file__ as nark___file__
 from nark.helpers.app_dirs import ensure_directory_exists
 
 from dob_bright.help_newbs import NEWBIE_HELP_WELCOME
-from dob_bright.termio import (
+from easy_as_pypi_termio import (
     attr,
     click_echo,
     dob_in_user_exit,

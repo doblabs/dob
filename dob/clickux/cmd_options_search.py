@@ -20,7 +20,7 @@ from gettext import gettext as _
 import click_hotoffthehamster as click
 
 from dob_bright.reports.tabulate_results import report_table_columns
-from dob_bright.termio import dob_in_user_exit, dob_in_user_warning
+from easy_as_pypi_termio import dob_in_user_exit, dob_in_user_warning
 
 __all__ = (
     # One decorator is all you need for each list and usage command.

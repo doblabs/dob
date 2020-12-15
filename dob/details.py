@@ -19,11 +19,14 @@ import os
 
 from gettext import gettext as _
 
+from easy_as_pypi_termio import ascii_art
+from easy_as_pypi_termio.echoes import click_echo, highlight_value
+from easy_as_pypi_termio.style import attr, fg
+
 from nark.items.fact import Fact
 
 # Profiling: load AppDirs: ~ 0.011 secs.
 from dob_bright.config.app_dirs import AppDirs
-from easy_as_pypi_termio import ascii_art, attr, click_echo, fg, highlight_value
 
 from .clickux.plugin_group import ClickPluginGroup
 

@@ -17,10 +17,10 @@
 
 """Copyright output UX methods."""
 
+from gettext import gettext as _
+
 import os
 from datetime import datetime
-
-from gettext import gettext as _
 
 from easy_as_pypi_termio import click_echo
 

@@ -19,9 +19,10 @@ from gettext import gettext as _
 
 import click_hotoffthehamster as click
 
+from easy_as_pypi_termio.errors import dob_in_user_exit, dob_in_user_warning
+
 from dob_bright.crud.fact_dressed import FactDressed
 from dob_bright.crud.interrogate import ask_edit_with_editor
-from easy_as_pypi_termio import dob_in_user_exit, dob_in_user_warning
 
 from dob_prompt.prompters.triple_prompter import ask_user_for_edits
 

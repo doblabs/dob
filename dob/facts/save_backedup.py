@@ -21,12 +21,9 @@ import traceback
 
 from gettext import gettext as _
 
-from easy_as_pypi_termio import (
-    click_echo,
-    dob_in_user_exit,
-    dob_in_user_warning,
-    highlight_value
-)
+from easy_as_pypi_termio.echoes import click_echo, highlight_value
+from easy_as_pypi_termio.errors import dob_in_user_exit, dob_in_user_warning
+
 from dob_bright.config.app_dirs import AppDirs, get_appdirs_subdir_file_path
 
 from .echo_fact import write_fact_block_format

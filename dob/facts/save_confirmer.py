@@ -17,13 +17,10 @@
 
 from gettext import gettext as _
 
-from easy_as_pypi_termio import (
-    attr,
-    click_echo,
-    echo_block_header,
-    highlight_value
-)
 from easy_as_pypi_termio.crude_progress import CrudeProgress
+from easy_as_pypi_termio.echoes import echo_block_header, highlight_value
+from easy_as_pypi_termio.paging import click_echo
+from easy_as_pypi_termio.style import attr
 
 from .echo_fact import echo_fact, write_fact_block_format
 from .simple_prompts import mend_facts_confirm_and_save_maybe

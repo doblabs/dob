@@ -21,18 +21,14 @@ import sys
 
 from gettext import gettext as _
 
+from easy_as_pypi_termio.echoes import click_echo, highlight_value
+from easy_as_pypi_termio.errors import dob_in_user_exit, dob_in_user_warning
+from easy_as_pypi_termio.style import attr, fg
+
 from nark import __file__ as nark___file__
 from nark.helpers.app_dirs import ensure_directory_exists
 
 from dob_bright.help_newbs import NEWBIE_HELP_WELCOME
-from easy_as_pypi_termio import (
-    attr,
-    click_echo,
-    dob_in_user_exit,
-    dob_in_user_warning,
-    fg,
-    highlight_value
-)
 
 from . import __arg0name__
 

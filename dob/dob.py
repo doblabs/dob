@@ -32,6 +32,9 @@ from functools import update_wrapper
 
 import click_hotoffthehamster as click
 
+from easy_as_pypi_termio.errors import dob_in_user_exit
+from easy_as_pypi_termio.paging import click_echo, flush_pager
+
 from dob_bright.crud.fact_dressed import FactDressed
 from dob_bright.styling.ignore_cmds import (
     create_ignore_conf,
@@ -53,9 +56,6 @@ from dob_bright.styling.styles_cmds import (
     echo_styles_table,
     edit_styles_conf
 )
-from easy_as_pypi_termio.echoes import click_echo
-from easy_as_pypi_termio.errors import dob_in_user_exit
-from easy_as_pypi_termio.paging import flush_pager
 
 from .clickux import help_strings
 from .clickux import help_string_add_fact

@@ -18,17 +18,15 @@
 from gettext import gettext as _
 
 import sys
+
 from inflector import English, Inflector
+
+from easy_as_pypi_termio.echoes import click_echo, highlight_value
+from easy_as_pypi_termio.errors import dob_in_user_exit, dob_in_user_warning
 
 from nark.managers.query_terms import QueryTerms
 
 from dob_bright.reports.render_results import render_results
-from easy_as_pypi_termio import (
-    click_echo,
-    dob_in_user_exit,
-    dob_in_user_warning,
-    highlight_value
-)
 
 from ..clickux.cmd_options_search import cmd_options_output_format_facts_only
 from ..clickux.query_assist import error_exit_no_results

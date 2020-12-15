@@ -18,11 +18,14 @@
 from gettext import gettext as _
 
 import ansiwrap
+
 import click_hotoffthehamster as click
 from click_hotoffthehamster.formatting import wrap_text
 from click_hotoffthehamster._textwrap import TextWrapper
 
-from easy_as_pypi_termio import attr, click_echo, dob_in_user_exit, fg
+from easy_as_pypi_termio.errors import dob_in_user_exit
+from easy_as_pypi_termio.paging import click_echo
+from easy_as_pypi_termio.style import attr, fg
 
 from ..clickux.help_strings import NO_ACTIVE_FACT_HELP
 

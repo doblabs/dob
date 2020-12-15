@@ -27,9 +27,9 @@ from nark import config as nark_config  # noqa: F401 '<>' imported but unused
 from dob_bright import config as dob_bright_config  # noqa: F401
 from dob_viewer import config as dob_viewer_config  # noqa: F401
 
+from dob_bright.config.config_table import echo_config_decorator_table
 from dob_bright.crud.interrogate import run_editor_safe
 from dob_bright.termio import click_echo, dob_in_user_exit
-from dob_bright.termio.config_table import echo_config_decorator_table
 
 __all__ = (
     'echo_config_table',

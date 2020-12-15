@@ -46,6 +46,9 @@ requirements = [
     #  Upstream at: https://github.com/click-contrib/click-aliases
     #  Released at: https://github.com/hotoffthehamster/click-hotoffthehamster-alias
     'click-hotoffthehamster-alias == 1.0.4',
+    # Get-package-or-Git-version helper.
+    #  https://github.com/tallybark/easy-as-pypi-getver
+    'easy-as-pypi-getver',
     # Elapsed timedelta formatter, e.g., "1.25 days".
     # - Imports as `pedantic_timedelta`.
     #  https://github.com/hotoffthehamster/human-friendly_pedantic-timedelta

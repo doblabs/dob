@@ -20,7 +20,7 @@
 import os
 import sys
 
-from nark import get_version as _get_version
+from easy_as_pypi_getver import get_version as _get_version
 
 __all__ = (
     'get_version',

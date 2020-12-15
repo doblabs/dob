@@ -26,6 +26,7 @@
 #  -e ../click-hotoffthehamster
 #  -e ../click-hotoffthehamster-alias
 #  -e ../config-decorator
+#  -e ../easy-as-pypi-getver
 #  -e ../human-friendly_pedantic-timedelta
 #  -e ../pep440-version-compare-cli
 #  -e ../python-prompt-toolkit

@@ -50,7 +50,16 @@ def prompt_and_save_backedup(
     """"""
 
     def _prompt_and_save():
-        backup_f = prepare_backup_file(backup)
+        try:
+            backup_f = must_prepare_backup_file(backup)
+        except Exception as err:
+            # On must_get_appdirs_subdir_file_path failure (permissions, or
+            # directory on path is actually a file).
+            dob_in_user_exit(str(err))
+        else:
+            _prompt_and_save_backup_f(backup_f)
+
+    def _prompt_and_save_backup_f(backup_f):
         delete_backup = False
         inner_error = None
         saved_facts = []
@@ -91,10 +100,10 @@ def prompt_and_save_backedup(
 
     # ***
 
-    def prepare_backup_file(backup):
+    def must_prepare_backup_file(backup):
         if not backup:
             return None
-        backup_path, backup_link = get_import_ephemeral_backup_path()
+        backup_path, backup_link = must_get_import_ephemeral_backup_path()
         log_msg = _("Creating backup at {0}").format(backup_path)
         controller.client_logger.info(log_msg)
         backup_f = backup_file_open(backup_path)
@@ -132,7 +141,7 @@ def prompt_and_save_backedup(
 
     IMPORT_BACKUP_DIR = 'carousel'
 
-    def get_import_ephemeral_backup_path():
+    def must_get_import_ephemeral_backup_path():
         backup_prefix = 'dob.import'
         backup_tstamp = controller.now.strftime('%Y%m%d%H%M%S')
         backup_basename = backup_prefix + '-' + backup_tstamp

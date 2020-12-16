@@ -19,8 +19,8 @@
 
 from gettext import gettext as _
 
-from dob_bright.config.fileboss import default_config_path, default_config_path_abbrev
-from dob_bright.config.urable import ConfigUrable
+from easy_as_pypi_config.fileboss import default_config_path, default_config_path_abbrev
+
 from easy_as_pypi_termio import attr, bg, coloring, fg, highlight_value
 
 from ..copyright import assemble_copyright
@@ -409,6 +409,8 @@ def INIT_HELP_OVERVIEW(ctx):
 # ***
 
 def CONFIG_GROUP_HELP(ctx):
+    controller = ctx.obj
+
     _help = _(
         """
         Manage user config settings (including editor key bindings).
@@ -528,7 +530,7 @@ def CONFIG_GROUP_HELP(ctx):
         """
     ).format(
         default_config_path=highlight_value(default_config_path()),
-        envkey=ConfigUrable.DOB_CONFIGFILE_ENVKEY,
+        envkey=controller.DOB_CONFIGFILE_ENVKEY,
         **common_format()
     )
     return _help

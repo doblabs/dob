@@ -23,7 +23,10 @@ import sys
 
 from gettext import gettext as _
 
-from dob_bright.config.app_dirs import AppDirs, get_appdirs_subdir_file_path
+from easy_as_pypi_apppth import AppDirs
+from easy_as_pypi_apppth.expand_and_mkdirs import must_get_appdirs_subdir_file_path
+
+from easy_as_pypi_termio.errors import dob_in_user_exit
 
 from .clickux.plugin_group import PLUGINS_DIRNAME
 
@@ -62,16 +65,20 @@ def install_plugin(package_module_path, package_plugin_name):
         return src_plugin
 
     def must_dst_target_path():
-        dst_plugin = get_appdirs_subdir_file_path(
-            file_basename=package_plugin_name,
-            dir_dirname=PLUGINS_DIRNAME,
-            appdirs_dir=AppDirs.user_config_dir,
-        )
-        if os.path.exists(dst_plugin):
-            print(_("The plugin is already installed!"))
-            # Not really an error to already be installed,
-            # so return not nonzero.
-            sys.exit(0)
+        try:
+            dst_plugin = must_get_appdirs_subdir_file_path(
+                file_basename=package_plugin_name,
+                dir_dirname=PLUGINS_DIRNAME,
+                appdirs_dir=AppDirs().user_config_dir,
+            )
+        except Exception as err:
+            dob_in_user_exit(str(err))
+        else:
+            if os.path.exists(dst_plugin):
+                print(_("The plugin is already installed!"))
+                # Not really an error to already be installed,
+                # so return not nonzero.
+                sys.exit(0)
         return dst_plugin
 
     def symlink_or_copy_plugin_or_die(src_plugin, dst_plugin):

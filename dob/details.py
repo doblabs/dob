@@ -19,14 +19,16 @@ import os
 
 from gettext import gettext as _
 
+# Profiling: load AppDirs: ~ 0.011 secs.
+#  [before being moved to new package; when profiled was at:]
+#  from dob_bright.config.app_dirs import AppDirs
+from easy_as_pypi_apppth.app_dirs_with_mkdir import AppDirsWithMkdir
+
 from easy_as_pypi_termio import ascii_art
 from easy_as_pypi_termio.echoes import click_echo, highlight_value
 from easy_as_pypi_termio.style import attr, fg
 
 from nark.items.fact import Fact
-
-# Profiling: load AppDirs: ~ 0.011 secs.
-from dob_bright.config.app_dirs import AppDirs
 
 from .clickux.plugin_group import ClickPluginGroup
 
@@ -192,25 +194,28 @@ def echo_app_environs(controller):
 def existent_app_dirs(include_errs=False, highlight=False):
     """"""
     def _existent_app_dirs():
-        was_create = appdirs_disable_create()
+        previous_create = appdirs_disable_create()
         prop_paths = build_prop_paths()
-        appdirs_restore_create(was_create)
+        appdirs_restore_create(previous_create)
         return prop_paths
 
     def appdirs_disable_create():
         # (lb): Our AppDirs defaults to trying to create directories. Tell it not to.
         #   NOTE: I consider this side effect a bug. Paths should be lazy-created only
         #   when a file stored therein is opened for writing.
-        was_create = AppDirs.create
-        AppDirs.create = False
-        return was_create
+        app_dirs_singleton = AppDirsWithMkdir()
+        previous_create = app_dirs_singleton.create
+        app_dirs_singleton.create = False
+        return previous_create
 
-    def appdirs_restore_create(was_create):
-        AppDirs.create = was_create
+    def appdirs_restore_create(previous_create):
+        app_dirs_singleton = AppDirsWithMkdir()
+        app_dirs_singleton.create = previous_create
 
     def build_prop_paths():
         actual_prop_paths = {}
 
+        app_dirs_singleton = AppDirsWithMkdir()
         # CONFIRM: (lb): On virtualenv install, no site_* dirs.
         #   Will this not be the case for site-wide, non-virtenv installs?
         for prop in [
@@ -221,7 +226,7 @@ def existent_app_dirs(include_errs=False, highlight=False):
             'user_cache_dir',
             'user_log_dir',
         ]:
-            path = getattr(AppDirs, prop)
+            path = getattr(app_dirs_singleton, prop)
             path = check_exists(path)
             if path is not None:
                 actual_prop_paths[prop] = path

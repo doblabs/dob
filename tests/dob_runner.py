@@ -19,6 +19,8 @@ import pytest
 
 from unittest.mock import PropertyMock
 
+from easy_as_pypi_config.urable import ConfigUrable
+
 from nark.tests.conftest import *  # noqa: F401, F403
 from nark.tests.backends.sqlalchemy.conftest import *  # noqa: F401, F403
 
@@ -27,11 +29,8 @@ from nark.backends.sqlalchemy import storage
 from nark.backends.sqlalchemy.managers.migrate import MigrationsManager
 from nark.control import NarkControl
 
-from dob_bright.config.urable import ConfigUrable
-
-# (lb): Note that setting pytest_plugins = (...) won't work from this file
-# (because not a conftest.py module, I'd guess). One options is to *-import
-# necessary files, e.g.,
+# (lb): Note that using pytest_plugins = (...) only works from root conftest.py.
+# One options is to *-import necessary files, e.g.,
 #   from nark.tests.backends.sqlalchemy.conftest import *  # noqa: F401, F403
 # Another option is to add the necessary fixture modules to the pytest_plugins
 # list in this directory's conftest.py file, which seems like the better option.

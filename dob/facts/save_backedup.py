@@ -21,10 +21,11 @@ import traceback
 
 from gettext import gettext as _
 
+from easy_as_pypi_apppth import AppDirs
+from easy_as_pypi_apppth.expand_and_mkdirs import must_get_appdirs_subdir_file_path
+
 from easy_as_pypi_termio.echoes import click_echo, highlight_value
 from easy_as_pypi_termio.errors import dob_in_user_exit, dob_in_user_warning
-
-from dob_bright.config.app_dirs import AppDirs, get_appdirs_subdir_file_path
 
 from .echo_fact import write_fact_block_format
 from .save_confirmed import prompt_and_save_confirmed
@@ -135,17 +136,17 @@ def prompt_and_save_backedup(
         backup_prefix = 'dob.import'
         backup_tstamp = controller.now.strftime('%Y%m%d%H%M%S')
         backup_basename = backup_prefix + '-' + backup_tstamp
-        backup_fullpath = get_appdirs_subdir_file_path(
+        backup_fullpath = must_get_appdirs_subdir_file_path(
             file_basename=backup_basename,
             dir_dirname=IMPORT_BACKUP_DIR,
-            appdirs_dir=AppDirs.user_cache_dir,
+            appdirs_dir=AppDirs().user_cache_dir,
         )
         # 2018-06-29 18:56: This symlink really isn't that helpful...
         #   but we'll see if I start using it. At least for DEVing.
-        backup_linkpath = get_appdirs_subdir_file_path(
+        backup_linkpath = must_get_appdirs_subdir_file_path(
             file_basename=backup_prefix,
             dir_dirname=IMPORT_BACKUP_DIR,
-            appdirs_dir=AppDirs.user_cache_dir,
+            appdirs_dir=AppDirs().user_cache_dir,
         )
         return backup_fullpath, backup_linkpath
 

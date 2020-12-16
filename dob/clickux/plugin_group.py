@@ -25,7 +25,8 @@ from gettext import gettext as _
 
 import click_hotoffthehamster as click
 
-from dob_bright.config.app_dirs import AppDirs
+from easy_as_pypi_apppth import AppDirs
+
 from easy_as_pypi_termio import dob_in_user_warning
 
 from ..helpers.path import compile_and_eval_source
@@ -45,7 +46,7 @@ class ClickPluginGroup(click.Group):
     def __init__(self, *args, **kwargs):
         super(ClickPluginGroup, self).__init__(*args, **kwargs)
         self.plugins_basepath = os.path.join(
-            AppDirs.user_config_dir, PLUGINS_DIRNAME,
+            AppDirs().user_config_dir, PLUGINS_DIRNAME,
         )
         self.has_loaded = False
 

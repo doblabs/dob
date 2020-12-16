@@ -25,14 +25,6 @@ requirements = [
     # Vocabulary word pluralizer.
     #  https://github.com/ixmatus/inflector
     'Inflector >= 3.0.1, < 4',
-    # https://github.com/mnmelo/lazy_import
-    'lazy_import >= 0.2.2, < 1',
-    # Tabulate is one of the many table formatter choices.
-    #  https://bitbucket.org/astanin/python-tabulate
-    'tabulate >= 0.8.7, < 1',
-    # Texttable is one of the many table formatter choices.
-    #  https://github.com/bufordtaylor/python-texttable
-    'texttable >= 1.6.2, < 2',
 
     # *** HOTH packages.
 
@@ -46,6 +38,12 @@ requirements = [
     #  Upstream at: https://github.com/click-contrib/click-aliases
     #  Released at: https://github.com/hotoffthehamster/click-hotoffthehamster-alias
     'click-hotoffthehamster-alias == 1.0.4',
+    # ActiveState/appdirs + Singleton (app-wide access w/out appname) + `mkdir -p`.
+    #  https://github.com/tallybark/easy-as-pypi-apppth#🛣
+    'easy-as-pypi-apppth',
+    # configobj + config-decorator helper.
+    #  https://github.com/tallybark/easy-as-pypi-config
+    'easy-as-pypi-config',
     # Get-package-or-Git-version helper.
     #  https://github.com/tallybark/easy-as-pypi-getver
     'easy-as-pypi-getver',
@@ -56,6 +54,7 @@ requirements = [
     # - Imports as `pedantic_timedelta`.
     #  https://github.com/hotoffthehamster/human-friendly_pedantic-timedelta
     'human-friendly_pedantic-timedelta > 2.0.11, < 2.0.13',
+
     # The heart of Hamster. (Ye olde `hamster-lib`).
     #  https://github.com/tallybark/nark
     'nark > 3.2.3, < 3.2.5',  # I.e., release 3.2.4, or whatever dev's running.

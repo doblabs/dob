@@ -65,11 +65,12 @@ def echo_config_table(
     conf_objs = fetch_config_objects(controller, parts)
     include_hidden = section and keyname
     echo_config_decorator_table(
-        controller,
-        conf_objs,
+        cfg_decors=conf_objs,
+        include_hidden=include_hidden,
+        # Passed on to render_results:
+        controller=controller,
         output_format=output_format,
         table_type=table_type,
-        include_hidden=include_hidden,
     )
 
 

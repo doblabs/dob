@@ -35,6 +35,9 @@ import click_hotoffthehamster as click
 from easy_as_pypi_termio.errors import dob_in_user_exit
 from easy_as_pypi_termio.paging import click_echo, flush_pager
 
+# Set app-wide AppDirs.appname and KeyChainedValue._envvar_prefix.
+from . import config  # noqa: F401
+
 from dob_bright.crud.fact_dressed import FactDressed
 from dob_bright.styling.ignore_cmds import (
     create_ignore_conf,
@@ -105,7 +108,7 @@ from .cmds_usage import activity as usage_activity
 from .cmds_usage import category as usage_category
 from .cmds_usage import tag as usage_tag
 from .complete import tab_complete
-from .config import (
+from .config.cmds_config import (
     echo_config_table,
     echo_config_value,
     edit_config_file,

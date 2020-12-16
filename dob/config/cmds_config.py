@@ -34,6 +34,7 @@ from dob_bright.config.config_table import echo_config_decorator_table
 from dob_bright.crud.interrogate import run_editor_safe
 
 __all__ = (
+    'alert_if_config_unwell',
     'echo_config_table',
     'echo_config_value',
     'edit_config_file',
@@ -53,6 +54,7 @@ __all__ = (
 
 # *** [DUMP] TABLE
 
+# dob-config-show command.
 def echo_config_table(
     controller,
     section,
@@ -76,12 +78,14 @@ def echo_config_table(
 
 # *** [EDIT] CONFIG
 
+# dob-config-edit command.
 def edit_config_file(controller):
     run_editor_safe(filename=controller.configurable.config_path)
 
 
 # *** [GET] ECHO
 
+# dob-config-get command.
 def echo_config_value(ctx, controller, parts):
     must_parts(ctx, parts, _('“KEYNAME”'))
     section_or_setting = fetch_config_object(controller, parts)
@@ -111,6 +115,7 @@ def echo_config_value_section(section):
 
 # *** [SET] CONFIG
 
+# dob-config-set command.
 def write_config_value(ctx, controller, parts):
     parts, value = config_parts_pop_value(ctx, parts)
     section_or_setting = fetch_config_object(controller, parts)
@@ -187,4 +192,17 @@ def exit_error_no_setting(parts):
     dob_in_user_exit(_(
         'ERROR: Not a configuration setting: “{}”.'.format('.'.join(parts))
     ))
+
+
+# *** @decorator
+
+def alert_if_config_unwell(func):
+    """
+    """
+
+    def wrapper(ctx, controller, *args, **kwargs):
+        controller.alert_user_if_config_file_unwell()
+        func(ctx, controller, *args, **kwargs)
+
+    return wrapper
 

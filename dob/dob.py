@@ -109,6 +109,7 @@ from .cmds_usage import category as usage_category
 from .cmds_usage import tag as usage_tag
 from .complete import tab_complete
 from .config.cmds_config import (
+    alert_if_config_unwell,
     echo_config_table,
     echo_config_value,
     edit_config_file,
@@ -339,6 +340,7 @@ def config_create(ctx, controller, force):
 @click.argument('section', nargs=1, default='')
 @click.argument('keyname', nargs=1, default='')
 @pass_controller_context
+@alert_if_config_unwell
 @ensure_plugged_in
 def config_show(ctx, controller, section='', keyname='', **kwargs):
     """"""
@@ -352,6 +354,7 @@ def config_show(ctx, controller, section='', keyname='', **kwargs):
 @show_help_finally
 @flush_pager
 @pass_controller_context
+@alert_if_config_unwell
 @ensure_plugged_in
 def config_edit(ctx, controller):
     """"""
@@ -365,6 +368,7 @@ def config_edit(ctx, controller):
 @flush_pager
 @click.argument('parts', nargs=-1, metavar='[SECTION] KEYNAME VALUE')
 @pass_controller_context
+@alert_if_config_unwell
 @ensure_plugged_in
 def config_value_get(ctx, controller, parts):
     """"""
@@ -378,6 +382,7 @@ def config_value_get(ctx, controller, parts):
 @flush_pager
 @click.argument('parts', nargs=-1, metavar='[SECTION] KEYNAME VALUE')
 @pass_controller_context
+@alert_if_config_unwell
 @ensure_plugged_in
 def config_value_set(ctx, controller, parts):
     """"""
@@ -390,6 +395,7 @@ def config_value_set(ctx, controller, parts):
 @show_help_finally
 @flush_pager
 @pass_controller_context
+@alert_if_config_unwell
 @ensure_plugged_in
 def config_update(ctx, controller):
     """Write "missing" key values to the user configuration file."""

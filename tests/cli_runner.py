@@ -29,6 +29,7 @@ def runner(tmpdir):
     def runner(args=[], keep_paths=False, **kwargs):
         # Override environments that AppDirs (thankfully) hooks. Ref:
         #   ~/.virtualenvs/dob/lib/python3.8/site-packages/appdirs.py
+        #   $(virtualenvwrapper_get_site_packages_dir)/appdirs.py
 
         # Override paths: (1) if caller running multiple command test
         # (keep_paths=True); or (2) if user wants theirs (DOB_KEEP_PATHS).

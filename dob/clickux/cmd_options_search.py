@@ -20,7 +20,7 @@ from gettext import gettext as _
 import click_hotoffthehamster as click
 
 from dob_bright.reports.tabulate_results import report_table_columns
-from easy_as_pypi_termio import dob_in_user_exit, dob_in_user_warning
+from easy_as_pypi_termio import dob_in_user_exit, echo_warning
 
 __all__ = (
     # One decorator is all you need for each list and usage command.
@@ -744,7 +744,7 @@ def _postprocess_options_output_format_choices(kwargs):
             pass
 
     if len(fmts_specified) > 1:
-        dob_in_user_warning(_(
+        echo_warning(_(
             'More than one format specified: {}'
         ).format(fmts_specified))
 

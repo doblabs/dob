@@ -25,7 +25,7 @@ from easy_as_pypi_apppth import AppDirs
 from easy_as_pypi_apppth.expand_and_mkdirs import must_get_appdirs_subdir_file_path
 
 from easy_as_pypi_termio.echoes import click_echo, highlight_value
-from easy_as_pypi_termio.errors import dob_in_user_exit, dob_in_user_warning
+from easy_as_pypi_termio.errors import dob_in_user_exit, echo_warning
 
 from .echo_fact import write_fact_block_format
 from .save_confirmed import prompt_and_save_confirmed
@@ -137,7 +137,7 @@ def prompt_and_save_backedup(
                 'Failed to setup temporary backup file link at "{}": {}'
                 .format(backup_link, str(err))
             )
-            dob_in_user_warning(msg)
+            echo_warning(msg)
 
     IMPORT_BACKUP_DIR = 'carousel'
 

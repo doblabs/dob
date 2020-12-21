@@ -24,7 +24,7 @@ from gettext import gettext as _
 from easy_as_pypi_apppth.expand_and_mkdirs import ensure_directory_exists
 
 from easy_as_pypi_termio.echoes import click_echo, highlight_value
-from easy_as_pypi_termio.errors import dob_in_user_exit, dob_in_user_warning
+from easy_as_pypi_termio.errors import dob_in_user_exit, echo_warning
 from easy_as_pypi_termio.style import attr, fg
 
 from nark import __file__ as nark___file__
@@ -202,7 +202,7 @@ def upgrade_legacy_database_file(ctx, controller, file_in, force):
             shutil.copyfile(file_in.name, db_path)
         except Exception as err:
             msg = _('Failed to copy new database to ‘{}’').format(str(err))
-            dob_in_user_warning(msg)
+            echo_warning(msg)
 
     def echo_help():
         if controller.is_germinated:

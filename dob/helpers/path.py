@@ -17,7 +17,7 @@
 
 from gettext import gettext as _
 
-from easy_as_pypi_termio import dob_in_user_warning
+from easy_as_pypi_termio import echo_warning
 
 __all__ = (
     'compile_and_eval_source',
@@ -48,7 +48,7 @@ def compile_and_eval_source(py_path):
             msg = _(
                 'ERROR: Could not compile source file at "{}": {}'
             ).format(py_path, str(err))
-            dob_in_user_warning(msg)
+            echo_warning(msg)
         return code
 
     def eval_source_code(code, eval_globals, py_path):
@@ -62,7 +62,7 @@ def compile_and_eval_source(py_path):
             msg = _(
                 'ERROR: Could not eval compiled source at "{}": {}'
             ).format(py_path, str(err))
-            dob_in_user_warning(msg)
+            echo_warning(msg)
             return False
         else:
             return True

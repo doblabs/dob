@@ -19,7 +19,7 @@ from gettext import gettext as _
 
 import click_hotoffthehamster as click
 
-from easy_as_pypi_termio.errors import dob_in_user_exit, dob_in_user_warning
+from easy_as_pypi_termio.errors import dob_in_user_exit, echo_warning
 
 from dob_bright.crud.fact_dressed import FactDressed
 from dob_bright.crud.interrogate import ask_edit_with_editor
@@ -123,7 +123,7 @@ def edit_fact_by_pk(
             msg = _('No Fact found with ID “{}”.'.format(key))
         else:
             msg = _('There are not that many Facts.')
-        dob_in_user_warning(msg)
+        echo_warning(msg)
         return None
 
     # ***

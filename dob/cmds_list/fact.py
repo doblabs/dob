@@ -22,7 +22,7 @@ import sys
 from inflector import English, Inflector
 
 from easy_as_pypi_termio.echoes import click_echo, highlight_value
-from easy_as_pypi_termio.errors import dob_in_user_exit, dob_in_user_warning
+from easy_as_pypi_termio.errors import dob_in_user_exit, echo_warning
 
 from nark.managers.query_terms import QueryTerms
 
@@ -255,7 +255,7 @@ def list_facts(
         if n_results <= n_rows:
             return
 
-        dob_in_user_warning(_(
+        echo_warning(_(
             'Showed only {} of {} results. Use `-C term.row_limit=0` to see all results.'
         ).format(format(n_results, ','), format(n_rows, ',')))
 

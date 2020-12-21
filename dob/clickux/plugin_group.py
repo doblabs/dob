@@ -27,7 +27,7 @@ import click_hotoffthehamster as click
 
 from easy_as_pypi_apppth import AppDirs
 
-from easy_as_pypi_termio import dob_in_user_warning
+from easy_as_pypi_termio import echo_warning
 
 from ..helpers.path import compile_and_eval_source
 
@@ -101,7 +101,7 @@ class ClickPluginGroup(click.Group):
                 msg = _(
                     'ERROR: Could not open plugins file "{}": {}'
                 ).format(py_path, str(err))
-                dob_in_user_warning(msg)
+                echo_warning(msg)
         self.has_loaded = True
         return list(cmds)
 

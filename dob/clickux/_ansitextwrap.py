@@ -17,7 +17,7 @@
 
 """TextWrapper ansiwrap wrapper class."""
 
-from ansiwrap import fill
+from ansiwrap_hotoffthehamster import fill
 
 from click_hotoffthehamster._textwrap import TextWrapper
 

@@ -17,7 +17,7 @@
 
 from gettext import gettext as _
 
-import ansiwrap
+import ansiwrap_hotoffthehamster as ansiwrap
 
 import click_hotoffthehamster as click
 from click_hotoffthehamster.formatting import wrap_text

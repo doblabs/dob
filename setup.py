@@ -19,15 +19,17 @@ from setuptools import find_packages, setup
 # *** Package requirements.
 
 requirements = [
-    # "textwrap, but savvy to ANSI colors"
-    #  https://github.com/jonathaneunice/ansiwrap
-    'ansiwrap >= 0.8.4, < 1',
     # Vocabulary word pluralizer.
     #  https://github.com/ixmatus/inflector
     'Inflector >= 3.0.1, < 4',
 
     # *** HOTH packages.
 
+    # "textwrap, but savvy to ANSI colors"
+    #  https://github.com/jonathaneunice/ansiwrap
+    # Forked to update to latest Pythons
+    #  https://github.com/hotoffthehamster/ansiwrap
+    'ansiwrap-hotoffthehamster == 0.8.4',
     # (lb): Click may be the best optparser of any language I've used.
     #  https://github.com/pallets/click
     #    'click',

@@ -17,7 +17,7 @@
 
 from gettext import gettext as _
 
-from easy_as_pypi_termio import dob_in_user_exit
+from easy_as_pypi_termio import exit_warning
 
 __all__ = (
     'error_exit_no_results',
@@ -44,5 +44,5 @@ def error_exit_no_results(item_type, more_msg=None):
     # when I see an empty tell, I spend a nanosecond scanning it
     # for rows, because when I see table headers, I expect to see
     # table rows! So I'm kinda liking printing a message, not table.
-    dob_in_user_exit(msg)
+    exit_warning(msg)
 

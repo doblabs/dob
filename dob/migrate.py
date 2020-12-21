@@ -24,7 +24,7 @@ from gettext import gettext as _
 from easy_as_pypi_apppth.expand_and_mkdirs import must_ensure_directory_exists
 
 from easy_as_pypi_termio.echoes import click_echo, highlight_value
-from easy_as_pypi_termio.errors import dob_in_user_exit, echo_warning
+from easy_as_pypi_termio.errors import echo_warning, exit_warning
 from easy_as_pypi_termio.style import attr, fg
 
 from nark import __file__ as nark___file__
@@ -60,7 +60,7 @@ def control(controller):
     if not success and not err_msg:
         err_msg = _('The database is already versioned!')
     if err_msg:
-        dob_in_user_exit(err_msg)
+        exit_warning(err_msg)
 
 
 def downgrade(controller):
@@ -68,7 +68,7 @@ def downgrade(controller):
     response = controller.store.migrations.downgrade()
     assert response is not None
     if not response:
-        dob_in_user_exit(_('The database is already at the earliest version'))
+        exit_warning(_('The database is already at the earliest version'))
 
 
 def upgrade(controller):
@@ -76,7 +76,7 @@ def upgrade(controller):
     response = controller.store.migrations.upgrade()
     assert response is not None
     if not response:
-        dob_in_user_exit(_('The database is already at the latest version'))
+        exit_warning(_('The database is already at the latest version'))
 
 
 def version(controller, silent_check=False, must=True):
@@ -215,7 +215,7 @@ def upgrade_legacy_database_file(ctx, controller, file_in, force):
         try:
             controller.store.migrations.legacy_upgrade_from_hamster_applet(db_path)
         except Exception as err:
-            dob_in_user_exit(_('Upgrade failed! ERROR: {}').format(str(err)))
+            exit_warning(_('Upgrade failed! ERROR: {}').format(str(err)))
 
     def run_migrations():
         db_version = controller.store.migrations.version()

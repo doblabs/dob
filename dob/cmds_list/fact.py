@@ -22,7 +22,7 @@ import sys
 from inflector import English, Inflector
 
 from easy_as_pypi_termio.echoes import click_echo, highlight_value
-from easy_as_pypi_termio.errors import dob_in_user_exit, echo_warning
+from easy_as_pypi_termio.errors import echo_warning, exit_warning
 
 from nark.managers.query_terms import QueryTerms
 
@@ -110,7 +110,7 @@ def list_facts(
         if not qt.is_grouped or not format_restricted:
             return
 
-        dob_in_user_exit(_(
+        exit_warning(_(
             'ERROR: Specified format type does not support grouping results.'
         ))
 
@@ -184,7 +184,7 @@ def list_facts(
             # - NotImplementedError happens if db.engine != 'sqlite', because
             #   get_all uses SQLite-specific aggregate functions.
             # - ParserInvalidDatetimeException happens on bad since or until.
-            dob_in_user_exit(str(err))
+            exit_warning(str(err))
 
     # ***
 

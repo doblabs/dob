@@ -19,7 +19,7 @@ from gettext import gettext as _
 
 import click_hotoffthehamster as click
 
-from easy_as_pypi_termio.errors import dob_in_user_exit, echo_warning
+from easy_as_pypi_termio.errors import echo_warning, exit_warning
 
 from dob_bright.crud.fact_dressed import FactDressed
 from dob_bright.crud.interrogate import ask_edit_with_editor
@@ -103,7 +103,7 @@ def edit_fact_by_pk(
             old_fact = controller.facts.get(pk=key)
             return old_fact
         except KeyError:
-            dob_in_user_exit(
+            exit_warning(
                 _("No fact found with ID “{0}”.").format(key)
             )
 
@@ -180,7 +180,7 @@ def edit_fact_by_pk(
         new_raw_fact = ask_edit_with_editor(controller, old_fact, old_raw_fact)
 
         if old_raw_fact == new_raw_fact:
-            dob_in_user_exit(
+            exit_warning(
                 _("Nothing changed! New Fact same as the old Fact.")
             )
 
@@ -213,7 +213,7 @@ def edit_fact_by_pk(
 
     def echo_edited_fact(new_fact, old_fact):
         if new_fact == old_fact:
-            dob_in_user_exit(
+            exit_warning(
                 _("Nothing changed! New Fact same as old Fact.")
             )
 

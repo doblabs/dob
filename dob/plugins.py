@@ -26,7 +26,7 @@ from gettext import gettext as _
 from easy_as_pypi_apppth import AppDirs
 from easy_as_pypi_apppth.expand_and_mkdirs import must_ensure_appdirs_path
 
-from easy_as_pypi_termio.errors import dob_in_user_exit
+from easy_as_pypi_termio.errors import exit_warning
 
 from .clickux.plugin_group import PLUGINS_DIRNAME
 
@@ -72,7 +72,7 @@ def install_plugin(package_module_path, package_plugin_name):
                 appdirs_dir=AppDirs().user_config_dir,
             )
         except Exception as err:
-            dob_in_user_exit(str(err))
+            exit_warning(str(err))
         else:
             if os.path.exists(dst_plugin):
                 print(_("The plugin is already installed!"))

@@ -23,7 +23,7 @@ import click_hotoffthehamster as click
 from click_hotoffthehamster.formatting import wrap_text
 from click_hotoffthehamster._textwrap import TextWrapper
 
-from easy_as_pypi_termio.errors import dob_in_user_exit
+from easy_as_pypi_termio.errors import exit_warning
 from easy_as_pypi_termio.paging import click_echo
 from easy_as_pypi_termio.style import attr, fg
 
@@ -89,7 +89,7 @@ def echo_most_recent(controller, restrict=None, empty_msg=None):
         echo_single_fact(controller, fact)
     else:
         empty_msg = empty_msg if empty_msg else _('No facts found.')
-        dob_in_user_exit(empty_msg)
+        exit_warning(empty_msg)
 
 
 # ***

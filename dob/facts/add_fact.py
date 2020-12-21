@@ -19,7 +19,7 @@ import random
 
 from gettext import gettext as _
 
-from easy_as_pypi_termio.errors import dob_in_user_exit
+from easy_as_pypi_termio.errors import exit_warning
 
 from dob_bright.crud.fact_from_factoid import must_create_fact_from_factoid
 from dob_bright.crud.fix_times import mend_fact_timey_wimey
@@ -124,7 +124,7 @@ def add_fact(
             ]
             msg = _('{} {}').format(random.choice(choices), err)
             controller.client_logger.error(msg)
-            dob_in_user_exit(msg)
+            exit_warning(msg)
         return new_fact_or_two, conflicts
 
     def _prepare_facts(new_fact_or_two):

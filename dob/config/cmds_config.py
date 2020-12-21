@@ -21,7 +21,7 @@ from click_hotoffthehamster.exceptions import MissingParameter
 
 from config_decorator.key_chained_val import KeyChainedValue
 
-from easy_as_pypi_termio.errors import dob_in_user_exit
+from easy_as_pypi_termio.errors import exit_warning
 from easy_as_pypi_termio.paging import click_echo
 
 # Load all the upstream config packages to ensure `dob config dump`, etc.,
@@ -105,7 +105,7 @@ def echo_config_value_section(section):
         counts.append('{} {}'.format(len(section._sections), _('sections')))
     if section._key_vals or not section._sections:
         counts.append('{} {}'.format(len(section._key_vals), _('settings')))
-    dob_in_user_exit(
+    exit_warning(
         _('Configuration section “{}” contains {}.').format(
             section._name,
             _('and').join(counts),
@@ -123,7 +123,7 @@ def write_config_value(ctx, controller, parts):
     try:
         setting.value = value
     except ValueError as err:
-        dob_in_user_exit(str(err))
+        exit_warning(str(err))
     controller.write_config(skip_unset=True)
 
 
@@ -150,13 +150,13 @@ def fetch_config_objects(controller, parts):
 def error_exit_not_one(parts, conf_objs):
     dotted = '.'.join(parts)
     if len(conf_objs) > 1:
-        dob_in_user_exit(
+        exit_warning(
             _('ERROR: Too many config objects named: “{}”').format(dotted)
         )
     else:
         # FIXME/2019-11-17 02:18: Should errors be paged if --pager?
-        # - See also/Consolidate: barf_and_exit, echo_exit, dob_in_user_exit.
-        dob_in_user_exit(
+        # - See also/Consolidate: barf_and_exit, echo_exit, exit_warning.
+        exit_warning(
             _('ERROR: Not a config object: “{}”.').format(dotted)
         )
 
@@ -182,14 +182,14 @@ def must_parts(ctx, parts, param_hint, param_type='argument'):
 
 def must_be_config_setting(section_or_setting):
     if not isinstance(section_or_setting, KeyChainedValue):
-        dob_in_user_exit(_(
+        exit_warning(_(
             'ERROR: Not a configuration setting: “{}”.'.format(section_or_setting._name)
         ))
     return section_or_setting
 
 
 def exit_error_no_setting(parts):
-    dob_in_user_exit(_(
+    exit_warning(_(
         'ERROR: Not a configuration setting: “{}”.'.format('.'.join(parts))
     ))
 

@@ -20,7 +20,7 @@ from gettext import gettext as _
 import click_hotoffthehamster as click
 
 from dob_bright.reports.tabulate_results import report_table_columns
-from easy_as_pypi_termio import dob_in_user_exit, echo_warning
+from easy_as_pypi_termio import echo_warning, exit_warning
 
 __all__ = (
     # One decorator is all you need for each list and usage command.
@@ -1012,7 +1012,7 @@ def _postprocess_options_sparkline_float(kwargs, spark_attr):
             msg = _(
                 "Unable to parse --{} value as (eval'able) seconds: {}"
             ).format(spark_attr.replace('_', '-'), kwargs[spark_attr])
-            dob_in_user_exit(msg)
+            exit_warning(msg)
 
 
 # ***

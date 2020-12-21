@@ -20,7 +20,7 @@ from gettext import gettext as _
 from functools import update_wrapper
 
 from dob_bright.crud.fact_dressed import FactDressed
-from easy_as_pypi_termio import click_echo, dob_in_user_exit, echo_block_header
+from easy_as_pypi_termio import click_echo, echo_block_header, exit_warning
 
 from .. import __arg0name__, migrate
 
@@ -62,7 +62,7 @@ def backend_integrity(func):
                 ' {} != {}'
                 '\nTrying running `{} migrate up`'
             ).format(db_version, latest_version, __arg0name__)
-            dob_in_user_exit(msg)
+            exit_warning(msg)
 
     # ***
 
@@ -87,7 +87,7 @@ def backend_integrity(func):
             # MAYBE/2018-05-23 17:05: (lb): We could offer an easy way out, e.g.,
             #   '\n\nTry, e.g.,\n\n  {} edit {} --end now'.format(__arg0name__, ...)
         )
-        dob_in_user_exit(msg)
+        exit_warning(msg)
 
     # ***
 

@@ -24,7 +24,7 @@ from inflector import English, Inflector
 import click_hotoffthehamster as click
 
 from easy_as_pypi_termio.echoes import click_echo
-from easy_as_pypi_termio.errors import dob_in_user_exit
+from easy_as_pypi_termio.errors import exit_warning
 from easy_as_pypi_termio.style import attr, fg
 
 from dob_bright.crud.fix_times import mend_fact_timey_wimey
@@ -100,7 +100,7 @@ def must_confirm_fact_edits(controller, conflicts, yes, dry):
             # (The carousel has its own error message display mechanism;
             #  and more importantly the carousel should never die,
             #  but should only ever be asked to die by the user.)
-            dob_in_user_exit(_("Please try again."))
+            exit_warning(_("Please try again."))
 
     def cull_stopped_ongoing(conflicts):
         return [con for con in conflicts if 'stopped' not in con[0].dirty_reasons]
@@ -186,7 +186,7 @@ def save_facts_maybe(controller, new_facts, conflicts, ignore_pks, dry):
                 new_fact = controller.facts.save(fact, ignore_pks=ignore_pks)
             except Exception as err:
                 traceback.print_exc()
-                dob_in_user_exit(str(err))
+                exit_warning(str(err))
         else:
             new_fact = fact
             echo_fact(fact)

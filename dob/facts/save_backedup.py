@@ -25,7 +25,7 @@ from easy_as_pypi_apppth import AppDirs
 from easy_as_pypi_apppth.expand_and_mkdirs import must_ensure_appdirs_path
 
 from easy_as_pypi_termio.echoes import click_echo, highlight_value
-from easy_as_pypi_termio.errors import dob_in_user_exit, echo_warning
+from easy_as_pypi_termio.errors import echo_warning, exit_warning
 
 from .echo_fact import write_fact_block_format
 from .save_confirmed import prompt_and_save_confirmed
@@ -55,7 +55,7 @@ def prompt_and_save_backedup(
         except Exception as err:
             # Exit on must_ensure_appdirs_path failure (permissions,
             # or if a directory in the path is actually a file).
-            dob_in_user_exit(str(err))
+            exit_warning(str(err))
         else:
             _prompt_and_save_backup_f(backup_f)
 
@@ -94,7 +94,7 @@ def prompt_and_save_backedup(
                         _("\nBut don't worry. A backup of edits was saved at: {}")
                         .format(backup_f.name)
                     )
-                dob_in_user_exit(msg)
+                exit_warning(msg)
             cleanup_files(backup_f, delete_backup)
         return saved_facts
 
@@ -118,7 +118,7 @@ def prompt_and_save_backedup(
                 'Failed to create temporary backup file at "{}": {}'
                 .format(backup_path, str(err))
             )
-            dob_in_user_exit(msg)
+            exit_warning(msg)
         return backup_f
 
     def backup_file_symlink(backup_path, backup_link):

@@ -32,7 +32,7 @@ from functools import update_wrapper
 
 import click_hotoffthehamster as click
 
-from easy_as_pypi_termio.errors import dob_in_user_exit
+from easy_as_pypi_termio.errors import exit_warning
 from easy_as_pypi_termio.paging import click_echo, flush_pager
 
 # Set app-wide AppDirs.appname and KeyChainedValue._envvar_prefix.
@@ -1293,7 +1293,7 @@ def edit_fact_by_key(
         if not keys:
             keys = [-1]
         elif len(keys) > 1:
-            dob_in_user_exit(_(
+            exit_warning(_(
                 "Argument error: Please specify “-1”, or Fact ID, not both!"
             ))
         return keys

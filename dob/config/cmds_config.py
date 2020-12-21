@@ -155,7 +155,7 @@ def error_exit_not_one(parts, conf_objs):
         )
     else:
         # FIXME/2019-11-17 02:18: Should errors be paged if --pager?
-        # - See also/Consolidate: barf_and_exit, echo_exit, exit_warning.
+        # - See also/Consolidate: echo_exit, exit_warning, exit_warning_crude.
         exit_warning(
             _('ERROR: Not a config object: “{}”.').format(dotted)
         )

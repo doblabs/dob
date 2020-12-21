@@ -22,7 +22,7 @@ import traceback
 from gettext import gettext as _
 
 from easy_as_pypi_apppth import AppDirs
-from easy_as_pypi_apppth.expand_and_mkdirs import must_get_appdirs_subdir_file_path
+from easy_as_pypi_apppth.expand_and_mkdirs import must_ensure_appdirs_path
 
 from easy_as_pypi_termio.echoes import click_echo, highlight_value
 from easy_as_pypi_termio.errors import dob_in_user_exit, echo_warning
@@ -53,8 +53,8 @@ def prompt_and_save_backedup(
         try:
             backup_f = must_prepare_backup_file(backup)
         except Exception as err:
-            # On must_get_appdirs_subdir_file_path failure (permissions, or
-            # directory on path is actually a file).
+            # Exit on must_ensure_appdirs_path failure (permissions,
+            # or if a directory in the path is actually a file).
             dob_in_user_exit(str(err))
         else:
             _prompt_and_save_backup_f(backup_f)
@@ -145,14 +145,14 @@ def prompt_and_save_backedup(
         backup_prefix = 'dob.import'
         backup_tstamp = controller.now.strftime('%Y%m%d%H%M%S')
         backup_basename = backup_prefix + '-' + backup_tstamp
-        backup_fullpath = must_get_appdirs_subdir_file_path(
+        backup_fullpath = must_ensure_appdirs_path(
             file_basename=backup_basename,
             dir_dirname=IMPORT_BACKUP_DIR,
             appdirs_dir=AppDirs().user_cache_dir,
         )
         # 2018-06-29 18:56: This symlink really isn't that helpful...
         #   but we'll see if I start using it. At least for DEVing.
-        backup_linkpath = must_get_appdirs_subdir_file_path(
+        backup_linkpath = must_ensure_appdirs_path(
             file_basename=backup_prefix,
             dir_dirname=IMPORT_BACKUP_DIR,
             appdirs_dir=AppDirs().user_cache_dir,

@@ -24,7 +24,7 @@ import sys
 from gettext import gettext as _
 
 from easy_as_pypi_apppth import AppDirs
-from easy_as_pypi_apppth.expand_and_mkdirs import must_get_appdirs_subdir_file_path
+from easy_as_pypi_apppth.expand_and_mkdirs import must_ensure_appdirs_path
 
 from easy_as_pypi_termio.errors import dob_in_user_exit
 
@@ -66,7 +66,7 @@ def install_plugin(package_module_path, package_plugin_name):
 
     def must_dst_target_path():
         try:
-            dst_plugin = must_get_appdirs_subdir_file_path(
+            dst_plugin = must_ensure_appdirs_path(
                 file_basename=package_plugin_name,
                 dir_dirname=PLUGINS_DIRNAME,
                 appdirs_dir=AppDirs().user_config_dir,

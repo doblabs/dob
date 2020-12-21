@@ -21,7 +21,7 @@ import sys
 
 from gettext import gettext as _
 
-from easy_as_pypi_apppth.expand_and_mkdirs import ensure_directory_exists
+from easy_as_pypi_apppth.expand_and_mkdirs import must_ensure_directory_exists
 
 from easy_as_pypi_termio.echoes import click_echo, highlight_value
 from easy_as_pypi_termio.errors import dob_in_user_exit, echo_warning
@@ -196,9 +196,10 @@ def upgrade_legacy_database_file(ctx, controller, file_in, force):
         must_copy_new_db_to_db_path()
 
     def must_copy_new_db_to_db_path():
+        db_dir = os.path.dirname(db_path)
         try:
-            db_dir = os.path.dirname(db_path)
-            ensure_directory_exists(db_dir)
+            # This must() raises on PermissionError or other if os.makedirs fails.
+            must_ensure_directory_exists(db_dir)
             shutil.copyfile(file_in.name, db_path)
         except Exception as err:
             msg = _('Failed to copy new database to ‘{}’').format(str(err))

@@ -25,6 +25,7 @@ from nark.tests.conftest import *  # noqa: F401, F403
 from nark.tests.backends.sqlalchemy.conftest import *  # noqa: F401, F403
 
 from dob_bright.crud.fact_dressed import FactDressed
+from dob_bright.reports import render_results
 from dob_bright.reports.tabulate_results import report_table_columns
 
 from dob.cmds_list.fact import list_facts
@@ -148,19 +149,27 @@ class TestCmdsListFactListFacts_PresentationArguments(object):
     )
     def test_list_facts_format_permutations(
         self,
+        test_fact_cls,
         five_report_facts_ctl,
         output_format,
         table_type,
+        mocker,
     ):
         controller = five_report_facts_ctl
         # Ensure that fact.friendly_str() is the FactDressed version
         # (because Factoid format uses 'colorful' argument).
-        controller.store.fact_cls = FactDressed
+        controller.store.fact_cls = test_fact_cls
+        render_results_mock = mocker.patch.object(render_results, 'render_results')
+        # Equivalent:
+        #   render_results_mock = mocker.patch(
+        #       'dob_bright.reports.render_results.render_results
+        #   ')
         list_facts(
             controller,
             output_format=output_format,
             table_type=table_type,
         )
+        assert render_results_mock.called
 
     # ***
 
@@ -403,9 +412,12 @@ class TestCmdsListFactListFacts_OutputFormats(object):
 
     def test_with_filename(self, five_report_facts_ctl, tmpdir, mocker):
         """Make sure that a valid format returns the appropriate writer class."""
-        path = os.path.join(tmpdir.ensure_dir('export').strpath, 'export.csv')
-        mocker.patch.object(nark.reports.csv_writer.CSVWriter, 'write_facts')
         controller = five_report_facts_ctl
+        n_written = len(controller.facts.get_all())  # aka 5
+        render_results_mock = mocker.patch.object(
+            render_results, 'render_results', return_value=n_written,
+        )
+        path = os.path.join(tmpdir.ensure_dir('export').strpath, 'export.csv')
         list_facts(controller, output_format='csv', output_path=path)
-        assert nark.reports.csv_writer.CSVWriter.write_facts.called
+        assert render_results_mock.called
 

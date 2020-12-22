@@ -26,7 +26,7 @@ from easy_as_pypi_termio.errors import echo_warning, exit_warning
 
 from nark.managers.query_terms import QueryTerms
 
-from dob_bright.reports.render_results import render_results
+from dob_bright.reports import render_results
 
 from ..clickux.cmd_options_search import cmd_options_output_format_facts_only
 from ..clickux.query_assist import error_exit_no_results
@@ -190,7 +190,7 @@ def list_facts(
 
     def display_results(results, qt, output_path):
         row_limit = suss_row_limit(qt, output_path)
-        n_written = render_results(
+        n_written = render_results.render_results(
             controller,
             results,
             headers=None,

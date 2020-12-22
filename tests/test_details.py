@@ -40,10 +40,10 @@ class TestDetails(object):
         for idx, line in enumerate(out.splitlines()):
             assert line.startswith(startswiths[idx])
 
-    def test_details_sqlite(self, controller, appdirs, mocker, capsys):
+    def test_details_sqlite(self, controller, tmp_appdirs, mocker, capsys):
         """Make sure database details for sqlite are shown properly."""
         mocker.patch.object(controller, '_get_store')
-        engine, path = 'sqlite', appdirs.user_data_dir
+        engine, path = 'sqlite', tmp_appdirs.user_data_dir
         controller.config['db.engine'] = engine
         controller.config['db.path'] = path
         echo_app_details(controller)

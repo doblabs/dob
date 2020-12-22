@@ -100,7 +100,7 @@ class TestStop(object):
         )
         assert controller_with_logging.facts.save.called
 
-    def test_stop_no_existing_ongoing_fact(self, controller_with_logging, capsys):
+    def test_stop_no_existing_ongoing_fact(self, controller_with_logging):
         """Make sure that stop without actually an ongoing fact leads to an error."""
         with pytest.raises(SystemExit):
             # 2019-12-06: stop_fact was deleted, replaced with add_fact + time_hint.

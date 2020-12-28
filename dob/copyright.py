@@ -40,7 +40,7 @@ __all__ = (
 
 
 def assemble_copyright():
-    """Display a greeting message providing basic set of information."""
+    """Displays the application copyright message."""
     cur_year = str(datetime.now().year)
     year_range = '2018'
     if cur_year != year_range:

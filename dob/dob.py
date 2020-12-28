@@ -191,7 +191,7 @@ def _license():
 @flush_pager
 @pass_controller
 def copyright(controller):
-    """Display copyright information.."""
+    """Display copyright information."""
     echo_copyright()
 
 
@@ -201,7 +201,7 @@ def copyright(controller):
 @flush_pager
 @pass_controller
 def about(controller):
-    """Display copyright information.."""
+    """Display copyright information."""
     echo_copyright()
 
 

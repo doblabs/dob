@@ -34,7 +34,7 @@ __all__ = (
 
 def backend_integrity(func):
     """
-    Verify that data in the database is integrit.
+    Verify that data in the database seems legit.
 
     (lb): I wonder if the backend should enforce this better.
     In any case, telling the user at the CLI level is better

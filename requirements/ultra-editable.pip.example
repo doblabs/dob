@@ -23,6 +23,7 @@
 # *** HOTH libraries and forks.
 
 #  -e ../ansi-escape-room
+#  -e ../ansiwrap-hotoffthehamster
 #  -e ../click-hotoffthehamster
 #  -e ../click-hotoffthehamster-alias
 #  -e ../config-decorator

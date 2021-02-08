@@ -357,13 +357,14 @@ def INIT_HELP_OVERVIEW(ctx):
     if controller.config['db.engine'] == 'sqlite':
         _hint_sqlite = _(
             """
-        And if you know SQL, you can poke around the database file easily:
+        If you know SQL, you can poke around the database file easily:
 
          \b
          {codehi}# Assuming sqlite3 is installed:{reset}
          {codehi}sqlite3 {cfg_db_path}{reset}
 
-        But you'll probably just want to make sure you backup that file!
+        And, just to be safe, consider backing up your database file
+        and config!
             """
             .strip()
         ).format(
@@ -1404,8 +1405,7 @@ HINT: To read from stdin, you can pipe to dob:
 
         dob import -
 
-      For the last option, dob processes input as you type it,
-      until you press ^D.
+      For the last option, dob processes input as you type it, until you press ^D.
     """
 )
 

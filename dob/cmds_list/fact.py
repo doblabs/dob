@@ -248,6 +248,12 @@ def list_facts(
             return
         # Otherwise, path was formed from, e.g., "export.{format}", so display actual.
 
+        try:
+            # Check if output_path is an TextIOWrapper.
+            output_path_name = output_path.name
+        except AttributeError:
+            output_path_name = str(output_path)
+
         if n_written < n_total:
             echo_warn_if_truncated(controller, n_written, n_total)
 
@@ -256,7 +262,7 @@ def list_facts(
         ).format(
             n_written=highlight_value(n_written),
             facts=Inflector(English).conditional_plural(n_written, _('Fact')),
-            output_path=highlight_value(str(output_path)),
+            output_path=highlight_value(output_path_name),
         ))
 
     def echo_warn_if_truncated(controller, n_results, n_rows):

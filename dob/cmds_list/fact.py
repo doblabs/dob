@@ -234,9 +234,17 @@ def list_facts(
             or not sys.stdout.isatty()
             # (lb): I don't quite like this coupling, but it works:
             #       - Don't click_echo if carousel_active.
+            #       (Also, called via by post-processor, so
+            #        this path not even called by dob proper.)
             or controller.ctx.command.name == 'edit'
+            or (
+                # Don't print on `dob import` unless `-E/--no-editor`.
+                controller.ctx.command.name == 'import'
+                and not controller.ctx.params['no_editor']
+            )
         ):
-            # If writ to stdout or pager, skip count and path report.
+            # If not writing to stdout, or if carousel running,
+            # skip reporting the count and output path.
             return
         # Otherwise, path was formed from, e.g., "export.{format}", so display actual.
 

@@ -57,7 +57,7 @@ def prompt_and_save_backedup(
             # or if a directory in the path is actually a file).
             exit_warning(str(err))
         else:
-            _prompt_and_save_backup_f(backup_f)
+            return _prompt_and_save_backup_f(backup_f)
 
     def _prompt_and_save_backup_f(backup_f):
         delete_backup = False

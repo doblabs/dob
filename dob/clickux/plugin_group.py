@@ -25,7 +25,7 @@ from gettext import gettext as _
 
 import click_hotoffthehamster as click
 
-from easy_as_pypi_apppth import AppDirs
+from easy_as_pypi_appdirs import AppDirs
 
 from easy_as_pypi_termio import echo_warning
 

@@ -22,7 +22,7 @@ from gettext import gettext as _
 # Profiling: load AppDirs: ~ 0.011 secs.
 #  [before being moved to new package; when profiled was at:]
 #  from dob_bright.config.app_dirs import AppDirs
-from easy_as_pypi_apppth.app_dirs_with_mkdir import AppDirsWithMkdir
+from easy_as_pypi_appdirs.app_dirs_with_mkdir import AppDirsWithMkdir
 
 from easy_as_pypi_termio import ascii_art
 from easy_as_pypi_termio.echoes import click_echo, highlight_value

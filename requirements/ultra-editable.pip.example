@@ -27,7 +27,7 @@
 #  -e ../click-hotoffthehamster
 #  -e ../click-hotoffthehamster-alias
 #  -e ../config-decorator
-#  -e ../easy-as-pypi-apppth
+#  -e ../easy-as-pypi-appdirs
 #  -e ../easy-as-pypi-config
 #  -e ../easy-as-pypi-getver
 #  -e ../easy-as-pypi-termio

@@ -48,7 +48,7 @@ from dob_bright.tests.conftest import *  # noqa: F401, F403
 #     https://docs.pytest.org/en/2.7.3/plugins.html
 pytest_plugins = (
     # Import tmp_appdirs fixture.
-    'easy_as_pypi_apppth.test_mock',
+    'easy_as_pypi_appdirs.tests.appdirs_mock',
 
     'nark.tests.backends.sqlalchemy.conftest',
     # Make sure fixtures required by fixtures available, e.g., 'base_config'.

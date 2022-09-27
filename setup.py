@@ -41,8 +41,8 @@ requirements = [
     #  Released at: https://github.com/hotoffthehamster/click-hotoffthehamster-alias
     'click-hotoffthehamster-alias == 1.0.4',
     # ActiveState/appdirs + Singleton (app-wide access w/out appname) + `mkdir -p`.
-    #  https://github.com/tallybark/easy-as-pypi-apppth#🛣
-    'easy-as-pypi-apppth',
+    #  https://github.com/doblabs/easy-as-pypi-appdirs#🛣
+    'easy-as-pypi-appdirs',
     # configobj + config-decorator helper.
     #  https://github.com/tallybark/easy-as-pypi-config
     'easy-as-pypi-config',

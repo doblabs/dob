@@ -425,7 +425,7 @@ for local development.
     # And then open the Pull Request.
 
 (*Ansible users:* You might enjoy this Dob-dev setup role:
-https://github.com/landonb/zoidy_dob-dev.)
+https://github.com/landonb/zoidy_dobber_dev.)
 
 Pull Request Guidelines
 -----------------------

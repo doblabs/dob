@@ -2,29 +2,40 @@
 dob
 @@@
 
-.. image:: https://api.travis-ci.com/tallybark/dob.svg?branch=proving
-  :target: https://travis-ci.com/tallybark/dob
+.. CXREF:
+   https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge
+
+.. image:: https://github.com/doblabs/dob/actions/workflows/checks-unspecial.yml/badge.svg?branch=release
+  :target: https://github.com/doblabs/dob/actions/workflows/checks-unspecial.yml/badge.svg?branch=release
   :alt: Build Status
 
-.. image:: https://codecov.io/gh/tallybark/dob/branch/proving/graph/badge.svg
-  :target: https://codecov.io/gh/tallybark/dob
+.. CXREF: https://app.codecov.io/github.com/doblabs/dob/settings/badge
+
+.. image:: https://codecov.io/gh/doblabs/dob/branch/release/graph/badge.svg?token=XXX
+  :target: https://app.codecov.io/gh/doblabs/dob
   :alt: Coverage Status
 
 .. image:: https://readthedocs.org/projects/dob/badge/?version=latest
   :target: https://dob.readthedocs.io/en/latest/
   :alt: Documentation Status
 
-.. image:: https://img.shields.io/github/v/release/tallybark/dob.svg?style=flat
-  :target: https://github.com/tallybark/dob/releases
+.. image:: https://img.shields.io/github/v/release/doblabs/dob.svg?style=flat
+  :target: https://github.com/doblabs/dob/releases
   :alt: GitHub Release Status
 
 .. image:: https://img.shields.io/pypi/v/dob.svg
   :target: https://pypi.org/project/dob/
   :alt: PyPI Release Status
 
-.. image:: https://img.shields.io/github/license/tallybark/dob.svg?style=flat
-  :target: https://github.com/tallybark/dob/blob/release/LICENSE
+.. image:: https://img.shields.io/pypi/pyversions/dob.svg
+  :target: https://pypi.org/project/dob/
+  :alt: PyPI Supported Python Versions
+
+.. image:: https://img.shields.io/github/license/doblabs/dob.svg?style=flat
+  :target: https://github.com/doblabs/dob/blob/release/LICENSE
   :alt: License Status
+
+|
 
 .. |dob| replace:: ``dob``
 .. _dob: https://github.com/tallybark/dob

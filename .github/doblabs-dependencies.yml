@@ -1,0 +1,251 @@
+# vim:tw=0:ts=2:sw=2:et:norl
+# Author: Landon Bouma <https://tallybark.com/>
+# Project: https://github.com/doblabs/easy-as-pypi#🥧
+# License: MIT
+# yamllint disable rule:line-length
+
+---
+
+# Beneath each org/repo: key is a list of downstream projects, with
+# generally all but one of the downstream projects comment-disabled.
+# In this way we'll chain project releases together, one-by-one, as
+# opposed to notifying *every* downstream project for each project.
+# (Otherwise some downstream projects would unnecessarily run more
+# times than we need (which is once each).)
+# - Note where the whole list of downstream projects is disabled
+#   and a closer downstream project is listed instead, so that
+#   we visit every project once in its stream order, e.g.,:
+#     easy-as-pypi → easy-as-pypi-appdirs → easy-as-pypi-config →
+#       easy-as-pypi-getver → easy-as-pypi-termio  → nark →
+#         dob-bright → dob-prompt → dob-viewer → dob
+#   - I.e., if you release easy-as-pypi, then we'll visit each
+#     project as listed until we eventually update and release
+#     dob.
+
+# TRICK: You can easily extract values from herein using `yq`, e.g.,
+#
+#   yq -r '.["doblabs/ansi-escape-room"][0]' .github/doblabs-dependencies.yml
+
+# ***
+
+# These projects are not based on easy-as-pypi boilerplate, so
+# releasing one of these causes its closest downstream user to be
+# notified (so we skip over the beginning of the easy-as-pypi chain).
+
+doblabs/ansi-escape-room:
+  # Upstream deps:
+  # - No doblabs deps.
+  # Downstream deps:
+  # - doblabs/easy-as-pypi-termio
+  # - doblabs/nark
+  - doblabs/easy-as-pypi-termio
+
+doblabs/ansiwrap-hotoffthehamster:
+  # Upstream deps:
+  # - No doblabs deps.
+  # Downstream deps:
+  # - doblabs/nark
+  # - doblabs/dob
+  - doblabs/nark
+
+doblabs/click-hotoffthehamster:
+  # Upstream deps:
+  # - No doblabs deps.
+  # Downstream deps:
+  # - doblabs/click-hotoffthehamster-alias
+  # - doblabs/easy-as-pypi-config
+  # - doblabs/easy-as-pypi-termio
+  # - doblabs/dob-bright
+  # - doblabs/dob-viewer
+  # - doblabs/dob
+  # - befinance/birdseye
+  - doblabs/click-hotoffthehamster-alias
+
+doblabs/click-hotoffthehamster-alias:
+  # Upstream deps:
+  # - doblabs/click-hotoffthehamster
+  # Downstream deps:
+  # - doblabs/dob
+  # Rather than cascade straight to doblabs/dob, this project
+  # maybe called by click-HOTH, so choose next click-HOTH ancestor.
+  - doblabs/easy-as-pypi-termio
+
+doblabs/config-decorator:
+  # Upstream deps:
+  # - No doblabs deps.
+  # Downstream deps:
+  # - doblabs/easy-as-pypi-config
+  # - doblabs/nark
+  # - doblabs/dob-bright
+  # - befinance/birdseye
+  - doblabs/easy-as-pypi-config
+
+doblabs/human-friendly_pedantic-timedelta:
+  # Upstream deps:
+  # - Inflector (which I might fork...)
+  # Downstream deps:
+  # - doblabs/nark
+  # - doblabs/dob-prompt
+  # - doblabs/dob
+  - doblabs/nark
+
+doblabs/sqlalchemy-migrate-hotoffthehamster:
+  # Upstream deps:
+  # - doblabs/tempita-hotoffthehamster
+  # Downstream deps:
+  # - doblabs/nark
+  - doblabs/nark
+
+doblabs/tempita-hotoffthehamster:
+  # Upstream deps:
+  # - No doblabs deps.
+  # Downstream deps:
+  # - doblabs/sqlalchemy-migrate-hotoffthehamster
+  - doblabs/sqlalchemy-migrate-hotoffthehamster
+
+# ***
+
+doblabs/easy-as-pypi:
+  # Upstream deps:
+  # - No doblabs deps.
+  # Downstream deps:
+  # - No doblabs deps.
+  # - Though every project herein is a boilerplate dep of EAPP.
+  - doblabs/easy-as-pypi-appdirs
+
+doblabs/easy-as-pypi-appdirs:
+  # Upstream deps:
+  # - No doblabs deps.
+  # Downstream deps:
+  # - doblabs/easy-as-pypi-config
+  # - doblabs/nark
+  # - doblabs/dob-bright
+  # - doblabs/dob-prompt
+  # - doblabs/dob
+  # - befinance/birdseye
+  - doblabs/easy-as-pypi-getver
+
+doblabs/easy-as-pypi-config:
+  # Upstream deps:
+  # - doblabs/click-hotoffthehamster
+  # - doblabs/config-decorator
+  # - doblabs/easy-as-pypi-appdirs
+  # - doblabs/easy-as-pypi-termio
+  # Downstream deps:
+  # - doblabs/dob-bright
+  # - doblabs/dob
+  # - befinance/birdseye
+  - doblabs/nark
+  - befinance/birdseye
+
+doblabs/easy-as-pypi-getver:
+  # Upstream deps:
+  # - No doblabs deps.
+  # Downstream deps:
+  # - doblabs/nark
+  # - doblabs/dob-bright
+  # - doblabs/dob-prompt
+  # - doblabs/dob-viewer
+  # - doblabs/dob
+  # - befinance/birdseye
+  - doblabs/easy-as-pypi-termio
+
+doblabs/easy-as-pypi-termio:
+  # Upstream deps:
+  # - doblabs/ansi-escape-room
+  # - doblabs/click-hotoffthehamster
+  # Downstream deps:
+  # - doblabs/dob-bright
+  # - doblabs/dob-viewer
+  # - doblabs/dob
+  # - befinance/birdseye
+  - doblabs/easy-as-pypi-config
+
+# ***
+
+doblabs/nark:
+  # Upstream deps:
+  # - doblabs/ansi-escape-room
+  # - doblabs/ansiwrap-hotoffthehamster
+  # - doblabs/config-decorator
+  # - doblabs/easy-as-pypi-appdirs
+  # - doblabs/easy-as-pypi-getver
+  # - doblabs/human-friendly_pedantic-timedelta
+  # - doblabs/sqlalchemy-migrate-hotoffthehamster
+  # Downstream deps:
+  # - doblabs/dob-bright
+  # - doblabs/dob-prompt
+  # - doblabs/dob-viewer
+  # - doblabs/dob
+  - doblabs/dob-bright
+
+doblabs/dob-bright:
+  # Upstream deps:
+  # - doblabs/click-hotoffthehamster
+  # - doblabs/config-decorator
+  # - doblabs/easy-as-pypi-appdirs
+  # - doblabs/easy-as-pypi-config
+  # - doblabs/easy-as-pypi-getver
+  # - doblabs/easy-as-pypi-termio
+  # - doblabs/nark
+  # Downstream deps:
+  # - doblabs/dob-prompt
+  # - doblabs/dob-viewer
+  # - doblabs/dob
+  - doblabs/dob-prompt
+
+doblabs/dob-prompt:
+  # Upstream deps:
+  # - Inflector (which I might fork...)
+  # - doblabs/easy-as-pypi-appdirs
+  # - doblabs/easy-as-pypi-getver
+  # - doblabs/human-friendly_pedantic-timedelta
+  # - doblabs/nark
+  # - doblabs/dob-bright
+  # Downstream deps:
+  # - doblabs/dob-viewer
+  - doblabs/dob-viewer
+
+doblabs/dob-viewer:
+  # Upstream deps:
+  # - doblabs/click-hotoffthehamster
+  # - doblabs/easy-as-pypi-getver
+  # - doblabs/easy-as-pypi-termio
+  # - doblabs/nark
+  # - doblabs/dob-bright
+  # - doblabs/dob-prompt
+  # Downstream deps:
+  # - doblabs/dob
+  - doblabs/dob
+
+# ***
+
+# doblabs/dob:
+  # Upstream deps:
+  # - Inflector (which I might fork...)
+  # - doblabs/ansiwrap-hotoffthehamster
+  # - doblabs/click-hotoffthehamster
+  # - doblabs/click-hotoffthehamster-alias
+  # - doblabs/easy-as-pypi-appdirs
+  # - doblabs/easy-as-pypi-config
+  # - doblabs/easy-as-pypi-getver
+  # - doblabs/easy-as-pypi-termio
+  # - doblabs/human-friendly_pedantic-timedelta
+  # - doblabs/nark
+  # - doblabs/dob-bright
+  # - doblabs/dob-viewer
+  # Downstream deps:
+  # - None, aka:
+  #   - Done!
+
+# befinance/birdseye:
+  # Upstream deps:
+  # - doblabs/config-decorator
+  # - doblabs/easy-as-pypi-appdirs
+  # - doblabs/easy-as-pypi-config
+  # - doblabs/easy-as-pypi-getver
+  # - doblabs/easy-as-pypi-termio
+  # - doblabs/click-hotoffthehamster
+  # Downstream deps:
+  # - None, aka:
+  #   - Done!

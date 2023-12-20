@@ -1,32 +1,22 @@
+############
 Contributing
-============
+############
+.. vim:tw=0:ts=2:sw=2:et:norl:nospell:ft=rst
 
-.. |dob| replace:: ``dob``
-.. _dob: https://github.com/tallybark/dob
-
-.. |dob-viewer| replace:: ``dob-viewer``
-.. _dob-viewer: https://github.com/tallybark/dob-viewer
-
-.. |dob-prompt| replace:: ``dob-prompt``
-.. _dob-prompt: https://github.com/tallybark/dob-prompt
-
-.. |dob-bright| replace:: ``dob-bright``
-.. _dob-bright: https://github.com/tallybark/dob-bright
-
-.. |nark| replace:: ``nark``
-.. _nark: https://github.com/tallybark/nark
+.. |easy-as-pypi| replace:: ``dob``
+.. _easy-as-pypi: https://github.com/doblabs/easy-as-pypi
 
 .. |user-docs| replace:: user documentation
-.. _user-docs: https://github.com/tallybark/dob/tree/release/docs
+.. _user-docs: https://github.com/doblabs/easy-as-pypi/tree/release/docs
 
 .. |envlist| replace:: ``envlist``
-.. _envlist: https://tox.readthedocs.io/en/latest/config.html#conf-envlist
+.. _envlist: https://tox.wiki/en/latest/config.html#env_list
 
 .. |flake8| replace:: ``flake8``
-.. _flake8: http://flake8.pycqa.org/en/latest/
+.. _flake8: https://flake8.pycqa.org/en/latest/
 
 .. |isort| replace:: ``isort``
-.. _isort: https://github.com/timothycrosley/isort
+.. _isort: https://github.com/PyCQA/isort
 
 .. |pdb| replace:: ``pdb``
 .. _pdb: https://docs.python.org/3/library/pdb.html
@@ -35,7 +25,7 @@ Contributing
 .. _pytest: https://docs.pytest.org/en/latest/
 
 .. |tox| replace:: ``tox``
-.. _tox: https://tox.readthedocs.io/en/latest/
+.. _tox: https://tox.wiki/en/latest/
 
 .. |virtualenv| replace:: ``virtualenv``
 .. _virtualenv: https://virtualenv.pypa.io/en/latest/
@@ -44,7 +34,7 @@ Contributing
 .. _virtualenvwrapper: https://pypi.org/project/virtualenvwrapper/
 
 .. |PEP-257| replace:: PEP 257
-.. _PEP-257: https://www.python.org/dev/peps/pep-0257/
+.. _PEP-257: https://peps.python.org/pep-0257/
 
 .. |goog-py-sty| replace:: Google Python Style Guide
 .. _goog-py-sty: https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings
@@ -57,19 +47,16 @@ Contributions are welcome, and they are greatly appreciated!
 
 Every little bit helps, and credit will always be given (if so desired).
 
+=================
 How to Contribute
------------------
+=================
 
-First, please respect the `Code of Conduct`__ and each other.
-
-__ https://dob.readthedocs.io/en/latest/code-of-conduct.html
-
-Then, decide how you'd like to contribute:
+You can contribute in many ways:
 
 Report Bugs
-^^^^^^^^^^^
+-----------
 
-Report bugs at https://github.com/tallybark/dob/issues.
+Report bugs at https://github.com/doblabs/easy-as-pypi/issues.
 
 When reporting a bug, please include:
 
@@ -80,37 +67,37 @@ When reporting a bug, please include:
 * Detailed steps to reproduce the bug.
 
 Fix Bugs
-^^^^^^^^
+--------
 
 Look through the GitHub issues for anything tagged with "bug".
 Pick one, assign yourself to it, and work on the issue.
 
 Implement Features
-^^^^^^^^^^^^^^^^^^
+------------------
 
 Look through the GitHub issues for anything tagged with "feature".
 Pick one, assign yourself to it, and work on the issue.
 
 Write Documentation
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
 If you find documentation out of date, missing, or confusing, please help
 us to improve it.
 
 This includes the official |user-docs|_,
 the `README
-<https://github.com/tallybark/dob/blob/release/README.rst>`__,
+<https://github.com/doblabs/easy-as-pypi/blob/release/README.rst>`__,
 and the inline docstrings that generate the `API documentation
-<https://dob.readthedocs.io/en/latest/modules.html>`__
+<https://easy-as-pypi.readthedocs.io/en/latest/modules.html>`__
 (per |PEP-257|_ and |goog-py-sty|_).
 
 We also appreciate reference from blog posts, articles, and other projects.
 
 Submit Feedback
-^^^^^^^^^^^^^^^
+---------------
 
 The best way to send feedback is to file an issue at
-https://github.com/tallybark/dob/issues.
+https://github.com/doblabs/easy-as-pypi/issues.
 
 See above for reporting bugs.
 
@@ -130,122 +117,77 @@ If you are proposing a feature:
 Please also feel free to email the author directly if you have any other
 questions or concerns. Response times may vary depending on season.
 
+===============
 Getting Started
----------------
+===============
 
-Ready to contribute? Here's how to set up |dob|_
+Ready to contribute? Here's how to set up |easy-as-pypi|_
 for local development.
 
-#. Dob is (for better and for worse) split across a number of projects.
-   Fork each of these projects on GitHub:
+1. Fork the |easy-as-pypi|_ repo on GitHub.
 
-   * |dob|_
+   * Visit `<https://github.com/doblabs/easy-as-pypi>`__
+     and click *Fork*.
 
-   * |dob-viewer|_
+2. Clone your fork locally.
 
-   * |dob-prompt|_
+   Open a local terminal, change to a directory you'd like to develop from,
+   and run the command::
 
-   * |dob-bright|_
+    $ git clone git@github.com:<your_login>/easy-as-pypi.git
 
-   * |nark|_
-
-#. Clone your forks locally.
-
-   For instance, open a terminal, change to a directory you'd like to
-   develop from, and then run the commands::
-
-    GH_URL=git@github.com:<your_user>
-    for repo in dob dob-viewer dob-prompt dob-bright nark; do
-      git clone ${GH_URL}/${repo}.git
-    done
-
-#. Prepare a Python virtual instance, or |virtualenv|_.
+3. Install |easy-as-pypi|_ into a Python virtual instance,
+   or |virtualenv|_.
 
    First, ensure that you have |virtualenvwrapper|_ installed.
 
-#. Next, set up a virtual environment for local development. Assuming you're
-   still in the base directory where you cloned all the projects, change into
-   the ``dob/`` directory and make the virtual environment::
+   Next, set up a virtual environment for local development::
 
-    $ cd dob/
-    $ mkvirtualenv -a $(pwd) dob
-    (dob) $
+    $ cd easy-as-pypi/
+    $ mkvirtualenv -a $(pwd) easy-as-pypi
+    (easy-as-pypi) $
 
    *Note:* We use the ``-a`` option so that ``cdproject`` changes directories
-   to the ``dob/`` directory when we're in the virtual
+   to the ``easy-as-pypi/`` directory when we're in the virtual
    environment.
 
-   *Note:* You can also specify the version of Python if you wish, e.g.,
-   add the option ``--python=/usr/bin/python3.8``.
+   Next, set up your fork for local development::
 
-#. Now, prepare a special requirements file so you can run *1* command to
-   install all five projects, rather than having to run the same command
-   *5* times from five different directories.
+    (easy-as-pypi) $ cdproject
+    (easy-as-pypi) $ make develop
 
-   Copy the example file included in the project and rename it.
+   *Hint:* As usual, run ``workon`` to activate the virtual environment, and
+   ``deactivate`` to leave it. E.g.,::
 
-   From the base ``dob/`` directory, run::
+    # Load the Python virtual instance.
+    $ workon easy-as-pypi
+    (easy-as-pypi) $
 
-    (dob) $ cp requirements/ultra-editable.pip.example requirements/ultra-editable.pip
+    # Do your work.
+    (easy-as-pypi) $ ...
 
-   If you're following the instructions here, you should not need to edit
-   the new file. But you might want to peak inside the file anyway to see
-   how it works.
+    # Finish up.
+    (easy-as-pypi) $ deactivate
+    $
 
-#. Finally, we're ready to install dob for local development!
+4. Before starting work on a new feature or bug fix, make sure your
+   ``develop`` branch is up to date with the official branch::
 
-   From the base ``dob/`` directory, run::
+    (easy-as-pypi) $ cdproject
+    (easy-as-pypi) $ git remote add upstream git@github.com:doblabs/easy-as-pypi.git
+    (easy-as-pypi) $ git fetch upstream
+    (easy-as-pypi) $ git checkout develop
+    (easy-as-pypi) $ git rebase upstream/develop
+    (easy-as-pypi) $ git push origin HEAD
 
-    (dob) $ make develop
-
-   And that's it!
-   The make task will install dependencies from `PyPI <https://pypi.org/>`__,
-   as well as all the projects you sourced locally.
-
-   - *Hint:* As usual, run ``workon`` to activate the virtual environment, and
-     ``deactivate`` to leave it. E.g.,::
-
-       # Load the Python virtual instance.
-       $ workon dob
-       (dob) $
-
-       # Do your work.
-       (dob) $ ...
-
-       # Finish up.
-       (dob) $ deactivate
-       $
-
-#. Now that your local development environment is setup, you can do some real work!
-
-   However, before starting any work on a new feature or bug fix, make sure your
-   ``proving`` branch is up to date with the official branch::
-
-    (dob) $ cdproject
-    (dob) $ git remote add upstream git@github.com:tallybark/dob.git
-    (dob) $ git fetch upstream
-    (dob) $ git checkout proving
-    (dob) $ git merge --ff-only upstream/proving
-    (dob) $ git push origin HEAD  # For good measure.
-
-   And also do the same for each of the other local projects.
-
-   (If you're concerned that managing multiple repositories is a chore,
-   you're right! Which is why I like to use
-   `myrepos <https://myrepos.branchable.com/>`__
-   and `Oh, My Repos! <https://github.com/landonb/ohmyrepos>`__
-   to be able to run the same operation against multiple repositories
-   using a single command.)
-
-#. Now that you've updated your local code to the freshest upstream sources,
-   create a branch for local development. If you are working on an known issue,
+5. Create a branch for local development. If you are working on an known issue,
    you may want to reference the Issue number in the branch name, e.g.,::
 
     $ git checkout -b feature/ISSUE-123-name-of-your-issue
 
-   In any case, create a new branch, and start editing code.
+   Now you can add and edit code in your local working directory.
 
-#. Do your work and make one or more neat, concise commits::
+6. Do your work and make one or more neat, concise commits::
 
     $ git add -p
     $ git commit -m "<Category>: <Short description of changes.>
@@ -299,43 +241,30 @@ for local development.
      * ``Feedback: Fix something per PR feedback.``
 
      (You'll notice that this strategy is similar to
-     `gitmoji <https://gitmoji.carloscuesta.me/>`__,
+     `gitmoji <https://gitmoji.dev/>`__,
      but it's more concise, and less obtuse.)
 
-#. Throughout development, run tests and the linter -- and definitely before
+7. Throughout development, run tests and the linter -- and definitely before
    you submit a Pull Request.
 
-   |dob|_ uses
+   |easy-as-pypi|_ uses
    |flake8|_ for linting,
    |pytest|_ for unit testing, and
    |tox|_ for verifying against the many versions of Python.
 
-   You can run all of these tools with one command
-   that should be familiar to seasoned Python developers::
-
-     $ tox
-
-   Or you can run the equivalent make task::
+   You can run all of these tools with one command::
 
      $ make test-all
 
-   (which simply executes |tox|_).
-
-   - Note that ``tox`` downloads and uses *released* packages, so you
-     might want to run ``make test`` instead (which calls ``py.test``
-     directly) to test against local changes to included packages.
-
-     E.g., if you make changes to ``nark`` but have not released them
-     yet, to test ``dob``, you should use ``make test`` or ``py.test``,
-     not ``make test-all`` or ``tox``.
+   which simply executes |tox|_.
 
    .. _rebase_and_squash:
 
-#. Rebase and squash your work, if necessary, before submitting a Pull Request.
+8. Rebase and squash your work, if necessary, before submitting a Pull Request.
 
    E.g., if the linter caught an error, rather than making a new commit
    with just the linting fix(es), make a temporary commit with the linting
-   fixes, and then "fixup" that commit into the previous commit wherein
+   fixes, and then squash that commit into the previous commit wherein
    you originally added the code that didn't lint.
 
    (*Note:* Rebasing is an intermediate Git skill.
@@ -363,37 +292,43 @@ for local development.
    First, add the linting fix::
 
     $ git add -A
+    $ git ci -m "Squash me!"
 
-   Then, use the ``fixup`` feature to tell Git which commit this belongs in::
+   Next, start a rebase::
 
-    $ git ci --fixup=17d1e38
+    $ git rebase -i 2e888c3
 
-   Next, start a rebase, and use ``--autosquash``::
+   (*Note:* Use the SHA1 hash of the commit *after* the one you want squash into.)
 
-    $ git rebase --autosquash -i 2e888c3
+   Git should open your default editor with a file that starts out like this::
 
-   (*Note:* Use the SHA1 hash of the commit *after* the first one you want
-   to be included in the rebase.)
-
-   Git should open your default editor with a file that look like this::
-
+    pick 2e888c3 Bugfix: Oops! Did I do that?
     pick 17d1e38 Feature: Add my new feature.
-    fixup f05e080 fixup! Feature: Add my new feature.
+    pick b1c07a4 Regression: Fix some old bug.
+    pick f05e080 Squash me!
+
+   Reorder the commit you want to squash so that it's after the commit
+   you want to combine it with, and change the command from ``pick`` to
+   ``squash`` (or ``s`` for short)::
+
+    pick 2e888c3 Bugfix: Oops! Did I do that?
+    pick 17d1e38 Feature: Add my new feature.
+    squash f05e080 Squash me!
     pick b1c07a4 Regression: Fix some old bug.
 
-   You'll notice that Git already reordered the commits and set the commit
-   in question to "fixup".
+   Save and close the file, and Git will rebase your work.
 
-   You can just save and close the file and Git will complete the rebase.
+   When Git rebases the commit being squashed, it will pop up your editor
+   again so you can edit the commit message of the new, squashed commit.
+   Delete the squash comment (``Squash me!``), and save and close the file.
 
-   - This is just one example of rebasing, and a rather advanced one at
-     that (I'm not sure how many people use ``--autosquash``, but I love
-     it!).
+   Git should hopefully finish up and report, ``Successfully rebased and updated``.
 
-     Please search online or ask for help if you find yourself struggling
-     to understand and perform rebasing.
+   (If not, you can manually resolve any conflicts. Or, you can run
+   ``git rebase --abort`` to rollback to where you were before the rebase,
+   and you can look online for more help rebasing.)
 
-#. Push the changes to your GitHub account.
+9. Push the changes to your GitHub account.
 
    After testing and linting, and double-checking that your new feature or
    bugfix works, and rebasing, and committing your changes, push them to
@@ -401,34 +336,31 @@ for local development.
 
     $ git push origin feature/ISSUE-123-name-of-your-issue
 
-   *Note:* If you pushed your work previosuly and then rebased, you may
-   have to force-push::
+   *Note:* If you pushed your work and then rebased, you may have to force-push::
 
     $ git push origin feature/ISSUE-123-name-of-your-issue --force
 
    .. _rebase_atop_develop:
 
-#. Finally,
-   `submit a pull request
-   <https://github.com/tallybark/dob/pulls>`_
-   through the GitHub website.
+10. Finally,
+    `submit a pull request
+    <https://github.com/doblabs/easy-as-pypi/pulls>`_
+    through the GitHub website.
 
-   *Important:* Please rebase your code against ``proving`` and resolve
-   merge conflicts, so that project maintainers does not have to do so
-   themselves. E.g.,::
+    *Important:* Please rebase your code against ``develop`` and resolve
+    merge conflicts, so that the main project maintainer does not have
+    to do so themselves. E.g.,::
 
-    $ git checkout feature/ISSUE-123-name-of-your-issue
-    $ git fetch upstream
-    $ git rebase upstream/proving
-    # Resolve any conflicts...
-    $ git push origin HEAD --force
-    # And then open the Pull Request.
+     $ git checkout feature/ISSUE-123-name-of-your-issue
+     $ git fetch upstream
+     $ git rebase upstream/develop
+     # Resolve any conflicts, then force-push.
+     $ git push origin HEAD --force
+     # And then open the Pull Request.
 
-(*Ansible users:* You might enjoy this Dob-dev setup role:
-https://github.com/landonb/zoidy_dobber_dev.)
-
+=======================
 Pull Request Guidelines
------------------------
+=======================
 
 Before you submit a pull request, check that it meets these guidelines:
 
@@ -454,11 +386,6 @@ Before you submit a pull request, check that it meets these guidelines:
      (you can ignore or consider error handling branches less important to
      cover, but all branches would still be good to test!).
 
-     * Note that, as of early 2020, existing test coverage is no where near
-       100%, so take this guideline with a grain of salt. If existing code
-       coverage improves, the core developers will have more standing to
-       demand the same of contributed code.
-
 3. Commit sensibly.
 
    * Each commit should be succinct and singular in focus.
@@ -466,18 +393,19 @@ Before you submit a pull request, check that it meets these guidelines:
 
      __ rebase_and_squash_
 
-   * Rebase your work atop ``proving`` (as `mentioned above`__)
+   * Rebase your work atop develop (as `mentioned above`__)
      before creating the PR, or after making any requested
      changes.
 
      __ rebase_atop_develop_
 
-4. Run ``tox``.
+4. Run ``make test-all``.
 
    * 'nough said.
 
+==============
 Debugging Tips
---------------
+==============
 
 To run one test or a subset of tests, you can specify a substring
 expression using the ``-k`` option with ``make test``::
@@ -494,27 +422,27 @@ will print a control character sequence to the terminal, rather than
 showing the last command you ran.)
 
 * If you want to interact with the code at runtime,
-  run ``py.test`` directly (see next).
+  run ``pytest`` directly (see next).
 
 If you'd like to break into a debugger when a test fails, run ``pytest``
 directly and have it start the interactive Python debugger on errors::
 
-    $ py.test --pdb tests/
+    $ pytest --pdb tests/
 
 If you'd like a more complete stack trace when a test fails, add verbosity::
 
-    $ py.test -v tests/
+    $ pytest -v tests/
 
     # Or, better yet, two vees!
-    $ py.test -vv tests/
+    $ pytest -vv tests/
 
 If you'd like to run a specific test, use ``-k``, as mentioned above. E.g.,::
 
-    $ py.test -k test__repr__no_start_no_end tests/
+    $ pytest -k test__repr__no_start_no_end tests/
 
 Put it all together to quickly debug a broken test. ::
 
-    $ py.test --pdb -vv -k <test_name> tests/
+    $ pytest --pdb -vv -k <test_name> tests/
 
 You can also set breakpoints in the code with |pdb|_.
 Simply add a line like this:
@@ -523,47 +451,19 @@ Simply add a line like this:
 
     import pdb; pdb.set_trace()
 
-For advanced usage, if the code has given up terminal control, e.g.,
-if you set a breakpoint in a `Python Prompt Toolkit
-<https://github.com/prompt-toolkit/python-prompt-toolkit>`__
-handler, you can wrest terminal interactivity back with ``stty``:
-
-.. code-block:: python
-
-    import os, pdb; os.system("stty sane"); pdb.set_trace()
-
-- However, if you want to ``continue`` after fiddling with ``stty sane``,
-  you need to restore the settings (by calling ``stty --save`` first,
-  debugging, and then calling ``stty`` again with the saved settings),
-  which is easiest done from within |dob|_ using helper methods.
-
-  - From within the Carousel, type the ``Alt-=`` key combination to
-    break into the debugger.
-
-  - You can also use the 2 helper methods from within the codebase::
-
-      Controller.pdb_break_enter()
-      # Poke around, then `c`ontinue!
-      Controller.pdb_break_leave()
-
 To test against other Python versions than what is setup in your |virtualenv|_,
 you can use |tox|_ and name an environment with the |envlist|_ option::
 
-    $ tox -e <ENVIRONMENT>
+    $ tox -e NAME_OR_ENVIRONMENT
 
-For instance::
-
-    $ tox -e py38
-
-The available environments are declared in ``tox.ini``.
-
+===========
 Style Guide
------------
+===========
 
 Code style should be readily apparent by reading existing code.
 
 Style Enforcement
-^^^^^^^^^^^^^^^^^
+-----------------
 
 The style of new code can be easily and incontrovertibly verified
 by running various developer tasks.
@@ -583,7 +483,7 @@ by running various developer tasks.
       $ tox -e flake8
 
       # is just like running flake8:
-      $ flake8 setup.py dob/ tests/
+      $ flake8 src/ tests/
 
 2. You can lint the docs easily with one or two commands.
 
@@ -599,17 +499,6 @@ by running various developer tasks.
 
       # Generate the reST docs (peruse the output for errors and warnings):
       $ make docs
-
-.. note:: Not all of this author's projects adhere that well to docstrings
-          convention, so pep257-compliance is not mandatory. Generally, the
-          module docs still build! Also, this author values tests, coverage,
-          and readable code over spending time fleshing out docstrings (which
-          could be a waste of time during development, as code changes quickly!
-          but then there's usually "no time" after development, so we often find
-          ourselves with imperfect docstrings littered throughout the code).
-
-          As such, feel free to run the pep257 linter,
-          but also feel free not to. It's noisy.
 
 .. _verify-import-statement-order:
 
@@ -634,18 +523,18 @@ by running various developer tasks.
    other changes, e.g., ``git checkout -- setup.cfg``.
 
 Style Reference
-^^^^^^^^^^^^^^^
+---------------
 
 The project style tracks as closely as possible to community conventions,
 mostly established in 2001 by Python's creator, Guido van Rossum, and others:
 
-* `PEP 8 -- Style Guide for Python Code <https://www.python.org/dev/peps/pep-0008/>`_
+* `PEP 8 -- Style Guide for Python Code <https://peps.python.org/pep-0008/>`_
 
-* `PEP 257 -- Docstring Conventions <https://www.python.org/dev/peps/pep-0257/>`_
+* `PEP 257 -- Docstring Conventions <https://peps.python.org/pep-0257/>`_
 
 In lieu of
 `PEP 287 -- reStructuredText Docstring Format
-<https://www.python.org/dev/peps/pep-0287/>`__,
+<https://peps.python.org/pep-0287/>`__,
 the project prefers Google-style docstrings, as defined in the
 `Google Python Style Guide
 <https://google.github.io/styleguide/pyguide.html>`__:
@@ -655,18 +544,18 @@ the project prefers Google-style docstrings, as defined in the
 
 When building the HTML documentation from the sources,
 Google-style docstrings are recognized by a
-`Sphinx <http://www.sphinx-doc.org/en/master/>`__
+`Sphinx <https://www.sphinx-doc.org/en/master/>`__
 extension:
 
 * `napoleon
-  <http://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html>`__:
+  <https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html>`__:
   Support for NumPy and Google style docstrings.
 
 Conventional Deviations
-^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------
 
-The conventions outlined in `PEP 8 <https://www.python.org/dev/peps/pep-0008/>`_
-are enforced by the `Flake8 <http://flake8.pycqa.org/en/latest/>`__ linter, with
+The conventions outlined in `PEP 8 <https://peps.python.org/pep-0008/>`_
+are enforced by the `Flake8 <https://flake8.pycqa.org/en/latest/>`__ linter, with
 the following custom rules:
 
 * Use a maximum line length of 89 characters.
@@ -776,7 +665,7 @@ the existing linters, by way of not being features), including:
   * Use *six.text_type* to cast a string (to Unicode).
 
 Of Readability
-^^^^^^^^^^^^^^
+--------------
 
 Concerning Writing *Tests, Docstrings, Comments, and Documentation*:
 
@@ -803,8 +692,8 @@ Concerning Writing *Tests, Docstrings, Comments, and Documentation*:
   (Which is not to say that docstrings have no utility! Just that docstrings
   are essentially worthless if what you documented has no test coverage, say.)
 
-Just run ``tox``
-^^^^^^^^^^^^^^^^
+Altogether Now
+--------------
 
 Save for running |isort|_ (`see above`__),
 you can run all linter and test tasks with one 3-letter command:
@@ -819,4 +708,13 @@ Once this command is passing, you should be good to commit (or rebase) your
 work and to submit a `Pull Request`__.
 
 __ `Pull Request Guidelines`_
+
+===========================
+Contributor Code of Conduct
+===========================
+
+Please respect and adhere to the `Code of Conduct <code-of-conduct.html>`__
+(please also read it!).
+
+** 🐬 Happy 🐠 easy-as-pypi 🦖 Hacking!! 🐡 **
 

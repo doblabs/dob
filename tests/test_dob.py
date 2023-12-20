@@ -25,5 +25,5 @@ class TestDobLicenseWrapper(object):
         """Make sure the license text is actually displayed."""
         _license()
         out, err = capsys.readouterr()
-        assert out.startswith("GNU GENERAL PUBLIC LICENSE")
-        assert "Version 3, 29 June 2007" in out
+        assert out.startswith("dob is free software:")
+        assert "version 3 of the License," in out

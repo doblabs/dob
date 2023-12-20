@@ -32,5 +32,5 @@ class TestCommandCopyright(object):
         """Make sure we display a brief reference to the license."""
         dob.echo_license()
         out, err = capsys.readouterr()
-        assert "GNU GENERAL PUBLIC LICENSE" in out
-        assert "Version 3" in out
+        assert "GNU\nGeneral Public License" in out
+        assert "version 3 of the License" in out

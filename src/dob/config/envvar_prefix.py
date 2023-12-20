@@ -22,5 +22,4 @@ from .. import __package_name__
 # Set the prefix used for specifying config via environs,
 # e.g., `DOB_EDITOR_CENTERED=false dob edit`:
 #  KeyChainedValue._envvar_prefix = 'DOB_'
-KeyChainedValue._envvar_prefix = '{}_'.format(__package_name__.upper())
-
+KeyChainedValue._envvar_prefix = "{}_".format(__package_name__.upper())

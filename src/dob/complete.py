@@ -27,30 +27,31 @@ from click_hotoffthehamster.parser import split_arg_string
 from nark.helpers.parsing import (
     ParserMissingActivityException,
     ParserMissingDatetimeOneException,
-    ParserMissingDatetimeTwoException
+    ParserMissingDatetimeTwoException,
 )
 from nark.items.fact import Fact
 
-__all__ = ('tab_complete', )
+__all__ = ("tab_complete",)
 
 
 TIME_HINT_MAP = {
     # SYNC_ME: RE_TIME_HINT, TIME_HINT_MAP, and @generate_add_fact_command's.
-    'on': 'verify_none',
-    'now': 'verify_none',  # 'on' alias
-    'from': 'verify_both',
-    'between': 'verify_both',  # 'from' alias
-    'at': 'verify_start',
-    'to': 'verify_end',
-    'until': 'verify_end',  # 'to' alias
-    'then': 'verify_then',
-    'still': 'verify_still',
-    'after': 'verify_none',
-    'next': 'verify_none',  # 'after' alias
+    "on": "verify_none",
+    "now": "verify_none",  # 'on' alias
+    "from": "verify_both",
+    "between": "verify_both",  # 'from' alias
+    "at": "verify_start",
+    "to": "verify_end",
+    "until": "verify_end",  # 'to' alias
+    "then": "verify_then",
+    "still": "verify_still",
+    "after": "verify_none",
+    "next": "verify_none",  # 'after' alias
 }
 
 
 # FIXME/2018-05-17 18:04: On `dob import <tab>`, showing commands, not files! why??
+
 
 def tab_complete(controller):
     def _complete_cmd(controller):
@@ -71,23 +72,21 @@ def tab_complete(controller):
     #       Then it was modified.
     def _do_complete():
         try:
-            cwords = split_arg_string(os.environ['COMP_WORDS'])
+            cwords = split_arg_string(os.environ["COMP_WORDS"])
         except KeyError:
-            controller.client_logger.error(_(
-                'Expected environ "COMP_WORDS" not set.'
-            ))
+            controller.client_logger.error(_('Expected environ "COMP_WORDS" not set.'))
             sys.exit(1)
         try:
-            cword = int(os.environ['COMP_CWORD'])
+            cword = int(os.environ["COMP_CWORD"])
         except ValueError:
             # This should only happen if your testing the complete command.
-            assert os.environ['COMP_CWORD'] == ''
+            assert os.environ["COMP_CWORD"] == ""
             cword = 0
         args = cwords[1:cword]
         try:
             incomplete = cwords[cword]
         except IndexError:
-            incomplete = ''
+            incomplete = ""
         return (args, incomplete)
 
     def _get_choices(args, incomplete, time_hint):
@@ -101,18 +100,22 @@ def tab_complete(controller):
             choices = _choices_datetimes(controller, incomplete, time_hint, err)
         except ParserMissingActivityException:
             # See if we should suggest tags, activities, or activity-categories.
-            if (not incomplete) or (not re.match(r'''^['"]?[#@]''', incomplete)):
+            if (not incomplete) or (not re.match(r"""^['"]?[#@]""", incomplete)):
                 choices = choices_activities(
-                    controller, incomplete, whitespace_ok=False,
+                    controller,
+                    incomplete,
+                    whitespace_ok=False,
                 )
             else:
                 choices = choices_tags(
-                    controller, incomplete, whitespace_ok=False,
+                    controller,
+                    incomplete,
+                    whitespace_ok=False,
                 )
         else:
             choices = [
-                'Now_You_Write_A_Description',
-                'Where-do-hamsters-go-after-graduation?__Hamsterdam!',
+                "Now_You_Write_A_Description",
+                "Where-do-hamsters-go-after-graduation?__Hamsterdam!",
             ]
 
         return choices
@@ -134,63 +137,60 @@ def _choices_datetimes(controller, incomplete, time_hint, parser_err):
     #       (for the most part; e.g., 'three years ago' works, but
     #       not 'three_years_ago', though '3_years_ago' works, go figure).
     friendly_at_hints = [
-        '10_minutes_ago',
-        '5_seconds_ago',
-        'at_1_pm',
-        'an_hour_ago',
-        'noon',
-        'midnight',
+        "10_minutes_ago",
+        "5_seconds_ago",
+        "at_1_pm",
+        "an_hour_ago",
+        "noon",
+        "midnight",
     ]
     friendly_from_hints = [
         # (lb): The shell splits completes on whitespace, so use underscores.
         # FIXME: (lb): Update parser to convert underscores back to whitespace
         #        before passing to human friendly time parser.
-        'yesterday_at_3_PM',
-        '1_week_ago',
-        '3_years_ago',
-        'Monday_at_16:44',
-        'at_noon'
-        '1_week_ago_at_midnight',
+        "yesterday_at_3_PM",
+        "1_week_ago",
+        "3_years_ago",
+        "Monday_at_16:44",
+        "at_noon" "1_week_ago_at_midnight",
         # Hahaha, futuristic!
         # (lb): This is an invalid option. But it's funny!
-        'tomorrow',
+        "tomorrow",
     ]
 
     # Show one friendly date example, randomly selected.
     # (lb): Using random.shuffle, rather than random.choice. Can't remember why.
     random.shuffle(friendly_at_hints)
     random.shuffle(friendly_from_hints)
-    if time_hint == 'verify_start':
+    if time_hint == "verify_start":
         friendly_hint = friendly_at_hints[:2]
-    elif time_hint == 'verify_end':
-        friendly_hint = ['now']
-    elif time_hint == 'verify_both':
+    elif time_hint == "verify_end":
+        friendly_hint = ["now"]
+    elif time_hint == "verify_both":
         if isinstance(parser_err, ParserMissingDatetimeOneException):
             friendly_hint = friendly_from_hints[:2]
         else:
             assert isinstance(parser_err, ParserMissingDatetimeTwoException)
             friendly_hint = friendly_at_hints[:2]
-            friendly_hint.append('now')
+            friendly_hint.append("now")
 
     choices = [
-        now.strftime('%Y-%m-%d'),
-        now.strftime('%H:%M'),
+        now.strftime("%Y-%m-%d"),
+        now.strftime("%H:%M"),
         # Bash will split the completion word in a space,
         # so use \S+ form of YYYY-MM-DD and %H:M.
         # MEH: dateparser recognizes almost any delimiter
         # between the YYYY-MM-DD and the %H:%M, except
         # '-' and '+' indicate time zone. 'T' seems fine.
-        now.strftime('%Y-%m-%dT%H:%M'),
+        now.strftime("%Y-%m-%dT%H:%M"),
     ]
     choices += friendly_hint
     if incomplete:
-        choices = [
-            ch for ch in choices if not incomplete or ch.startswith(incomplete)
-        ]
+        choices = [ch for ch in choices if not incomplete or ch.startswith(incomplete)]
     return choices
 
 
-def choices_tags(controller, incomplete='', whitespace_ok=False):
+def choices_tags(controller, incomplete="", whitespace_ok=False):
     """Suggest tags."""
     # Grab the last 20 or so tags used (by Facts, chronologically),
     # and also the most used (top ten) 10 or so tags used by all Facts.
@@ -201,39 +201,39 @@ def choices_tags(controller, incomplete='', whitespace_ok=False):
     #          And if user TABs a second time, show list of most
     #          use tags. TAB again, another sort option, etc.
     # MAGIC_NUMBERS: 21 and 13, eh. Arbitrary limits.
-    tags_counts = controller.tags.get_all_by_usage(sort_cols=('start',), limit=21)
-    tags_counts += controller.tags.get_all_by_usage(sort_cols=('usage',), limit=13)
+    tags_counts = controller.tags.get_all_by_usage(sort_cols=("start",), limit=21)
+    tags_counts += controller.tags.get_all_by_usage(sort_cols=("usage",), limit=13)
 
     choices = [
-        '@{}'.format(tag.name) for tag, _uses, _span
-        in tags_counts if not incomplete or tag.name.startswith(incomplete[1:])
+        "@{}".format(tag.name)
+        for tag, _uses, _span in tags_counts
+        if not incomplete or tag.name.startswith(incomplete[1:])
     ]
     # MEH: We cull, even though we set limit above, so total count might be even smaller.
     #   (We could solve at the SQL query level, but who wants to go to the trouble?)
     if not whitespace_ok:
-        choices = [tag for tag in choices if ' ' not in tag]
+        choices = [tag for tag in choices if " " not in tag]
     return choices
 
 
 def choices_activities(
     controller,
-    incomplete='',
+    incomplete="",
     whitespace_ok=False,
 ):
     """Suggest activities."""
 
-    acty = controller.activities.get_all_by_usage(sort_cols=('start'))
+    acty = controller.activities.get_all_by_usage(sort_cols=("start"))
 
     choices = [
-        '{}@{}'.format(
-            act.name, act.category.name if act.category else ''
-        ) for act, count in acty
+        "{}@{}".format(act.name, act.category.name if act.category else "")
+        for act, count in acty
     ]
 
     # (lb): Bash complete doesn't handle spaces well, so ignore
     # those activities@categories with and spaces.
     if not whitespace_ok:
-        choices = [atc for atc in choices if ' ' not in atc]
+        choices = [atc for atc in choices if " " not in atc]
     if incomplete:
         choices = [atc for atc in choices if atc.startswith(incomplete)]
 
@@ -245,4 +245,3 @@ def choices_activities(
         choices = choices[:50]
 
     return choices
-

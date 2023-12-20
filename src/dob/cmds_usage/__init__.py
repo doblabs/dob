@@ -23,18 +23,18 @@ from pedantic_timedelta import PedanticTimedelta
 
 from dob_bright.reports.render_results import render_results
 
-__all__ = ('generate_usage_table', )
+__all__ = ("generate_usage_table",)
 
 
 def generate_usage_table(
     controller,
     results,
     name_header=None,
-    name_fmttr=lambda item: item.name if item else '<NULL>',
+    name_fmttr=lambda item: item.name if item else "<NULL>",
     show_usage=False,
     show_duration=False,
-    output_format='table',
-    table_type='texttable',
+    output_format="table",
+    table_type="texttable",
     max_width=-1,
     output_path=None,
 ):
@@ -44,18 +44,23 @@ def generate_usage_table(
         max_width_tm_units = 0
         for item, count, duration in results:
             (
-                tm_fmttd, tm_scale, tm_units,
+                tm_fmttd,
+                tm_scale,
+                tm_units,
             ) = PedanticTimedelta(days=duration or 0).time_format_scaled()
-            value, units = tm_fmttd.split(' ')
+            value, units = tm_fmttd.split(" ")
             max_width_tm_value = max(max_width_tm_value, len(value))
             max_width_tm_units = max(max_width_tm_units, len(units))
             staged.append((item, count, tm_fmttd))
 
         rows = []
         for item, count, tm_fmttd in staged:
-            value, units = tm_fmttd.split(' ')
-            span = '{0:>{1}} {2:^{3}}'.format(
-                value, max_width_tm_value, units, max_width_tm_units,
+            value, units = tm_fmttd.split(" ")
+            span = "{0:>{1}} {2:^{3}}".format(
+                value,
+                max_width_tm_value,
+                units,
+                max_width_tm_units,
             )
 
             rows.append((name_fmttr(item), count, span))
@@ -100,4 +105,3 @@ def generate_usage_table(
         return headers
 
     generate_usage_table()
-

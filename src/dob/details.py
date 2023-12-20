@@ -35,15 +35,16 @@ from .clickux.plugin_group import ClickPluginGroup
 from . import get_version, __package_name__
 
 __all__ = (
-    'echo_app_details',
-    'echo_app_environs',
-    'echo_data_stats',
-    'hamster_time',
+    "echo_app_details",
+    "echo_app_environs",
+    "echo_data_stats",
+    "hamster_time",
 )
 
 
 def echo_app_details(controller, full=False):
     """List details about the runtime environment."""
+
     def _echo_app_details():
         echo_name_version()
         echo_config_path()
@@ -53,34 +54,34 @@ def echo_app_details(controller, full=False):
         echo_app_dirs()
 
     def echo_name_version():
-        click_echo(_(
-            "You are running {appname} version {version}"
-        ).format(
-            appname=highlight_value(__package_name__),
-            version=highlight_value(get_version()),
-        ))
+        click_echo(
+            _("You are running {appname} version {version}").format(
+                appname=highlight_value(__package_name__),
+                version=highlight_value(get_version()),
+            )
+        )
 
     def echo_config_path():
-        click_echo(_(
-            "Configuration file at: {}"
-        ).format(
-            highlight_value(controller.configurable.config_path),
-        ))
+        click_echo(
+            _("Configuration file at: {}").format(
+                highlight_value(controller.configurable.config_path),
+            )
+        )
 
     def echo_plugins_basepath():
-        click_echo(_(
-            "Plugins directory at: {}"
-        ).format(
-            # (lb): Such hack.
-            highlight_value(ClickPluginGroup().plugins_basepath),
-        ))
+        click_echo(
+            _("Plugins directory at: {}").format(
+                # (lb): Such hack.
+                highlight_value(ClickPluginGroup().plugins_basepath),
+            )
+        )
 
     def echo_logfile_path():
-        click_echo(_(
-            "Logfile stored at: {}"
-        ).format(
-            highlight_value(controller.config['log.filepath']),
-        ))
+        click_echo(
+            _("Logfile stored at: {}").format(
+                highlight_value(controller.config["log.filepath"]),
+            )
+        )
 
     def echo_db_info():
         click_echo(get_db_info())
@@ -94,34 +95,34 @@ def echo_app_details(controller, full=False):
 
     def get_sqlalchemy_info():
         """"""
+
         def _get_sqlalchemy_info():
-            engine = controller.config['db.engine']
-            if engine == 'sqlite':
+            engine = controller.config["db.engine"]
+            if engine == "sqlite":
                 return sqlalchemy_string_sqlite()
             else:
                 return sqlalchemy_string_remote(engine)
 
         def sqlalchemy_string_sqlite():
             sqlalchemy_string = _(
-                "Using {engine} on database: {db_path}"
-                .format(
-                    engine=highlight_value('sqlite'),
-                    db_path=highlight_value(controller.config['db.path']),
+                "Using {engine} on database: {db_path}".format(
+                    engine=highlight_value("sqlite"),
+                    db_path=highlight_value(controller.config["db.path"]),
                 )
             )
             return sqlalchemy_string
 
         def sqlalchemy_string_remote(engine):
-            port = controller.config['db.port']
+            port = controller.config["db.port"]
             if port:
-                port = ':{}'.format(port)
+                port = ":{}".format(port)
             sqlalchemy_string = _(
                 "Using {engine} on database {db_name} at:"
                 " {username}@{host}{port}".format(
                     engine=highlight_value(engine),
-                    db_name=highlight_value(controller.config['db.name']),
-                    username=highlight_value(controller.config['db.user']),
-                    host=highlight_value(controller.config['db.host']),
+                    db_name=highlight_value(controller.config["db.name"]),
+                    username=highlight_value(controller.config["db.user"]),
+                    host=highlight_value(controller.config["db.host"]),
                     port=highlight_value(port),
                 )
             )
@@ -135,7 +136,7 @@ def echo_app_details(controller, full=False):
         appdir_paths = existent_app_dirs(include_errs=True, highlight=True)
         for prop in sorted(appdir_paths.keys()):
             path = appdir_paths[prop]
-            click_echo('AppDirs.{}: {}'.format(prop, highlight_value(path)))
+            click_echo("AppDirs.{}: {}".format(prop, highlight_value(path)))
 
     _echo_app_details()
 
@@ -163,26 +164,26 @@ def echo_app_environs(controller):
             click_echo('DOB_{}="{}"'.format(key.upper(), val))
 
     def environs_add_appname_ver():
-        environs['appname'] = __package_name__
-        environs['version'] = get_version()
+        environs["appname"] = __package_name__
+        environs["version"] = get_version()
 
     def environs_add_config_path():
-        environs['conf'] = controller.configurable.config_path
+        environs["conf"] = controller.configurable.config_path
 
     def environs_add_plugins_path():
-        environs['plugins'] = ClickPluginGroup().plugins_basepath
+        environs["plugins"] = ClickPluginGroup().plugins_basepath
 
     def environs_add_log_path():
         # environs['log_filepath'] = controller.config['log.filepath']
-        environs['CONFIG_LOG_FILEPATH'] = controller.config['log.filepath']
+        environs["CONFIG_LOG_FILEPATH"] = controller.config["log.filepath"]
 
     def environs_add_db_url():
-        environs['db_url'] = controller.store.db_url
+        environs["db_url"] = controller.store.db_url
 
     def environs_add_db_path():
-        if controller.config['db.path']:
+        if controller.config["db.path"]:
             # environs['db_path'] = controller.config['db.path']
-            environs['CONFIG_DB_PATH'] = controller.config['db.path']
+            environs["CONFIG_DB_PATH"] = controller.config["db.path"]
 
     def environs_add_user_app_dirs():
         for prop, path in existent_app_dirs().items():
@@ -193,6 +194,7 @@ def echo_app_environs(controller):
 
 def existent_app_dirs(include_errs=False, highlight=False):
     """"""
+
     def _existent_app_dirs():
         previous_create = appdirs_disable_create()
         prop_paths = build_prop_paths()
@@ -219,12 +221,12 @@ def existent_app_dirs(include_errs=False, highlight=False):
         # CONFIRM: (lb): On virtualenv install, no site_* dirs.
         #   Will this not be the case for site-wide, non-virtenv installs?
         for prop in [
-            'user_data_dir',
-            'site_data_dir',
-            'user_config_dir',
-            'site_config_dir',
-            'user_cache_dir',
-            'user_log_dir',
+            "user_data_dir",
+            "site_data_dir",
+            "user_config_dir",
+            "site_config_dir",
+            "user_cache_dir",
+            "user_log_dir",
         ]:
             path = getattr(app_dirs_singleton, prop)
             path = check_exists(path)
@@ -236,9 +238,9 @@ def existent_app_dirs(include_errs=False, highlight=False):
     def check_exists(path):
         if not os.path.exists(path):
             if include_errs:
-                dne = _(' [dne]')
+                dne = _(" [dne]")
                 if highlight:
-                    dne = _('{}{}{}').format(fg('red_3b'), dne, attr('reset'))
+                    dne = _("{}{}{}").format(fg("red_3b"), dne, attr("reset"))
                 path += dne
             else:
                 path = None
@@ -267,10 +269,14 @@ def echo_data_stats(controller):
 
     def echo_facts_interesting():
         first_facts = controller.facts.get_all(
-            sort_cols=('start',), sort_orders=('asc',), limit=1,
+            sort_cols=("start",),
+            sort_orders=("asc",),
+            limit=1,
         )
         final_facts = controller.facts.get_all(
-            sort_cols=('start',), sort_orders=('desc',), limit=1,
+            sort_cols=("start",),
+            sort_orders=("desc",),
+            limit=1,
         )
         assert len(first_facts) <= 1
         assert len(final_facts) <= 1
@@ -282,7 +288,7 @@ def echo_data_stats(controller):
         time_0 = first_fact.start
         time_n = final_fact.end or controller.now
         spanner = Fact(activity=None, start=time_0, end=time_n)
-        elapsed = spanner.format_delta(style='')
+        elapsed = spanner.format_delta(style="")
         click_echo(_("Lifetime of Facts: {}").format(highlight_value(elapsed)))
 
     _echo_data_stats()
@@ -296,4 +302,3 @@ def hamster_time(posits=[]):
 
     for one_art_please in arts:
         click_echo(one_art_please)
-

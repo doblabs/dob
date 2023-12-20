@@ -29,28 +29,29 @@ class TestDetails(object):
         echo_app_details(controller)
         out, err = capsys.readouterr()
         startswiths = (
-            'You are running {} version {}'.format(
-                __package_name__, get_version(),
+            "You are running {} version {}".format(
+                __package_name__,
+                get_version(),
             ),
-            'Configuration file at: ',
-            'Plugins directory at: ',
-            'Logfile stored at: ',
-            'Using sqlite on database: :memory:',
+            "Configuration file at: ",
+            "Plugins directory at: ",
+            "Logfile stored at: ",
+            "Using sqlite on database: :memory:",
         )
         for idx, line in enumerate(out.splitlines()):
             assert line.startswith(startswiths[idx])
 
     def test_details_sqlite(self, controller, tmp_appdirs, mocker, capsys):
         """Make sure database details for sqlite are shown properly."""
-        mocker.patch.object(controller, '_get_store')
-        engine, path = 'sqlite', tmp_appdirs.user_data_dir
-        controller.config['db.engine'] = engine
-        controller.config['db.path'] = path
+        mocker.patch.object(controller, "_get_store")
+        engine, path = "sqlite", tmp_appdirs.user_data_dir
+        controller.config["db.engine"] = engine
+        controller.config["db.path"] = path
         echo_app_details(controller)
         out, err = capsys.readouterr()
         for item in (engine, path):
             assert item in out
-        assert out.splitlines()[-1] == 'Using {} on database: {}'.format(engine, path)
+        assert out.splitlines()[-1] == "Using {} on database: {}".format(engine, path)
 
     def test_details_non_sqlite(
         self,
@@ -69,18 +70,17 @@ class TestDetails(object):
         We need to mock the backend Controller because it would try to setup a
         database connection right away otherwise.
         """
-        mocker.patch.object(controller, '_get_store')
-        controller.config['db.engine'] = 'postgres'
-        controller.config['db.name'] = db_name
-        controller.config['db.host'] = db_host
-        controller.config['db.user'] = db_user
-        controller.config['db.password'] = db_password
-        controller.config['db.port'] = db_port
+        mocker.patch.object(controller, "_get_store")
+        controller.config["db.engine"] = "postgres"
+        controller.config["db.name"] = db_name
+        controller.config["db.host"] = db_host
+        controller.config["db.user"] = db_user
+        controller.config["db.password"] = db_password
+        controller.config["db.port"] = db_port
         echo_app_details(controller)
         out, err = capsys.readouterr()
-        for item in ('postgres', db_host, db_name, db_user):
+        for item in ("postgres", db_host, db_name, db_user):
             assert item in out
         if db_port:
             assert db_port in out
         assert db_password not in out
-

@@ -29,4 +29,3 @@ class TestCurrent(object):
         with pytest.raises(SystemExit):
             echo_ongoing_fact(controller)
             assert False  # Unreachable.
-

@@ -28,7 +28,7 @@ class TestBasicRun(object):
 class TestSearchWithoutInitPrintsSetupMessage(object):
     def test_search_all(self, runner):
         """Running search command fails until dob conf and store are initialized."""
-        result = runner(['search'])
+        result = runner(["search"])
         assert result.exit_code == 1
         assert "Let’s get you setup!" in result.stdout
 
@@ -41,11 +41,10 @@ class TestDobSearchCommandCallsFeatureHandler(object):
         capsys,
     ):
         """Running search command fails until dob conf and store are initialized."""
-        mocker.patch.object(list_fact, 'list_facts')
-        result = dob_runner(['search'])
+        mocker.patch.object(list_fact, "list_facts")
+        result = dob_runner(["search"])
         assert result.exit_code == 0
         assert list_fact.list_facts.called
         # We stubbed list_facts, so there won't be any output.
         out, err = capsys.readouterr()
         assert not out and not err
-

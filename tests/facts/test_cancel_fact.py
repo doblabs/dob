@@ -26,7 +26,11 @@ class TestCancel(object):
     """Unit tests related to cancelation of an ongoing fact."""
 
     def test_cancel_existing_ongoing_fact(
-        self, ongoing_fact, controller_with_logging, mocker, capsys,
+        self,
+        ongoing_fact,
+        controller_with_logging,
+        mocker,
+        capsys,
     ):
         """Test cancelation in case there is an ongoing fact."""
         controller = controller_with_logging
@@ -35,11 +39,10 @@ class TestCancel(object):
         cancel_fact(controller)
         out, err = capsys.readouterr()
         assert controller.facts.cancel_current_fact.called
-        assert out.startswith('Cancelled: ')
+        assert out.startswith("Cancelled: ")
 
     def test_cancel_no_existing_ongoing_fact(self, controller_with_logging, capsys):
         """Test cancelation in case there is no actual ongoing fact."""
         with pytest.raises(ClickException):
             cancel_fact(controller_with_logging)
             assert False  # Unreachable.
-

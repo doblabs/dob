@@ -33,17 +33,18 @@ from .save_confirmed import prompt_and_save_confirmed
 
 __all__ = (
     # (lb): aka 'prompt_and_save_paranoid'
-    'prompt_and_save_backedup',
+    "prompt_and_save_backedup",
 )
 
 
 # ***
 
+
 def prompt_and_save_backedup(
     controller,
     backup=True,
     leave_backup=False,
-    rule='',
+    rule="",
     dry=False,
     **kwargs,
 ):
@@ -86,14 +87,13 @@ def prompt_and_save_backedup(
         finally:
             if not delete_backup:
                 traceback.print_exc()
-                msg = 'Something horrible happened!'
+                msg = "Something horrible happened!"
                 if inner_error is not None:
                     msg += _(' err: "{}"').format(inner_error)
                 if backup_f:
-                    msg += (
-                        _("\nBut don't worry. A backup of edits was saved at: {}")
-                        .format(backup_f.name)
-                    )
+                    msg += _(
+                        "\nBut don't worry. A backup of edits was saved at: {}"
+                    ).format(backup_f.name)
                 exit_warning(msg)
             cleanup_files(backup_f, delete_backup)
         return saved_facts
@@ -112,17 +112,16 @@ def prompt_and_save_backedup(
 
     def backup_file_open(backup_path):
         try:
-            backup_f = open(backup_path, 'w')
+            backup_f = open(backup_path, "w")
         except Exception as err:
-            msg = (
-                'Failed to create temporary backup file at "{}": {}'
-                .format(backup_path, str(err))
+            msg = 'Failed to create temporary backup file at "{}": {}'.format(
+                backup_path, str(err)
             )
             exit_warning(msg)
         return backup_f
 
     def backup_file_symlink(backup_path, backup_link):
-        if platform.system() == 'Windows':
+        if platform.system() == "Windows":
             # Windows only recently added symlinks, and even then, you need
             # privileges or to enable a special switch. But whatever, this
             # symlink is only a convenience. It's not necessary.
@@ -133,18 +132,17 @@ def prompt_and_save_backedup(
             os.unlink(backup_link) if os.path.lexists(backup_link) else None
             os.symlink(backup_path, backup_link)
         except Exception as err:
-            msg = (
-                'Failed to setup temporary backup file link at "{}": {}'
-                .format(backup_link, str(err))
+            msg = 'Failed to setup temporary backup file link at "{}": {}'.format(
+                backup_link, str(err)
             )
             echo_warning(msg)
 
-    IMPORT_BACKUP_DIR = 'carousel'
+    IMPORT_BACKUP_DIR = "carousel"
 
     def must_get_import_ephemeral_backup_path():
-        backup_prefix = 'dob.import'
-        backup_tstamp = controller.now.strftime('%Y%m%d%H%M%S')
-        backup_basename = backup_prefix + '-' + backup_tstamp
+        backup_prefix = "dob.import"
+        backup_tstamp = controller.now.strftime("%Y%m%d%H%M%S")
+        backup_basename = backup_prefix + "-" + backup_tstamp
         backup_fullpath = must_ensure_appdirs_path(
             file_basename=backup_basename,
             dir_dirname=IMPORT_BACKUP_DIR,
@@ -177,13 +175,13 @@ def prompt_and_save_backedup(
                 # recreating. Not a problem if it fails, but why would it
                 # fail, especially given that the code just called close().
                 controller.client_logger.warning(
-                    'nothing to cleanup?: backup file missing: {}'
-                    .format(backup_f.name)
+                    "nothing to cleanup?: backup file missing: {}".format(backup_f.name)
                 )
         else:
             click_echo(
-                _('Abandoned working backup at: {}')
-                .format(highlight_value(backup_f.name))
+                _("Abandoned working backup at: {}").format(
+                    highlight_value(backup_f.name)
+                )
             )
 
     # ***
@@ -208,4 +206,3 @@ def prompt_and_save_backedup(
     # ***
 
     return _prompt_and_save()
-

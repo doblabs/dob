@@ -21,13 +21,13 @@ from dob_bright.reports.render_results import render_results
 
 from ..clickux.query_assist import error_exit_no_results
 
-__all__ = ('list_activities', )
+__all__ = ("list_activities",)
 
 
 def list_activities(
     controller,
-    output_format='table',
-    table_type='texttable',
+    output_format="table",
+    table_type="texttable",
     max_width=-1,
     output_path=None,
     # These two --hide flags are ignored but specified to keep out of kwargs.
@@ -40,7 +40,7 @@ def list_activities(
 
     Writes to stdout, or to the file specified by ``output_path``.
     """
-    err_context = _('activities')
+    err_context = _("activities")
 
     results = controller.activities.get_all(**kwargs)
 
@@ -68,4 +68,3 @@ def list_activities(
         max_width=max_width,
         output_obj_or_path=output_path,
     )
-

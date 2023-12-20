@@ -43,25 +43,31 @@ def help_command_help(ctx, command=None):
         cmd_ctx = ctx.parent
         parts = []
         for part in command:
-            if part.startswith('-'):
+            if part.startswith("-"):
                 continue
             parts.append(part)
             cmd = cmd.get_command(cmd_ctx, part)
             if cmd is None:
-                echo_exit(ctx, _(
-                    """
+                echo_exit(
+                    ctx,
+                    _(
+                        """
 For detailed help, try:
   {codehi}{helpcmd}{reset}
 
 ERROR: No such command: “{command}”
                     """
-                ).format(
-                    command=' '.join(parts),
-                    helpcmd=' '.join([ctx.command_path] + parts[:-1]),
-                    # FIXME: (lb): Replace hardcoded. Assign from styles.conf. #styling
-                    codehi=(fg('turquoise_2') or ''),
-                    reset=(attr('reset') or ''),
-                ).strip(), exitcode=1)
+                    )
+                    .format(
+                        command=" ".join(parts),
+                        helpcmd=" ".join([ctx.command_path] + parts[:-1]),
+                        # FIXME: (lb): Replace hardcoded. Assign from styles.conf. #styling
+                        codehi=(fg("turquoise_2") or ""),
+                        reset=(attr("reset") or ""),
+                    )
+                    .strip(),
+                    exitcode=1,
+                )
             if isinstance(cmd, tuple):
                 cmd = cmd[1]
             # Make a temporary Context to print the help.
@@ -72,4 +78,3 @@ ERROR: No such command: “{command}”
             cmd_ctx = cmd.make_context(cmd.name, args, parent=cmd_ctx)
 
     click_echo(cmd.get_help(cmd_ctx))
-

@@ -26,6 +26,7 @@ import dob.dob as dob  # for dob.run
 @pytest.fixture
 def runner(tmpdir):
     """Provide a convenient fixture to simulate execution of (sub-) commands."""
+
     def runner(args=[], keep_paths=False, **kwargs):
         # Override environments that AppDirs (thankfully) hooks. Ref:
         #   ~/.virtualenvs/dob/lib/python3.8/site-packages/appdirs.py
@@ -33,19 +34,19 @@ def runner(tmpdir):
 
         # Override paths: (1) if caller running multiple command test
         # (keep_paths=True); or (2) if user wants theirs (DOB_KEEP_PATHS).
-        if keep_paths or os.environ.get('DOB_KEEP_PATHS', False):
-            XDG_CONFIG_HOME = os.environ['XDG_CONFIG_HOME']
-            XDG_DATA_HOME = os.environ['XDG_DATA_HOME']
+        if keep_paths or os.environ.get("DOB_KEEP_PATHS", False):
+            XDG_CONFIG_HOME = os.environ["XDG_CONFIG_HOME"]
+            XDG_DATA_HOME = os.environ["XDG_DATA_HOME"]
         else:
             path = tmpdir.strpath
-            XDG_CONFIG_HOME = '{}/.config'.format(path)
-            XDG_DATA_HOME = '{}/.local/share'.format(path)
-        os.environ['XDG_CONFIG_HOME'] = XDG_CONFIG_HOME
-        os.environ['XDG_DATA_HOME'] = XDG_DATA_HOME
+            XDG_CONFIG_HOME = "{}/.config".format(path)
+            XDG_DATA_HOME = "{}/.local/share".format(path)
+        os.environ["XDG_CONFIG_HOME"] = XDG_CONFIG_HOME
+        os.environ["XDG_DATA_HOME"] = XDG_DATA_HOME
 
         env = {
-            'XDG_CONFIG_HOME': XDG_CONFIG_HOME,
-            'XDG_DATA_HOME': XDG_DATA_HOME,
+            "XDG_CONFIG_HOME": XDG_CONFIG_HOME,
+            "XDG_DATA_HOME": XDG_DATA_HOME,
             # Do not overwrite ~/.cache/dob path, where dob.log lives,
             # so DEV tail sees test output, too:
             #   'XDG_CACHE_HOME': '{}/.cache'.format(path),
@@ -58,5 +59,5 @@ def runner(tmpdir):
             #   'XDG_CONFIG_DIRS': '/etc/xdg',
         }
         return CliRunner().invoke(dob.run, args, env=env, **kwargs)
-    return runner
 
+    return runner

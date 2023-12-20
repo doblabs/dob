@@ -34,10 +34,10 @@ from .controller import DobController
 from .copyright import echo_copyright
 
 __all__ = (
-    'pass_controller',
-    'pass_controller_context',
-    'dob_versions',
-    'run',
+    "pass_controller",
+    "pass_controller_context",
+    "dob_versions",
+    "run",
     # Private:
     #  'CONTEXT_SETTINGS',
 )
@@ -49,6 +49,7 @@ pass_controller = click.make_pass_decorator(DobController, ensure=True)
 
 
 # ***
+
 
 def pass_controller_context(func):
     @pass_controller
@@ -64,26 +65,27 @@ def pass_controller_context(func):
 # *** [VERSION] Version command helper.
 # ***
 
+
 def dob_versions(include_all=False):
-    '''Return CLI version information, either for this package, or all HOTH packages.
-    '''
-    vers = ''
+    """Return CLI version information, either for this package, or all HOTH packages."""
+    vers = ""
     include_head = include_all
     import importlib
+
     # MAYBE/2020-04-01: Add config_decorator and pedantic_timedelta.
-    hothlibs = ['dob']
+    hothlibs = ["dob"]
     if include_all:
         hothlibs += [
-            'dob_viewer',
-            'dob_prompt',
-            'dob_bright',
-            'nark',
+            "dob_viewer",
+            "dob_prompt",
+            "dob_bright",
+            "nark",
         ]
     minlen = max([len(name) for name in hothlibs])
     for hothlib in hothlibs:
         mod = importlib.import_module(hothlib, package=None)
-        vers += '\n' if vers else ''
-        vers += '{name:{minlen}s} version {vers}'.format(
+        vers += "\n" if vers else ""
+        vers += "{name:{minlen}s} version {vers}".format(
             minlen=minlen,
             name=mod.__package_name__,
             vers=mod.get_version(include_head=include_head),
@@ -97,7 +99,7 @@ def dob_versions(include_all=False):
 
 CONTEXT_SETTINGS = dict(
     # Tell Click to plumb the -h and --help options.
-    help_option_names=['-h', '--help'],
+    help_option_names=["-h", "--help"],
     # But also tell Click not to invoke the help callback,
     # which it would otherwise do immediately when it sees
     # the help option.
@@ -134,6 +136,7 @@ CONTEXT_SETTINGS = dict(
 # *** [BASE COMMAND GROUP] One Group to rule them all.
 # ***
 
+
 # (lb): Use invoke_without_command so `dob -v` works, otherwise Click's
 # Group (MultiCommand ancestor) does not allow it ('Missing command.').
 @click.group(
@@ -147,28 +150,46 @@ CONTEXT_SETTINGS = dict(
     context_settings=CONTEXT_SETTINGS,
 )
 # (lb): Also include version to avoid RuntimeError, ha!
-@click.version_option(message=dob_versions(), version='')
+@click.version_option(message=dob_versions(), version="")
 # (lb): Hide -v: version_option adds help for --version, so don't repeat ourselves.
-@click.option('-v', is_flag=True, help=help_strings.VERSION_HELP, hidden=True)
+@click.option("-v", is_flag=True, help=help_strings.VERSION_HELP, hidden=True)
 # (lb): Note that universal --options must com before the sub command.
 # FIXME: Need universal options in cmd_options? Or can I apply to Groups?
 #          These aren't recognized by other fcns...
 #        OH! These have to come *before* the command??
-@click.option('-V', '--verbose', is_flag=True,
-              help=help_strings.GLOBAL_OPT_VERBOSE)
-@click.option('-VV', '--verboser', is_flag=True, hidden=True,
-              help=help_strings.GLOBAL_OPT_VERBOSER)
-@click.option('-X', '--color/--no-color', default=None,
-              help=help_strings.GLOBAL_OPT_COLOR_NO_COLOR)
-@click.option('-P', '--pager/--no-pager', default=None,
-              help=help_strings.GLOBAL_OPT_PAGER_NO_PAGER)
-@click.option('-C', '--config', multiple=True, metavar='KEY=VALUE',
-              help=help_strings.GLOBAL_OPT_CONFIG)
+@click.option("-V", "--verbose", is_flag=True, help=help_strings.GLOBAL_OPT_VERBOSE)
+@click.option(
+    "-VV",
+    "--verboser",
+    is_flag=True,
+    hidden=True,
+    help=help_strings.GLOBAL_OPT_VERBOSER,
+)
+@click.option(
+    "-X",
+    "--color/--no-color",
+    default=None,
+    help=help_strings.GLOBAL_OPT_COLOR_NO_COLOR,
+)
+@click.option(
+    "-P",
+    "--pager/--no-pager",
+    default=None,
+    help=help_strings.GLOBAL_OPT_PAGER_NO_PAGER,
+)
+@click.option(
+    "-C",
+    "--config",
+    multiple=True,
+    metavar="KEY=VALUE",
+    help=help_strings.GLOBAL_OPT_CONFIG,
+)
 # (lb): We could use `type=click.File('r')` here. Or not.
-@click.option('-F', '--configfile', metavar='PATH',
-              help=help_strings.GLOBAL_OPT_CONFIGFILE)
+@click.option(
+    "-F", "--configfile", metavar="PATH", help=help_strings.GLOBAL_OPT_CONFIGFILE
+)
 # Profiling: pass_controller appears to take ~ ¼ seconds.
-@timefunct('run: create Controller [_get_store]')
+@timefunct("run: create Controller [_get_store]")
 @pass_controller
 @click.pass_context
 # NOTE: @click.group transforms this func. definition into a callback that
@@ -186,7 +207,7 @@ def run(ctx, controller, v, verbose, verboser, color, pager, config, configfile)
         Show version and exit, if user specified -v option.
         Setup up loggers.
         """
-        profile_elapsed('To dob:    run')
+        profile_elapsed("To dob:    run")
         controller.ensure_config(ctx, configfile, *config)
         _setup_tty_options(ctx, controller)
         _run_handle_banner()
@@ -199,8 +220,8 @@ def run(ctx, controller, v, verbose, verboser, color, pager, config, configfile)
         # MAYBE: (lb): What about allowing color for outputting to ANSI file? Meh.
         use_color = color
         if use_color is None and not sys.stdout.isatty():
-            controller.config['term.use_pager'] = False
-            controller.config['term.use_color'] = False
+            controller.config["term.use_pager"] = False
+            controller.config["term.use_color"] = False
         _setup_tty_paging(controller)
         _setup_tty_color(ctx, controller)
         controller.pre_apply_style_conf()
@@ -210,7 +231,7 @@ def run(ctx, controller, v, verbose, verboser, color, pager, config, configfile)
         if use_pager is None:
             # None if --pager nor --no-pager specified,
             # so fallback to what's in the user config.
-            use_pager = controller.config['term.use_pager']
+            use_pager = controller.config["term.use_pager"]
         ClickEchoPager.set_paging(use_pager)
 
     def _setup_tty_color(ctx, controller):
@@ -230,7 +251,7 @@ def run(ctx, controller, v, verbose, verboser, color, pager, config, configfile)
         #   always output a license, on every invocation -- but I like
         #   the clean aesthetics of not showing it. Though I suppose
         #   it's easy enough just to make a config option for it....
-        if not controller.config['term.show_greeting']:
+        if not controller.config["term.show_greeting"]:
             return
         echo_copyright()
         click_echo()
@@ -251,4 +272,3 @@ def run(ctx, controller, v, verbose, verboser, color, pager, config, configfile)
     # Shim to the private run() functions.
 
     _run(ctx, controller, show_version=v)
-

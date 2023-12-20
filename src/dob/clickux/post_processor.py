@@ -17,16 +17,14 @@
 
 from functools import update_wrapper
 
-__all__ = (
-    'post_processor',
-)
+__all__ = ("post_processor",)
 
 
 # ***
 
+
 def post_processor(func):
-    """
-    """
+    """ """
 
     def wrapper(ctx, controller, *args, **kwargs):
         # Ensure that plugins are loaded. Plugins may have functions
@@ -38,4 +36,3 @@ def post_processor(func):
         controller.post_process(controller, facts, show_plugin_error=None)
 
     return update_wrapper(wrapper, func)
-

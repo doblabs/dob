@@ -27,4 +27,3 @@ class TestDobLicenseWrapper(object):
         out, err = capsys.readouterr()
         assert out.startswith("GNU GENERAL PUBLIC LICENSE")
         assert "Version 3, 29 June 2007" in out
-

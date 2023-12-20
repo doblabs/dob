@@ -20,20 +20,17 @@
 from .aliasable_bunchy_plugin import ClickAliasableBunchyPluginGroup
 from .bunchy_help import help_header_add_fact
 
-__all__ = (
-    'ClickAddFactHelpGroup'
-)
+__all__ = "ClickAddFactHelpGroup"
 
 
 class ClickAddFactHelpGroup(ClickAliasableBunchyPluginGroup):
+    ADD_FACT_GROUP_NAME = "add"
 
-    ADD_FACT_GROUP_NAME = 'add'
-
-    ADD_FACT_GROUP_HELP = 'add --help'
+    ADD_FACT_GROUP_HELP = "add --help"
 
     # SYNC_ME:
     #   dob.run.command(name) ↔ ClickAddFactHelpGroup.ADD_FACT_SKIP_ALIASED=[name,]
-    ADD_FACT_SKIP_ALIASED = ['on', 'until', 'next']
+    ADD_FACT_SKIP_ALIASED = ["on", "until", "next"]
     # Here the main names = ['now', 'to', 'after'].
     # FIXME/2019-11-21: (lb): Maybe remove these aliased Add Fact cmds?
     #                        (And be more confident about chosen names.)
@@ -53,11 +50,10 @@ class ClickAddFactHelpGroup(ClickAliasableBunchyPluginGroup):
                 continue
             # MEH: (lb): We could weed out hidden commands, too. Seems like work.
             commands.append(cmdname)
-        return '|'.join(commands)
+        return "|".join(commands)
 
     def format_help_text(self, ctx, formatter):
         # (lb): Achoo! Undent (-1, yo!) before click indents (back to 0, we want).
         formatter.dedent()
         super(ClickAddFactHelpGroup, self).format_help_text(ctx, formatter)
         formatter.indent()
-

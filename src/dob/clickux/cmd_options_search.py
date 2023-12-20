@@ -24,13 +24,13 @@ from easy_as_pypi_termio import echo_warning, exit_warning
 
 __all__ = (
     # One decorator is all you need for each list and usage command.
-    'cmd_options_any_search_query',
+    "cmd_options_any_search_query",
     # Some other commands share use of the ASCII output table feature.
-    'cmd_options_output_format_any_input',
-    'cmd_options_output_format_facts_only',
+    "cmd_options_output_format_any_input",
+    "cmd_options_output_format_facts_only",
     # Argument parsing helpers, to facilitate **kwargs passing.
-    'postprocess_options_normalize_search_args',
-    'postprocess_options_output_format_any_input',
+    "postprocess_options_normalize_search_args",
+    "postprocess_options_output_format_any_input",
     # Private module variables:
     #   '_cmd_options_*',
     # Private module functions:
@@ -68,9 +68,10 @@ __all__ = (
 
 _cmd_options_search_item_key = [
     click.option(
-        '-k', '--key',
-        metavar='ID',
-        help=_('The database key of the item.'),
+        "-k",
+        "--key",
+        metavar="ID",
+        help=_("The database key of the item."),
     ),
 ]
 
@@ -81,7 +82,7 @@ _cmd_options_search_item_key = [
 
 _cmd_options_search_search_term = [
     click.argument(
-        'search_term',
+        "search_term",
         nargs=-1,
         default=None,
     ),
@@ -89,36 +90,41 @@ _cmd_options_search_search_term = [
 
 
 def _postprocess_options_search_term(kwargs):
-    if 'search_term' not in kwargs:
+    if "search_term" not in kwargs:
         return
 
     # (lb): Me, the pedant.
-    kwargs['search_terms'] = kwargs['search_term']
-    del kwargs['search_term']
+    kwargs["search_terms"] = kwargs["search_term"]
+    del kwargs["search_term"]
 
 
 # ***
 # *** [SEARCH QUERY] Time Window.
 # ***
 
-def _cmd_options_search_time_window(command=''):
-    since_default_value = ''
+
+def _cmd_options_search_time_window(command=""):
+    since_default_value = ""
     since_show_default = False
-    if command == 'journal':
-        since_default_value = 'last week'
+    if command == "journal":
+        since_default_value = "last week"
         since_show_default = True
     cmd_options = [
         click.option(
-            '-s', '--since', '--after',
-            metavar='TIME',
+            "-s",
+            "--since",
+            "--after",
+            metavar="TIME",
             default=since_default_value,
             show_default=since_show_default,
-            help=_('Show items newer than a specific date.'),
+            help=_("Show items newer than a specific date."),
         ),
         click.option(
-            '-u', '--until', '--before',
-            metavar='TIME',
-            help=_('Show items older than a specific date.'),
+            "-u",
+            "--until",
+            "--before",
+            metavar="TIME",
+            help=_("Show items older than a specific date."),
         ),
     ]
     return cmd_options
@@ -132,7 +138,9 @@ def _cmd_options_search_time_window(command=''):
 
 _cmd_options_search_deleted_hidden = [
     click.option(
-        '--deleted', is_flag=True, help=_('Show deleted items.'),
+        "--deleted",
+        is_flag=True,
+        help=_("Show deleted items."),
     ),
     # FIXME/2020-05-20: Scrub hidden from everywhere.
     # click.option(
@@ -147,20 +155,22 @@ _cmd_options_search_deleted_hidden = [
 
 _cmd_options_search_match_activities = [
     click.option(
-        '-a', '--activity', multiple=True,
-        help=_('Restrict results by exact activity name(s).'),
+        "-a",
+        "--activity",
+        multiple=True,
+        help=_("Restrict results by exact activity name(s)."),
     ),
 ]
 
 
 def _postprocess_options_match_activities(kwargs):
-    if 'activity' not in kwargs:
+    if "activity" not in kwargs:
         return
 
-    match_activities = _postprocess_assemble_match_names(kwargs['activity'])
+    match_activities = _postprocess_assemble_match_names(kwargs["activity"])
     if match_activities:
-        kwargs['match_activities'] = match_activities
-    del kwargs['activity']
+        kwargs["match_activities"] = match_activities
+    del kwargs["activity"]
 
 
 def _postprocess_assemble_match_names(match_names):
@@ -180,20 +190,22 @@ def _postprocess_assemble_match_names(match_names):
 
 _cmd_options_search_match_categories = [
     click.option(
-        '-c', '--category', multiple=True,
-        help=_('Restrict results by exact category name(s).'),
+        "-c",
+        "--category",
+        multiple=True,
+        help=_("Restrict results by exact category name(s)."),
     ),
 ]
 
 
 def _postprocess_options_match_categories(kwargs):
-    if 'category' not in kwargs:
+    if "category" not in kwargs:
         return
 
-    match_categories = _postprocess_assemble_match_names(kwargs['category'])
+    match_categories = _postprocess_assemble_match_names(kwargs["category"])
     if match_categories:
-        kwargs['match_categories'] = match_categories
-    del kwargs['category']
+        kwargs["match_categories"] = match_categories
+    del kwargs["category"]
 
 
 # ***
@@ -202,20 +214,22 @@ def _postprocess_options_match_categories(kwargs):
 
 _cmd_options_search_match_tags = [
     click.option(
-        '-t', '--tag', multiple=True,
-        help=_('Restrict results by exact tag name(s).'),
+        "-t",
+        "--tag",
+        multiple=True,
+        help=_("Restrict results by exact tag name(s)."),
     ),
 ]
 
 
 def _postprocess_options_match_tags(kwargs):
-    if 'tag' not in kwargs:
+    if "tag" not in kwargs:
         return
 
-    match_tags = _postprocess_assemble_match_names(kwargs['tag'])
+    match_tags = _postprocess_assemble_match_names(kwargs["tag"])
     if match_tags:
-        kwargs['match_tags'] = match_tags
-    del kwargs['tag']
+        kwargs["match_tags"] = match_tags
+    del kwargs["tag"]
 
 
 # ***
@@ -224,11 +238,12 @@ def _postprocess_options_match_tags(kwargs):
 
 _cmd_options_search_broad_match = [
     click.option(
-        '--broad-match', '--broad',
+        "--broad-match",
+        "--broad",
         is_flag=True,
         help=_(
-            'Try SEARCH_TERM matching on activity, category, and tag names'
-            ' (otherwise SEARCH_TERM only matches description).'
+            "Try SEARCH_TERM matching on activity, category, and tag names"
+            " (otherwise SEARCH_TERM only matches description)."
         ),
     ),
 ]
@@ -238,60 +253,63 @@ _cmd_options_search_broad_match = [
 # *** [RESULTS GROUP] Option.
 # ***
 
+
 def _cmd_options_results_group(item):
     choices = []
-    if item != 'activity':
-        choices.append('activity')
-    if item != 'category':
-        choices.append('category')
-    if item != 'tags':
-        choices.append('tags')
-    if item == 'fact':
-        choices.append('days')
+    if item != "activity":
+        choices.append("activity")
+    if item != "category":
+        choices.append("category")
+    if item != "tags":
+        choices.append("tags")
+    if item == "fact":
+        choices.append("days")
 
     return [
         click.option(
-            '-g', '--group', multiple=True,
+            "-g",
+            "--group",
+            multiple=True,
             type=click.Choice(choices),
-            help=_('Alias of `--group-<attribute>` options (multiple allowed).'),
+            help=_("Alias of `--group-<attribute>` options (multiple allowed)."),
         ),
     ]
 
 
 def _postprocess_options_grouping(kwargs, cmd_journal=False):
     def __postprocess_options_grouping():
-        if 'group' not in kwargs:
+        if "group" not in kwargs:
             return
 
-        process_grouping_option('activity')
-        process_grouping_option('category')
-        process_grouping_option('tags')
-        process_grouping_option('days')
-        del kwargs['group']
+        process_grouping_option("activity")
+        process_grouping_option("category")
+        process_grouping_option("tags")
+        process_grouping_option("days")
+        del kwargs["group"]
 
         ensure_default_grouping()
 
     def process_grouping_option(type_name):
         # Form the group name, e.g., group_activity, group_category, etc.
-        group_name = 'group_{}'.format(type_name)
+        group_name = "group_{}".format(type_name)
         if group_name not in kwargs:
             return
 
-        kwargs[group_name] = kwargs[group_name] or type_name in kwargs['group']
+        kwargs[group_name] = kwargs[group_name] or type_name in kwargs["group"]
 
     def ensure_default_grouping():
         if not cmd_journal:
             return
 
         if not (
-            kwargs['group_activity']
-            or kwargs['group_category']
-            or kwargs['group_tags']
-            or kwargs['group_days']
+            kwargs["group_activity"]
+            or kwargs["group_category"]
+            or kwargs["group_tags"]
+            or kwargs["group_days"]
         ):
-            kwargs['group_activity'] = True
-            kwargs['group_category'] = True
-            kwargs['group_days'] = True
+            kwargs["group_activity"] = True
+            kwargs["group_category"] = True
+            kwargs["group_days"] = True
 
     __postprocess_options_grouping()
 
@@ -302,8 +320,10 @@ def _postprocess_options_grouping(kwargs, cmd_journal=False):
 
 _cmd_options_results_group_activity = [
     click.option(
-        '-A', '--group-activity', is_flag=True,
-        help=_('Group results by activity name.'),
+        "-A",
+        "--group-activity",
+        is_flag=True,
+        help=_("Group results by activity name."),
     ),
 ]
 
@@ -317,8 +337,10 @@ _cmd_options_results_group_category = [
     # specified before the command name (just how Click works), so
     # this re-usage of the same single -C option is perfectly fine.
     click.option(
-        '-C', '--group-category', is_flag=True,
-        help=_('Group results by category name.'),
+        "-C",
+        "--group-category",
+        is_flag=True,
+        help=_("Group results by category name."),
     ),
 ]
 
@@ -329,8 +351,10 @@ _cmd_options_results_group_category = [
 
 _cmd_options_results_group_tags = [
     click.option(
-        '-T', '--group-tags', is_flag=True,
-        help=_('Group results by tag names.'),
+        "-T",
+        "--group-tags",
+        is_flag=True,
+        help=_("Group results by tag names."),
     ),
 ]
 
@@ -341,8 +365,10 @@ _cmd_options_results_group_tags = [
 
 _cmd_options_results_group_days = [
     click.option(
-        '-Y', '--group-days', is_flag=True,
-        help=_('Group results by day.'),
+        "-Y",
+        "--group-days",
+        is_flag=True,
+        help=_("Group results by day."),
     ),
 ]
 
@@ -351,47 +377,52 @@ _cmd_options_results_group_days = [
 # *** [SEARCH RESULTS] Order.
 # ***
 
-def _cmd_options_results_sort_order(item, command, group):
-    choices = ['name', 'activity', 'category']
-    default_sort_cols = ['name']
-    default_sort_orders = ['asc']
-    if item == 'fact' or command == 'usage':
-        choices += ['start', 'time']
-        if item == 'fact':
-            default_sort_cols = ['start']
-        if group or command == 'usage':
-            choices += ['usage']
-            default_sort_cols = ['usage']
-            default_sort_orders = ['desc']
-        if command == 'journal':
-            default_sort_cols = ['day', 'time']
-            default_sort_orders = ['asc', 'desc']
 
-    if group and item == 'fact':
-        choices.append('day')
-    if item in ('tag', 'fact'):
+def _cmd_options_results_sort_order(item, command, group):
+    choices = ["name", "activity", "category"]
+    default_sort_cols = ["name"]
+    default_sort_orders = ["asc"]
+    if item == "fact" or command == "usage":
+        choices += ["start", "time"]
+        if item == "fact":
+            default_sort_cols = ["start"]
+        if group or command == "usage":
+            choices += ["usage"]
+            default_sort_cols = ["usage"]
+            default_sort_orders = ["desc"]
+        if command == "journal":
+            default_sort_cols = ["day", "time"]
+            default_sort_orders = ["asc", "desc"]
+
+    if group and item == "fact":
+        choices.append("day")
+    if item in ("tag", "fact"):
         # For item == 'tag', this option same as --sort 'name'.
-        choices.append('tag')
-    if item == 'fact':
+        choices.append("tag")
+    if item == "fact":
         # Sorts by Fact PK. (lb): Not sure how useful.
         # - Because Momentaneous Facts, potentially useful.
-        choices.append('fact')
+        choices.append("fact")
 
     return [
         click.option(
-            '-S', '--sort', '--order',
+            "-S",
+            "--sort",
+            "--order",
             default=default_sort_cols,
             show_default=True,
             type=click.Choice(choices),
             multiple=True,
-            help=_('Order by column(s) (multiple allowed).'),
+            help=_("Order by column(s) (multiple allowed)."),
         ),
         click.option(
-            '-D', '--direction', '--dir',
+            "-D",
+            "--direction",
+            "--dir",
             default=default_sort_orders,
-            type=click.Choice(['asc', 'desc']),
+            type=click.Choice(["asc", "desc"]),
             multiple=True,
-            help=_('Order by direction(s) (one for each --sort).'),
+            help=_("Order by direction(s) (one for each --sort)."),
         ),
     ]
 
@@ -402,32 +433,32 @@ def _cmd_options_results_sort_order(item, command, group):
 
 
 def _postprocess_options_sort_cols(kwargs):
-    if 'sort' not in kwargs:
+    if "sort" not in kwargs:
         return
 
-    if kwargs['sort']:
-        kwargs['sort_cols'] = kwargs['sort']
-    del kwargs['sort']
+    if kwargs["sort"]:
+        kwargs["sort_cols"] = kwargs["sort"]
+    del kwargs["sort"]
 
 
 def _postprocess_options_sort_dirs(kwargs):
-    if 'direction' not in kwargs:
+    if "direction" not in kwargs:
         return
 
-    last_direction = 'asc'
+    last_direction = "asc"
     sort_orders = []
-    if 'sort_cols' in kwargs:
+    if "sort_cols" in kwargs:
         # Ensure sort_orders same length as sort_cols.
-        for idx in range(len(kwargs['sort_cols'])):
+        for idx in range(len(kwargs["sort_cols"])):
             try:
-                last_direction = kwargs['direction'][idx]
+                last_direction = kwargs["direction"][idx]
             except IndexError:
                 pass
             sort_orders.append(last_direction)
-    del kwargs['direction']
+    del kwargs["direction"]
 
     if sort_orders:
-        kwargs['sort_orders'] = sort_orders
+        kwargs["sort_orders"] = sort_orders
 
 
 # ***
@@ -436,10 +467,10 @@ def _postprocess_options_sort_dirs(kwargs):
 
 _postprocess_options_results_options_sort_double_sort = [
     click.option(
-        '--re-sort',
+        "--re-sort",
         is_flag=True,
         hidden=True,
-        help=_('Resort query after SELECT post-processing.'),
+        help=_("Resort query after SELECT post-processing."),
     ),
 ]
 
@@ -450,12 +481,18 @@ _postprocess_options_results_options_sort_double_sort = [
 
 _cmd_options_search_limit_offset = [
     click.option(
-        '-L', '--limit', default=0, show_default=False,
-        help=_('Limit the number of records to fetch.'),
+        "-L",
+        "--limit",
+        default=0,
+        show_default=False,
+        help=_("Limit the number of records to fetch."),
     ),
     click.option(
-        '-O', '--offset', default=0, show_default=False,
-        help=_('Skip this number of records before returning results.'),
+        "-O",
+        "--offset",
+        default=0,
+        show_default=False,
+        help=_("Skip this number of records before returning results."),
     ),
 ]
 
@@ -466,8 +503,10 @@ _cmd_options_search_limit_offset = [
 
 _cmd_options_results_hide_description = [
     click.option(
-        '-P', '--hide-description', is_flag=True,
-        help=_('Omit Fact description from results.'),
+        "-P",
+        "--hide-description",
+        is_flag=True,
+        help=_("Omit Fact description from results."),
     ),
 ]
 
@@ -478,16 +517,20 @@ _cmd_options_results_hide_description = [
 
 _cmd_options_results_hide_duration = [
     click.option(
-        '-N', '--hide-duration', is_flag=True,
-        help=_('Omit duration from results.'),
+        "-N",
+        "--hide-duration",
+        is_flag=True,
+        help=_("Omit duration from results."),
     ),
 ]
 
 
 _cmd_options_results_show_duration = [
     click.option(
-        '-N', '--show-duration', is_flag=True,
-        help=_('Display duration time in results.'),
+        "-N",
+        "--show-duration",
+        is_flag=True,
+        help=_("Display duration time in results."),
     ),
 ]
 
@@ -496,22 +539,24 @@ _cmd_options_results_show_duration = [
 # *** [RESULTS FORMAT] Duration.
 # ***
 
-def _cmd_options_duration_formats(item=''):
+
+def _cmd_options_duration_formats(item=""):
     format_choices = [
-        '%S', # As seconds, to the second.
-        '%M', # As minutes, rounded down.
-        '%H:%M', # As 'hours:minutes'. rounded down.
-        'HHhMMm', # As '{hours} hour(s) {minutes} minute(s)'.
-        '', # As human friendly time.
+        "%S",  # As seconds, to the second.
+        "%M",  # As minutes, rounded down.
+        "%H:%M",  # As 'hours:minutes'. rounded down.
+        "HHhMMm",  # As '{hours} hour(s) {minutes} minute(s)'.
+        "",  # As human friendly time.
     ]
     return format_choices
 
 
 _cmd_options_results_duration_format = [
     click.option(
-        '--duration-format', '--df',
+        "--duration-format",
+        "--df",
         type=click.Choice(_cmd_options_duration_formats()),
-        default='',
+        default="",
         show_default=False,
         help=_("Duration format [default: Human-friendly ('')]."),
     ),
@@ -524,16 +569,20 @@ _cmd_options_results_duration_format = [
 
 _cmd_options_results_hide_usage = [
     click.option(
-        '-U', '--hide-usage', is_flag=True,
-        help=_('Omit usage count from results.'),
+        "-U",
+        "--hide-usage",
+        is_flag=True,
+        help=_("Omit usage count from results."),
     ),
 ]
 
 
 _cmd_options_results_show_usage = [
     click.option(
-        '-U', '--show-usage', is_flag=True,
-        help=_('Display usage count in results.'),
+        "-U",
+        "--show-usage",
+        is_flag=True,
+        help=_("Display usage count in results."),
     ),
 ]
 
@@ -542,17 +591,18 @@ _cmd_options_results_show_usage = [
 # *** [POST PROCESS] Show/Hide.
 # ***
 
+
 def _postprocess_options_results_show_hide(kwargs):
     # The list command have --show-* options; the usage commands
     # have --hide-* options; the export command has neither.
-    _postprocess_options_results_show_hide_option(kwargs, 'duration')
-    _postprocess_options_results_show_hide_option(kwargs, 'usage')
+    _postprocess_options_results_show_hide_option(kwargs, "duration")
+    _postprocess_options_results_show_hide_option(kwargs, "usage")
 
 
 def _postprocess_options_results_show_hide_option(kwargs, argname):
     show_item = None
-    attr_show = 'show_{}'.format(argname)
-    attr_hide = 'hide_{}'.format(argname)
+    attr_show = "show_{}".format(argname)
+    attr_hide = "hide_{}".format(argname)
     if attr_show in kwargs:
         show_item = kwargs[attr_show]
     elif attr_hide in kwargs:
@@ -569,9 +619,11 @@ def _postprocess_options_results_show_hide_option(kwargs, argname):
 
 _cmd_options_results_show_columns = [
     click.option(
-        '-l', '--column', multiple=True,
+        "-l",
+        "--column",
+        multiple=True,
         type=click.Choice(report_table_columns()),
-        help=_('Specify custom report columns.'),
+        help=_("Specify custom report columns."),
     ),
 ]
 
@@ -582,8 +634,11 @@ _cmd_options_results_show_columns = [
 
 _cmd_options_results_max_width = [
     click.option(
-        '-W', '--max-width', '--width', default=-1,
-        help=_('Set the table width or Factoid line length.'),
+        "-W",
+        "--max-width",
+        "--width",
+        default=-1,
+        help=_("Set the table width or Factoid line length."),
     ),
 ]
 
@@ -592,27 +647,29 @@ _cmd_options_results_max_width = [
 # *** [SEARCH RESULTS] Output file.
 # ***
 
+
 def _cmd_options_results_output_path(for_export=False):
     return [
         click.option(
-            '-o', '--output',
+            "-o",
+            "--output",
             # Not setting `type=click.File('r')` because
             # refuses empty string, which we want user to
             # be able to use to choose stdout (i.e., when
             # for_export=True).
-            help=_('Write to file instead of stdout.'),
-            metavar='PATH',
+            help=_("Write to file instead of stdout."),
+            metavar="PATH",
             required=for_export,
         ),
     ]
 
 
 def _postprocess_options_output_filename(kwargs):
-    if 'output' not in kwargs:
+    if "output" not in kwargs:
         return
 
-    kwargs['output_path'] = kwargs['output']
-    del kwargs['output']
+    kwargs["output_path"] = kwargs["output"]
+    del kwargs["output"]
 
 
 # ***
@@ -621,29 +678,29 @@ def _postprocess_options_output_filename(kwargs):
 
 
 _standard_formats = [
-    'csv',
-    'json',
-    'tsv',
-    'xml',
-    'table',
+    "csv",
+    "json",
+    "tsv",
+    "xml",
+    "table",
 ]
 
 
 _single_fact_formats = [
-    'factoid',
-    'ical',
+    "factoid",
+    "ical",
 ]
 
 
 _fact_usage_formats = [
-    'journal',
+    "journal",
 ]
 
 
-def _cmd_options_output_formats_basic(item=''):
+def _cmd_options_output_formats_basic(item=""):
     format_choices = []
-    format_choices += _fact_usage_formats if item == 'fact' else []
-    format_choices += _single_fact_formats if item == 'fact' else []
+    format_choices += _fact_usage_formats if item == "fact" else []
+    format_choices += _single_fact_formats if item == "fact" else []
     format_choices += _standard_formats
     return format_choices
 
@@ -656,24 +713,30 @@ def _cmd_options_output_format_singular_options_any():
     # --format <format> aliases.
     cmd_options = [
         click.option(
-            '--csv', is_flag=True,
-            help=_('Output results as comma-separated values (CSV).'),
+            "--csv",
+            is_flag=True,
+            help=_("Output results as comma-separated values (CSV)."),
         ),
         click.option(
-            '--json', '-J', is_flag=True,
-            help=_('Output results as JavaScript Object Notation (JSON).'),
+            "--json",
+            "-J",
+            is_flag=True,
+            help=_("Output results as JavaScript Object Notation (JSON)."),
         ),
         click.option(
-            '--tsv', is_flag=True,
-            help=_('Output results as tab-separated values (TSV).'),
+            "--tsv",
+            is_flag=True,
+            help=_("Output results as tab-separated values (TSV)."),
         ),
         click.option(
-            '--xml', is_flag=True,
-            help=_('Output results as Extensible Markup Language (XML).'),
+            "--xml",
+            is_flag=True,
+            help=_("Output results as Extensible Markup Language (XML)."),
         ),
         click.option(
-            '--table', is_flag=True,
-            help=_('Output results as format indicated by --table-type.'),
+            "--table",
+            is_flag=True,
+            help=_("Output results as format indicated by --table-type."),
         ),
     ]
     return cmd_options
@@ -682,44 +745,48 @@ def _cmd_options_output_format_singular_options_any():
 def _cmd_options_output_format_singular_options_fact():
     cmd_options = [
         click.option(
-            '--journal', is_flag=True,
+            "--journal",
+            is_flag=True,
             help=_("Output Facts using dob's Journal format."),
         ),
         click.option(
-            '--factoid', is_flag=True,
+            "--factoid",
+            is_flag=True,
             help=_("Output Facts using dob's Factoid format."),
         ),
         click.option(
-            '--ical', is_flag=True,
-            help=_('Output Facts using iCalendar format.'),
+            "--ical",
+            is_flag=True,
+            help=_("Output Facts using iCalendar format."),
         ),
     ]
     return cmd_options
 
 
-def _cmd_options_output_format_multiple_choices_option(command='', item=''):
+def _cmd_options_output_format_multiple_choices_option(command="", item=""):
     format_choices = _cmd_options_output_formats_basic(item)
 
-    if command == 'journal':
-        default_format = 'journal'
+    if command == "journal":
+        default_format = "journal"
     else:
-        default_format = 'table'
+        default_format = "table"
 
     cmd_options = [
         click.option(
-            '-f', '--format',
+            "-f",
+            "--format",
             type=click.Choice(format_choices),
             default=default_format,
             show_default=True,
-            help=_('Alias of format options (one allowed).'),
+            help=_("Alias of format options (one allowed)."),
         ),
     ]
     return cmd_options
 
 
-def _cmd_options_output_format_choices(command='', item=''):
+def _cmd_options_output_format_choices(command="", item=""):
     cmd_options = []
-    if item == 'fact':
+    if item == "fact":
         cmd_options += _cmd_options_output_format_singular_options_fact()
     cmd_options += _cmd_options_output_format_singular_options_any()
     cmd_options += _cmd_options_output_format_multiple_choices_option(command, item)
@@ -727,15 +794,15 @@ def _cmd_options_output_format_choices(command='', item=''):
 
 
 def _postprocess_options_output_format_choices(kwargs):
-    if 'format' not in kwargs:
+    if "format" not in kwargs:
         return
 
-    format_choices = _cmd_options_output_formats_basic(item='fact')
+    format_choices = _cmd_options_output_formats_basic(item="fact")
     fmts_specified = []
     for choice in format_choices:
         try:
             if kwargs[choice]:
-                kwargs['format'] = choice
+                kwargs["format"] = choice
                 fmts_specified.append(choice)
             del kwargs[choice]
         except KeyError:
@@ -744,12 +811,10 @@ def _postprocess_options_output_format_choices(kwargs):
             pass
 
     if len(fmts_specified) > 1:
-        echo_warning(_(
-            'More than one format specified: {}'
-        ).format(fmts_specified))
+        echo_warning(_("More than one format specified: {}").format(fmts_specified))
 
-    kwargs['output_format'] = kwargs['format']
-    del kwargs['format']
+    kwargs["output_format"] = kwargs["format"]
+    del kwargs["format"]
 
 
 # ***
@@ -757,12 +822,11 @@ def _postprocess_options_output_format_choices(kwargs):
 # ***
 
 _tabulate_tablefmts_markup = [
-    'github',
+    "github",
     #   | Header 1   | Header 2   | Header 3   |
     #   |------------|------------|------------|
     #   | value 1    | value 2    | value 3    |
-
-    'html',
+    "html",
     #   <table>
     #   <thead>
     #   <tr><th>Header 1  </th><th>Header 2  </th><th>Header 3  </th></tr>
@@ -771,11 +835,9 @@ _tabulate_tablefmts_markup = [
     #   <tr><td>value 1   </td><td>value 2   </td><td>value 3   </td></tr>
     #   </tbody>
     #   </table>
-
     # 'jira',  # MEH: Could add if requested.
     #   || Header 1   || Header 2   || Header 3   ||
     #   | value 1    | value 2    | value 3    |
-
     # 'latex',  # MEH: Could add if requested.
     #   \begin{tabular}{lll}
     #   \hline
@@ -784,7 +846,6 @@ _tabulate_tablefmts_markup = [
     #    value 1    & value 2    & value 3    \\
     #   \hline
     #   \end{tabular}
-
     # 'latex_raw',  # SKIP: Same as 'latex'
     #   \begin{tabular}{lll}
     #   \hline
@@ -793,7 +854,6 @@ _tabulate_tablefmts_markup = [
     #    value 1    & value 2    & value 3    \\
     #   \hline
     #   \end{tabular}
-
     # 'latex_booktabs',  # MEH: Could add if requested.
     #   \begin{tabular}{lll}
     #   \toprule
@@ -802,8 +862,7 @@ _tabulate_tablefmts_markup = [
     #    value 1    & value 2    & value 3    \\
     #   \bottomrule
     #   \end{tabular}
-
-    'mediawiki',
+    "mediawiki",
     #   {| class="wikitable" style="text-align: left;"
     #   |+ <!-- caption -->
     #   |-
@@ -811,32 +870,26 @@ _tabulate_tablefmts_markup = [
     #   |-
     #   | value 1    || value 2    || value 3
     #   |}
-
     # 'moinmoin',  # For MoinMoin Wiki Engine. MEH: Could add if requested.
     #   || ''' Header 1   ''' || ''' Header 2   ''' || ''' Header 3   ''' ||
     #   ||  value 1     ||  value 2     ||  value 3     ||
-
-    'orgtbl',
+    "orgtbl",
     #   | Header 1   | Header 2   | Header 3   |
     #   |------------+------------+------------|
     #   | value 1    | value 2    | value 3    |
-
-    'rst',
+    "rst",
     #   ==========  ==========  ==========
     #   Header 1    Header 2    Header 3
     #   ==========  ==========  ==========
     #   value 1     value 2     value 3
     #   ==========  ==========  ==========
-
     # 'textile',  # MEH: Could add if requested.
     #   |_.  Header 1   |_. Header 2   |_. Header 3   |
     #   |<. value 1     |<. value 2    |<. value 3    |
-
     # 'unsafehtml',  # MEH.
     #   Header 1    Header 2    Header 3
     #   ----------  ----------  ----------
     #   value 1     value 2     value 3
-
     # 'youtrack',  # Similar to 'jira'
     #   ||  Header 1    ||  Header 2    ||  Header 3    ||
     #   |  value 1     |  value 2     |  value 3     |
@@ -870,11 +923,11 @@ _tabulate_tablefmts_markup = [
 # - tl;dr We let the user choose `texttable` to generate an ASCII table; and we
 #   let them choose a few of the `tabulate` formats to generate alternative
 #   (non-table) outputs.
-def _cmd_options_output_formats_table(item=''):
+def _cmd_options_output_formats_table(item=""):
     table_choices = []
     # MAGIC_VALUE: Use 'normal' to refer to the nice, wrapped ASCII table
     #              that 'texttable' generates by default.
-    table_choices += ['normal']
+    table_choices += ["normal"]
     # Include also those tabulate package output formats that are not
     # ASCII table formats (and not destined for terminal viewage).
     table_choices += _tabulate_tablefmts_markup
@@ -886,28 +939,30 @@ def _cmd_options_output_format_tabling():
 
     cmd_options = [
         click.option(
-            '--table-type', '--type',
+            "--table-type",
+            "--type",
             type=click.Choice(formats_table),
             nargs=1,
-            default='normal',
+            default="normal",
             show_default=True,
-            help=_('Table format style.'),
+            help=_("Table format style."),
         ),
     ]
     return cmd_options
 
 
 def _postprocess_options_output_format_tabling(kwargs):
-    if 'table_type' not in kwargs:
+    if "table_type" not in kwargs:
         return
 
-    if kwargs['table_type'] == 'normal':
-        kwargs['table_type'] = 'texttable'
+    if kwargs["table_type"] == "normal":
+        kwargs["table_type"] = "texttable"
 
 
 # ***
 # *** [REPORT FORMAT] Basic Formats and Table Styles.
 # ***
+
 
 def cmd_options_output_format_any_input(func):
     cmd_options = []
@@ -930,11 +985,12 @@ def postprocess_options_output_format_any_input(kwargs, cmd_journal=False):
 _cmd_options_output_factoids_hrule = [
     click.option(
         # MEH: We could alias '-R', or reserve -R for later.
-        '--factoid-rule', '--rule',
+        "--factoid-rule",
+        "--rule",
         nargs=1,
-        default='',
-        metavar='SEP',
-        help=_('Separate Factoids with a horizontal rule.'),
+        default="",
+        metavar="SEP",
+        help=_("Separate Factoids with a horizontal rule."),
     ),
 ]
 
@@ -946,20 +1002,22 @@ _cmd_options_output_factoids_hrule = [
 _cmd_options_output_sparkline_format = [
     click.option(
         # MEH: We could alias '-W', or reserve -W for later.
-        '--spark-width', '--swid',
+        "--spark-width",
+        "--swid",
         type=int,
-        default='12',
-        metavar='INT',
+        default="12",
+        metavar="INT",
         # (lb): I like the idea of showing "block (█) character"
         #       but it's very distracting.
         help=_("Number of block characters in full spark [default: 12]."),
     ),
     click.option(
         # MEH: We could alias '-V', or reserve -V for later.
-        '--spark-total', '--stot',
+        "--spark-total",
+        "--stot",
         nargs=1,
-        default='max',
-        metavar='MAX',
+        default="max",
+        metavar="MAX",
         # show_default=True,
         help=_(
             "Number of seconds in full spark: "
@@ -968,8 +1026,9 @@ _cmd_options_output_sparkline_format = [
     ),
     click.option(
         # MEH: We could alias '-S', or reserve -S for later.
-        '--spark-secs', '--ssec',
-        metavar='WIDTH',
+        "--spark-secs",
+        "--ssec",
+        metavar="WIDTH",
         help=_("Seconds per block character [default: total / width]."),
     ),
 ]
@@ -979,8 +1038,9 @@ _cmd_options_output_sparkline_format = [
 # *** [POST PROCESS] Show/Hide.
 # ***
 
+
 def _postprocess_options_sparkline(kwargs):
-    if 'spark_total' not in kwargs:
+    if "spark_total" not in kwargs:
         return
 
     _postprocess_options_sparkline_total(kwargs)
@@ -988,14 +1048,14 @@ def _postprocess_options_sparkline(kwargs):
 
 
 def _postprocess_options_sparkline_total(kwargs):
-    if kwargs['spark_total'] in ('max', 'net'):
+    if kwargs["spark_total"] in ("max", "net"):
         return
 
-    _postprocess_options_sparkline_float(kwargs, 'spark_total')
+    _postprocess_options_sparkline_float(kwargs, "spark_total")
 
 
 def _postprocess_options_sparkline_secs(kwargs):
-    _postprocess_options_sparkline_float(kwargs, 'spark_secs')
+    _postprocess_options_sparkline_float(kwargs, "spark_secs")
 
 
 def _postprocess_options_sparkline_float(kwargs, spark_attr):
@@ -1009,9 +1069,9 @@ def _postprocess_options_sparkline_float(kwargs, spark_attr):
             #     --spark-total '8 * 60 * 60'
             kwargs[spark_attr] = float(eval(kwargs[spark_attr]))
         except Exception:
-            msg = _(
-                "Unable to parse --{} value as (eval'able) seconds: {}"
-            ).format(spark_attr.replace('_', '-'), kwargs[spark_attr])
+            msg = _("Unable to parse --{} value as (eval'able) seconds: {}").format(
+                spark_attr.replace("_", "-"), kwargs[spark_attr]
+            )
             exit_warning(msg)
 
 
@@ -1021,18 +1081,20 @@ def _postprocess_options_sparkline_float(kwargs, spark_attr):
 
 _cmd_options_output_show_totals = [
     click.option(
-        '--show-totals', '--totals',
+        "--show-totals",
+        "--totals",
         is_flag=True,
-        help=_('Calculate and show totals in final row of output.'),
+        help=_("Calculate and show totals in final row of output."),
     ),
 ]
 
 
 _cmd_options_output_hide_totals = [
     click.option(
-        '--hide-totals', '--totals',
+        "--hide-totals",
+        "--totals",
         is_flag=True,
-        help=_('Do not calculate and show totals in final row of output.'),
+        help=_("Do not calculate and show totals in final row of output."),
     ),
 ]
 
@@ -1040,6 +1102,7 @@ _cmd_options_output_hide_totals = [
 # ***
 # *** [POST PROCESS] Adjust **kwargs.
 # ***
+
 
 def _postprocess_options_matching(kwargs):
     _postprocess_options_match_activities(kwargs)
@@ -1065,7 +1128,8 @@ def postprocess_options_normalize_search_args(kwargs, cmd_journal=False):
 
 # *** One @decorator for all your search command option needs.
 
-def cmd_options_any_search_query(command='', item='', match=False, group=False):
+
+def cmd_options_any_search_query(command="", item="", match=False, group=False):
     def _cmd_options_any_search_query():
         options = []
         append_cmd_options_filter_by_pk(options)
@@ -1089,7 +1153,7 @@ def cmd_options_any_search_query(command='', item='', match=False, group=False):
     # +++
 
     def append_cmd_options_filter_by_pk(options):
-        if command == 'export':
+        if command == "export":
             return
 
         options.extend(_cmd_options_search_item_key)
@@ -1115,7 +1179,7 @@ def cmd_options_any_search_query(command='', item='', match=False, group=False):
         options.extend(_cmd_options_search_match_activities)
         options.extend(_cmd_options_search_match_categories)
 
-        if item == 'fact':
+        if item == "fact":
             options.extend(_cmd_options_search_match_tags)
             options.extend(_cmd_options_search_broad_match)
 
@@ -1125,13 +1189,13 @@ def cmd_options_any_search_query(command='', item='', match=False, group=False):
         if not group:
             return
 
-        if item != 'activity':
+        if item != "activity":
             options.extend(_cmd_options_results_group_activity)
-        if item != 'category':
+        if item != "category":
             options.extend(_cmd_options_results_group_category)
-        if item != 'tags':
+        if item != "tags":
             options.extend(_cmd_options_results_group_tags)
-        if item == 'fact':
+        if item == "fact":
             options.extend(_cmd_options_results_group_days)
         options.extend(_cmd_options_results_group(item))
 
@@ -1144,14 +1208,14 @@ def cmd_options_any_search_query(command='', item='', match=False, group=False):
     # +++
 
     def append_cmd_options_results_column_choices(options):
-        if command == 'export':
+        if command == "export":
             return
 
         append_cmd_options_results_basic_usage_hide_show(options)
         append_cmd_options_results_fact_attrs_hide_show(options)
 
     def append_cmd_options_results_report_formats(options):
-        if command == 'export':
+        if command == "export":
             return
 
         append_cmd_options_output_format(options)
@@ -1164,10 +1228,10 @@ def cmd_options_any_search_query(command='', item='', match=False, group=False):
         append_cmd_options_results_re_sort(options)
 
     def append_cmd_options_results_report_totals(options):
-        if command == 'export':
+        if command == "export":
             return
 
-        if command == 'journal':
+        if command == "journal":
             options.extend(_cmd_options_output_show_totals)
         else:
             options.extend(_cmd_options_output_hide_totals)
@@ -1176,13 +1240,13 @@ def cmd_options_any_search_query(command='', item='', match=False, group=False):
 
     def append_cmd_options_results_basic_usage_hide_show(options):
         # Search results report output column values hide/show options.
-        if command == 'usage':
+        if command == "usage":
             options.extend(_cmd_options_results_hide_usage)
             options.extend(_cmd_options_results_hide_duration)
-        elif command in ['list', 'journal']:
+        elif command in ["list", "journal"]:
             options.extend(_cmd_options_results_show_usage)
             options.extend(_cmd_options_results_show_duration)
-        elif command == 'export':
+        elif command == "export":
             pass  # Show neither.
         else:  # Impossible.
             raise False  # pragma: no cover
@@ -1190,7 +1254,7 @@ def cmd_options_any_search_query(command='', item='', match=False, group=False):
 
     def append_cmd_options_results_fact_attrs_hide_show(options):
         # Search results report output column values hide/show options.
-        if item != 'fact':
+        if item != "fact":
             return
 
         options.extend(_cmd_options_results_hide_description)
@@ -1200,13 +1264,13 @@ def cmd_options_any_search_query(command='', item='', match=False, group=False):
         options.extend(_cmd_options_results_show_columns)
 
     def append_cmd_options_results_max_width(options):
-        if command == 'export':
+        if command == "export":
             return
 
         options.extend(_cmd_options_results_max_width)
 
     def append_cmd_options_results_re_sort(options):
-        if item != 'fact':
+        if item != "fact":
             return
 
         # (lb): It'd be nice to squelch this option unless config['dev.catch_errors']
@@ -1216,7 +1280,7 @@ def cmd_options_any_search_query(command='', item='', match=False, group=False):
     # +++
 
     def append_cmd_options_output_file(options):
-        for_export = (command == 'export')
+        for_export = command == "export"
         options.extend(_cmd_options_results_output_path(for_export=for_export))
 
     # +++
@@ -1225,13 +1289,13 @@ def cmd_options_any_search_query(command='', item='', match=False, group=False):
         options.extend(_cmd_options_output_format_choices(command, item))
 
     def append_cmd_options_format_factoid_output(options):
-        if item != 'fact':
+        if item != "fact":
             return
 
         options.extend(_cmd_options_output_factoids_hrule)
 
     def append_cmd_options_format_sparkline_output(options):
-        if item != 'fact':
+        if item != "fact":
             return
 
         options.extend(_cmd_options_output_sparkline_format)
@@ -1242,4 +1306,3 @@ def cmd_options_any_search_query(command='', item='', match=False, group=False):
     # +++
 
     return _cmd_options_any_search_query()
-

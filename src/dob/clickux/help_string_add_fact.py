@@ -49,15 +49,16 @@ from .help_strings import common_format
 #
 #        For timestamp, require hours and minutes; but allow any obvious delimiter.
 
+
 # NOTE: In Click, \b prevents re-wrapping blocks of text using terminal width.
 def ADD_FACT_COMMON(ctx):
     # Throw out a hint to use the pager, if not being used,
     # because this help document is dense.
-    first_line = 'Help on Adding single Facts from the command line'
-    if not ctx.find_root().params['pager']:
+    first_line = "Help on Adding single Facts from the command line"
+    if not ctx.find_root().params["pager"]:
         first_line = _(
-            'Show Add Fact help'
-            ' (or try {codehi}{rawname} -P add -h{reset} for paged help)'
+            "Show Add Fact help"
+            " (or try {codehi}{rawname} -P add -h{reset} for paged help)"
         ).format(**common_format())
 
     # - Tricky, tricky: Click truncates first line at first period '.',
@@ -550,7 +551,8 @@ def ADD_FACT_COMMON(ctx):
          {codehi}to{reset}           No   Yes     Yes    You must specify end time.
                                           If no active, new Fact starts at last end.
 
-        """.format(first_line=first_line, **common_format())  # noqa: E501
+        """.format(
+            first_line=first_line, **common_format()
+        )  # noqa: E501
     )
     return _help
-

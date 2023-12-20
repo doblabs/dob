@@ -23,13 +23,10 @@ import click_hotoffthehamster as click
 
 from .help_header import help_header_format
 
-__all__ = (
-    'ClickBetterHeadersGroup'
-)
+__all__ = "ClickBetterHeadersGroup"
 
 
 class ClickBetterHeadersGroup(click.Group):
-
     def __init__(self, *args, **kwargs):
         super(ClickBetterHeadersGroup, self).__init__(*args, **kwargs)
 
@@ -41,13 +38,12 @@ class ClickBetterHeadersGroup(click.Group):
         # name, which is 'run', the name of the root callback in run_cli.
         # - I'd rather use ctx.parent is None, and not do a string compare,
         #   but this is dirt cheap and easy squeeze y.
-        if self.name == 'run':
-            return help_header_format(_('Global Options'))
-        return help_header_format(_('Command Options'))
+        if self.name == "run":
+            return help_header_format(_("Global Options"))
+        return help_header_format(_("Command Options"))
 
     @property
     def help_header_commands(self):
         # click.core's behavior: return 'Commands:' (with a colon;
         # but we prefer an underline instead).
-        return help_header_format(_('Commands'))
-
+        return help_header_format(_("Commands"))

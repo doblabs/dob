@@ -23,24 +23,24 @@ import sys
 from easy_as_pypi_getver import get_version as _get_version
 
 __all__ = (
-    'get_version',
-    '__arg0name__',
-    '__author_name__',
-    '__author_link__',
-    '__package_name__',
+    "get_version",
+    "__arg0name__",
+    "__author_name__",
+    "__author_link__",
+    "__package_name__",
 )
 
 __arg0name__ = os.path.basename(sys.argv[0])
 
 # (lb): These are duplicated in setup.cfg:[metadata], but not sure how to DRY.
 #   Fortunately, they're not likely to change.
-__author_name__ = 'Landon Bouma'
-__author_link__ = 'https://tallybark.com'
+__author_name__ = "Landon Bouma"
+__author_link__ = "https://tallybark.com"
 
 # (lb): Not sure if the package name is available at runtime. Seems kinda meta,
 # anyway, like, Who am I? I just want to avoid hard coding this string in docs.
 # (And it's also used for making the `dob version` output.)
-__package_name__ = 'dob'
+__package_name__ = "dob"
 
 
 def get_version(include_head=False):
@@ -49,4 +49,3 @@ def get_version(include_head=False):
         reference_file=__file__,
         include_head=include_head,
     )
-

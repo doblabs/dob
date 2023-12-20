@@ -23,15 +23,15 @@ from .help_header import help_header_format
 from ..run_cli import run
 
 __all__ = (
-    'cmd_bunch_group_add_fact',
-    'cmd_bunch_group_dbms',
-    'cmd_bunch_group_edit',
-    'cmd_bunch_group_generate_report',
-    'cmd_bunch_group_get_meta',
-    'cmd_bunch_group_introducing',
-    'cmd_bunch_group_ongoing_fact',
-    'cmd_bunch_group_personalize',
-    'cmd_bunch_group_plugin',
+    "cmd_bunch_group_add_fact",
+    "cmd_bunch_group_dbms",
+    "cmd_bunch_group_edit",
+    "cmd_bunch_group_generate_report",
+    "cmd_bunch_group_get_meta",
+    "cmd_bunch_group_introducing",
+    "cmd_bunch_group_ongoing_fact",
+    "cmd_bunch_group_personalize",
+    "cmd_bunch_group_plugin",
 )
 
 
@@ -39,45 +39,47 @@ __all__ = (
 # *** Help command group headers.
 # ***
 
+
 def help_header_introducing():
-    return help_header_format(_('Learn and Setup Dob'))
+    return help_header_format(_("Learn and Setup Dob"))
 
 
 def help_header_edit():
-    return help_header_format(_('Run the Editor'))
+    return help_header_format(_("Run the Editor"))
 
 
 def help_header_personalize():
-    return help_header_format(_('Personalize the Editor'))
+    return help_header_format(_("Personalize the Editor"))
 
 
 def help_header_get_meta():
-    return help_header_format(_('Manage the Application'))
+    return help_header_format(_("Manage the Application"))
 
 
 def help_header_generate_report():
-    return help_header_format(_('Generate Reports'))
+    return help_header_format(_("Generate Reports"))
 
 
 def help_header_dbms():
-    return help_header_format(_('Manage the Database'))
+    return help_header_format(_("Manage the Database"))
 
 
 def help_header_add_fact():
-    return help_header_format(_('Add Facts from the CLI'))
+    return help_header_format(_("Add Facts from the CLI"))
 
 
 def help_header_ongoing_fact():
-    return help_header_format(_('Work on the Latest Fact'))
+    return help_header_format(_("Work on the Latest Fact"))
 
 
 def help_header_plugin():
-    return help_header_format(_('Plugin Commands'))
+    return help_header_format(_("Plugin Commands"))
 
 
 # ***
 # *** Help command group headers.
 # ***
+
 
 def cmd_bunch_group_introducing(cmd):
     run.add_to_bunch(cmd, help_header_introducing, 100)
@@ -122,4 +124,3 @@ def cmd_bunch_group_ongoing_fact(cmd):
 def cmd_bunch_group_plugin(cmd):
     run.add_to_bunch(cmd, help_header_plugin, 999)
     return cmd
-

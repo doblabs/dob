@@ -30,10 +30,10 @@ from easy_as_pypi_termio.style import attr, fg
 from ..clickux.help_strings import NO_ACTIVE_FACT_HELP
 
 __all__ = (
-    'echo_fact',
-    'echo_latest_ended',
-    'echo_ongoing_fact',
-    'echo_ongoing_or_ended',
+    "echo_fact",
+    "echo_latest_ended",
+    "echo_ongoing_fact",
+    "echo_ongoing_or_ended",
     # Private:
     #  'echo_most_recent',
     #  'echo_single_fact',
@@ -42,24 +42,30 @@ __all__ = (
 
 # ***
 
+
 def echo_fact(fact):
-    click.echo('{}Dry run! New fact{}:\n '.format(
-        attr('underlined'),
-        attr('reset'),
-    ))
-    click.echo('{}{}{}{}'.format(
-        # FIXME: (lb): Replace hardcoding. Assign from styles.conf. #styling
-        fg('steel_blue_1b'),
-        attr('bold'),
-        fact.friendly_str(description_sep='\n\n'),
-        attr('reset'),
-    ))
+    click.echo(
+        "{}Dry run! New fact{}:\n ".format(
+            attr("underlined"),
+            attr("reset"),
+        )
+    )
+    click.echo(
+        "{}{}{}{}".format(
+            # FIXME: (lb): Replace hardcoding. Assign from styles.conf. #styling
+            fg("steel_blue_1b"),
+            attr("bold"),
+            fact.friendly_str(description_sep="\n\n"),
+            attr("reset"),
+        )
+    )
 
 
 # ***
 
+
 def echo_latest_ended(controller):
-    echo_most_recent(controller, restrict='ended')
+    echo_most_recent(controller, restrict="ended")
 
 
 def echo_ongoing_fact(controller):
@@ -74,7 +80,7 @@ def echo_ongoing_fact(controller):
     """
     echo_most_recent(
         controller,
-        restrict='ongoing',
+        restrict="ongoing",
         empty_msg=NO_ACTIVE_FACT_HELP(controller.ctx),
     )
 
@@ -88,14 +94,14 @@ def echo_most_recent(controller, restrict=None, empty_msg=None):
     if fact is not None:
         echo_single_fact(controller, fact)
     else:
-        empty_msg = empty_msg if empty_msg else _('No facts found.')
+        empty_msg = empty_msg if empty_msg else _("No facts found.")
         exit_warning(empty_msg)
 
 
 # ***
 
-class AnsiWrapper(TextWrapper):
 
+class AnsiWrapper(TextWrapper):
     def __init__(self, *args, **kwargs):
         super(AnsiWrapper, self).__init__(*args, **kwargs)
 
@@ -104,7 +110,7 @@ class AnsiWrapper(TextWrapper):
 
 
 def echo_single_fact(controller, fact):
-    colorful = controller.config['term.use_color']
+    colorful = controller.config["term.use_color"]
     # (lb): Would user ever want to see UTC time instead?
     # - For now, assume user wants to see time in local TZ.
     #   (Also, for now, UTC support not fully implemented.)
@@ -112,7 +118,7 @@ def echo_single_fact(controller, fact):
     localize = True
     friendly = fact.friendly_str(
         shellify=False,
-        description_sep=': ',
+        description_sep=": ",
         localize=localize,
         colorful=colorful,
         show_elapsed=True,
@@ -127,14 +133,15 @@ def echo_single_fact(controller, fact):
 
 # ***
 
+
 def write_fact_block_format(fact_f, fact, rule, is_first_fact):
     write_fact_separator(fact_f, rule, is_first_fact)
     friendly_str = fact.friendly_str(
         # description_sep='\n\n',
-        description_sep=': ',
+        description_sep=": ",
         shellify=False,
         colorful=False,
-        empty_actegory_placeholder='',
+        empty_actegory_placeholder="",
     )
     fact_f.write(friendly_str)
 
@@ -143,7 +150,6 @@ def write_fact_separator(fact_f, rule, is_first_fact):
     RULE_WIDTH = 76  # How wide to print the between-facts separator.
     if is_first_fact:
         return
-    fact_f.write('\n\n')
+    fact_f.write("\n\n")
     if rule:
-        fact_f.write('{}\n\n'.format(rule * RULE_WIDTH))
-
+        fact_f.write("{}\n\n".format(rule * RULE_WIDTH))

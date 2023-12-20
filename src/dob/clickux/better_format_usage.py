@@ -26,31 +26,28 @@ from easy_as_pypi_termio.style import attr
 
 from ._ansitextwrap import AnsiTextWrapper
 
-__all__ = (
-    'ClickBetterUsageGroup'
-)
+__all__ = "ClickBetterUsageGroup"
 
 
 class ClickBetterUsageGroup(click.Group):
-
     # (lb): What I originally had but pretty wordy,
     # and tends to force usage to wrap:
     # USAGE_HINT_ALL_OPTS = '--GLOBAL-OPTIONS...'
     # USAGE_HINT_CMD_OPTS = '--COMMAND-OPTIONS...'
 
-    USAGE_HINT_ALL_OPTS = '--GLOBAL...'
-    USAGE_HINT_CMD_OPTS = '--OPTION...'
-    USAGE_HINT_CMD_ARGS = 'ARGS...'
+    USAGE_HINT_ALL_OPTS = "--GLOBAL..."
+    USAGE_HINT_CMD_OPTS = "--OPTION..."
+    USAGE_HINT_CMD_ARGS = "ARGS..."
 
     def __init__(self, *args, **kwargs):
         super(ClickBetterUsageGroup, self).__init__(*args, **kwargs)
 
     def help_usage_command_path_postfix(self, ctx):
-        if self.name == 'run':
-            return ''
+        if self.name == "run":
+            return ""
         # Return everything but the program name, e.g., if ctx.command_path
         # is "dob config dump", returns "config dump".
-        return ctx.command_path.split(' ', 1)[1]
+        return ctx.command_path.split(" ", 1)[1]
 
     def format_usage(self, ctx, formatter):
         """Writes the usage line into the formatter.
@@ -61,35 +58,36 @@ class ClickBetterUsageGroup(click.Group):
         """
         # We want usage to appear like "dob [--GLOBAL-OPTIONS...] init...",
         # but default click uses ctx.command_path, which is, e.g., "dob init".
-        if self.name == 'run':
+        if self.name == "run":
             prog = ctx.command_path
         else:
-            prog = ctx.command_path.split(' ', 1)[0]
-        prog = '{} [{}]'.format(
-            prog, ClickBetterUsageGroup.USAGE_HINT_ALL_OPTS,
+            prog = ctx.command_path.split(" ", 1)[0]
+        prog = "{} [{}]".format(
+            prog,
+            ClickBetterUsageGroup.USAGE_HINT_ALL_OPTS,
         )
         commands = self.help_usage_command_path_postfix(ctx)
         if commands:
-            prog = '{} {}'.format(prog, commands)
-        prog = '{bold}{prog}{reset}'.format(
-            bold=attr('bold'),
+            prog = "{} {}".format(prog, commands)
+        prog = "{bold}{prog}{reset}".format(
+            bold=attr("bold"),
             prog=prog,
-            reset=attr('reset'),
+            reset=attr("reset"),
         )
         #
         pieces = self.collect_usage_pieces(ctx)
-        args = ''
+        args = ""
         if pieces:
-            args = '{bold}{args}{reset}'.format(
-                bold=attr('bold'),
-                args=' '.join(pieces),
-                reset=attr('reset'),
+            args = "{bold}{args}{reset}".format(
+                bold=attr("bold"),
+                args=" ".join(pieces),
+                reset=attr("reset"),
             )
         #
-        prefix = '{underlined}{usage}{reset}: '.format(
-            underlined=attr('underlined'),
-            usage=_('Usage'),
-            reset=attr('reset'),
+        prefix = "{underlined}{usage}{reset}: ".format(
+            underlined=attr("underlined"),
+            usage=_("Usage"),
+            reset=attr("reset"),
         )
         #
         formatter.write_usage(
@@ -109,33 +107,30 @@ class ClickBetterUsageGroup(click.Group):
                 n_opts += 1
             # (lb): Skip click.core.Argument objects, which are
             # added separately to the pieces collection.
-        self.options_metavar = ''
-        if n_opts and self.name != 'run':
+        self.options_metavar = ""
+        if n_opts and self.name != "run":
             # E.g., [--COMMAND-OPTIONS...]
-            self.options_metavar = '[{}]'.format(
+            self.options_metavar = "[{}]".format(
                 ClickBetterUsageGroup.USAGE_HINT_CMD_OPTS,
             )
         # else, if n_opts and name == 'run', then --GLOBAL-OPTIONS shown instead.
-        self.subcommand_metavar = ''
+        self.subcommand_metavar = ""
         if self.commands:
-            self.subcommand_metavar = 'COMMAND [{}] [{}]'.format(
+            self.subcommand_metavar = "COMMAND [{}] [{}]".format(
                 ClickBetterUsageGroup.USAGE_HINT_CMD_OPTS,
                 ClickBetterUsageGroup.USAGE_HINT_CMD_ARGS,
             )
-        return super(
-            ClickBetterUsageGroup, self
-        ).collect_usage_pieces(*args, **kwargs)
+        return super(ClickBetterUsageGroup, self).collect_usage_pieces(*args, **kwargs)
 
     def format_help(self, ctx, formatter):
         """Override Click.Command: shorter help for commandless root command action."""
         self.format_usage(ctx, formatter)
         self.format_help_text(ctx, formatter)
         if (
-            (ctx.command.name == 'run')
+            (ctx.command.name == "run")
             and (ctx.invoked_subcommand is None)
             and (not ctx.help_option_spotted)
         ):
             return
         self.format_options(ctx, formatter)
         self.format_epilog(ctx, formatter)
-

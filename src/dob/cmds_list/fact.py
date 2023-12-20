@@ -31,9 +31,7 @@ from dob_bright.reports import render_results
 from ..clickux.cmd_options_search import cmd_options_output_format_facts_only
 from ..clickux.query_assist import error_exit_no_results
 
-__all__ = (
-    'list_facts',
-)
+__all__ = ("list_facts",)
 
 
 def list_facts(
@@ -44,16 +42,16 @@ def list_facts(
     # - Args: Select columns to output.
     show_usage=False,
     show_duration=False,
-    duration_format='',
+    duration_format="",
     hide_description=False,
     column=None,
     # - Args: Output formatter processor writer.
-    output_format='csv',
+    output_format="csv",
     # - Args: Format- and Row-specific arguments.
-    table_type='texttable',  # Applies when output_format == 'table'.
+    table_type="texttable",  # Applies when output_format == 'table'.
     max_width=-1,
     row_limit=None,
-    factoid_rule='',
+    factoid_rule="",
     # - Args: Output constraints.
     output_path=None,
     # - Args: Cell-specific arguments.
@@ -92,7 +90,7 @@ def list_facts(
         qt = prepare_query_terms(*args, **kwargs)
         results = find_facts(controller, query_terms=qt)
         if not results:
-            error_exit_no_results(_('facts'))
+            error_exit_no_results(_("facts"))
         n_total = len(results)
         n_written = display_results(results, qt, output_path)
         report_report_written(controller, output_path, n_total, n_written)
@@ -110,9 +108,9 @@ def list_facts(
         if not qt.is_grouped or not format_restricted:
             return
 
-        exit_warning(_(
-            'ERROR: Specified format type does not support grouping results.'
-        ))
+        exit_warning(
+            _("ERROR: Specified format type does not support grouping results.")
+        )
 
     # Note that the two complementary commands, dob-list and dob-usage,
     # have complementary options, --show-usage and --hide-usage options,
@@ -141,13 +139,8 @@ def list_facts(
         # - Ignore `show_usage` -- 'uses' obviously 1 because not qt.is_grouped.
         # - Check for 'sparkline' output, which is calculated from 'duration'.
         #   - Again, we could just do this during post-processing in tabulate_results.
-        if (
-            show_duration
-            and (
-                not column
-                or 'duration' in column
-                or 'sparkline' in column
-            )
+        if show_duration and (
+            not column or "duration" in column or "sparkline" in column
         ):
             return True
 
@@ -160,8 +153,8 @@ def list_facts(
         # If request includes the 'duration' column, might as well use it.
         if not qt.include_stats or not show_usage:
             # No 'duration' column, or user not asking to see it.
-            return ('start',)  # The get_all default.
-        return ('time',)  # Aka, sort-by 'duration'.
+            return ("start",)  # The get_all default.
+        return ("time",)  # Aka, sort-by 'duration'.
 
     # ***
 
@@ -223,7 +216,7 @@ def list_facts(
         # Note: Not caring about qt.limit here, as the query limit is
         # a separate concern from the row limit.
         if _row_limit is None and not output_path and sys.stdout.isatty():
-            _row_limit = controller.config['term.row_limit']
+            _row_limit = controller.config["term.row_limit"]
         return _row_limit
 
     # ***
@@ -236,11 +229,11 @@ def list_facts(
             #       - Don't click_echo if carousel_active.
             #       (Also, called via by post-processor, so
             #        this path not even called by dob proper.)
-            or controller.ctx.command.name == 'edit'
+            or controller.ctx.command.name == "edit"
             or (
                 # Don't print on `dob import` unless `-E/--no-editor`.
-                controller.ctx.command.name == 'import'
-                and not controller.ctx.params['no_editor']
+                controller.ctx.command.name == "import"
+                and not controller.ctx.params["no_editor"]
             )
         ):
             # If not writing to stdout, or if carousel running,
@@ -257,23 +250,24 @@ def list_facts(
         if n_written < n_total:
             echo_warn_if_truncated(controller, n_written, n_total)
 
-        click_echo(_(
-            "Wrote {n_written} {facts} to {output_path}"
-        ).format(
-            n_written=highlight_value(n_written),
-            facts=Inflector(English).conditional_plural(n_written, _('Fact')),
-            output_path=highlight_value(output_path_name),
-        ))
+        click_echo(
+            _("Wrote {n_written} {facts} to {output_path}").format(
+                n_written=highlight_value(n_written),
+                facts=Inflector(English).conditional_plural(n_written, _("Fact")),
+                output_path=highlight_value(output_path_name),
+            )
+        )
 
     def echo_warn_if_truncated(controller, n_results, n_rows):
         if n_results <= n_rows:
             return
 
-        echo_warning(_(
-            'Showed only {} of {} results. Use `-C term.row_limit=0` to see all results.'
-        ).format(format(n_results, ','), format(n_rows, ',')))
+        echo_warning(
+            _(
+                "Showed only {} of {} results. Use `-C term.row_limit=0` to see all results."
+            ).format(format(n_results, ","), format(n_rows, ","))
+        )
 
     # ***
 
     _list_facts()
-

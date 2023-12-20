@@ -16,4 +16,3 @@
 # or visit <http://www.gnu.org/licenses/>.
 
 """Testsuite for ``dob.facts`` modules."""
-

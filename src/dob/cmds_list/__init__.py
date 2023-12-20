@@ -16,4 +16,3 @@
 # or visit <http://www.gnu.org/licenses/>.
 
 """``dob list`` commands."""
-

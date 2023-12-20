@@ -22,8 +22,8 @@ import click_hotoffthehamster as click
 from easy_as_pypi_termio import click_echo, echo_exit
 
 __all__ = (
-    'show_help_finally',
-    'show_help_if_no_command',
+    "show_help_finally",
+    "show_help_if_no_command",
 )
 
 
@@ -67,5 +67,5 @@ def show_help_if_no_command(func):
         if ctx.invoked_subcommand is None:
             click_echo(ctx.command.get_help(ctx))
         func(*args, **kwargs)
-    return update_wrapper(show_help, func)
 
+    return update_wrapper(show_help, func)

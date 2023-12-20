@@ -20,9 +20,7 @@
 from dob_bright.controllers.app_controller import Controller
 from dob_bright.styling.apply_styles import pre_apply_style_conf
 
-__all__ = (
-    'Controller',
-)
+__all__ = ("Controller",)
 
 
 class DobController(Controller):
@@ -48,4 +46,3 @@ class DobController(Controller):
         # Trigger the cache mechanism for the style conf.
         pre_apply_style_conf(self)
         self.applied_style_conf = True
-

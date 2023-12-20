@@ -26,12 +26,11 @@ from .echo_fact import echo_fact, write_fact_block_format
 from .simple_prompts import mend_facts_confirm_and_save_maybe
 
 
-__all__ = (
-    'prompt_and_save_confirmer',
-)
+__all__ = ("prompt_and_save_confirmer",)
 
 
 # ***
+
 
 def prompt_and_save_confirmer(
     controller,
@@ -39,7 +38,7 @@ def prompt_and_save_confirmer(
     orig_facts=None,
     backup_callback=None,
     file_out=None,
-    rule='',
+    rule="",
     yes=False,
     dry=False,
     progress=None,
@@ -71,7 +70,7 @@ def prompt_and_save_confirmer(
         return saved_facts
 
     def record_edited_facts():
-        task_descrip = _('Saving facts')
+        task_descrip = _("Saving facts")
         if progress is not None:
             term_width, dot_count, fact_sep = progress.start_crude_progressor(
                 task_descrip,
@@ -84,14 +83,20 @@ def prompt_and_save_confirmer(
         for idx, fact in enumerate(edit_facts):
             if progress is not None:
                 term_width, dot_count, fact_sep = progress.step_crude_progressor(
-                    task_descrip, term_width, dot_count, fact_sep,
+                    task_descrip,
+                    term_width,
+                    dot_count,
+                    fact_sep,
                 )
 
             is_first_fact = idx == 0
             is_final_fact = idx == (len(edit_facts) - 1)
             fact_pk = fact.pk
             new_and_edited += persist_fact(
-                fact, other_edits, is_first_fact, is_final_fact,
+                fact,
+                other_edits,
+                is_first_fact,
+                is_final_fact,
             )
             # If an existing Fact:
             #   - the pk is the same; and
@@ -108,23 +113,27 @@ def prompt_and_save_confirmer(
         # NOTE: It's up to the caller to ensure controller.post_process called,
         #       either via @post_processor, or by calling it directly.
 
-        progress and progress.click_echo_current_task('')
+        progress and progress.click_echo_current_task("")
 
         return new_and_edited
 
     def persist_fact(fact, other_edits, is_first_fact, is_final_fact):
-        new_and_edited = [fact, ]
+        new_and_edited = [
+            fact,
+        ]
         if not dry:
             # If user did not specify an output file, save to database
             # (otherwise, we may have been maintaining a temporary file).
             if not file_out:
                 new_and_edited = persist_fact_save(
-                    fact, is_final_fact, other_edits,
+                    fact,
+                    is_final_fact,
+                    other_edits,
                 )
             else:
                 write_fact_block_format(file_out, fact, rule, is_first_fact)
         else:
-            echo_block_header(_('Fresh Fact!'))
+            echo_block_header(_("Fresh Fact!"))
             click_echo()
             echo_fact(fact)
             click_echo()
@@ -139,9 +148,14 @@ def prompt_and_save_confirmer(
         # creating an ongoing Fact that has closed Facts after it!
         # 2018-07-05/TEST_ME: Test previous comment: try deleting end of old Fact.
         # FIXME: Do we care to confirm if is_final_fact is indeed latest ever? Meh?
-        time_hint = 'verify_both' if not is_final_fact else 'verify_last'
+        time_hint = "verify_both" if not is_final_fact else "verify_last"
         new_and_edited = mend_facts_confirm_and_save_maybe(
-            controller, fact, time_hint, other_edits, yes=yes, dry=dry,
+            controller,
+            fact,
+            time_hint,
+            other_edits,
+            yes=yes,
+            dry=dry,
         )
         return new_and_edited
 
@@ -150,14 +164,15 @@ def prompt_and_save_confirmer(
     def celebrate():
         if not edit_facts:
             return
-        click_echo('{}{}{}! {}'.format(
-            attr('underlined'),
-            _('Voilà'),
-            attr('reset'),
-            _('Saved {} facts.').format(highlight_value(len(edit_facts))),
-        ))
+        click_echo(
+            "{}{}{}! {}".format(
+                attr("underlined"),
+                _("Voilà"),
+                attr("reset"),
+                _("Saved {} facts.").format(highlight_value(len(edit_facts))),
+            )
+        )
 
     # ***
 
     return _prompt_and_save()
-

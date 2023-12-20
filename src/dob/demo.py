@@ -35,16 +35,16 @@ from dob_bright.crud.fact_dressed import FactDressed
 from dob_viewer.traverser.save_confirmer import prompt_and_save_confirmer
 
 __all__ = (
-    'demo_config',
-    'demo_dob',
+    "demo_config",
+    "demo_dob",
     # Private:
     # '_demo_prep'
 )
 
 
 def demo_config(func):
-    """
-    """
+    """ """
+
     def wrapper(controller, *args, **kwargs):
         tmpfile = _demo_prep(controller)
         func(controller, *args, **kwargs)
@@ -55,6 +55,7 @@ def demo_config(func):
 
 
 # ***
+
 
 def demo_dob(controller):
     def _demo_dob():
@@ -76,13 +77,14 @@ def demo_dob(controller):
         #   because it is being used by another process:
         #     'C:\\Users\\IEUser\\AppData\\Local\\Temp\\dob-demo-vr5mi28q.sqlite'
         controller.store.session.close()
-        os.unlink(controller.config['db.path'])
+        os.unlink(controller.config["db.path"])
 
     return _demo_dob()
 
 
 class DemoFactGenerator(object):
     """"""
+
     def __init__(self, controller):
         self.controller = controller
         self.create_actegories()
@@ -96,17 +98,19 @@ class DemoFactGenerator(object):
 
     def create_categories(self):
         self.cats = {
-            'welcome': Category(name=_('Welcome')),
-            'intermediate': Category(name=_('Intermediate Skills')),
+            "welcome": Category(name=_("Welcome")),
+            "intermediate": Category(name=_("Intermediate Skills")),
         }
 
     def create_activities(self):
         self.acts = {
-            'demo@intermediate': Activity(
-                name=_('Demo'), category=self.cats['intermediate'],
+            "demo@intermediate": Activity(
+                name=_("Demo"),
+                category=self.cats["intermediate"],
             ),
-            'demo@welcome': Activity(
-                name=_('Demo'), category=self.cats['welcome'],
+            "demo@welcome": Activity(
+                name=_("Demo"),
+                category=self.cats["welcome"],
             ),
         }
 
@@ -119,7 +123,7 @@ class DemoFactGenerator(object):
     def populate_facts(self):
         self._demo_facts = []
         prev_fact = None
-        for name in list(filter(lambda name: name.startswith('demo_fact_'), dir(self))):
+        for name in list(filter(lambda name: name.startswith("demo_fact_"), dir(self))):
             demo_fact = getattr(self, name)(prev_fact)
             self._demo_facts.append(demo_fact)
             prev_fact = demo_fact
@@ -136,10 +140,13 @@ class DemoFactGenerator(object):
         demo_fact = FactDressed(
             start=self.controller.now - timedelta(hours=1),
             end=None,
-            activity=self.acts['demo@welcome'],
+            activity=self.acts["demo@welcome"],
             # tags=['dob-life', 'welcome', ],
-            tags=['hello, dobber!', ],
-            description=_('''
+            tags=[
+                "hello, dobber!",
+            ],
+            description=_(
+                """
 Welcome to the dob demo!
 
 Do you want to learn the basics of dob? Then follow along!
@@ -149,7 +156,8 @@ Do you want to learn the basics of dob? Then follow along!
 Let’s get started! You’re looking at the last, final Fact.
 
 * Press the "g" key twice ("gg") to go to the first Fact.
-            '''.strip()),  # noqa: E501
+            """.strip()
+            ),  # noqa: E501
         )
         return demo_fact
 
@@ -159,9 +167,12 @@ Let’s get started! You’re looking at the last, final Fact.
         demo_fact = FactDressed(
             start=since_time,
             end=until_time,
-            activity=self.acts['demo@welcome'],
-            tags=['first-fact', ],
-            description=_('''
+            activity=self.acts["demo@welcome"],
+            tags=[
+                "first-fact",
+            ],
+            description=_(
+                """
 Congratulations, you made it to the first Fact in the demo!
 
 The "gg" command takes you to the first Fact in your database.
@@ -171,7 +182,8 @@ The "G" command (uppercase), similarly, takes you to the last Fact.
 * Press "G" now to try it, then press "gg" to return here.
 
 * To continue, press the "k" key to advance to the next Fact.
-            '''.strip()),  # noqa: E501
+            """.strip()
+            ),  # noqa: E501
         )
         return demo_fact
 
@@ -183,9 +195,12 @@ The "G" command (uppercase), similarly, takes you to the last Fact.
         demo_fact = FactDressed(
             start=prev_fact.end,
             end=prev_fact.end + timedelta(minutes=66),
-            activity=self.acts['demo@welcome'],
-            tags=['learning fast', ],
-            description=_('''
+            activity=self.acts["demo@welcome"],
+            tags=[
+                "learning fast",
+            ],
+            description=_(
+                """
 You're learning fast!
 
 To go backward one Fact, press the "j" key.
@@ -195,7 +210,8 @@ To go backward one Fact, press the "j" key.
 You can also use the left and right arrow keys to change Facts.
 
 * To continue, press the right arrow key "→" to advance one Fact.
-            '''.strip()),  # noqa: E501
+            """.strip()
+            ),  # noqa: E501
         )
         return demo_fact
 
@@ -203,9 +219,12 @@ You can also use the left and right arrow keys to change Facts.
         demo_fact = FactDressed(
             start=prev_fact.end,
             end=prev_fact.end + timedelta(hours=12),
-            activity=self.acts['demo@intermediate'],
-            tags=['choose your own demo #3', ],
-            description=_('''
+            activity=self.acts["demo@intermediate"],
+            tags=[
+                "choose your own demo #3",
+            ],
+            description=_(
+                """
 Wow! You can sure get around dob now!
 
 You can also navigate dob by jumping Facts one day at a time.
@@ -215,7 +234,8 @@ You can also navigate dob by jumping Facts one day at a time.
   Return to this entry with (uppercase) "J".
 
 * Then press (lowercase) "k" (or "→") to keep reading the demo.
-            '''.strip()),  # noqa: E501
+            """.strip()
+            ),  # noqa: E501
         )
         return demo_fact
 
@@ -223,10 +243,13 @@ You can also navigate dob by jumping Facts one day at a time.
         demo_fact = FactDressed(
             start=prev_fact.end,
             end=prev_fact.end + timedelta(hours=9),
-            activity=self.acts['demo@intermediate'],
-            tags=['choose your own demo #5', ],
+            activity=self.acts["demo@intermediate"],
+            tags=[
+                "choose your own demo #5",
+            ],
             # E501 line too long (✗✗✗ > 89 characters)
-            description=_('''
+            description=_(
+                """
 You’ve become a pro at navigating between Facts!
 
 Let’s learn how to navigate the *description*, which is what you’re reading.
@@ -269,7 +292,8 @@ This is the end of the description!
 
   Hint: Look at the status bar below this text and you’ll see
   the "Fact ID #4" change to "Fact ID #6" after pressing "K".
-            '''.strip()),  # noqa: E501
+            """.strip()
+            ),  # noqa: E501
         )
         return demo_fact
 
@@ -277,9 +301,12 @@ This is the end of the description!
         demo_fact = FactDressed(
             start=prev_fact.end,
             end=prev_fact.end + timedelta(hours=6),
-            activity=self.acts['demo@intermediate'],
-            tags=['choose your own demo #4', ],
-            description=_('''
+            activity=self.acts["demo@intermediate"],
+            tags=[
+                "choose your own demo #4",
+            ],
+            description=_(
+                """
 Did you just press "K" to jump forward one day? Congrats!
 
 Bonus Feature: If you press and hold "K" (don't do it now), dob will start jumping by weeks.
@@ -287,7 +314,8 @@ Bonus Feature: If you press and hold "K" (don't do it now), dob will start jumpi
 To continue the demo, jump back one day, to the last entry you read.
 
 * Press "J" to jump back one day to continue the demo.
-            '''.strip()),  # noqa: E501
+            """.strip()
+            ),  # noqa: E501
         )
         return demo_fact
 
@@ -295,9 +323,12 @@ To continue the demo, jump back one day, to the last entry you read.
         demo_fact = FactDressed(
             start=prev_fact.end,
             end=prev_fact.end + timedelta(hours=18),
-            activity=self.acts['demo@intermediate'],
-            tags=['choose your own demo #6', ],
-            description=_('''
+            activity=self.acts["demo@intermediate"],
+            tags=[
+                "choose your own demo #6",
+            ],
+            description=_(
+                """
 Before we can learn how to create and edit Facts, there are a few more basics!
 
 (And remember to scroll down, using the down arrow key "↓", or "PgDn".)
@@ -319,7 +350,8 @@ Gaps
 ----
 
 * Press "→" or "l" to learn about Gap Facts.
-            '''.strip()),  # noqa: E501
+            """.strip()
+            ),  # noqa: E501
         )
         return demo_fact
 
@@ -327,9 +359,12 @@ Gaps
         demo_fact = FactDressed(
             start=prev_fact.end,
             end=prev_fact.end + timedelta(hours=18),
-            activity=self.acts['demo@intermediate'],
-            tags=['choose your own demo #7', ],
-            description=_('''
+            activity=self.acts["demo@intermediate"],
+            tags=[
+                "choose your own demo #7",
+            ],
+            description=_(
+                """
 Gap Facts
 ---------
 
@@ -365,7 +400,8 @@ To see a Gap Fact for real, the next Fact in the demo starts 17 minutes later, a
     - You’ll notice that the Gap Fact has a special background color, sorta pink.
 
       You will also see that the status message, below this text, says “Gap Fact”.
-            '''.strip()),  # noqa: E501
+            """.strip()
+            ),  # noqa: E501
         )
         return demo_fact
 
@@ -374,9 +410,12 @@ To see a Gap Fact for real, the next Fact in the demo starts 17 minutes later, a
         demo_fact = FactDressed(
             start=since_time,
             end=since_time + timedelta(hours=6),
-            activity=self.acts['demo@intermediate'],
-            tags=['After the Gap Fact #8', ],
-            description=_('''
+            activity=self.acts["demo@intermediate"],
+            tags=[
+                "After the Gap Fact #8",
+            ],
+            description=_(
+                """
 Gap Review
 ----------
 
@@ -385,7 +424,8 @@ As stated in the last step of the demo, the previous Fact has a sorta pinkish ba
 Speaking of editing, let’s talk about that finally!
 
 * Press "k" (or "→") to learn how to edit Fact times.
-            '''.strip()),  # noqa: E501
+            """.strip()
+            ),  # noqa: E501
         )
         return demo_fact
 
@@ -393,9 +433,12 @@ Speaking of editing, let’s talk about that finally!
         demo_fact = FactDressed(
             start=prev_fact.end,
             end=prev_fact.end + timedelta(hours=4.75),
-            activity=self.acts['demo@intermediate'],
-            tags=['choose your own demo #9', ],
-            description=_('''
+            activity=self.acts["demo@intermediate"],
+            tags=[
+                "choose your own demo #9",
+            ],
+            description=_(
+                """
 Edit Time
 ---------
 
@@ -474,7 +517,8 @@ Fact Editing
 To read about editing the Description, Activity & Category, and Tags, move forward 1 Fact.
 
 * Press "k" (or "→") to continue the demo.
-            '''.strip()),  # noqa: E501
+            """.strip()
+            ),  # noqa: E501
         )
         return demo_fact
 
@@ -482,9 +526,12 @@ To read about editing the Description, Activity & Category, and Tags, move forwa
         demo_fact = FactDressed(
             start=prev_fact.end,
             end=prev_fact.end + timedelta(hours=4.75),
-            activity=self.acts['demo@intermediate'],
-            tags=['choose your own demo #10', ],
-            description=_('''
+            activity=self.acts["demo@intermediate"],
+            tags=[
+                "choose your own demo #10",
+            ],
+            description=_(
+                """
 Meta Edits
 ----------
 
@@ -525,7 +572,8 @@ Save
 ----
 
 * Press "k" (or "→") to learn how to save edits.
-            '''.strip()),  # noqa: E501
+            """.strip()
+            ),  # noqa: E501
         )
         return demo_fact
 
@@ -533,9 +581,12 @@ Save
         demo_fact = FactDressed(
             start=prev_fact.end,
             end=prev_fact.end + timedelta(hours=4.75),
-            activity=self.acts['demo@intermediate'],
-            tags=['choose your own demo #11', ],
-            description=_('''
+            activity=self.acts["demo@intermediate"],
+            tags=[
+                "choose your own demo #11",
+            ],
+            description=_(
+                """
 Saving
 ------
 
@@ -553,7 +604,8 @@ Undo/Redo
 ---------
 
 * Press "k" (or "→") to continue the demo and learn how to undo and redo.
-            '''.strip()),  # noqa: E501
+            """.strip()
+            ),  # noqa: E501
         )
         return demo_fact
 
@@ -561,9 +613,12 @@ Undo/Redo
         demo_fact = FactDressed(
             start=prev_fact.end,
             end=prev_fact.end + timedelta(hours=4.75),
-            activity=self.acts['demo@intermediate'],
-            tags=['choose your own demo #12', ],
-            description=_('''
+            activity=self.acts["demo@intermediate"],
+            tags=[
+                "choose your own demo #12",
+            ],
+            description=_(
+                """
 Undo/Redo
 ---------
 
@@ -587,7 +642,8 @@ Ctrl-c/-v
 The next Fact explains how copy and paste work in dob.
 
 * Press "k" (or "→") to continue the demo.
-            '''.strip()),  # noqa: E501
+            """.strip()
+            ),  # noqa: E501
         )
         return demo_fact
 
@@ -595,9 +651,12 @@ The next Fact explains how copy and paste work in dob.
         demo_fact = FactDressed(
             start=prev_fact.end,
             end=prev_fact.end + timedelta(hours=4.75),
-            activity=self.acts['demo@intermediate'],
-            tags=['choose your own demo #13', ],
-            description=_('''
+            activity=self.acts["demo@intermediate"],
+            tags=[
+                "choose your own demo #13",
+            ],
+            description=_(
+                """
 Copy/Paste
 ----------
 
@@ -623,7 +682,8 @@ Split/Merge
 -----------
 
 * Press "k" (or "→") to continue the demo.
-            '''.strip()),  # noqa: E501
+            """.strip()
+            ),  # noqa: E501
         )
         return demo_fact
 
@@ -631,9 +691,12 @@ Split/Merge
         demo_fact = FactDressed(
             start=prev_fact.end,
             end=prev_fact.end + timedelta(hours=4.75),
-            activity=self.acts['demo@intermediate'],
-            tags=['choose your own demo #14', ],
-            description=_('''
+            activity=self.acts["demo@intermediate"],
+            tags=[
+                "choose your own demo #14",
+            ],
+            description=_(
+                """
 Split/Merge/Delete
 ------------------
 
@@ -657,7 +720,8 @@ Start using dob
 To get up and running, read the next Fact.
 
 * Press "k" ("→") to learn how to dob yourself.
-            '''.strip()),  # noqa: E501
+            """.strip()
+            ),  # noqa: E501
         )
         return demo_fact
 
@@ -665,9 +729,12 @@ To get up and running, read the next Fact.
         demo_fact = FactDressed(
             start=prev_fact.end,
             end=prev_fact.end + timedelta(hours=4.75),
-            activity=self.acts['demo@intermediate'],
-            tags=['choose your own demo #15', ],
-            description=_('''
+            activity=self.acts["demo@intermediate"],
+            tags=[
+                "choose your own demo #15",
+            ],
+            description=_(
+                """
 Getting Started
 ---------------
 
@@ -694,7 +761,8 @@ You're a pro!
 -------------
 
 * Press "k" ("→") to conclude the demo.
-            '''.strip()),  # noqa: E501
+            """.strip()
+            ),  # noqa: E501
         )
         return demo_fact
 
@@ -702,9 +770,13 @@ You're a pro!
         demo_fact = FactDressed(
             start=prev_fact.end,
             end=prev_fact.end + timedelta(hours=4.75),
-            activity=self.acts['demo@intermediate'],
-            tags=['choose your own demo #16', 'end of the ride', ],
-            description=_('''
+            activity=self.acts["demo@intermediate"],
+            tags=[
+                "choose your own demo #16",
+                "end of the ride",
+            ],
+            description=_(
+                """
 You made it to the end of the demo!! -- But there's much more you can do with dob:
 
   - Import Facts from raw text (collected while, say, on vacation).
@@ -715,12 +787,14 @@ You made it to the end of the demo!! -- But there's much more you can do with do
 This demo gives you the gist of dob. We hope you enjoyed it!!
 
 Happy dobbin!
-            '''.strip()),  # noqa: E501
+            """.strip()
+            ),  # noqa: E501
         )
         return demo_fact
 
 
 # ***
+
 
 def _demo_prep(controller):
     """"""
@@ -736,22 +810,21 @@ def _demo_prep(controller):
         # so close here, without allowing it to be deleted, and then the store
         # will reopen it. We'll remove it when the user ends the demo.
         tmpfile = tempfile.NamedTemporaryFile(
-            prefix='dob-demo-',
-            suffix='.sqlite',
+            prefix="dob-demo-",
+            suffix=".sqlite",
             delete=False,
         )
         tmpfile.close()
         return tmpfile
 
     def demoize_config(db_path):
-        controller.config['db.orm'] = 'sqlalchemy'
-        controller.config['db.engine'] = 'sqlite'
-        controller.config['db.path'] = db_path
+        controller.config["db.orm"] = "sqlalchemy"
+        controller.config["db.engine"] = "sqlite"
+        controller.config["db.path"] = db_path
         # For completeness, reset the others.
-        controller.config['db.host'] = ''
-        controller.config['db.port'] = ''
-        controller.config['db.name'] = ''
-        controller.config['db.user'] = ''
+        controller.config["db.host"] = ""
+        controller.config["db.port"] = ""
+        controller.config["db.name"] = ""
+        controller.config["db.user"] = ""
 
     return __demo_prep()
-

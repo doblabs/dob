@@ -22,13 +22,10 @@ from collections import OrderedDict
 import click_hotoffthehamster as click
 from click_hotoffthehamster._compat import term_len
 
-__all__ = (
-    'ClickBunchyGroup',
-)
+__all__ = ("ClickBunchyGroup",)
 
 
 class ClickBunchyGroup(click.Group):
-
     def __init__(self, *args, help_weight=10, **kwargs):
         super(ClickBunchyGroup, self).__init__(*args, **kwargs)
         self.group_bunchies = {None: OrderedDict()}
@@ -75,8 +72,8 @@ class ClickBunchyGroup(click.Group):
             # GROUP-BUNCH: (lb): A little wonky. Seems least disruptive to code, though,
             # i.e., this is a lazy approach to solving group command bunching.
             if subcommand in self._commands:
-                aliases = '|'.join(sorted(self._commands[subcommand]))
-                subcommand = '{0} ({1})'.format(subcommand, aliases)
+                aliases = "|".join(sorted(self._commands[subcommand]))
+                subcommand = "{0} ({1})".format(subcommand, aliases)
             col_max = max(col_max, term_len(subcommand))
             # Note that this width does not account for color (ANSI codes).
             if cmd.name not in self.group_bunchies[bunchy_name].keys():
@@ -86,4 +83,3 @@ class ClickBunchyGroup(click.Group):
         sorted_commands = sorted(commands, key=lambda tup: tup[1].name)
         sorted_commands = sorted(sorted_commands, key=lambda tup: tup[1].help_weight)
         return sorted_commands, col_max
-

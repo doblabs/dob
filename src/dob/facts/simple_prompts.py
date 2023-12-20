@@ -32,7 +32,7 @@ from dob_bright.crud.fix_times import mend_fact_timey_wimey
 from .echo_fact import echo_fact
 
 __all__ = (
-    'mend_facts_confirm_and_save_maybe',
+    "mend_facts_confirm_and_save_maybe",
     # Private:
     #   'echo_ongoing_completed',
     #   'must_confirm_fact_edits',
@@ -42,13 +42,23 @@ __all__ = (
 
 # ***
 
+
 def mend_facts_confirm_and_save_maybe(
-    controller, fact, time_hint, other_edits, yes, dry,
+    controller,
+    fact,
+    time_hint,
+    other_edits,
+    yes,
+    dry,
 ):
     """"""
+
     def _mend_facts_confirm_and_save_maybe():
         new_fact_or_two, conflicts = mend_fact_timey_wimey(
-            controller, fact, time_hint, other_edits,
+            controller,
+            fact,
+            time_hint,
+            other_edits,
         )
         saved_facts = confirm_conflicts_and_save_all(new_fact_or_two, conflicts)
         return saved_facts
@@ -59,7 +69,11 @@ def mend_facts_confirm_and_save_maybe(
         ignore_pks = other_edits.keys()
         must_confirm_fact_edits(controller, conflicts, yes, dry)
         saved_facts = save_facts_maybe(
-            controller, new_fact_or_two, conflicts, ignore_pks, dry,
+            controller,
+            new_fact_or_two,
+            conflicts,
+            ignore_pks,
+            dry,
         )
         return saved_facts
 
@@ -67,6 +81,7 @@ def mend_facts_confirm_and_save_maybe(
 
 
 # ***
+
 
 def must_confirm_fact_edits(controller, conflicts, yes, dry):
     """"""
@@ -86,12 +101,14 @@ def must_confirm_fact_edits(controller, conflicts, yes, dry):
             n_conflict += 1
             if not yes:
                 confirmed = echo_confirmation_edited(
-                    n_conflict, edited_fact, original,
+                    n_conflict,
+                    edited_fact,
+                    original,
                 )
                 n_confirms += 1 if confirmed else 0
             else:
                 controller.client_logger.debug(
-                    _('Editing fact: {}').format(edited_fact)
+                    _("Editing fact: {}").format(edited_fact)
                 )
 
         if n_conflict != n_confirms:
@@ -103,20 +120,24 @@ def must_confirm_fact_edits(controller, conflicts, yes, dry):
             exit_warning(_("Please try again."))
 
     def cull_stopped_ongoing(conflicts):
-        return [con for con in conflicts if 'stopped' not in con[0].dirty_reasons]
+        return [con for con in conflicts if "stopped" not in con[0].dirty_reasons]
 
     def echo_confirmation_banner(conflicts):
         # FIXME: (lb): Replace hardcoded styles. Assign from styles.conf. #styling
         click.echo()
-        click.echo(_(
-            'Found {}{}{} {}. '
-            '{}Please confirm the following changes:{}'
-            .format(
-                fg('magenta'), len(conflicts), attr('reset'),
-                Inflector(English).conditional_plural(len(conflicts), 'conflict'),
-                attr('underlined'), attr('reset'),
+        click.echo(
+            _(
+                "Found {}{}{} {}. "
+                "{}Please confirm the following changes:{}".format(
+                    fg("magenta"),
+                    len(conflicts),
+                    attr("reset"),
+                    Inflector(English).conditional_plural(len(conflicts), "conflict"),
+                    attr("underlined"),
+                    attr("reset"),
+                )
             )
-        ))
+        )
 
     def echo_confirmation_edited(n_conflict, edited_fact, original):
         click.echo()
@@ -124,7 +145,7 @@ def must_confirm_fact_edits(controller, conflicts, yes, dry):
         #   from dob_viewer.ptkui.re_confirm import confirm
         #   confirmed = confirm()
         confirmed = click.confirm(
-            text=_('Conflict #{}\n-----------\n{}\nReally edit fact?').format(
+            text=_("Conflict #{}\n-----------\n{}\nReally edit fact?").format(
                 n_conflict,
                 original.friendly_diff(edited_fact),
             ),
@@ -143,6 +164,7 @@ def must_confirm_fact_edits(controller, conflicts, yes, dry):
 
 # ***
 
+
 def save_facts_maybe(controller, new_facts, conflicts, ignore_pks, dry):
     """"""
 
@@ -153,7 +175,7 @@ def save_facts_maybe(controller, new_facts, conflicts, ignore_pks, dry):
         for edited_fact, original in conflicts:
             if not dry:
                 new_and_edited += save_fact(controller, edited_fact, dry)
-                if 'stopped' in edited_fact.dirty_reasons:
+                if "stopped" in edited_fact.dirty_reasons:
                     # This'll happen on one-off dob-to/dob-at/etc., but it
                     # will not happen on dob-import, e.g., if dob-import
                     # closes ongoing fact, it'll be saved normally, and it
@@ -168,20 +190,22 @@ def save_facts_maybe(controller, new_facts, conflicts, ignore_pks, dry):
 
     def echo_dry_run():
         click.echo()
-        click.echo('{}Dry run! These facts will be edited{}:\n '.format(
-            attr('underlined'),
-            attr('reset'),
-        ))
+        click.echo(
+            "{}Dry run! These facts will be edited{}:\n ".format(
+                attr("underlined"),
+                attr("reset"),
+            )
+        )
 
     def save_fact(controller, fact, dry, ignore_pks=[]):
         # (lb): SIMILAR: edits_manager.save_edited_fact, create.save_fact.
         if fact.pk and fact.pk < 0:
             fact.pk = None
         if fact.pk is None and fact.deleted:
-            controller.client_logger.debug('{}: {}'.format(_('Dead fact'), fact.short))
+            controller.client_logger.debug("{}: {}".format(_("Dead fact"), fact.short))
             return []
         if not dry:
-            controller.client_logger.debug('{}: {}'.format(_('Save fact'), fact.short))
+            controller.client_logger.debug("{}: {}".format(_("Save fact"), fact.short))
             try:
                 new_fact = controller.facts.save(fact, ignore_pks=ignore_pks)
             except Exception as err:
@@ -190,7 +214,9 @@ def save_facts_maybe(controller, new_facts, conflicts, ignore_pks, dry):
         else:
             new_fact = fact
             echo_fact(fact)
-        return [new_fact, ]
+        return [
+            new_fact,
+        ]
 
     # ***
 
@@ -199,11 +225,13 @@ def save_facts_maybe(controller, new_facts, conflicts, ignore_pks, dry):
 
 # ***
 
+
 def echo_ongoing_completed(controller, fact, cancelled=False):
     """"""
+
     def _echo_ongoing_completed():
-        colorful = controller.config['term.use_color']
-        leader = _('Completed: ') if not cancelled else _('Cancelled: ')
+        colorful = controller.config["term.use_color"]
+        leader = _("Completed: ") if not cancelled else _("Cancelled: ")
         cut_width = width_avail(len(leader))
         completed_msg = echo_fact(leader, colorful, cut_width)
         controller.client_logger.debug(completed_msg)
@@ -216,19 +244,15 @@ def echo_ongoing_completed(controller, fact, cancelled=False):
     def echo_fact(leader, colorful, cut_width):
         # FIXME: (lb): Add UTC support. Currently, all times "local".
         localize = True
-        completed_msg = (
-            leader
-            + fact.friendly_str(
-                shellify=False,
-                description_sep=': ',
-                localize=localize,
-                colorful=colorful,
-                cut_width_complete=cut_width,
-                show_elapsed=True,
-            )
+        completed_msg = leader + fact.friendly_str(
+            shellify=False,
+            description_sep=": ",
+            localize=localize,
+            colorful=colorful,
+            cut_width_complete=cut_width,
+            show_elapsed=True,
         )
         click_echo(completed_msg)
         return completed_msg
 
     _echo_ongoing_completed()
-

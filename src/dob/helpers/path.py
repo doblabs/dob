@@ -19,15 +19,14 @@ from gettext import gettext as _
 
 from easy_as_pypi_termio import echo_warning
 
-__all__ = (
-    'compile_and_eval_source',
-)
+__all__ = ("compile_and_eval_source",)
 
 
 def compile_and_eval_source(py_path):
     """"""
+
     def _compile_and_eval_source(py_path):
-        with open(py_path, 'r') as py_text:
+        with open(py_path, "r") as py_text:
             eval_globals = compile_and_eval_module(py_text, py_path)
             return eval_globals
 
@@ -42,12 +41,12 @@ def compile_and_eval_source(py_path):
 
     def source_compile(py_text, py_path):
         try:
-            code = compile(py_text.read(), py_path, 'exec')
+            code = compile(py_text.read(), py_path, "exec")
         except Exception as err:
             code = None
-            msg = _(
-                'ERROR: Could not compile source file at "{}": {}'
-            ).format(py_path, str(err))
+            msg = _('ERROR: Could not compile source file at "{}": {}').format(
+                py_path, str(err)
+            )
             echo_warning(msg)
         return code
 
@@ -55,17 +54,16 @@ def compile_and_eval_source(py_path):
         # Pass py_path to code being eval'd, so it can orientate.
         # (lb): I tried passing `locals()` for second argument, but
         # then plugins complain `name 'ConfigRoot' is not defined`.
-        eval_globals['__file__'] = py_path
+        eval_globals["__file__"] = py_path
         try:
             eval(code, eval_globals, eval_globals)
         except Exception as err:
-            msg = _(
-                'ERROR: Could not eval compiled source at "{}": {}'
-            ).format(py_path, str(err))
+            msg = _('ERROR: Could not eval compiled source at "{}": {}').format(
+                py_path, str(err)
+            )
             echo_warning(msg)
             return False
         else:
             return True
 
     return _compile_and_eval_source(py_path)
-

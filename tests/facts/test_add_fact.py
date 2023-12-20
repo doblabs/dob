@@ -26,7 +26,7 @@ from dob.facts.add_fact import add_fact
 class TestAddFact(object):
     """Unit test related to starting a new fact."""
 
-    @freeze_time('2015-12-25 18:00')
+    @freeze_time("2015-12-25 18:00")
     @pytest.mark.parametrize(*factoid_fixture)
     def test_add_new_fact(
         self,
@@ -47,27 +47,28 @@ class TestAddFact(object):
 
         """
         controller = controller_with_logging
-        mocker.patch.object(controller.facts, 'save')
+        mocker.patch.object(controller.facts, "save")
         add_fact(controller, raw_fact, time_hint=time_hint, use_carousel=False)
         assert controller.facts.save.called
         args, kwargs = controller.facts.save.call_args
         fact = args[0]
-        assert fact.start == expectation['start']
-        assert fact.end == expectation['end']
-        assert fact.activity_name == expectation['activity']
-        assert fact.category_name == expectation['category']
-        expecting_tags = ''
-        tagnames = list(expectation['tags'])
+        assert fact.start == expectation["start"]
+        assert fact.end == expectation["end"]
+        assert fact.activity_name == expectation["activity"]
+        assert fact.category_name == expectation["category"]
+        expecting_tags = ""
+        tagnames = list(expectation["tags"])
         if tagnames:
             tagnames.sort()
-            expecting_tags = ['#{}'.format(name) for name in tagnames]
-            expecting_tags = '{}'.format(' '.join(expecting_tags))
+            expecting_tags = ["#{}".format(name) for name in tagnames]
+            expecting_tags = "{}".format(" ".join(expecting_tags))
         assert fact.tagnames() == expecting_tags
-        expect_description = expectation.get('description', None) or None
+        expect_description = expectation.get("description", None) or None
         assert fact.description == expect_description
 
 
 # ***
+
 
 class TestStop(object):
     """Unit test concerning the stop command."""
@@ -80,8 +81,8 @@ class TestStop(object):
     ):
         """Make sure stopping an ongoing fact works as intended."""
         mockfact = mocker.MagicMock()
-        mockfact.activity.name = 'foo'
-        mockfact.category.name = 'bar'
+        mockfact.activity.name = "foo"
+        mockfact.category.name = "bar"
         mocktime = mocker.MagicMock(return_value="%Y-%m-%d %H:%M")
         mockfact.start.strftime = mocktime
         mockfact.end.strftime = mocktime
@@ -94,8 +95,8 @@ class TestStop(object):
         # 2019-12-06: stop_fact was deleted, replaced with add_fact + time_hint.
         add_fact(
             controller_with_logging,
-            factoid='',
-            time_hint='verify_end',
+            factoid="",
+            time_hint="verify_end",
             use_carousel=False,
         )
         assert controller_with_logging.facts.save.called
@@ -106,8 +107,7 @@ class TestStop(object):
             # 2019-12-06: stop_fact was deleted, replaced with add_fact + time_hint.
             add_fact(
                 controller_with_logging,
-                factoid='',
-                time_hint='verify_end',
+                factoid="",
+                time_hint="verify_end",
                 use_carousel=False,
             )
-

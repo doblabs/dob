@@ -38,4 +38,3 @@ class AnsiTextWrapper(TextWrapper):
         if filled:
             return filled
         return self.initial_indent
-

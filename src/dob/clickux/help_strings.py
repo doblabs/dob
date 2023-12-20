@@ -65,20 +65,21 @@ def common_format():
     # or not.
     # FIXME: (lb): Replace hardcoded styles. Assign from styles.conf. #styling
     common_format = {
-        'appname': highlight_value(__package_name__),
-        'rawname': __package_name__,
-        'codehi': fg('turquoise_2'),
-        'reset': attr('reset'),
-        'bold': attr('bold'),
-        'italic': attr('italic'),
-        'underlined': attr('underlined'),
-        'wordhi': fg('chartreuse_3a'),
-        'errcol': bg('red_1') + attr('bold'),
+        "appname": highlight_value(__package_name__),
+        "rawname": __package_name__,
+        "codehi": fg("turquoise_2"),
+        "reset": attr("reset"),
+        "bold": attr("bold"),
+        "italic": attr("italic"),
+        "underlined": attr("underlined"),
+        "wordhi": fg("chartreuse_3a"),
+        "errcol": bg("red_1") + attr("bold"),
     }
     return common_format
 
 
 # ***
+
 
 def _command_create_force_help(what):
     return _(
@@ -92,12 +93,12 @@ def _command_create_force_help(what):
 # *** [BARE] Command help.
 # ***
 
+
 def RUN_HELP_WHATIS():
     _help = _(
         """
         {appname} is a time tracker for the command line.
-        """
-        .strip()
+        """.strip()
     ).format(**common_format())
     return _help
 
@@ -108,8 +109,7 @@ def RUN_HELP_TRYME():
         - Try the demo to get acquainted with dob quickly,
 
           {codehi}{rawname} demo{reset}
-        """
-        .strip()
+        """.strip()
     ).format(**common_format())
     return _help
 
@@ -122,8 +122,7 @@ def RUN_HELP_QUICKIE():
           {codehi}{rawname} init{reset}
 
           {codehi}{rawname} edit{reset}
-        """
-        .strip()
+        """.strip()
     ).format(**common_format())
     return _help
 
@@ -136,8 +135,7 @@ def RUN_HELP_HEADER():
         {try_me}
 
         {quick_start}
-        """
-        .strip()
+        """.strip()
     ).format(
         what_is=RUN_HELP_WHATIS(),
         try_me=RUN_HELP_TRYME(),
@@ -164,12 +162,11 @@ def RUN_HELP_TLDR():
 
         \b
         {copyright}
-        """
-        .strip()
+        """.strip()
     ).format(
         what_is=RUN_HELP_WHATIS(),
         try_me=RUN_HELP_TRYME(),
-        copyright='\b\n        '.join(assemble_copyright()),
+        copyright="\b\n        ".join(assemble_copyright()),
         **common_format()
     )
     return _help
@@ -201,24 +198,19 @@ def RUN_HELP_COMPLETE():
           {codehi}{rawname} copyright{reset}
 
           {codehi}{rawname} license{reset}
-        """  # noqa: E501 line too long
-        .strip()
+        """.strip()  # noqa: E501 line too long
     ).format(
         run_help_header=RUN_HELP_HEADER(),
-        copyrt_sym=coloring() and '©' or 'copyright',
-        scroll_sym=coloring() and '📜' or 'license',
+        copyrt_sym=coloring() and "©" or "copyright",
+        scroll_sym=coloring() and "📜" or "license",
         **common_format()
     )
     return _help
 
 
 def RUN_HELP_OVERVIEW(ctx):
-    if (
-        (ctx.command.name == 'run')
-        and (
-            ctx.invoked_subcommand
-            or ctx.help_option_spotted
-        )
+    if (ctx.command.name == "run") and (
+        ctx.invoked_subcommand or ctx.help_option_spotted
     ):
         return RUN_HELP_COMPLETE()
     return RUN_HELP_TLDR()
@@ -305,7 +297,9 @@ ENVIRONS_HELP = _(
        \b
        eval "$({} environs)"
        echo $DOB_CONF
-    """.format(__arg0name__)
+    """.format(
+        __arg0name__
+    )
 )
 
 
@@ -336,12 +330,12 @@ DEBUG_HELP = _(
 # *** [DEMO] Command help.
 # ***
 
+
 def DEMO_HELP(ctx):
     _help = _(
         """
         Learn {rawname} -- {italic}Run this first!{reset}
-        """
-        .strip()
+        """.strip()
     ).format(**common_format())
     return _help
 
@@ -350,11 +344,12 @@ def DEMO_HELP(ctx):
 # *** [INIT] Command help.
 # ***
 
+
 def INIT_HELP_OVERVIEW(ctx):
     controller = ctx.obj
 
-    _hint_sqlite = ''
-    if controller.config['db.engine'] == 'sqlite':
+    _hint_sqlite = ""
+    if controller.config["db.engine"] == "sqlite":
         _hint_sqlite = _(
             """
         If you know SQL, you can poke around the database file easily:
@@ -365,12 +360,8 @@ def INIT_HELP_OVERVIEW(ctx):
 
         And, just to be safe, consider backing up your database file
         and config!
-            """
-            .strip()
-        ).format(
-            cfg_db_path=controller.config['db.path'],
-            **common_format()
-        )
+            """.strip()
+        ).format(cfg_db_path=controller.config["db.path"], **common_format())
 
     _help = _(
         """
@@ -394,11 +385,10 @@ def INIT_HELP_OVERVIEW(ctx):
          {codehi}{rawname} config dump{reset}
 
         {_hint_sqlite}
-        """
-        .strip()
+        """.strip()
     ).format(
         default_config_path=highlight_value(default_config_path()),
-        hlg_db_path=highlight_value(controller.config['db.path']),
+        hlg_db_path=highlight_value(controller.config["db.path"]),
         _hint_sqlite=_hint_sqlite,
         **common_format()
     )
@@ -408,6 +398,7 @@ def INIT_HELP_OVERVIEW(ctx):
 # ***
 # *** [CONFIG] Commands help.
 # ***
+
 
 def CONFIG_GROUP_HELP(ctx):
     controller = ctx.obj
@@ -546,7 +537,7 @@ CONFIG_CREATE_HELP = _(
 )
 
 
-CONFIG_CREATE_FORCE_HELP = _command_create_force_help(_('config file'))
+CONFIG_CREATE_FORCE_HELP = _command_create_force_help(_("config file"))
 
 
 CONFIG_EDIT_HELP = _(
@@ -587,6 +578,7 @@ CONFIG_UPDATE_HELP = _(
 # ***
 # *** [STYLES] Commands help.
 # ***
+
 
 def STYLES_GROUP_HELP(ctx):
     _help = _(
@@ -705,9 +697,7 @@ def STYLES_GROUP_HELP(ctx):
         list of class name of style strings, as recognized by Python Prompt
         Toolkit and Pygments.
         """
-    ).format(
-        **common_format()
-    )
+    ).format(**common_format())
     return _help
 
 
@@ -720,7 +710,7 @@ STYLES_CREATE_HELP = _(
 )
 
 
-STYLES_CREATE_FORCE_HELP = _command_create_force_help(_('styles file'))
+STYLES_CREATE_FORCE_HELP = _command_create_force_help(_("styles file"))
 
 
 STYLES_CONF_HELP = _(
@@ -772,6 +762,7 @@ STYLES_SHOW_HELP = _(
 # *** [RULES] Commands help.
 # ***
 
+
 def RULES_GROUP_HELP(ctx):
     _help = _(
         """
@@ -782,9 +773,7 @@ def RULES_GROUP_HELP(ctx):
           \b
           {codehi}{rawname} styles --help{reset}
         """
-    ).format(
-        **common_format()
-    )
+    ).format(**common_format())
     return _help
 
 
@@ -797,7 +786,7 @@ RULES_CREATE_HELP = _(
 )
 
 
-RULES_CREATE_FORCE_HELP = _command_create_force_help(_('style rules'))
+RULES_CREATE_FORCE_HELP = _command_create_force_help(_("style rules"))
 
 
 RULES_CONF_HELP = _(
@@ -856,14 +845,13 @@ RULES_SHOW_HELP = _(
 # *** [IGNORE] Commands help.
 # ***
 
+
 def IGNORE_GROUP_HELP(ctx):
     _help = _(
         """
         Manages ignore lists (to exclude matching names from prompts).
         """
-    ).format(
-        **common_format()
-    )
+    ).format(**common_format())
     return _help
 
 
@@ -876,7 +864,7 @@ IGNORE_CREATE_HELP = _(
 )
 
 
-IGNORE_CREATE_FORCE_HELP = _command_create_force_help(_('ignore file'))
+IGNORE_CREATE_FORCE_HELP = _command_create_force_help(_("ignore file"))
 
 
 IGNORE_EDIT_HELP = _(
@@ -920,7 +908,7 @@ STORE_CREATE_HELP = _(
 )
 
 
-STORE_CREATE_FORCE_HELP = _command_create_force_help(_('data store'))
+STORE_CREATE_FORCE_HELP = _command_create_force_help(_("data store"))
 
 
 STORE_PATH_HELP = _(
@@ -994,27 +982,27 @@ QUERY_ITEM_HELP = _(
 )
 
 
-LIST_GROUP_HELP = QUERY_GROUP_HELP.format(item_part=_('names'))
+LIST_GROUP_HELP = QUERY_GROUP_HELP.format(item_part=_("names"))
 
 
 LIST_ACTIVITIES_HELP = QUERY_ITEM_HELP.format(
     item_type=_("activity"),
     item_types=_("activities"),
-    item_part=_('names'),
+    item_part=_("names"),
 )
 
 
 LIST_CATEGORIES_HELP = QUERY_ITEM_HELP.format(
     item_type=_("category"),
     item_types=_("categories"),
-    item_part=_('names'),
+    item_part=_("names"),
 )
 
 
 LIST_TAGS_HELP = QUERY_ITEM_HELP.format(
     item_type=_("tag"),
     item_types=_("tags"),
-    item_part=_('names'),
+    item_part=_("names"),
 )
 
 
@@ -1022,7 +1010,7 @@ LIST_TAGS_HELP = QUERY_ITEM_HELP.format(
 LIST_FACTS_HELP = QUERY_ITEM_HELP.format(
     item_type=_("fact"),
     item_types=_("facts"),
-    item_part=_('names'),
+    item_part=_("names"),
 )
 
 
@@ -1107,27 +1095,27 @@ This command is essentially an alias to:
 # *** [USAGE] Commands help.
 # ***
 
-USAGE_GROUP_HELP = QUERY_GROUP_HELP.format(item_part=_('usage'))
+USAGE_GROUP_HELP = QUERY_GROUP_HELP.format(item_part=_("usage"))
 
 
 USAGE_ACTIVITIES_HELP = QUERY_ITEM_HELP.format(
     item_type=_("activity"),
     item_types=_("activities"),
-    item_part=_('usage'),
+    item_part=_("usage"),
 )
 
 
 USAGE_CATEGORIES_HELP = QUERY_ITEM_HELP.format(
     item_type=_("category"),
     item_types=_("categories"),
-    item_part=_('usage'),
+    item_part=_("usage"),
 )
 
 
 USAGE_TAGS_HELP = QUERY_ITEM_HELP.format(
     item_type=_("tag"),
     item_types=_("tags"),
-    item_part=_('usage'),
+    item_part=_("usage"),
 )
 
 
@@ -1135,7 +1123,7 @@ USAGE_TAGS_HELP = QUERY_ITEM_HELP.format(
 USAGE_FACTS_HELP = QUERY_ITEM_HELP.format(
     item_type=_("fact"),
     item_types=_("facts"),
-    item_part=_('usage'),
+    item_part=_("usage"),
 )
 
 
@@ -1169,8 +1157,7 @@ def NO_ACTIVE_FACT_HELP(ctx):
     _help = _(
         """
         No active Fact. Try {italic}starting{reset} a new Fact first.
-        """
-        .strip()
+        """.strip()
     ).format(**common_format())
     return _help
 
@@ -1193,14 +1180,14 @@ HELP_CMD_SHOW = _(
 # *** [ADD-FACT] Commands help.
 # ***
 
+
 def ADD_FACT_REFERRAL():
     _help = _(
         """
         For more help on this and the other add Fact commands, try
 
           {codehi}{rawname} --pager help add{reset}
-        """
-        .strip()
+        """.strip()
     ).format(**common_format())
     return _help
 
@@ -1273,8 +1260,7 @@ def ADD_FACT_THEN(ctx):
 
           {rawname} then -5m: Woke up.
           {rawname} now Grinding beans...
-        """
-        .strip()
+        """.strip()
     ).format(**common_format())
     return _help
 
@@ -1298,8 +1284,7 @@ def ADD_FACT_AFTER(ctx):
         Start a new Fact, beginning when the last Fact ended.
 
         {}
-        """
-        .strip()
+        """.strip()
     ).format(ADD_FACT_REFERRAL())
     return _help
 
@@ -1325,8 +1310,7 @@ def ADD_FACT_UNTIL(ctx):
     _help = _(
         """
         Alias for the 'to' command, e.g., `{rawname} until -10m: Yada...`.
-        """
-        .strip()
+        """.strip()
     ).format(**common_format())
     return _help
 
@@ -1338,8 +1322,7 @@ def ADD_FACT_FROM(ctx):
         Insert a new Fact using the start and end time indicated.
 
         E.g., {rawname} from 2019-01-01 00:00 to 2019-01-01 01:00: Happy New Year!
-        """
-        .strip()
+        """.strip()
     ).format(**common_format())
     return _help
 
@@ -1360,6 +1343,7 @@ EDIT_FACT_HELP = _(
 # ***
 # *** [EXPORT] Command help.
 # ***
+
 
 def EXPORT_HELP(ctx):
     _help = _(
@@ -1506,9 +1490,7 @@ GLOBAL_OPT_CONFIG = _(
 GLOBAL_OPT_CONFIGFILE = _(
     """
     Specify config path (Default: {default_config_path_abbrev}).
-    """
-    .strip()
+    """.strip()
 ).format(
     default_config_path_abbrev=highlight_value(default_config_path_abbrev()),
 )
-

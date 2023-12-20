@@ -34,11 +34,11 @@ from dob_bright.config.config_table import echo_config_decorator_table
 from dob_bright.crud.interrogate import run_editor_safe
 
 __all__ = (
-    'alert_if_config_unwell',
-    'echo_config_table',
-    'echo_config_value',
-    'edit_config_file',
-    'write_config_value',
+    "alert_if_config_unwell",
+    "echo_config_table",
+    "echo_config_value",
+    "edit_config_file",
+    "write_config_value",
     # PRIVATE:
     #  'echo_config_value_setting',
     #  'echo_config_value_section',
@@ -53,6 +53,7 @@ __all__ = (
 
 
 # *** [DUMP] TABLE
+
 
 # dob-config-show command.
 def echo_config_table(
@@ -78,6 +79,7 @@ def echo_config_table(
 
 # *** [EDIT] CONFIG
 
+
 # dob-config-edit command.
 def edit_config_file(controller):
     run_editor_safe(filename=controller.configurable.config_path)
@@ -85,9 +87,10 @@ def edit_config_file(controller):
 
 # *** [GET] ECHO
 
+
 # dob-config-get command.
 def echo_config_value(ctx, controller, parts):
-    must_parts(ctx, parts, _('“KEYNAME”'))
+    must_parts(ctx, parts, _("“KEYNAME”"))
     section_or_setting = fetch_config_object(controller, parts)
     if isinstance(section_or_setting, KeyChainedValue):
         echo_config_value_setting(section_or_setting)
@@ -102,18 +105,19 @@ def echo_config_value_setting(setting):
 def echo_config_value_section(section):
     counts = []
     if section._sections:
-        counts.append('{} {}'.format(len(section._sections), _('sections')))
+        counts.append("{} {}".format(len(section._sections), _("sections")))
     if section._key_vals or not section._sections:
-        counts.append('{} {}'.format(len(section._key_vals), _('settings')))
+        counts.append("{} {}".format(len(section._key_vals), _("settings")))
     exit_warning(
-        _('Configuration section “{}” contains {}.').format(
+        _("Configuration section “{}” contains {}.").format(
             section._name,
-            _('and').join(counts),
+            _("and").join(counts),
         )
     )
 
 
 # *** [SET] CONFIG
+
 
 # dob-config-set command.
 def write_config_value(ctx, controller, parts):
@@ -128,6 +132,7 @@ def write_config_value(ctx, controller, parts):
 
 
 # *** [GET/SET] FETCH
+
 
 def fetch_config_object(controller, parts):
     conf_objs = fetch_config_objects(controller, parts)
@@ -148,61 +153,61 @@ def fetch_config_objects(controller, parts):
 
 
 def error_exit_not_one(parts, conf_objs):
-    dotted = '.'.join(parts)
+    dotted = ".".join(parts)
     if len(conf_objs) > 1:
-        exit_warning(
-            _('ERROR: Too many config objects named: “{}”').format(dotted)
-        )
+        exit_warning(_("ERROR: Too many config objects named: “{}”").format(dotted))
     else:
         # FIXME/2019-11-17 02:18: Should errors be paged if --pager?
         # - See also/Consolidate: echo_exit, exit_warning, exit_warning_crude.
-        exit_warning(
-            _('ERROR: Not a config object: “{}”.').format(dotted)
-        )
+        exit_warning(_("ERROR: Not a config object: “{}”.").format(dotted))
 
 
 # *** [SECTION] [KEYNAME] [VALUE] VALIDATING
 
+
 def config_parts_pop_value(ctx, parts):
     parts = list(parts)
-    must_parts(ctx, parts, _('“KEYNAME” “VALUE”'), param_type='arguments')
+    must_parts(ctx, parts, _("“KEYNAME” “VALUE”"), param_type="arguments")
     value = parts.pop()
-    must_parts(ctx, parts, _('“VALUE”'))
+    must_parts(ctx, parts, _("“VALUE”"))
     return parts, value
 
 
-def must_parts(ctx, parts, param_hint, param_type='argument'):
+def must_parts(ctx, parts, param_hint, param_type="argument"):
     parts = list(parts)
     if not parts:
         raise MissingParameter(
-            ctx=ctx, param_hint=param_hint, param_type=param_type,
+            ctx=ctx,
+            param_hint=param_hint,
+            param_type=param_type,
         )
     return parts
 
 
 def must_be_config_setting(section_or_setting):
     if not isinstance(section_or_setting, KeyChainedValue):
-        exit_warning(_(
-            'ERROR: Not a configuration setting: “{}”.'.format(section_or_setting._name)
-        ))
+        exit_warning(
+            _(
+                "ERROR: Not a configuration setting: “{}”.".format(
+                    section_or_setting._name
+                )
+            )
+        )
     return section_or_setting
 
 
 def exit_error_no_setting(parts):
-    exit_warning(_(
-        'ERROR: Not a configuration setting: “{}”.'.format('.'.join(parts))
-    ))
+    exit_warning(_("ERROR: Not a configuration setting: “{}”.".format(".".join(parts))))
 
 
 # *** @decorator
 
+
 def alert_if_config_unwell(func):
-    """
-    """
+    """ """
 
     def wrapper(ctx, controller, *args, **kwargs):
         controller.alert_user_if_config_file_unwell()
         func(ctx, controller, *args, **kwargs)
 
     return wrapper
-

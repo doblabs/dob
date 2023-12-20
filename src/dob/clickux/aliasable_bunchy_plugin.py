@@ -24,9 +24,7 @@ from .better_help_headers import ClickBetterHeadersGroup
 from .bunchy_group import ClickBunchyGroup
 from .plugin_group import ClickPluginGroup
 
-__all__ = (
-    'ClickAliasableBunchyPluginGroup'
-)
+__all__ = "ClickAliasableBunchyPluginGroup"
 
 
 class ClickAliasableBunchyPluginGroup(
@@ -39,14 +37,13 @@ class ClickAliasableBunchyPluginGroup(
     ClickBetterUsageGroup,
     ClickBetterHeadersGroup,
 ):
-
     def __init__(self, *args, **kwargs):
         super(ClickAliasableBunchyPluginGroup, self).__init__(*args, **kwargs)
 
     def command(self, *args, **kwargs):
         # And awaaaaaay we hack!
         # Ensure that all subcommand classes are also this class.
-        kwargs.setdefault('cls', self.__class__)
+        kwargs.setdefault("cls", self.__class__)
         # So that Click does not complain `Error: Missing command.` when all
         # we want is a little `dob command --help`, always assume
         # invoke_without_command... which is funny, because some commands
@@ -56,6 +53,5 @@ class ClickAliasableBunchyPluginGroup(
         # wires commands to display help or not as appropriate depending how
         # they're called, e.g., `dob init` runs the init action, but `dob migrate`
         # prints the help for the dob-migrate group of commands.
-        kwargs.setdefault('invoke_without_command', True)
+        kwargs.setdefault("invoke_without_command", True)
         return super(ClickAliasableBunchyPluginGroup, self).command(*args, **kwargs)
-

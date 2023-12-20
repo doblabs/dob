@@ -21,15 +21,15 @@ from ..clickux.query_assist import error_exit_no_results
 
 from . import generate_usage_table
 
-__all__ = ('usage_categories', )
+__all__ = ("usage_categories",)
 
 
 def usage_categories(
     controller,
     show_usage=False,
     show_duration=False,
-    output_format='table',
-    table_type='texttable',
+    output_format="table",
+    table_type="texttable",
     max_width=-1,
     output_path=None,
     **kwargs
@@ -40,8 +40,9 @@ def usage_categories(
     Returns:
         None: If success.
     """
+
     def _usage_categories():
-        err_context = _('categories')
+        err_context = _("categories")
 
         results = controller.categories.get_all_by_usage(**kwargs)
 
@@ -62,4 +63,3 @@ def usage_categories(
     # ***
 
     _usage_categories()
-

@@ -29,7 +29,7 @@ from dob_prompt.prompters.triple_prompter import ask_user_for_edits
 from .save_backedup import prompt_and_save_backedup
 from .simple_prompts import mend_facts_confirm_and_save_maybe
 
-__all__ = ('edit_fact_by_pk', )
+__all__ = ("edit_fact_by_pk",)
 
 
 def edit_fact_by_pk(
@@ -40,6 +40,7 @@ def edit_fact_by_pk(
     edit_meta=False,
 ):
     """"""
+
     def _edit_fact_by_pk():
         old_fact = fact_from_key(key)
         if old_fact is None:
@@ -71,7 +72,7 @@ def edit_fact_by_pk(
                 # fact=edit_fact,
                 fact=old_fact,
                 always_ask=True,
-                restrict_edit='description',
+                restrict_edit="description",
             )
             # FIXME: Missing diff with old Fact to see if edited (and tell user)
             #    and missing save Fact.
@@ -103,15 +104,13 @@ def edit_fact_by_pk(
             old_fact = controller.facts.get(pk=key)
             return old_fact
         except KeyError:
-            exit_warning(
-                _("No fact found with ID “{0}”.").format(key)
-            )
+            exit_warning(_("No fact found with ID “{0}”.").format(key))
 
     def fact_from_key_relative(key):
         offset = -1 - key
         old_facts = controller.facts.get_all(
-            sort_cols=('start',),
-            sort_orders=('desc',),
+            sort_cols=("start",),
+            sort_orders=("desc",),
             limit=1,
             offset=offset,
             deleted=False,
@@ -120,9 +119,9 @@ def edit_fact_by_pk(
 
     def warn_nothing_found(key):
         if key > 0:
-            msg = _('No Fact found with ID “{}”.'.format(key))
+            msg = _("No Fact found with ID “{}”.".format(key))
         else:
-            msg = _('There are not that many Facts.')
+            msg = _("There are not that many Facts.")
         echo_warning(msg)
         return None
 
@@ -151,14 +150,13 @@ def edit_fact_by_pk(
         return new_and_edited
 
     def editor_interact(old_fact):
-        """Presents user with their EDITOR displaying the Factoid text.
-        """
+        """Presents user with their EDITOR displaying the Factoid text."""
         # So that the user can edit act@gory and tags, and not solely
         # the description, marshal the Fact to a factoid string and
         # let the user edit that.
         old_raw_fact = old_fact.friendly_str(
             shellify=False,
-            description_sep='\n\n',
+            description_sep="\n\n",
             localize=True,
             colorful=False,
             show_elapsed=False,
@@ -180,18 +178,16 @@ def edit_fact_by_pk(
         new_raw_fact = ask_edit_with_editor(controller, old_fact, old_raw_fact)
 
         if old_raw_fact == new_raw_fact:
-            exit_warning(
-                _("Nothing changed! New Fact same as the old Fact.")
-            )
+            exit_warning(_("Nothing changed! New Fact same as the old Fact."))
 
         return new_raw_fact
 
     def fact_time_hint(old_fact):
         if old_fact.start and old_fact.end:
-            time_hint = 'verify_both'
+            time_hint = "verify_both"
         else:
             assert old_fact.start
-            time_hint = 'verify_start'
+            time_hint = "verify_start"
         return time_hint
 
     def new_fact_from_factoid(raw_fact, old_fact, time_hint):
@@ -213,12 +209,10 @@ def edit_fact_by_pk(
 
     def echo_edited_fact(new_fact, old_fact):
         if new_fact == old_fact:
-            exit_warning(
-                _("Nothing changed! New Fact same as old Fact.")
-            )
+            exit_warning(_("Nothing changed! New Fact same as old Fact."))
 
-        click.echo('An edited fact!: {}'.format(str(new_fact)))
-        click.echo('\nThe diff!\n')
+        click.echo("An edited fact!: {}".format(str(new_fact)))
+        click.echo("\nThe diff!\n")
         click.echo(old_fact.friendly_diff(new_fact))
 
     def confirm_and_save(new_fact, time_hint):
@@ -235,4 +229,3 @@ def edit_fact_by_pk(
         # ***
 
     return _edit_fact_by_pk()
-

@@ -25,4 +25,3 @@ from . import envvar_prefix  # noqa: F401
 
 # Wire AppDirs, e.g., ~/.config/dob, ~/.cache/dob, etc.
 from . import init_app_dirs  # noqa: F401
-

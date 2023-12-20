@@ -48,20 +48,19 @@ from dob_bright.tests.conftest import *  # noqa: F401, F403
 #     https://docs.pytest.org/en/2.7.3/plugins.html
 pytest_plugins = (
     # Import tmp_appdirs fixture.
-    'easy_as_pypi_appdirs.tests.appdirs_mock',
-
-    'nark.tests.backends.sqlalchemy.conftest',
+    "easy_as_pypi_appdirs.tests.appdirs_mock",
+    "nark.tests.backends.sqlalchemy.conftest",
     # Make sure fixtures required by fixtures available, e.g., 'base_config'.
-    'nark.tests.conftest',
-
+    "nark.tests.conftest",
     # SKIP (see comment, below):
     #   'dob_bright.tests.conftest',
-    'tests.cli_runner',
-    'tests.dob_runner',
+    "tests.cli_runner",
+    "tests.dob_runner",
 )
 
 
 # ***
+
 
 @pytest.fixture
 def test_fact_cls():
@@ -74,6 +73,7 @@ def test_fact_cls_ro():
 
 
 # ***
+
 
 # (lb): Possible scope values: function, class, module, package or session.
 # - Let's try the broadest scope. This is just for testing reports.
@@ -95,4 +95,3 @@ def five_report_facts_ctl(
     controller.store.fact_cls = test_fact_cls_ro  # FactDressed
     # Ignored: set_of_alchemy_facts_ro.
     yield controller
-

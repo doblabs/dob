@@ -19,16 +19,13 @@ from gettext import gettext as _
 
 from easy_as_pypi_termio import attr, coloring
 
-__all__ = (
-    'help_header_format',
-)
+__all__ = ("help_header_format",)
 
 
 def help_header_format(text):
-    return '{underlined}{text}{reset}{optolon}'.format(
-        underlined=attr('underlined'),
+    return "{underlined}{text}{reset}{optolon}".format(
+        underlined=attr("underlined"),
         text=text,
-        reset=attr('reset'),
-        optolon=not coloring() and _(':') or '',
+        reset=attr("reset"),
+        optolon=not coloring() and _(":") or "",
     )
-

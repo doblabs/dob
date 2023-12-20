@@ -20,12 +20,11 @@ from gettext import gettext as _
 import sys
 
 
-__all__ = (
-    'prompt_and_save_confirmed',
-)
+__all__ = ("prompt_and_save_confirmed",)
 
 
 # ***
+
 
 def prompt_and_save_confirmed(
     controller,
@@ -34,7 +33,7 @@ def prompt_and_save_confirmed(
     use_carousel=False,
     backup_callback=None,
     file_out=None,
-    rule='',
+    rule="",
     yes=False,
     dry=False,
     progress=None,
@@ -54,12 +53,10 @@ def prompt_and_save_confirmed(
         if (
             not use_carousel
             or sys.stdin.isatty()
-            or 'input' in kwargs  # PTK3's input test hook.
+            or "input" in kwargs  # PTK3's input test hook.
         ):
             return
-        raise Exception(_(
-            'Commands requires user confirmation, or --yes or --dry.'
-        ))
+        raise Exception(_("Commands requires user confirmation, or --yes or --dry."))
 
     def launch_carousel_or_prompt_directly():
         if use_carousel:
@@ -70,6 +67,7 @@ def prompt_and_save_confirmed(
     def launch_carousel():
         # Not just lazy loading, but allows test_save_backedup to mock away.
         from dob_viewer.traverser.save_confirmer import prompt_and_save_confirmer
+
         prompt_and_save_confirmer(
             controller,
             edit_facts=edit_facts,
@@ -83,6 +81,7 @@ def prompt_and_save_confirmed(
     def prompt_directly():
         # Not just lazy loading, but allows test_save_backedup to mock away.
         from .save_confirmer import prompt_and_save_confirmer
+
         saved_facts = prompt_and_save_confirmer(
             controller,
             edit_facts=edit_facts,
@@ -100,4 +99,3 @@ def prompt_and_save_confirmed(
     # ***
 
     return _prompt_and_save_confirmed()
-

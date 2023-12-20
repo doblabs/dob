@@ -24,16 +24,14 @@ from dob_bright.crud.parse_input import parse_input
 from .save_backedup import prompt_and_save_backedup
 
 
-__all__ = (
-    'import_facts',
-)
+__all__ = ("import_facts",)
 
 
 def import_facts(
     controller,
     file_in=None,
     file_out=None,
-    rule='',
+    rule="",
     backup=True,
     leave_backup=False,
     use_carousel=False,
@@ -77,4 +75,3 @@ def import_facts(
     # ***
 
     return _import_facts()
-

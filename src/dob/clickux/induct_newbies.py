@@ -25,8 +25,8 @@ from easy_as_pypi_termio import click_echo, echo_block_header, exit_warning
 from .. import __arg0name__, migrate
 
 __all__ = (
-    'induct_newbies',
-    'insist_germinated',
+    "induct_newbies",
+    "insist_germinated",
     # Private:
     #  'backend_integrity',
 )
@@ -50,17 +50,21 @@ def backend_integrity(func):
 
     def version_must_be_latest(controller):
         db_version = migrate.version(
-            controller, silent_check=True, must=True,
+            controller,
+            silent_check=True,
+            must=True,
         )
         latest_version = migrate.latest_version(
-            controller, silent_check=True, must=True,
+            controller,
+            silent_check=True,
+            must=True,
         )
         if db_version != latest_version:
             assert db_version < latest_version
             msg = _(
-                'Expected database to be same version as latest migration.'
-                ' {} != {}'
-                '\nTrying running `{} migrate up`'
+                "Expected database to be same version as latest migration."
+                " {} != {}"
+                "\nTrying running `{} migrate up`"
             ).format(db_version, latest_version, __arg0name__)
             exit_warning(msg)
 
@@ -77,13 +81,13 @@ def backend_integrity(func):
 
         for fact in endless_facts:
             # FIXME/2018-05-18: (lb): Make this prettier.
-            echo_block_header(_('Endless Fact Found!'))
+            echo_block_header(_("Endless Fact Found!"))
             click_echo()
             click_echo(fact.friendly_diff(fact))
             click_echo()
         msg = _(
-            'Found saved fact(s) without start time and/or end time.'
-            '\nSee list of offending Facts above.'
+            "Found saved fact(s) without start time and/or end time."
+            "\nSee list of offending Facts above."
             # MAYBE/2018-05-23 17:05: (lb): We could offer an easy way out, e.g.,
             #   '\n\nTry, e.g.,\n\n  {} edit {} --end now'.format(__arg0name__, ...)
         )
@@ -95,8 +99,7 @@ def backend_integrity(func):
 
 
 def insist_germinated(func):
-    """
-    """
+    """ """
 
     def wrapper(ctx, controller, *args, **kwargs):
         controller.insist_germinated(fact_cls=FactDressed)
@@ -106,12 +109,11 @@ def insist_germinated(func):
 
 
 def induct_newbies(func):
-    """
-    """
+    """ """
+
     @insist_germinated
     @backend_integrity
     def wrapper(*args, **kwargs):
         func(*args, **kwargs)
 
     return update_wrapper(wrapper, func)
-

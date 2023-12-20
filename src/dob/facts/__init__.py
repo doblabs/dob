@@ -16,4 +16,3 @@
 # or visit <http://www.gnu.org/licenses/>.
 
 """``dob`` commands that deal with creating/editing/exporting/importing facts."""
-

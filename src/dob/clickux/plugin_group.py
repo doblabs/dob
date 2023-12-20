@@ -32,27 +32,27 @@ from easy_as_pypi_termio import echo_warning
 from ..helpers.path import compile_and_eval_source
 
 __all__ = (
-    'ensure_plugged_in',
-    'ClickPluginGroup',
-    'PLUGINS_DIRNAME',
+    "ensure_plugged_in",
+    "ClickPluginGroup",
+    "PLUGINS_DIRNAME",
 )
 
 
-PLUGINS_DIRNAME = 'plugins'
+PLUGINS_DIRNAME = "plugins"
 
 
 class ClickPluginGroup(click.Group):
-
     def __init__(self, *args, **kwargs):
         super(ClickPluginGroup, self).__init__(*args, **kwargs)
         self.plugins_basepath = os.path.join(
-            AppDirs().user_config_dir, PLUGINS_DIRNAME,
+            AppDirs().user_config_dir,
+            PLUGINS_DIRNAME,
         )
         self.has_loaded = False
 
     @property
     def plugin_paths(self):
-        py_paths = glob.glob(os.path.join(self.plugins_basepath, '*.py'))
+        py_paths = glob.glob(os.path.join(self.plugins_basepath, "*.py"))
         return py_paths
 
     def list_commands(self, ctx):
@@ -98,9 +98,9 @@ class ClickPluginGroup(click.Group):
                     # not want to return multiple matches.
                     cmds |= files_cmds
             except Exception as err:
-                msg = _(
-                    'ERROR: Could not open plugins file "{}": {}'
-                ).format(py_path, str(err))
+                msg = _('ERROR: Could not open plugins file "{}": {}').format(
+                    py_path, str(err)
+                )
                 echo_warning(msg)
         self.has_loaded = True
         return list(cmds)
@@ -134,9 +134,9 @@ class ClickPluginGroup(click.Group):
 
 # ***
 
+
 def ensure_plugged_in(func):
-    """
-    """
+    """ """
 
     def wrapper(ctx, controller, *args, **kwargs):
         # Ensure plugins are loaded for Click functions decorated like:
@@ -149,4 +149,3 @@ def ensure_plugged_in(func):
         func(ctx, controller, *args, **kwargs)
 
     return update_wrapper(wrapper, func)
-

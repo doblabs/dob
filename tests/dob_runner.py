@@ -51,20 +51,25 @@ def dob_runner(alchemy_store, test_fact_cls, controller, mocker, runner):
     migrations.control(version=None, engine=engine)
 
     mocker.patch.object(
-        storage.SQLAlchemyStore, 'create_storage_engine', return_value=engine,
+        storage.SQLAlchemyStore,
+        "create_storage_engine",
+        return_value=engine,
     )
 
-    mocker.patch.object(NarkControl, '_get_store', return_value=alchemy_store)
+    mocker.patch.object(NarkControl, "_get_store", return_value=alchemy_store)
 
     mocker.patch.object(
-        ConfigUrable, 'config_root', return_value=controller.config,
+        ConfigUrable,
+        "config_root",
+        return_value=controller.config,
         new_callable=PropertyMock,
     )
 
     cfgfile_exists = True
     mocker.patch.object(
-        ConfigUrable, 'load_configfile', return_value=cfgfile_exists,
+        ConfigUrable,
+        "load_configfile",
+        return_value=cfgfile_exists,
     )
 
     return runner
-

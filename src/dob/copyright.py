@@ -29,42 +29,43 @@ from . import (
     __arg0name__,
     __author_name__,
     __author_link__,
-    __package_name__
+    __package_name__,
 )
 
 __all__ = (
-    'assemble_copyright',
-    'echo_copyright',
-    'echo_license',
+    "assemble_copyright",
+    "echo_copyright",
+    "echo_license",
 )
 
 
 def assemble_copyright():
     """Displays the application copyright message."""
     cur_year = str(datetime.now().year)
-    year_range = '2018'
+    year_range = "2018"
     if cur_year != year_range:
-        year_range = '2018-{}'.format(cur_year)
+        year_range = "2018-{}".format(cur_year)
     gpl3_notice_2018 = [
-        'This is {pkgname} v{version}.'.format(
+        "This is {pkgname} v{version}.".format(
             pkgname=__package_name__,
             version=get_version(),
         ),
-        '',
-        'Copyright (C) {years} {aname} <{alink}>'.format(
+        "",
+        "Copyright (C) {years} {aname} <{alink}>".format(
             years=year_range,
             aname=__author_name__,
             alink=__author_link__,
         ),
         # Be nice and call out the significant copyright holders from the years.
         # (lb): What about Right to be forgotten?
-        'Copyright (C) 2015-2016 Eric Goller <elbenfreund@DenkenInEchtzeit.net>',
-        '',
-        _('This program comes with ABSOLUTELY NO WARRANTY. This is free software,'),
-        _('and you are welcome to redistribute it under certain conditions.'),
-        _(''),
-        _('Run `{} license` for your legal rights and responsibilities.'
-          ).format(__arg0name__),
+        "Copyright (C) 2015-2016 Eric Goller <elbenfreund@DenkenInEchtzeit.net>",
+        "",
+        _("This program comes with ABSOLUTELY NO WARRANTY. This is free software,"),
+        _("and you are welcome to redistribute it under certain conditions."),
+        _(""),
+        _("Run `{} license` for your legal rights and responsibilities.").format(
+            __arg0name__
+        ),
     ]
     copy_notice = gpl3_notice_2018
     return copy_notice
@@ -97,11 +98,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
     #        This will be good learning on installing non-package files.
     license_path = os.path.join(
         os.path.dirname(__file__),
-        '..',
-        'LICENSE',
+        "..",
+        "LICENSE",
     )
     if os.path.exists(license_path):
-        with open(license_path, 'rb') as f:
-            license_txt = f.read().decode('utf-8').strip()
+        with open(license_path, "rb") as f:
+            license_txt = f.read().decode("utf-8").strip()
     click_echo(license_txt)
-

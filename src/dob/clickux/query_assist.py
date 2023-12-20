@@ -19,12 +19,11 @@ from gettext import gettext as _
 
 from easy_as_pypi_termio import exit_warning
 
-__all__ = (
-    'error_exit_no_results',
-)
+__all__ = ("error_exit_no_results",)
 
 
 # ***
+
 
 def error_exit_no_results(item_type, more_msg=None):
     # MAYBE: (lb): Should we exit on error?
@@ -37,12 +36,11 @@ def error_exit_no_results(item_type, more_msg=None):
     #        pipeline would only see empty string or empty table
     #        on stdin, and never a message, so that post-processing
     #        won't die on unexpected error message string.
-    more_msg = ': {}'.format(more_msg) if more_msg else ''
-    msg = _('No {} were found for the specified query{}.').format(item_type, more_msg)
+    more_msg = ": {}".format(more_msg) if more_msg else ""
+    msg = _("No {} were found for the specified query{}.").format(item_type, more_msg)
     # (lb): I sorta like the message, not table, on no results,
     # because you can tell quicker that nothing was found. I.e.,
     # when I see an empty tell, I spend a nanosecond scanning it
     # for rows, because when I see table headers, I expect to see
     # table rows! So I'm kinda liking printing a message, not table.
     exit_warning(msg)
-

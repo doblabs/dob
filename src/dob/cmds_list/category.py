@@ -21,13 +21,13 @@ from dob_bright.reports.render_results import render_results
 
 from ..clickux.query_assist import error_exit_no_results
 
-__all__ = ('list_categories', )
+__all__ = ("list_categories",)
 
 
 def list_categories(
     controller,
-    output_format='table',
-    table_type='texttable',
+    output_format="table",
+    table_type="texttable",
     max_width=-1,
     output_path=None,
     # These two --hide flags are ignored but specified to keep out of kwargs.
@@ -40,7 +40,7 @@ def list_categories(
 
     Writes to stdout, or to the file specified by ``output_path``.
     """
-    err_context = _('categories')
+    err_context = _("categories")
 
     results = controller.categories.get_all(**kwargs)
 
@@ -49,7 +49,7 @@ def list_categories(
     headers = (_("Category Name"),)
     category_names = []
     for category in results:
-        category_name = category.name if category else '<NULL>'
+        category_name = category.name if category else "<NULL>"
         category_names.append((category_name,))
 
     render_results(
@@ -61,4 +61,3 @@ def list_categories(
         max_width=max_width,
         output_obj_or_path=output_path,
     )
-

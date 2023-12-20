@@ -17,5 +17,4 @@
 
 from easy_as_pypi_config.defaults import register_conf_filename
 
-register_conf_filename('dob.conf')
-
+register_conf_filename("dob.conf")

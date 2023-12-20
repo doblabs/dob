@@ -21,9 +21,7 @@ import click_hotoffthehamster as click
 
 from .simple_prompts import echo_ongoing_completed
 
-__all__ = (
-    'cancel_fact',
-)
+__all__ = ("cancel_fact",)
 
 
 def cancel_fact(controller, purge=False):
@@ -45,4 +43,3 @@ def cancel_fact(controller, purge=False):
     else:
         echo_ongoing_completed(controller, fact, cancelled=True)
         return fact
-

@@ -20,19 +20,19 @@ from gettext import gettext as _
 import click_hotoffthehamster as click
 
 __all__ = (
-    'cmd_options_edit_item',
-    'cmd_options_fact_add',
-    'cmd_options_fact_dryable',
-    'cmd_options_fact_edit',
-    'cmd_options_fact_import',
-    'cmd_options_factoid',
-    'cmd_options_factoid_verify_none',
-    'cmd_options_factoid_verify_start',
-    'cmd_options_factoid_verify_end',
-    'cmd_options_factoid_verify_both',
-    'cmd_options_rule_name',
-    'cmd_options_styles_internal',
-    'cmd_options_styles_named',
+    "cmd_options_edit_item",
+    "cmd_options_fact_add",
+    "cmd_options_fact_dryable",
+    "cmd_options_fact_edit",
+    "cmd_options_fact_import",
+    "cmd_options_factoid",
+    "cmd_options_factoid_verify_none",
+    "cmd_options_factoid_verify_start",
+    "cmd_options_factoid_verify_end",
+    "cmd_options_factoid_verify_both",
+    "cmd_options_rule_name",
+    "cmd_options_styles_internal",
+    "cmd_options_styles_named",
 )
 
 
@@ -40,17 +40,18 @@ __all__ = (
 # *** [ADD FACT/STOP FACT] Raw Factoid Option.
 # ***
 
-_option_factoid_text_parts = (
-    '[<activity>[@<category>]]'
-    ' [@<tag>...] [<description>]'
-)
+_option_factoid_text_parts = "[<activity>[@<category>]]" " [@<tag>...] [<description>]"
 
 
 _cmd_options_factoid = [
-    click.argument('factoid', nargs=-1, default=None,
-                   metavar='[START_TIME] [to] [END_TIME] {}'.format(
-                       _option_factoid_text_parts,
-                   )),
+    click.argument(
+        "factoid",
+        nargs=-1,
+        default=None,
+        metavar="[START_TIME] [to] [END_TIME] {}".format(
+            _option_factoid_text_parts,
+        ),
+    ),
 ]
 
 
@@ -61,9 +62,12 @@ def cmd_options_factoid(func):
 
 
 _cmd_options_factoid_verify_none = [
-    click.argument('factoid', nargs=-1, default=None,
-                   metavar=_option_factoid_text_parts,
-                   ),
+    click.argument(
+        "factoid",
+        nargs=-1,
+        default=None,
+        metavar=_option_factoid_text_parts,
+    ),
 ]
 
 
@@ -74,10 +78,14 @@ def cmd_options_factoid_verify_none(func):
 
 
 _cmd_options_factoid_verify_start = [
-    click.argument('factoid', nargs=-1, default=None,
-                   metavar='[START_TIME] {}'.format(
-                       _option_factoid_text_parts,
-                   )),
+    click.argument(
+        "factoid",
+        nargs=-1,
+        default=None,
+        metavar="[START_TIME] {}".format(
+            _option_factoid_text_parts,
+        ),
+    ),
 ]
 
 
@@ -88,10 +96,14 @@ def cmd_options_factoid_verify_start(func):
 
 
 _cmd_options_factoid_verify_end = [
-    click.argument('factoid', nargs=-1, default=None,
-                   metavar='[END_TIME] {}'.format(
-                       _option_factoid_text_parts,
-                   )),
+    click.argument(
+        "factoid",
+        nargs=-1,
+        default=None,
+        metavar="[END_TIME] {}".format(
+            _option_factoid_text_parts,
+        ),
+    ),
 ]
 
 
@@ -102,10 +114,14 @@ def cmd_options_factoid_verify_end(func):
 
 
 _cmd_options_factoid_verify_both = [
-    click.argument('factoid', nargs=-1, default=None,
-                   metavar='START_TIME to END_TIME {}'.format(
-                       _option_factoid_text_parts,
-                   )),
+    click.argument(
+        "factoid",
+        nargs=-1,
+        default=None,
+        metavar="START_TIME to END_TIME {}".format(
+            _option_factoid_text_parts,
+        ),
+    ),
 ]
 
 
@@ -121,20 +137,26 @@ def cmd_options_factoid_verify_both(func):
 
 _cmd_options_fact_add_prefix = [
     click.option(
-        '-e', '--editor', is_flag=True,
-        help=_('Edit new Fact before saving, using Carousel, and Awesome Prompt.'),
+        "-e",
+        "--editor",
+        is_flag=True,
+        help=_("Edit new Fact before saving, using Carousel, and Awesome Prompt."),
     ),
 ]
 
 
 _cmd_options_fact_add_and_edit = [
     click.option(
-        '-d', '--edit-text', is_flag=True,
-        help=_('Edit description using user’s preferred $EDITOR.'),
+        "-d",
+        "--edit-text",
+        is_flag=True,
+        help=_("Edit description using user’s preferred $EDITOR."),
     ),
     click.option(
-        '-a', '--edit-meta', is_flag=True,
-        help=_('Ask for act@gory and tags using Awesome Prompt.'),
+        "-a",
+        "--edit-meta",
+        is_flag=True,
+        help=_("Ask for act@gory and tags using Awesome Prompt."),
     ),
 ]
 
@@ -144,8 +166,10 @@ _cmd_options_fact_add_postfix = [
     # on add-fact, and only outside the context of the Carousel. So applies
     # to dob-add commands, but not to dob-import.
     click.option(
-        '-y', '--yes', is_flag=True,
-        help=_('Save conflicts automatically, otherwise ask for confirmation.'),
+        "-y",
+        "--yes",
+        is_flag=True,
+        help=_("Save conflicts automatically, otherwise ask for confirmation."),
     ),
 ]
 
@@ -169,8 +193,10 @@ _cmd_options_fact_import = [
     # - On dob-add, default is to not run Carousel; but on dob-import, it is.
     click.option(
         # Option skips carousel, opens Content in EDITOR, saves Fact on EDITOR exit.
-        '-E', '--no-editor', is_flag=True,
-        help=_('Skip interactive editor after import. Save Facts and exit.'),
+        "-E",
+        "--no-editor",
+        is_flag=True,
+        help=_("Skip interactive editor after import. Save Facts and exit."),
     ),
 ]
 
@@ -187,16 +213,17 @@ def cmd_options_fact_import(func):
 
 _cmd_options_fact_no_editor_edit = [
     click.option(
-        '-E', '--no-editor', is_flag=True,
-        help=_('Skip interactive editor. Use $EDITOR and Awesome Prompt.'),
+        "-E",
+        "--no-editor",
+        is_flag=True,
+        help=_("Skip interactive editor. Use $EDITOR and Awesome Prompt."),
     ),
 ]
 
 
 def cmd_options_fact_edit(func):
     for option in reversed(
-        _cmd_options_fact_add_and_edit
-        + _cmd_options_fact_no_editor_edit
+        _cmd_options_fact_add_and_edit + _cmd_options_fact_no_editor_edit
     ):
         func = option(func)
     return func
@@ -213,8 +240,9 @@ _cmd_options_fact_dryable = [
     # It's really just more code to test!
     # MAYBE/2019-02-01: Remove the --dry option, and save a unittest?
     click.option(
-        '--dry', is_flag=True,
-        help=_('Dry run: do not make changes.'),
+        "--dry",
+        is_flag=True,
+        help=_("Dry run: do not make changes."),
     ),
 ]
 
@@ -234,7 +262,7 @@ _cmd_options_edit_item = [
     # FIXME/BACKLOG/2019-01-31: Could allow user to specify datetime instead of PK,
     #   e.g., `dob edit 2019-01-31` could bring up Fact at Noon on specific day (or
     #   midnight).
-    click.argument('key', nargs=1, type=int, required=False),
+    click.argument("key", nargs=1, type=int, required=False),
     # (lb): User can specify specific Fact PK, a positive integer, or user
     # can specify an index relative to the last Fact, e.g., `dob edit -1`
     # (or even `dob edit -2`, though anything other than `dob edit -1` seems
@@ -248,8 +276,10 @@ _cmd_options_edit_item = [
     # The latter is somewhat clunky, so we can make '-1' an option.
     # Note that this doesn't solve the issue for -2, -3, etc., but really, who cares.
     click.option(
-        '-1', 'latest_1', is_flag=True,
-        help=_('Edit most recent Fact (latest complete, or active).'),
+        "-1",
+        "latest_1",
+        is_flag=True,
+        help=_("Edit most recent Fact (latest complete, or active)."),
     ),
 ]
 
@@ -266,13 +296,15 @@ def cmd_options_edit_item(func):
 
 _cmd_options_styles_internal = [
     click.option(
-        '-i', '--internal', is_flag=True,
+        "-i",
+        "--internal",
+        is_flag=True,
         help=_(
-            'Print pristine or internal style settings, not raw styles.conf section. '
-            'If the named style is also a section in styles.conf, '
-            'this exclude comments, and it reorders the settings. '
-            'Otherwise, if not in styles.conf, the matching internal style is located.'
-        )
+            "Print pristine or internal style settings, not raw styles.conf section. "
+            "If the named style is also a section in styles.conf, "
+            "this exclude comments, and it reorders the settings. "
+            "Otherwise, if not in styles.conf, the matching internal style is located."
+        ),
     ),
 ]
 
@@ -284,7 +316,7 @@ def cmd_options_styles_internal(func):
 
 
 _cmd_options_styles_named = [
-    click.argument('name', nargs=1, default='', metavar=_('[STYLE_NAME]')),
+    click.argument("name", nargs=1, default="", metavar=_("[STYLE_NAME]")),
 ]
 
 
@@ -299,7 +331,7 @@ def cmd_options_styles_named(func):
 # ***
 
 _cmd_options_rule_name = [
-    click.argument('name', nargs=1, default='', metavar=_('[RULE_NAME]')),
+    click.argument("name", nargs=1, default="", metavar=_("[RULE_NAME]")),
 ]
 
 
@@ -307,4 +339,3 @@ def cmd_options_rule_name(func):
     for option in reversed(_cmd_options_rule_name):
         func = option(func)
     return func
-

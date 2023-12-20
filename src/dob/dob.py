@@ -19,9 +19,10 @@
 
 # BREADCRUMB: PROFILING
 from nark.helpers.dev.profiling import profile_elapsed
+
 # BREADCRUMB: PROFILING
 # E402 module level import not at top of file
-profile_elapsed('To dob:   _top')  # noqa: E402
+profile_elapsed("To dob:   _top")  # noqa: E402
 
 from gettext import gettext as _
 
@@ -43,21 +44,21 @@ from dob_bright.styling.ignore_cmds import (
     create_ignore_conf,
     echo_ignore_sections,
     echo_ignore_table,
-    edit_ignore_file
+    edit_ignore_file,
 )
 from dob_bright.styling.rules_cmds import (
     create_rules_conf,
     echo_rules_conf,
     echo_rule_names,
     echo_rules_table,
-    edit_rules_conf
+    edit_rules_conf,
 )
 from dob_bright.styling.styles_cmds import (
     create_styles_conf,
     echo_styles_conf,
     echo_styles_list,
     echo_styles_table,
-    edit_styles_conf
+    edit_styles_conf,
 )
 
 from .clickux import help_strings
@@ -72,7 +73,7 @@ from .clickux.bunchy_help import (
     cmd_bunch_group_dbms,
     cmd_bunch_group_add_fact,
     cmd_bunch_group_ongoing_fact,
-    cmd_bunch_group_personalize
+    cmd_bunch_group_personalize,
 )
 from .clickux.cmd_options import (
     cmd_options_edit_item,
@@ -87,13 +88,13 @@ from .clickux.cmd_options import (
     cmd_options_factoid_verify_both,
     cmd_options_rule_name,
     cmd_options_styles_internal,
-    cmd_options_styles_named
+    cmd_options_styles_named,
 )
 from .clickux.cmd_options_search import (
     cmd_options_any_search_query,
     cmd_options_output_format_any_input,
     postprocess_options_normalize_search_args,
-    postprocess_options_output_format_any_input
+    postprocess_options_output_format_any_input,
 )
 from .clickux.help_command import help_command_help
 from .clickux.help_detect import show_help_finally, show_help_if_no_command
@@ -113,7 +114,7 @@ from .config.cmds_config import (
     echo_config_table,
     echo_config_value,
     edit_config_file,
-    write_config_value
+    write_config_value,
 )
 from .copyright import echo_copyright, echo_license
 from .demo import demo_config, demo_dob
@@ -137,13 +138,14 @@ from .run_cli import dob_versions, pass_controller, pass_controller_context, run
 # *** [HELP]
 # ***
 
+
 @cmd_bunch_group_get_meta
 @run.command(help=help_strings.HELP_HELP)
 # (lb): Should not need the help-finally decorator, but doesn't seem to hurt, either:
 #   @show_help_finally
 @flush_pager
 @click.pass_context
-@click.argument('command', nargs=-1)
+@click.argument("command", nargs=-1)
 def help(ctx, command=None):
     """Show help."""
     help_command_help(ctx, command)
@@ -153,6 +155,7 @@ def help(ctx, command=None):
 # *** [VERSION] Ye rote version command.
 # ***
 
+
 @cmd_bunch_group_get_meta
 @run.command(help=help_strings.VERSION_HELP)
 @show_help_finally
@@ -160,13 +163,14 @@ def help(ctx, command=None):
 @pass_controller
 def version(controller):
     """Show version information."""
-    include_all = controller.config['dev.catch_errors']
+    include_all = controller.config["dev.catch_errors"]
     click_echo(dob_versions(include_all=include_all))
 
 
 # ***
 # *** [LICENSE] Command.
 # ***
+
 
 @run.command(hidden=True, help=help_strings.LICENSE_HELP)
 @show_help_finally
@@ -184,6 +188,7 @@ def _license():
 # ***
 # *** [COPYRIGHT] Command.
 # ***
+
 
 @cmd_bunch_group_get_meta
 @run.command(help=help_strings.COPYRIGHT_HELP)
@@ -209,6 +214,7 @@ def about(controller):
 # *** [DETAILS] Command [about paths, config, etc.].
 # ***
 
+
 # MAYBE: (lb): Call this dob-show? dob-status? dob-info?
 #   (2018-06-09: Trying aliases for now)
 #   Some ideas: aliases=['show', 'status', 'info', 'config', 'details', 'appinfo'])
@@ -219,10 +225,10 @@ def about(controller):
 #   dob details | dob info | dob show
 # i.e., details about what? info about what? showing what?
 @cmd_bunch_group_get_meta
-@run.command(aliases=['info'], help=help_strings.DETAILS_HELP)
+@run.command(aliases=["info"], help=help_strings.DETAILS_HELP)
 @show_help_finally
 @flush_pager
-@click.option('--tmi', '--full', is_flag=True, help=help_strings.DETAILS_TMI_HELP)
+@click.option("--tmi", "--full", is_flag=True, help=help_strings.DETAILS_TMI_HELP)
 @pass_controller
 def details(controller, tmi):
     """List details about the runtime environment."""
@@ -233,8 +239,9 @@ def details(controller, tmi):
 # *** [ENVIRONS] Command [like details command, but shell-sourceable].
 # ***
 
+
 @cmd_bunch_group_get_meta
-@run.command(aliases=['env'], help=help_strings.ENVIRONS_HELP)
+@run.command(aliases=["env"], help=help_strings.ENVIRONS_HELP)
 @show_help_finally
 @flush_pager
 @pass_controller
@@ -247,6 +254,7 @@ def environs(controller):
 # *** [DEBUG] Dump ya on a prompt.
 # ***
 
+
 @cmd_bunch_group_get_meta
 @run.command(help=help_strings.DEBUG_HELP, hidden=True)
 @show_help_finally
@@ -255,6 +263,7 @@ def environs(controller):
 def debug(controller):
     """Break!"""
     import pdb
+
     pdb.set_trace()
     pass
 
@@ -263,8 +272,9 @@ def debug(controller):
 # *** [DEMO] Command.
 # ***
 
+
 @cmd_bunch_group_introducing
-@run.command('demo', help=help_strings.DEMO_HELP)
+@run.command("demo", help=help_strings.DEMO_HELP)
 @show_help_finally
 @flush_pager
 @pass_controller
@@ -278,8 +288,9 @@ def demo_dob_and_nark(controller):
 # *** [INIT] Command.
 # ***
 
+
 @cmd_bunch_group_introducing
-@run.command('init', help=help_strings.INIT_HELP_OVERVIEW)
+@run.command("init", help=help_strings.INIT_HELP_OVERVIEW)
 @show_help_finally
 @flush_pager
 @pass_controller
@@ -295,10 +306,10 @@ def init_config_and_store(controller):
 run_group_kwargs = {
     # Groups should also use our class override so that usage is proper,
     # and other fancy features we add are part of group commands, too.
-    'cls': ClickAliasableBunchyPluginGroup,
+    "cls": ClickAliasableBunchyPluginGroup,
     # Ensure Click does not die on the -h/--help option, e.g.,
     # `dob config -h` should show help, not show "Error: Missing command."
-    'invoke_without_command': True,
+    "invoke_without_command": True,
 }
 
 
@@ -306,8 +317,9 @@ run_group_kwargs = {
 # *** [CONFIG] Commands.
 # ***
 
+
 @cmd_bunch_group_get_meta
-@run.group('config', help=help_strings.CONFIG_GROUP_HELP, **run_group_kwargs)
+@run.group("config", help=help_strings.CONFIG_GROUP_HELP, **run_group_kwargs)
 @show_help_finally
 @show_help_if_no_command
 @flush_pager
@@ -319,11 +331,11 @@ def config_group(ctx):
 
 # *** [CONFIG] CREATE
 
-@config_group.command('create', aliases=['new'], help=help_strings.CONFIG_CREATE_HELP)
+
+@config_group.command("create", aliases=["new"], help=help_strings.CONFIG_CREATE_HELP)
 @show_help_finally
 @flush_pager
-@click.option('-f', '--force', is_flag=True,
-              help=help_strings.CONFIG_CREATE_FORCE_HELP)
+@click.option("-f", "--force", is_flag=True, help=help_strings.CONFIG_CREATE_FORCE_HELP)
 @pass_controller_context
 @ensure_plugged_in
 def config_create(ctx, controller, force):
@@ -333,16 +345,17 @@ def config_create(ctx, controller, force):
 
 # *** [CONFIG] SHOW
 
-@config_group.command('show', aliases=['dump'], help=help_strings.CONFIG_SHOW_HELP)
+
+@config_group.command("show", aliases=["dump"], help=help_strings.CONFIG_SHOW_HELP)
 @show_help_finally
 @flush_pager
 @cmd_options_output_format_any_input
-@click.argument('section', nargs=1, default='')
-@click.argument('keyname', nargs=1, default='')
+@click.argument("section", nargs=1, default="")
+@click.argument("keyname", nargs=1, default="")
 @pass_controller_context
 @alert_if_config_unwell
 @ensure_plugged_in
-def config_show(ctx, controller, section='', keyname='', **kwargs):
+def config_show(ctx, controller, section="", keyname="", **kwargs):
     """"""
     postprocess_options_output_format_any_input(kwargs)
     echo_config_table(controller, section, keyname, **kwargs)
@@ -350,7 +363,8 @@ def config_show(ctx, controller, section='', keyname='', **kwargs):
 
 # *** [CONFIG] EDIT
 
-@config_group.command('edit', help=help_strings.CONFIG_EDIT_HELP)
+
+@config_group.command("edit", help=help_strings.CONFIG_EDIT_HELP)
 @show_help_finally
 @flush_pager
 @pass_controller_context
@@ -363,10 +377,11 @@ def config_edit(ctx, controller):
 
 # *** [CONFIG] GET
 
-@config_group.command('get', aliases=['read'], help=help_strings.CONFIG_GET_HELP)
+
+@config_group.command("get", aliases=["read"], help=help_strings.CONFIG_GET_HELP)
 @show_help_finally
 @flush_pager
-@click.argument('parts', nargs=-1, metavar='[SECTION] KEYNAME VALUE')
+@click.argument("parts", nargs=-1, metavar="[SECTION] KEYNAME VALUE")
 @pass_controller_context
 @alert_if_config_unwell
 @ensure_plugged_in
@@ -377,10 +392,11 @@ def config_value_get(ctx, controller, parts):
 
 # *** [CONFIG] SET
 
-@config_group.command('set', aliases=['write'], help=help_strings.CONFIG_SET_HELP)
+
+@config_group.command("set", aliases=["write"], help=help_strings.CONFIG_SET_HELP)
 @show_help_finally
 @flush_pager
-@click.argument('parts', nargs=-1, metavar='[SECTION] KEYNAME VALUE')
+@click.argument("parts", nargs=-1, metavar="[SECTION] KEYNAME VALUE")
 @pass_controller_context
 @alert_if_config_unwell
 @ensure_plugged_in
@@ -391,7 +407,8 @@ def config_value_set(ctx, controller, parts):
 
 # *** [CONFIG] UPDATE
 
-@config_group.command('update', help=help_strings.CONFIG_UPDATE_HELP)
+
+@config_group.command("update", help=help_strings.CONFIG_UPDATE_HELP)
 @show_help_finally
 @flush_pager
 @pass_controller_context
@@ -406,11 +423,11 @@ def config_update(ctx, controller):
 # *** [STYLES] Commands.
 # ***
 
+
 @cmd_bunch_group_personalize
-@run.group('styles',
-           help=help_strings.STYLES_GROUP_HELP,
-           help_weight=10,
-           **run_group_kwargs)
+@run.group(
+    "styles", help=help_strings.STYLES_GROUP_HELP, help_weight=10, **run_group_kwargs
+)
 @show_help_finally
 @show_help_if_no_command
 @flush_pager
@@ -422,11 +439,12 @@ def styles_group(ctx):
 
 # *** [STYLES] CREATE
 
-@styles_group.command('create', aliases=['new'], help=help_strings.STYLES_CREATE_HELP)
+
+@styles_group.command("create", aliases=["new"], help=help_strings.STYLES_CREATE_HELP)
 @show_help_finally
 @flush_pager
 @cmd_options_styles_named
-@click.option('-f', '--force', is_flag=True, help=help_strings.STYLES_CREATE_FORCE_HELP)
+@click.option("-f", "--force", is_flag=True, help=help_strings.STYLES_CREATE_FORCE_HELP)
 @pass_controller_context
 @ensure_plugged_in
 def styles_create(ctx, controller, name, force):
@@ -436,15 +454,21 @@ def styles_create(ctx, controller, name, force):
 
 # *** [STYLES] CONF
 
-@styles_group.command('conf', help=help_strings.STYLES_CONF_HELP)
+
+@styles_group.command("conf", help=help_strings.STYLES_CONF_HELP)
 @show_help_finally
 @flush_pager
 @cmd_options_styles_named
 @cmd_options_styles_internal
 # (lb): Cannot specify click.option name, and if just -a and --all, click uses
 # all as the function parameter, which shadows the built-in. So add --complete.
-@click.option('-a', '--complete', '--all', is_flag=True,
-              help=_('Include all possible settings, even those not set by the style.'))
+@click.option(
+    "-a",
+    "--complete",
+    "--all",
+    is_flag=True,
+    help=_("Include all possible settings, even those not set by the style."),
+)
 @pass_controller_context
 @ensure_plugged_in
 def styles_conf(ctx, controller, name, internal, complete):
@@ -454,7 +478,8 @@ def styles_conf(ctx, controller, name, internal, complete):
 
 # *** [STYLES] EDIT
 
-@styles_group.command('edit', help=help_strings.STYLES_EDIT_HELP)
+
+@styles_group.command("edit", help=help_strings.STYLES_EDIT_HELP)
 @show_help_finally
 @flush_pager
 @pass_controller_context
@@ -466,7 +491,8 @@ def styles_edit(ctx, controller):
 
 # *** [STYLES] LIST
 
-@styles_group.command('list', help=help_strings.STYLES_LIST_HELP)
+
+@styles_group.command("list", help=help_strings.STYLES_LIST_HELP)
 @show_help_finally
 @flush_pager
 @cmd_options_styles_internal
@@ -479,7 +505,8 @@ def styles_list(ctx, controller, internal):
 
 # *** [STYLES] SHOW
 
-@styles_group.command('show', aliases=['dump'], help=help_strings.STYLES_SHOW_HELP)
+
+@styles_group.command("show", aliases=["dump"], help=help_strings.STYLES_SHOW_HELP)
 @show_help_finally
 @flush_pager
 @cmd_options_styles_named
@@ -496,11 +523,11 @@ def styles_show(ctx, controller, name, **kwargs):
 # *** [RULES] Commands.
 # ***
 
+
 @cmd_bunch_group_personalize
-@run.group('rules',
-           help=help_strings.RULES_GROUP_HELP,
-           help_weight=20,
-           **run_group_kwargs)
+@run.group(
+    "rules", help=help_strings.RULES_GROUP_HELP, help_weight=20, **run_group_kwargs
+)
 @show_help_finally
 @show_help_if_no_command
 @flush_pager
@@ -512,10 +539,11 @@ def rules_group(ctx):
 
 # *** [RULES] CREATE
 
-@rules_group.command('create', aliases=['new'], help=help_strings.RULES_CREATE_HELP)
+
+@rules_group.command("create", aliases=["new"], help=help_strings.RULES_CREATE_HELP)
 @show_help_finally
 @flush_pager
-@click.option('-f', '--force', is_flag=True, help=help_strings.RULES_CREATE_FORCE_HELP)
+@click.option("-f", "--force", is_flag=True, help=help_strings.RULES_CREATE_FORCE_HELP)
 @pass_controller_context
 @ensure_plugged_in
 def rules_create(ctx, controller, force):
@@ -525,14 +553,20 @@ def rules_create(ctx, controller, force):
 
 # *** [RULES] CONF
 
-@rules_group.command('conf', help=help_strings.RULES_CONF_HELP)
+
+@rules_group.command("conf", help=help_strings.RULES_CONF_HELP)
 @show_help_finally
 @flush_pager
 @cmd_options_rule_name
 # (lb): Cannot specify click.option name, and if just -a and --all, click uses
 # all as the function parameter, which shadows the built-in. So add --complete.
-@click.option('-a', '--complete', '--all', is_flag=True,
-              help=_('Include all possible settings, even those not set by the style.'))
+@click.option(
+    "-a",
+    "--complete",
+    "--all",
+    is_flag=True,
+    help=_("Include all possible settings, even those not set by the style."),
+)
 @pass_controller_context
 @ensure_plugged_in
 def rules_conf(ctx, controller, name, complete):
@@ -542,7 +576,8 @@ def rules_conf(ctx, controller, name, complete):
 
 # *** [RULES] EDIT
 
-@rules_group.command('edit', help=help_strings.RULES_EDIT_HELP)
+
+@rules_group.command("edit", help=help_strings.RULES_EDIT_HELP)
 @show_help_finally
 @flush_pager
 @pass_controller_context
@@ -554,7 +589,8 @@ def rules_edit(ctx, controller):
 
 # *** [RULES] LIST
 
-@rules_group.command('list', help=help_strings.RULES_LIST_HELP)
+
+@rules_group.command("list", help=help_strings.RULES_LIST_HELP)
 @show_help_finally
 @flush_pager
 @pass_controller_context
@@ -566,7 +602,8 @@ def rules_list(ctx, controller):
 
 # *** [RULES] SHOW
 
-@rules_group.command('show', aliases=['dump'], help=help_strings.RULES_SHOW_HELP)
+
+@rules_group.command("show", aliases=["dump"], help=help_strings.RULES_SHOW_HELP)
 @show_help_finally
 @flush_pager
 @cmd_options_rule_name
@@ -583,11 +620,11 @@ def rules_show(ctx, controller, name, **kwargs):
 # *** [IGNORE] Commands.
 # ***
 
+
 @cmd_bunch_group_personalize
-@run.group('ignore',
-           help=help_strings.IGNORE_GROUP_HELP,
-           help_weight=30,
-           **run_group_kwargs)
+@run.group(
+    "ignore", help=help_strings.IGNORE_GROUP_HELP, help_weight=30, **run_group_kwargs
+)
 @show_help_finally
 @show_help_if_no_command
 @flush_pager
@@ -599,10 +636,11 @@ def ignore_group(ctx):
 
 # *** [IGNORE] CREATE
 
-@ignore_group.command('create', aliases=['new'], help=help_strings.IGNORE_CREATE_HELP)
+
+@ignore_group.command("create", aliases=["new"], help=help_strings.IGNORE_CREATE_HELP)
 @show_help_finally
 @flush_pager
-@click.option('-f', '--force', is_flag=True, help=help_strings.IGNORE_CREATE_FORCE_HELP)
+@click.option("-f", "--force", is_flag=True, help=help_strings.IGNORE_CREATE_FORCE_HELP)
 @pass_controller_context
 @ensure_plugged_in
 def ignore_create(ctx, controller, force):
@@ -612,7 +650,8 @@ def ignore_create(ctx, controller, force):
 
 # *** [IGNORE] EDIT
 
-@ignore_group.command('edit', help=help_strings.IGNORE_EDIT_HELP)
+
+@ignore_group.command("edit", help=help_strings.IGNORE_EDIT_HELP)
 @show_help_finally
 @flush_pager
 @pass_controller_context
@@ -624,7 +663,8 @@ def ignore_edit(ctx, controller):
 
 # *** [IGNORE] LIST
 
-@ignore_group.command('list', help=help_strings.IGNORE_LIST_HELP)
+
+@ignore_group.command("list", help=help_strings.IGNORE_LIST_HELP)
 @show_help_finally
 @flush_pager
 @pass_controller_context
@@ -636,7 +676,8 @@ def ignore_list(ctx, controller):
 
 # *** [IGNORE] SHOW
 
-@ignore_group.command('show', aliases=['dump'], help=help_strings.IGNORE_SHOW_HELP)
+
+@ignore_group.command("show", aliases=["dump"], help=help_strings.IGNORE_SHOW_HELP)
 @show_help_finally
 @flush_pager
 @cmd_options_rule_name
@@ -655,8 +696,9 @@ def ignore_show(ctx, controller, name, **kwargs):
 
 # See also: 'migrate' commands. The store commands are mostly for initial setup.
 
+
 @cmd_bunch_group_dbms
-@run.group('store', help=help_strings.STORE_GROUP_HELP, **run_group_kwargs)
+@run.group("store", help=help_strings.STORE_GROUP_HELP, **run_group_kwargs)
 @show_help_finally
 @show_help_if_no_command
 @flush_pager
@@ -666,18 +708,17 @@ def store_group(ctx):
     pass
 
 
-@store_group.command('create', aliases=['new'], help=help_strings.STORE_CREATE_HELP)
+@store_group.command("create", aliases=["new"], help=help_strings.STORE_CREATE_HELP)
 @show_help_finally
 @flush_pager
-@click.option('-f', '--force', is_flag=True,
-              help=help_strings.STORE_CREATE_FORCE_HELP)
+@click.option("-f", "--force", is_flag=True, help=help_strings.STORE_CREATE_FORCE_HELP)
 @pass_controller
 def store_create(controller, force):
     """"""
     controller.create_data_store(force, fact_cls=FactDressed)
 
 
-@store_group.command('path', help=help_strings.STORE_PATH_HELP)
+@store_group.command("path", help=help_strings.STORE_PATH_HELP)
 @show_help_finally
 @flush_pager
 @pass_controller
@@ -686,7 +727,7 @@ def store_path(controller):
     click_echo(controller.sqlite_db_path)
 
 
-@store_group.command('url', help=help_strings.STORE_URL_HELP)
+@store_group.command("url", help=help_strings.STORE_URL_HELP)
 @show_help_finally
 @flush_pager
 @pass_controller
@@ -695,12 +736,11 @@ def store_url(controller):
     click_echo(controller.data_store_url)
 
 
-@store_group.command('upgrade-legacy', help=help_strings.STORE_UPGRADE_LEGACY_HELP)
+@store_group.command("upgrade-legacy", help=help_strings.STORE_UPGRADE_LEGACY_HELP)
 @show_help_finally
 @flush_pager
-@click.argument('filename', nargs=1, type=click.File('r'), required=False)
-@click.option('-f', '--force', is_flag=True,
-              help=help_strings.STORE_UPGRADE_FORCE_HELP)
+@click.argument("filename", nargs=1, type=click.File("r"), required=False)
+@click.option("-f", "--force", is_flag=True, help=help_strings.STORE_UPGRADE_FORCE_HELP)
 @pass_controller_context
 @post_processor
 def upgrade_legacy(ctx, controller, force, filename=None):
@@ -713,8 +753,9 @@ def upgrade_legacy(ctx, controller, force, filename=None):
 # *** [STATS] Command.
 # ***
 
+
 @cmd_bunch_group_dbms
-@run.command('stats', help=help_strings.STATS_HELP, help_weight=20)
+@run.command("stats", help=help_strings.STATS_HELP, help_weight=20)
 @show_help_finally
 @flush_pager
 @pass_controller_context
@@ -728,11 +769,15 @@ def nark_stats(ctx, controller):
 # *** [LIST] Commands.
 # ***
 
+
 @cmd_bunch_group_generate_report
 # Use a command alias to avoid conflict with builtin of same name
 # (i.e., we cannot declare this function, `def list()`).
 @run.group(
-    'list', help=help_strings.LIST_GROUP_HELP, help_weight=20, **run_group_kwargs,
+    "list",
+    help=help_strings.LIST_GROUP_HELP,
+    help_weight=20,
+    **run_group_kwargs,
 )
 @show_help_finally
 @show_help_if_no_command
@@ -746,11 +791,13 @@ def list_group(ctx, controller):
 
 # *** ACTIVITIES.
 
-@list_group.command('activities', aliases=['activity', 'act'],
-                    help=help_strings.LIST_ACTIVITIES_HELP)
+
+@list_group.command(
+    "activities", aliases=["activity", "act"], help=help_strings.LIST_ACTIVITIES_HELP
+)
 @show_help_finally
 @flush_pager
-@cmd_options_any_search_query(command='list', item='activity', match=True, group=False)
+@cmd_options_any_search_query(command="list", item="activity", match=True, group=False)
 @pass_controller_context
 @induct_newbies
 def list_activities(ctx, controller, *args, **kwargs):
@@ -760,7 +807,7 @@ def list_activities(ctx, controller, *args, **kwargs):
 
 def query_activities(ctx, controller, *args, **kwargs):
     postprocess_options_normalize_search_args(kwargs)
-    if kwargs['show_usage'] or kwargs['show_duration']:
+    if kwargs["show_usage"] or kwargs["show_duration"]:
         handler = usage_activity.usage_activities
     else:
         handler = list_activity.list_activities
@@ -769,11 +816,13 @@ def query_activities(ctx, controller, *args, **kwargs):
 
 # *** CATEGORIES.
 
-@list_group.command('categories', aliases=['category', 'cat'],
-                    help=help_strings.LIST_CATEGORIES_HELP)
+
+@list_group.command(
+    "categories", aliases=["category", "cat"], help=help_strings.LIST_CATEGORIES_HELP
+)
 @show_help_finally
 @flush_pager
-@cmd_options_any_search_query(command='list', item='category', match=True, group=False)
+@cmd_options_any_search_query(command="list", item="category", match=True, group=False)
 @pass_controller_context
 @induct_newbies
 def list_categories(ctx, controller, *args, **kwargs):
@@ -783,7 +832,7 @@ def list_categories(ctx, controller, *args, **kwargs):
 
 def query_categories(ctx, controller, *args, **kwargs):
     postprocess_options_normalize_search_args(kwargs)
-    if kwargs['show_usage'] or kwargs['show_duration']:
+    if kwargs["show_usage"] or kwargs["show_duration"]:
         handler = usage_category.usage_categories
     else:
         handler = list_category.list_categories
@@ -792,13 +841,14 @@ def query_categories(ctx, controller, *args, **kwargs):
 
 # *** TAGS.
 
-@list_group.command('tags', aliases=['tag'], help=help_strings.LIST_TAGS_HELP)
+
+@list_group.command("tags", aliases=["tag"], help=help_strings.LIST_TAGS_HELP)
 @show_help_finally
 @flush_pager
 # TESTME/2020-05-16: group_target seems peculiar: it's not enabled on
 # list-act or list-cat; but it could be interesting (to see what tags
 # you use on which act@gories).
-@cmd_options_any_search_query(command='list', item='tags', match=True, group=False)
+@cmd_options_any_search_query(command="list", item="tags", match=True, group=False)
 @pass_controller_context
 @induct_newbies
 def list_tags(ctx, controller, *args, **kwargs):
@@ -808,7 +858,7 @@ def list_tags(ctx, controller, *args, **kwargs):
 
 def query_tags(ctx, controller, *args, **kwargs):
     postprocess_options_normalize_search_args(kwargs)
-    if kwargs['show_usage'] or kwargs['show_duration']:
+    if kwargs["show_usage"] or kwargs["show_duration"]:
         handler = usage_tag.usage_tags
     else:
         handler = list_tag.list_tags
@@ -817,17 +867,18 @@ def query_tags(ctx, controller, *args, **kwargs):
 
 # *** FACTS.
 
+
 def _list_facts(controller, *args, cmd_journal=False, **kwargs):
     """Find matching facts, filtered and sorted."""
     postprocess_options_normalize_search_args(kwargs, cmd_journal=cmd_journal)
     list_fact.list_facts(controller, *args, **kwargs)
 
 
-@list_group.command('facts', aliases=['fact'], help=help_strings.LIST_FACTS_HELP)
+@list_group.command("facts", aliases=["fact"], help=help_strings.LIST_FACTS_HELP)
 @show_help_finally
 @flush_pager
 # The `dob find` and `dob list fact` commands are the same.
-@cmd_options_any_search_query(command='list', item='fact', match=True, group=True)
+@cmd_options_any_search_query(command="list", item="fact", match=True, group=True)
 @pass_controller_context
 @induct_newbies
 def dob_list_facts(ctx, controller, *args, **kwargs):
@@ -838,12 +889,13 @@ def dob_list_facts(ctx, controller, *args, **kwargs):
 # *** [SEARCH] Facts Command.
 # ***
 
+
 @cmd_bunch_group_generate_report
-@run.command('find', aliases=['search'], help=help_strings.SEARCH_HELP, help_weight=5)
+@run.command("find", aliases=["search"], help=help_strings.SEARCH_HELP, help_weight=5)
 @show_help_finally
 @flush_pager
 # The `dob find` and `dob list fact` commands are the same.
-@cmd_options_any_search_query(command='list', item='fact', match=True, group=True)
+@cmd_options_any_search_query(command="list", item="fact", match=True, group=True)
 @pass_controller_context
 @induct_newbies
 def search_facts(ctx, controller, *args, **kwargs):
@@ -854,12 +906,13 @@ def search_facts(ctx, controller, *args, **kwargs):
 # *** [REPORT] Facts Command.
 # ***
 
+
 @cmd_bunch_group_generate_report
-@run.command('report', help=help_strings.REPORT_HELP, help_weight=10)
+@run.command("report", help=help_strings.REPORT_HELP, help_weight=10)
 @show_help_finally
 @flush_pager
 # The `dob report` command is `dob find` with specific defaults.
-@cmd_options_any_search_query(command='journal', item='fact', match=True, group=True)
+@cmd_options_any_search_query(command="journal", item="fact", match=True, group=True)
 @pass_controller_context
 @induct_newbies
 def journal_report(ctx, controller, *args, **kwargs):
@@ -873,9 +926,13 @@ def journal_report(ctx, controller, *args, **kwargs):
 # *** [USAGE] Commands.
 # ***
 
+
 @cmd_bunch_group_generate_report
 @run.group(
-    'usage', help=help_strings.USAGE_GROUP_HELP, help_weight=15, **run_group_kwargs,
+    "usage",
+    help=help_strings.USAGE_GROUP_HELP,
+    help_weight=15,
+    **run_group_kwargs,
 )
 @show_help_finally
 @show_help_if_no_command
@@ -888,11 +945,13 @@ def usage_group(ctx, controller):
 
 # *** ACTIVITIES.
 
-@usage_group.command('activities', aliases=['activity', 'act'],
-                     help=help_strings.USAGE_ACTIVITIES_HELP)
+
+@usage_group.command(
+    "activities", aliases=["activity", "act"], help=help_strings.USAGE_ACTIVITIES_HELP
+)
 @show_help_finally
 @flush_pager
-@cmd_options_any_search_query(command='usage', item='activity', match=True, group=False)
+@cmd_options_any_search_query(command="usage", item="activity", match=True, group=False)
 @pass_controller_context
 @induct_newbies
 def usage_activities(ctx, controller, *args, **kwargs):
@@ -902,11 +961,13 @@ def usage_activities(ctx, controller, *args, **kwargs):
 
 # *** CATEGORIES.
 
-@usage_group.command('categories', aliases=['category', 'cat'],
-                     help=help_strings.USAGE_CATEGORIES_HELP)
+
+@usage_group.command(
+    "categories", aliases=["category", "cat"], help=help_strings.USAGE_CATEGORIES_HELP
+)
 @show_help_finally
 @flush_pager
-@cmd_options_any_search_query(command='usage', item='category', match=True, group=False)
+@cmd_options_any_search_query(command="usage", item="category", match=True, group=False)
 @pass_controller_context
 @induct_newbies
 def usage_categories(ctx, controller, *args, **kwargs):
@@ -916,10 +977,11 @@ def usage_categories(ctx, controller, *args, **kwargs):
 
 # *** TAGS.
 
-@usage_group.command('tags', aliases=['tag'], help=help_strings.USAGE_TAGS_HELP)
+
+@usage_group.command("tags", aliases=["tag"], help=help_strings.USAGE_TAGS_HELP)
 @show_help_finally
 @flush_pager
-@cmd_options_any_search_query(command='usage', item='tags', match=True, group=False)
+@cmd_options_any_search_query(command="usage", item="tags", match=True, group=False)
 @pass_controller_context
 @induct_newbies
 def usage_tags(ctx, controller, *args, **kwargs):
@@ -929,10 +991,11 @@ def usage_tags(ctx, controller, *args, **kwargs):
 
 # *** FACTS.
 
-@usage_group.command('facts', aliases=['fact'], help=help_strings.USAGE_FACTS_HELP)
+
+@usage_group.command("facts", aliases=["fact"], help=help_strings.USAGE_FACTS_HELP)
 @show_help_finally
 @flush_pager
-@cmd_options_any_search_query(command='usage', item='fact', match=True, group=True)
+@cmd_options_any_search_query(command="usage", item="fact", match=True, group=True)
 @pass_controller_context
 @induct_newbies
 def usage_facts(ctx, controller, *args, **kwargs):
@@ -949,13 +1012,17 @@ def usage_facts(ctx, controller, *args, **kwargs):
 # *** [CURRENT-FACT] Commands: stop/cancel/current/latest/show.
 # ***
 
+
 @cmd_bunch_group_ongoing_fact
-@run.command('cancel', help=help_strings.CANCEL_HELP)
+@run.command("cancel", help=help_strings.CANCEL_HELP)
 @show_help_finally
 @flush_pager
 @click.option(
-    '-f', '--force', '--purge', is_flag=True,
-    help=_('Completely delete Fact, rather than just marking deleted.'),
+    "-f",
+    "--force",
+    "--purge",
+    is_flag=True,
+    help=_("Completely delete Fact, rather than just marking deleted."),
 )
 @pass_controller_context
 @induct_newbies
@@ -966,7 +1033,7 @@ def cancel(ctx, controller, force):
 
 
 @cmd_bunch_group_ongoing_fact
-@run.command('current', help=help_strings.CURRENT_HELP)
+@run.command("current", help=help_strings.CURRENT_HELP)
 @show_help_finally
 @flush_pager
 @pass_controller_context
@@ -977,7 +1044,7 @@ def current(ctx, controller):
 
 
 @cmd_bunch_group_ongoing_fact
-@run.command('latest', aliases=['last'], help=help_strings.LATEST_HELP)
+@run.command("latest", aliases=["last"], help=help_strings.LATEST_HELP)
 @show_help_finally
 @flush_pager
 @pass_controller_context
@@ -988,7 +1055,7 @@ def latest(ctx, controller):
 
 
 @cmd_bunch_group_ongoing_fact
-@run.command('show', help=help_strings.HELP_CMD_SHOW)
+@run.command("show", help=help_strings.HELP_CMD_SHOW)
 @show_help_finally
 @flush_pager
 @pass_controller_context
@@ -1002,6 +1069,7 @@ def show(ctx, controller):
 # *** [CREATE-FACT] Commands.
 # ***
 
+
 def generate_add_fact_command(time_hint):
     def _generate_add_fact_command(func):
         @cmd_options_fact_add
@@ -1013,7 +1081,9 @@ def generate_add_fact_command(time_hint):
             return add_fact(
                 controller, *args, time_hint=time_hint, use_carousel=editor, **kwargs
             )
+
         return update_wrapper(_add_fact, func)
+
     return _generate_add_fact_command
 
 
@@ -1030,8 +1100,9 @@ def add_fact_now(controller, *args, **kwargs):
 
 
 @cmd_bunch_group_add_fact
-@run.command("on", aliases=["on:"], help=help_strings.ADD_FACT_ON,
-             hidden=True)  # FIXME/2019-11-21: Remove aliases, but keep unique help.
+@run.command(
+    "on", aliases=["on:"], help=help_strings.ADD_FACT_ON, hidden=True
+)  # FIXME/2019-11-21: Remove aliases, but keep unique help.
 @show_help_finally
 @flush_pager
 @cmd_options_factoid_verify_none
@@ -1079,8 +1150,9 @@ def add_fact_to(controller, *args, **kwargs):
 
 
 @cmd_bunch_group_add_fact
-@run.command("until", aliases=["until:"], help=help_strings.ADD_FACT_UNTIL,
-             hidden=True)  # FIXME/2019-11-21: Remove aliases... but I like "until"!
+@run.command(
+    "until", aliases=["until:"], help=help_strings.ADD_FACT_UNTIL, hidden=True
+)  # FIXME/2019-11-21: Remove aliases... but I like "until"!
 @show_help_finally
 @flush_pager
 @cmd_options_factoid_verify_end
@@ -1131,8 +1203,9 @@ def add_fact_after(controller, *args, **kwargs):
 
 
 @cmd_bunch_group_add_fact
-@run.command("next", aliases=["next:"], help=help_strings.ADD_FACT_NEXT,
-             hidden=True)  # FIXME/2019-11-21: Remove aliases, but keep unique help.
+@run.command(
+    "next", aliases=["next:"], help=help_strings.ADD_FACT_NEXT, hidden=True
+)  # FIXME/2019-11-21: Remove aliases, but keep unique help.
 @show_help_finally
 @flush_pager
 # FIXME/2019-11-22: (lb): This right? (Because command is verify_after):
@@ -1152,11 +1225,11 @@ def add_fact_next(controller, *args, **kwargs):
 
 # NOPE: @cmd_bunch_group_add_fact
 @cmd_bunch_group_ongoing_fact
-@run.command('start', help=help_strings.ADD_FACT_START, help_weight=5)
+@run.command("start", help=help_strings.ADD_FACT_START, help_weight=5)
 @show_help_finally
 @flush_pager
 @cmd_options_factoid_verify_none
-@generate_add_fact_command('verify_none')
+@generate_add_fact_command("verify_none")
 def add_fact_start(controller, *args, **kwargs):
     """Start or add a fact using the `now` directive."""
     # Not reachable, because generate_add_fact_command.
@@ -1165,7 +1238,7 @@ def add_fact_start(controller, *args, **kwargs):
 
 # NOPE: @cmd_bunch_group_add_fact
 @cmd_bunch_group_ongoing_fact
-@run.command('stop', help=help_strings.STOP_HELP, help_weight=5)
+@run.command("stop", help=help_strings.STOP_HELP, help_weight=5)
 @show_help_finally
 @flush_pager
 @cmd_options_factoid_verify_end
@@ -1173,7 +1246,7 @@ def add_fact_start(controller, *args, **kwargs):
 # to now. At least if you're being pedantic. I just want to have a group
 # of latest-fact commands that's hopefully simpler to grok than the more
 # expansive group of add-fact commands.
-@generate_add_fact_command('verify_end')
+@generate_add_fact_command("verify_end")
 def stop(controller, *args, **kwargs):
     """Complete the active fact (by setting its 'end')."""
     # Not reachable, because generate_add_fact_command.
@@ -1187,8 +1260,8 @@ def stop(controller, *args, **kwargs):
 
 add_group_kwargs = {
     # Use a special business class that munges the usage to show all add commands.
-    'cls': ClickAddFactHelpGroup,
-    'invoke_without_command': True,
+    "cls": ClickAddFactHelpGroup,
+    "invoke_without_command": True,
 }
 
 
@@ -1202,7 +1275,7 @@ add_group_kwargs = {
     ClickAddFactHelpGroup.ADD_FACT_GROUP_NAME,  # 'add'
     help=help_string_add_fact.ADD_FACT_COMMON,
     hidden=True,
-    **add_group_kwargs
+    **add_group_kwargs,
 )
 @show_help_finally
 @show_help_if_no_command
@@ -1225,7 +1298,7 @@ def add_group(ctx, controller, *args, **kwargs):
 @run.group(
     ClickAddFactHelpGroup.ADD_FACT_GROUP_HELP,  # 'add --help'
     help=help_string_add_fact.ADD_FACT_COMMON,
-    **add_group_kwargs
+    **add_group_kwargs,
 )
 @show_help_finally
 @show_help_if_no_command
@@ -1245,8 +1318,9 @@ def add_help(*args, **kwargs):
 # *** [EDIT] Command(s).
 # ***
 
+
 @cmd_bunch_group_edit
-@run.command('edit', help=help_strings.EDIT_FACT_HELP)
+@run.command("edit", help=help_strings.EDIT_FACT_HELP)
 @show_help_finally
 @flush_pager
 @cmd_options_edit_item
@@ -1282,7 +1356,7 @@ def edit_fact_by_key(
             keys.append(key)
         # See also if user specified '-1', '-2', etc.
         for kwg_key in kwargs.keys():
-            match = re.match(r'^(latest_(\d+))$', kwg_key)
+            match = re.match(r"^(latest_(\d+))$", kwg_key)
             if match is not None:
                 # Check whether enabled (True) or not.
                 if kwargs[match.groups()[0]]:
@@ -1293,9 +1367,9 @@ def edit_fact_by_key(
         if not keys:
             keys = [-1]
         elif len(keys) > 1:
-            exit_warning(_(
-                "Argument error: Please specify “-1”, or Fact ID, not both!"
-            ))
+            exit_warning(
+                _("Argument error: Please specify “-1”, or Fact ID, not both!")
+            )
         return keys
 
     def process_edit_command(keys):
@@ -1315,17 +1389,18 @@ def edit_fact_by_key(
 # *** [EXPORT] Command.
 # ***
 
+
 @cmd_bunch_group_dbms
-@run.command('export', help=help_strings.EXPORT_HELP)
+@run.command("export", help=help_strings.EXPORT_HELP)
 @show_help_finally
 @flush_pager
-@cmd_options_any_search_query(command='export', item='fact', match=True, group=False)
+@cmd_options_any_search_query(command="export", item="fact", match=True, group=False)
 @pass_controller_context
 @induct_newbies
 def transcode_export(ctx, controller, *args, **kwargs):
     """Export all facts of within a given time window to a file of specified format."""
     postprocess_options_normalize_search_args(kwargs)
-    kwargs['output_format'] = 'factoid'
+    kwargs["output_format"] = "factoid"
     list_fact.list_facts(controller, *args, **kwargs)
 
 
@@ -1333,35 +1408,49 @@ def transcode_export(ctx, controller, *args, **kwargs):
 # *** [IMPORT] Command.
 # ***
 
+
 @cmd_bunch_group_dbms
-@run.command('import', help=help_strings.IMPORT_HELP)
+@run.command("import", help=help_strings.IMPORT_HELP)
 @show_help_finally
 @flush_pager
-@click.argument('filename', nargs=1, type=click.File('r'), required=False)
-@click.option('-o', '--output', type=click.File('w', lazy=True),
-              help=_('If specified, write to output file rather than saving'))
-@click.option('-f', '--force', is_flag=True,
-              help=_('Overwrite --output file if is exists'))
-@click.option('-r', '--rule', '--sep', nargs=1, default='',
-              help=_('With --output, split facts with a horizontal rule'))
-@click.option('--backup/--no-backup', '-B', default=True, show_default=True,
-              help=_('Keep plaintext backup of edited facts until committed'))
-@click.option('-b', '--leave-backup', is_flag=True,
-              help=_('Leave working backup file after commit'))
+@click.argument("filename", nargs=1, type=click.File("r"), required=False)
+@click.option(
+    "-o",
+    "--output",
+    type=click.File("w", lazy=True),
+    help=_("If specified, write to output file rather than saving"),
+)
+@click.option(
+    "-f", "--force", is_flag=True, help=_("Overwrite --output file if is exists")
+)
+@click.option(
+    "-r",
+    "--rule",
+    "--sep",
+    nargs=1,
+    default="",
+    help=_("With --output, split facts with a horizontal rule"),
+)
+@click.option(
+    "--backup/--no-backup",
+    "-B",
+    default=True,
+    show_default=True,
+    help=_("Keep plaintext backup of edited facts until committed"),
+)
+@click.option(
+    "-b",
+    "--leave-backup",
+    is_flag=True,
+    help=_("Leave working backup file after commit"),
+)
 @cmd_options_fact_dryable
 @cmd_options_fact_import
 @pass_controller_context
 @induct_newbies
 @post_processor
 def transcode_import(
-    ctx,
-    controller,
-    output,
-    force,
-    no_editor,
-    filename=None,
-    *args,
-    **kwargs
+    ctx, controller, output, force, no_editor, filename=None, *args, **kwargs
 ):
     """Import from file or STDIN (pipe).
 
@@ -1392,13 +1481,13 @@ def transcode_import(
         #   echo "2020-01-28 15:38: hello" | dob import facts.txt
         # Or:
         #   dob import - < facts.txt
-        msg = 'Hey, why are you redirecting STDIN *and* specifying a file?'
+        msg = "Hey, why are you redirecting STDIN *and* specifying a file?"
         click_echo(msg)
         sys.exit(1)
 
     # If output file specified, verify file absent, or --force.
     if output and not force and os.path.exists(output.name):
-        msg = _('Outfile already exists at: {}'.format(output.name))
+        msg = _("Outfile already exists at: {}".format(output.name))
         click_echo(msg)
         sys.exit(1)
 
@@ -1416,7 +1505,7 @@ def transcode_import(
         file_in=filename,
         file_out=output,
         use_carousel=(not no_editor),
-        **kwargs
+        **kwargs,
     )
     return pre_post_processed_saved_facts
 
@@ -1425,12 +1514,13 @@ def transcode_import(
 # *** [COMPLETE] Command [Bash tab completion].
 # ***
 
+
 # FIXME: YAS! `hidden` is from a branch at:
 #          sstaszkiewicz-copperleaf:6.x-maintenance
 #        Watch the PR, lest you want to remove this before publishing:
 #          https://github.com/pallets/click/pull/985
 #          https://github.com/pallets/click/pull/500
-@run.command('complete', hidden=True, help=help_strings.COMPLETE_HELP)
+@run.command("complete", hidden=True, help=help_strings.COMPLETE_HELP)
 @show_help_finally
 @flush_pager
 @pass_controller_context
@@ -1445,9 +1535,10 @@ def complete(ctx, controller):
 # *** [MIGRATE] Commands [database transformations].
 # ***
 
+
 @cmd_bunch_group_dbms
 @run.group(
-    'migrate',
+    "migrate",
     help=help_strings.MIGRATE_GROUP_HELP,
     # (lb): Hidden until needed. Does db really need to evolve?
     # Then again, I don't want to be rigid like JSON or Md specs.
@@ -1464,7 +1555,7 @@ def migrate_group(ctx, controller):
     pass
 
 
-@migrate_group.command('control', help=help_strings.MIGRATE_CONTROL_HELP)
+@migrate_group.command("control", help=help_strings.MIGRATE_CONTROL_HELP)
 @show_help_finally
 @flush_pager
 @pass_controller_context
@@ -1474,7 +1565,7 @@ def _migrate_control(ctx, controller):
     migrate_control(controller)
 
 
-@migrate_group.command('down', help=help_strings.MIGRATE_DOWN_HELP)
+@migrate_group.command("down", help=help_strings.MIGRATE_DOWN_HELP)
 @show_help_finally
 @flush_pager
 @pass_controller_context
@@ -1484,7 +1575,7 @@ def _migrate_downgrade(ctx, controller):
     migrate_downgrade(controller)
 
 
-@migrate_group.command('up', help=help_strings.MIGRATE_UP_HELP)
+@migrate_group.command("up", help=help_strings.MIGRATE_UP_HELP)
 @show_help_finally
 @flush_pager
 @pass_controller_context
@@ -1494,7 +1585,7 @@ def _migrate_upgrade(ctx, controller):
     migrate_upgrade(controller)
 
 
-@migrate_group.command('version', help=help_strings.MIGRATE_VERSION_HELP)
+@migrate_group.command("version", help=help_strings.MIGRATE_VERSION_HELP)
 @show_help_finally
 @flush_pager
 @pass_controller_context
@@ -1511,5 +1602,4 @@ def _migrate_version(ctx, controller):
 # About ~ 0.150 is sqlalchemy, which is unavoidable?
 # About ~ 0.005 is loading config.
 # The other half of the time, ~ 0.145, is plugins.
-profile_elapsed('To dob: loaded')
-
+profile_elapsed("To dob: loaded")

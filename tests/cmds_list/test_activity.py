@@ -24,23 +24,29 @@ class TestActivities(object):
     """Unit tests for the ``activities`` command."""
 
     def test_tabulate_list_activities_no_category(
-        self, controller, activity, mocker, capsys,
+        self,
+        controller,
+        activity,
+        mocker,
+        capsys,
     ):
         """Make sure command works if activities do not have a category associated."""
         activity.category = None
         mocker.patch.object(
-            controller.activities, 'get_all', return_value=[activity],
+            controller.activities,
+            "get_all",
+            return_value=[activity],
         )
         mocker.patch.object(
             ascii_table.tabulate,
-            'tabulate',
-            return_value='{}, {}'.format(activity.name, None),
+            "tabulate",
+            return_value="{}, {}".format(activity.name, None),
         )
         cmds_list.activity.list_activities(
             controller,
-            output_format='table',
+            output_format="table",
             # Specify any one of 'tabulate' types.
-            table_type='rst',
+            table_type="rst",
         )
         out, err = capsys.readouterr()
         assert out.startswith(activity.name)
@@ -50,18 +56,20 @@ class TestActivities(object):
         """Make sure command works if activities do not have a category associated."""
         activity.category = None
         mocker.patch.object(
-            controller.activities, 'get_all', return_value=[activity],
+            controller.activities,
+            "get_all",
+            return_value=[activity],
         )
-        mocker.patch.object(ascii_table.texttable.Texttable, 'add_rows')
+        mocker.patch.object(ascii_table.texttable.Texttable, "add_rows")
         mocker.patch.object(
             ascii_table.texttable.Texttable,
-            'draw',
-            return_value='{}, {}'.format(activity.name, None),
+            "draw",
+            return_value="{}, {}".format(activity.name, None),
         )
         cmds_list.activity.list_activities(
             controller,
-            output_format='table',
-            table_type='texttable',
+            output_format="table",
+            table_type="texttable",
         )
         out, err = capsys.readouterr()
         assert out.startswith(activity.name)
@@ -72,11 +80,17 @@ class TestActivities(object):
         assert draw_call_args[0] == ()
 
     def test_list_activities_no_filter(
-        self, controller, activity, mocker, capsys,
+        self,
+        controller,
+        activity,
+        mocker,
+        capsys,
     ):
         """Make sure activity name and category are displayed if present."""
         mocker.patch.object(
-            controller.activities, 'get_all', return_value=[activity],
+            controller.activities,
+            "get_all",
+            return_value=[activity],
         )
         cmds_list.activity.list_activities(controller)
         out, err = capsys.readouterr()
@@ -84,15 +98,21 @@ class TestActivities(object):
         assert activity.category.name in out
 
     def test_list_activities_using_category(
-        self, controller, activity, mocker, capsys,
+        self,
+        controller,
+        activity,
+        mocker,
+        capsys,
     ):
         """Make sure the search term is passed on."""
         mocker.patch.object(
-            controller.activities, 'query_process_results', return_value=[activity],
+            controller.activities,
+            "query_process_results",
+            return_value=[activity],
         )
         mocker.patch.object(
             controller.activities,
-            'query_filter_by_category_name',
+            "query_filter_by_category_name",
             return_value=activity.category.name,
         )
         cmds_list.activity.list_activities(
@@ -108,16 +128,22 @@ class TestActivities(object):
         assert activity.category.name in out
 
     def test_list_activities_with_search_term(
-        self, controller, activity, mocker, capsys,
+        self,
+        controller,
+        activity,
+        mocker,
+        capsys,
     ):
         """Make sure the search term is passed on."""
         mocker.patch.object(
-            controller.activities, 'gather', return_value=[activity],
+            controller.activities,
+            "gather",
+            return_value=[activity],
         )
         cmds_list.activity.list_activities(
             controller,
             # Defaults.
-            output_format='table',
+            output_format="table",
             show_usage=True,
             show_duration=True,
             # The one we're testing.
@@ -134,4 +160,3 @@ class TestActivities(object):
         assert query_terms.match_categories == []
         assert activity.name in out
         assert activity.category.name in out
-

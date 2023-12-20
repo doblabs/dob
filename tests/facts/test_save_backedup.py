@@ -36,11 +36,12 @@ from dob.facts.import_facts import import_facts
 # FIXME/2020-02-01: Could probably simply this test module and use 1 or 2
 # Facts from Fact factory -- then moved IMPORT_PATH et al to new module,
 # test_import_facts.
-IMPORT_PATH = './tests/fixtures/test-import-fixture.rst'
+IMPORT_PATH = "./tests/fixtures/test-import-fixture.rst"
 """Path to the import file fixture, which is full of Factoids."""
 
 
 # ***
+
 
 class TestPromptAndSaveBackedUpViaImportFacts(object):
     """Methods to test write_facts_file via the Carousel."""
@@ -53,11 +54,26 @@ class TestPromptAndSaveBackedUpViaImportFacts(object):
         proper_confirmer.prompt_and_save_confirmer = self.was_propers
         viewer_confirmer.prompt_and_save_confirmer = self.was_viewers
 
-    @pytest.mark.parametrize('tres_bools', [
-        (True, False, False, ),
-        (False, True, False, ),
-        (False, False, True, ),
-    ])
+    @pytest.mark.parametrize(
+        "tres_bools",
+        [
+            (
+                True,
+                False,
+                False,
+            ),
+            (
+                False,
+                True,
+                False,
+            ),
+            (
+                False,
+                False,
+                True,
+            ),
+        ],
+    )
     def test_prompt_and_save_backedup(
         self,
         controller_with_logging,
@@ -66,12 +82,16 @@ class TestPromptAndSaveBackedUpViaImportFacts(object):
     ):
         """Tests save_backedup functionality."""
 
-        (backup, use_carousel, dry, ) = tres_bools
+        (
+            backup,
+            use_carousel,
+            dry,
+        ) = tres_bools
 
-        mocker.patch.object(proper_confirmer, 'prompt_and_save_confirmer')
-        mocker.patch.object(viewer_confirmer, 'prompt_and_save_confirmer')
+        mocker.patch.object(proper_confirmer, "prompt_and_save_confirmer")
+        mocker.patch.object(viewer_confirmer, "prompt_and_save_confirmer")
 
-        input_stream = open(IMPORT_PATH, 'r')
+        input_stream = open(IMPORT_PATH, "r")
 
         # (lb): A somewhat roundabout route to test prompt_and_save_backedup.
         # - Also tests parse_input!
@@ -91,6 +111,7 @@ class TestPromptAndSaveBackedUpViaImportFacts(object):
 
 # ***
 
+
 def _feed_cli_with_input(
     controller_with_logging,
     key_sequence,
@@ -98,9 +119,9 @@ def _feed_cli_with_input(
     mocker,
 ):
     inp = create_pipe_input()
-    input_stream = open(IMPORT_PATH, 'r')
+    input_stream = open(IMPORT_PATH, "r")
     # Because the key_sequence force-quits, Carousel prompts "Ok?".
-    mocker.patch.object(re_confirm, 'confirm', return_value=True)
+    mocker.patch.object(re_confirm, "confirm", return_value=True)
     try:
         inp.send_text(key_sequence)
         import_facts(
@@ -123,19 +144,25 @@ class TestCarouselBackupCallbackWriteFactsFile(object):
     """Methods to test write_facts_file via the Carousel."""
 
     @pytest.mark.parametrize(
-        ('key_sequence'),
+        ("key_sequence"),
         [
             [
                 # Sneak in a test of FactDressed.has_prev_fact:
-                '\x1bOD',   # Left arrow ←.
-                '\x11',     # Ctrl-Q.
-                '\x11',     # Ctrl-Q.
-                '\x11',     # Ctrl-Q.
+                "\x1bOD",  # Left arrow ←.
+                "\x11",  # Ctrl-Q.
+                "\x11",  # Ctrl-Q.
+                "\x11",  # Ctrl-Q.
                 # We can skip b'' (or '\r') EOL because of the ^Q³.
             ],
         ],
     )
-    @pytest.mark.parametrize('dry', [True, False, ])
+    @pytest.mark.parametrize(
+        "dry",
+        [
+            True,
+            False,
+        ],
+    )
     def test_carousel_backup_callback_write_facts_file(
         self,
         controller_with_logging,
@@ -159,8 +186,7 @@ class TestCarouselBackupCallbackWriteFactsFile(object):
         #   here feels more like an integration test).
         _feed_cli_with_input(
             controller_with_logging,
-            ''.join(key_sequence),
+            "".join(key_sequence),
             dry,
             mocker,
         )
-

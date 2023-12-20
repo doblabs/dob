@@ -34,13 +34,13 @@ from dob_bright.help_newbs import NEWBIE_HELP_WELCOME
 from . import __arg0name__
 
 __all__ = (
-    'control',
-    'downgrade',
-    'upgrade',
-    'version',
-    'latest_version',
-    'upgrade_legacy_database_file',
-    'upgrade_legacy_database_instructions',
+    "control",
+    "downgrade",
+    "upgrade",
+    "version",
+    "latest_version",
+    "upgrade_legacy_database_file",
+    "upgrade_legacy_database_instructions",
     # Private:
     #  '_barf_legacy_database',
     #  '_instruct_upgrade',
@@ -56,9 +56,9 @@ def control(controller):
         # MAYBE/2018-05-18: (lb): Also check if legacy database!
         success = controller.store.migrations.control()
         if success is None:
-            err_msg = _('Something went wrong! Sorry!!')
+            err_msg = _("Something went wrong! Sorry!!")
     if not success and not err_msg:
-        err_msg = _('The database is already versioned!')
+        err_msg = _("The database is already versioned!")
     if err_msg:
         exit_warning(err_msg)
 
@@ -68,7 +68,7 @@ def downgrade(controller):
     response = controller.store.migrations.downgrade()
     assert response is not None
     if not response:
-        exit_warning(_('The database is already at the earliest version'))
+        exit_warning(_("The database is already at the earliest version"))
 
 
 def upgrade(controller):
@@ -76,7 +76,7 @@ def upgrade(controller):
     response = controller.store.migrations.upgrade()
     assert response is not None
     if not response:
-        exit_warning(_('The database is already at the latest version'))
+        exit_warning(_("The database is already at the latest version"))
 
 
 def version(controller, silent_check=False, must=True):
@@ -136,10 +136,12 @@ def upgrade_legacy_database_instructions(controller):
     """"""
     nark_path = os.path.dirname(os.path.dirname(nark___file__))
     up_legacy_rel = os.path.join(
-        'migrations', 'legacy', 'upgrade_hamster-applet_db.sh',
+        "migrations",
+        "legacy",
+        "upgrade_hamster-applet_db.sh",
     )
     up_legacy_path = os.path.join(nark_path, up_legacy_rel)
-    db_path = controller.config['db.path']
+    db_path = controller.config["db.path"]
     instructions = UPGRADE_INSTRUCTIONS.format(
         prog_name=__arg0name__,
         legacy_path="~/.local/share/hamster-applet/hamster.db",
@@ -147,30 +149,31 @@ def upgrade_legacy_database_instructions(controller):
         nark_path=nark_path,
         up_legacy_path=up_legacy_path,
         # FIXME: (lb): Replace hardcoded styles. Assign from styles.conf. #styling
-        mintgreen=(fg('spring_green_2a') + attr('bold')),
-        reset=attr('reset'),
+        mintgreen=(fg("spring_green_2a") + attr("bold")),
+        reset=attr("reset"),
     )
     return instructions
 
 
 def _barf_legacy_database(controller):
     """"""
-    prefix = '''
+    prefix = """
 If this is a legacy database, upgrade and register the database.
-'''.strip()
+""".strip()
     msg1 = prefix + upgrade_legacy_database_instructions(controller)
-    msg2 = _('The database is not versioned!')
-    msg2 = '{}{}{}'.format(fg('red_3b'), msg2, attr('reset'))
-    msg = '{}\n{}'.format(msg2, msg1)
+    msg2 = _("The database is not versioned!")
+    msg2 = "{}{}{}".format(fg("red_3b"), msg2, attr("reset"))
+    msg = "{}\n{}".format(msg2, msg1)
     click_echo(msg)
     sys.exit(1)
 
 
 # ***
 
+
 def upgrade_legacy_database_file(ctx, controller, file_in, force):
     """"""
-    db_path = controller.config['db.path']
+    db_path = controller.config["db.path"]
 
     def _upgrade_legacy_database_file():
         if file_in is None:
@@ -184,10 +187,7 @@ def upgrade_legacy_database_file(ctx, controller, file_in, force):
         copy_into_place()
         run_upgrade()
         run_migrations()
-        click_echo(
-            _('Seeded data store at {}')
-            .format(highlight_value(db_path))
-        )
+        click_echo(_("Seeded data store at {}").format(highlight_value(db_path)))
 
     def copy_into_place():
         if os.path.exists(db_path) and os.path.samefile(db_path, file_in.name):
@@ -202,7 +202,7 @@ def upgrade_legacy_database_file(ctx, controller, file_in, force):
             must_ensure_directory_exists(db_dir)
             shutil.copyfile(file_in.name, db_path)
         except Exception as err:
-            msg = _('Failed to copy new database to ‘{}’').format(str(err))
+            msg = _("Failed to copy new database to ‘{}’").format(str(err))
             echo_warning(msg)
 
     def echo_help():
@@ -215,7 +215,7 @@ def upgrade_legacy_database_file(ctx, controller, file_in, force):
         try:
             controller.store.migrations.legacy_upgrade_from_hamster_applet(db_path)
         except Exception as err:
-            exit_warning(_('Upgrade failed! ERROR: {}').format(str(err)))
+            exit_warning(_("Upgrade failed! ERROR: {}").format(str(err)))
 
     def run_migrations():
         db_version = controller.store.migrations.version()
@@ -232,9 +232,8 @@ def upgrade_legacy_database_file(ctx, controller, file_in, force):
 
 def _instruct_upgrade(ctx, controller):
     click_echo(
-        '\n{}\n{}'.format(
+        "\n{}\n{}".format(
             NEWBIE_HELP_WELCOME(ctx),
             upgrade_legacy_database_instructions(controller),
         )
     )
-

@@ -28,12 +28,11 @@ from dob_prompt.prompters.triple_prompter import ask_user_for_edits
 
 from .save_backedup import prompt_and_save_backedup
 
-__all__ = (
-    'add_fact',
-)
+__all__ = ("add_fact",)
 
 
 # ***
+
 
 def add_fact(
     controller,
@@ -101,7 +100,9 @@ def add_fact(
 
         # Make a new Fact from the command line input.
         new_fact = must_create_fact_from_factoid(
-            controller, factoid, time_hint,
+            controller,
+            factoid,
+            time_hint,
         )
         return new_fact
 
@@ -111,7 +112,9 @@ def add_fact(
         # times might be changed, and/or existing Facts might be deleted.
         try:
             new_fact_or_two, conflicts = mend_fact_timey_wimey(
-                controller, new_fact, time_hint,
+                controller,
+                new_fact,
+                time_hint,
             )
         except ValueError as err:
             # (lb): I'm very indecisive.
@@ -122,7 +125,7 @@ def add_fact(
                 _("Insidious!"),
                 _("Think again!"),
             ]
-            msg = _('{} {}').format(random.choice(choices), err)
+            msg = _("{} {}").format(random.choice(choices), err)
             controller.client_logger.error(msg)
             exit_warning(msg)
         return new_fact_or_two, conflicts
@@ -160,7 +163,7 @@ def add_fact(
             controller,
             fact=edit_fact,
             always_ask=False,
-            restrict_edit='description',
+            restrict_edit="description",
         )
 
     def _maybe_prompt_actegory(edit_fact):
@@ -185,4 +188,3 @@ def add_fact(
         return saved_facts
 
     return _add_fact()
-

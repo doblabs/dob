@@ -29,7 +29,7 @@ requirements = [
     #  https://github.com/jonathaneunice/ansiwrap
     # Forked to update to latest Pythons
     #  https://github.com/hotoffthehamster/ansiwrap
-    'ansiwrap-hotoffthehamster == 0.8.4',
+    'ansiwrap-hotoffthehamster == 0.8.6',
     # (lb): Click may be the best optparser of any language I've used.
     #  https://github.com/pallets/click
     #    'click',

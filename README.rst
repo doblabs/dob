@@ -222,9 +222,9 @@ Features
 
 - Use all the Unicode you want -- spice up your notes!
 
-- Personalize the interface colors -- you can even style your own activity and tag names!
+- Personalize the interface colors -- and style your own activity and tag names!
 
-- Natural syntax lets you go "offline" and dob to a text file, that you can import later.
+- Natural syntax lets you dob "offline" to a text file, that you can import later.
 
 - Migrates legacy Hamster databases -- and repairs integrity issues, too.
 

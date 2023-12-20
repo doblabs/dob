@@ -208,8 +208,8 @@ def choices_tags(controller, incomplete="", whitespace_ok=False):
         for tag, _uses, _span in tags_counts
         if not incomplete or tag.name.startswith(incomplete[1:])
     ]
-    # MEH: We cull, even though we set limit above, so total count might be even smaller.
-    #   (We could solve at the SQL query level, but who wants to go to the trouble?)
+    # MEH: We cull, even though we set limit above, so total count might be even
+    #   smaller. (We could solve at SQL query level, but who wants to bother?)
     if not whitespace_ok:
         choices = [tag for tag in choices if " " not in tag]
     return choices

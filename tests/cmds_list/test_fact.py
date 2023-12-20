@@ -20,7 +20,6 @@ import os
 import fauxfactory
 import nark
 import pytest
-from dob_bright.crud.fact_dressed import FactDressed
 from dob_bright.reports import render_results
 from dob_bright.reports.tabulate_results import report_table_columns
 from nark.tests.backends.sqlalchemy.conftest import *  # noqa: F401, F403
@@ -412,7 +411,7 @@ class TestCmdsListFactListFacts_OutputFormats(object):
         assert query_terms.since == since
 
     def test_with_until(self, controller, mocker):
-        """Make sure that passing a until date is passed to the fact gathering method."""
+        """Make sure passing an until date is passed to the fact gathering method."""
         mocker.patch.object(controller.facts, "gather")
         until = fauxfactory.gen_datetime()
         # Get rid of fractions of a second.

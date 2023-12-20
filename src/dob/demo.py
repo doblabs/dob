@@ -154,8 +154,8 @@ Do you want to learn the basics of dob? Then follow along!
 Let’s get started! You’re looking at the last, final Fact.
 
 * Press the "g" key twice ("gg") to go to the first Fact.
-            """.strip()
-            ),  # noqa: E501
+            """.strip()  # noqa: E501
+            ),
         )
         return demo_fact
 
@@ -180,8 +180,8 @@ The "G" command (uppercase), similarly, takes you to the last Fact.
 * Press "G" now to try it, then press "gg" to return here.
 
 * To continue, press the "k" key to advance to the next Fact.
-            """.strip()
-            ),  # noqa: E501
+            """.strip()  # noqa: E501
+            ),
         )
         return demo_fact
 
@@ -208,8 +208,8 @@ To go backward one Fact, press the "j" key.
 You can also use the left and right arrow keys to change Facts.
 
 * To continue, press the right arrow key "→" to advance one Fact.
-            """.strip()
-            ),  # noqa: E501
+            """.strip()  # noqa: E501
+            ),
         )
         return demo_fact
 
@@ -232,8 +232,8 @@ You can also navigate dob by jumping Facts one day at a time.
   Return to this entry with (uppercase) "J".
 
 * Then press (lowercase) "k" (or "→") to keep reading the demo.
-            """.strip()
-            ),  # noqa: E501
+            """.strip()  # noqa: E501
+            ),
         )
         return demo_fact
 
@@ -290,8 +290,8 @@ This is the end of the description!
 
   Hint: Look at the status bar below this text and you’ll see
   the "Fact ID #4" change to "Fact ID #6" after pressing "K".
-            """.strip()
-            ),  # noqa: E501
+            """.strip()  # noqa: E501
+            ),
         )
         return demo_fact
 
@@ -312,8 +312,8 @@ Bonus Feature: If you press and hold "K" (don't do it now), dob will start jumpi
 To continue the demo, jump back one day, to the last entry you read.
 
 * Press "J" to jump back one day to continue the demo.
-            """.strip()
-            ),  # noqa: E501
+            """.strip()  # noqa: E501
+            ),
         )
         return demo_fact
 
@@ -348,8 +348,8 @@ Gaps
 ----
 
 * Press "→" or "l" to learn about Gap Facts.
-            """.strip()
-            ),  # noqa: E501
+            """.strip()  # noqa: E501
+            ),
         )
         return demo_fact
 
@@ -398,8 +398,8 @@ To see a Gap Fact for real, the next Fact in the demo starts 17 minutes later, a
     - You’ll notice that the Gap Fact has a special background color, sorta pink.
 
       You will also see that the status message, below this text, says “Gap Fact”.
-            """.strip()
-            ),  # noqa: E501
+            """.strip()  # noqa: E501
+            ),
         )
         return demo_fact
 
@@ -422,8 +422,8 @@ As stated in the last step of the demo, the previous Fact has a sorta pinkish ba
 Speaking of editing, let’s talk about that finally!
 
 * Press "k" (or "→") to learn how to edit Fact times.
-            """.strip()
-            ),  # noqa: E501
+            """.strip()  # noqa: E501
+            ),
         )
         return demo_fact
 
@@ -515,8 +515,8 @@ Fact Editing
 To read about editing the Description, Activity & Category, and Tags, move forward 1 Fact.
 
 * Press "k" (or "→") to continue the demo.
-            """.strip()
-            ),  # noqa: E501
+            """.strip()  # noqa: E501
+            ),
         )
         return demo_fact
 
@@ -570,8 +570,8 @@ Save
 ----
 
 * Press "k" (or "→") to learn how to save edits.
-            """.strip()
-            ),  # noqa: E501
+            """.strip()  # noqa: E501
+            ),
         )
         return demo_fact
 
@@ -602,8 +602,8 @@ Undo/Redo
 ---------
 
 * Press "k" (or "→") to continue the demo and learn how to undo and redo.
-            """.strip()
-            ),  # noqa: E501
+            """.strip()  # noqa: E501
+            ),
         )
         return demo_fact
 
@@ -680,8 +680,8 @@ Split/Merge
 -----------
 
 * Press "k" (or "→") to continue the demo.
-            """.strip()
-            ),  # noqa: E501
+            """.strip()  # noqa: E501
+            ),
         )
         return demo_fact
 
@@ -718,8 +718,8 @@ Start using dob
 To get up and running, read the next Fact.
 
 * Press "k" ("→") to learn how to dob yourself.
-            """.strip()
-            ),  # noqa: E501
+            """.strip()  # noqa: E501
+            ),
         )
         return demo_fact
 
@@ -759,8 +759,8 @@ You're a pro!
 -------------
 
 * Press "k" ("→") to conclude the demo.
-            """.strip()
-            ),  # noqa: E501
+            """.strip()  # noqa: E501
+            ),
         )
         return demo_fact
 
@@ -785,8 +785,8 @@ You made it to the end of the demo!! -- But there's much more you can do with do
 This demo gives you the gist of dob. We hope you enjoyed it!!
 
 Happy dobbin!
-            """.strip()
-            ),  # noqa: E501
+            """.strip()  # noqa: E501
+            ),
         )
         return demo_fact
 

@@ -260,7 +260,8 @@ def list_facts(
 
         echo_warning(
             _(
-                "Showed only {} of {} results. Use `-C term.row_limit=0` to see all results."
+                "Showed only {} of {} results. "
+                "Use `-C term.row_limit=0` to see all results."
             ).format(format(n_results, ","), format(n_rows, ","))
         )
 

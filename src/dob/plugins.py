@@ -44,7 +44,7 @@ def install_plugin(package_module_path, package_plugin_name):
 
         https://github.com/tallybark/dob-plugin-example
 
-    and search PyPI for matching "dob-plugin-\*" projects.
+    and search PyPI for matching "dob-plugin-*" projects.
     """
 
     def _install_plugin():

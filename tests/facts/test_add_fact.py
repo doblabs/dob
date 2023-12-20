@@ -36,7 +36,7 @@ class TestAddFact(object):
         expectation,
     ):
         """
-        Test that input validation and assignment of start/end time(s) works as expected.
+        Test input validation and assignment of start/end time(s).
 
         To test just this function -- and the parametrize, above -- try:
 

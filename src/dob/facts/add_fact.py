@@ -93,7 +93,7 @@ def add_fact(
         #       list of strings that need to be parsed and reassembled (though
         #       not necessarily in that order).
         #
-        #         tl;dr: factoid is a tuple of 1+ strings that together specify the Fact.
+        #         tl;dr: factoid is tuple of 1+ strings that together specify the Fact
 
         # Make a new Fact from the command line input.
         new_fact = must_create_fact_from_factoid(

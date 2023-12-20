@@ -15,6 +15,7 @@
 # You can find the GNU General Public License reprinted in the file titled 'LICENSE',
 # or visit <http://www.gnu.org/licenses/>.
 
+import shutil
 import traceback
 from gettext import gettext as _
 
@@ -233,7 +234,7 @@ def echo_ongoing_completed(controller, fact, cancelled=False):
         controller.client_logger.debug(completed_msg)
 
     def width_avail(leader_len):
-        term_width = click.get_terminal_size()[0]
+        term_width = shutil.get_terminal_size()[0]
         width_avail = term_width - leader_len
         return width_avail
 

@@ -325,7 +325,7 @@ class TestCmdsListFactListFacts_FactoidPermutations(object):
         controller = five_report_facts_ctl
         isatty = mocker.patch("sys.stdout.isatty", return_value=True)
         get_ts = mocker.patch(
-            "click_hotoffthehamster.get_terminal_size",
+            "shutil.get_terminal_size",
             return_value=(80, 24),
         )
         list_facts(

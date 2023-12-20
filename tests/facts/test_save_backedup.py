@@ -17,6 +17,8 @@
 
 """Tests hard to reach methods using Carousel."""
 
+from contextlib import closing
+
 import pytest
 
 # (lb): This is the only place in dob project that uses prompt_toolkit
@@ -117,11 +119,11 @@ def _feed_cli_with_input(
     dry,
     mocker,
 ):
-    inp = create_pipe_input()
+    inp_gen = create_pipe_input()
     input_stream = open(IMPORT_PATH, "r")
     # Because the key_sequence force-quits, Carousel prompts "Ok?".
     mocker.patch.object(re_confirm, "confirm", return_value=True)
-    try:
+    with closing(next(inp_gen.gen)) as inp:
         inp.send_text(key_sequence)
         import_facts(
             controller_with_logging,
@@ -135,8 +137,6 @@ def _feed_cli_with_input(
             input=inp,
             output=DummyOutput(),
         )
-    finally:
-        inp.close()
 
 
 class TestCarouselBackupCallbackWriteFactsFile(object):

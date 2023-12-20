@@ -18,18 +18,14 @@
 import os
 import shutil
 import sys
-
 from gettext import gettext as _
 
+from dob_bright.help_newbs import NEWBIE_HELP_WELCOME
 from easy_as_pypi_appdirs.expand_and_mkdirs import must_ensure_directory_exists
-
 from easy_as_pypi_termio.echoes import click_echo, highlight_value
 from easy_as_pypi_termio.errors import echo_warning, exit_warning
 from easy_as_pypi_termio.style import attr, fg
-
 from nark import __file__ as nark___file__
-
-from dob_bright.help_newbs import NEWBIE_HELP_WELCOME
 
 from . import __arg0name__
 

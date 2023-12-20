@@ -19,9 +19,8 @@
 
 from gettext import gettext as _
 
-from pedantic_timedelta import PedanticTimedelta
-
 from dob_bright.reports.render_results import render_results
+from pedantic_timedelta import PedanticTimedelta
 
 __all__ = ("generate_usage_table",)
 

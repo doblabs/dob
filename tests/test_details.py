@@ -16,7 +16,6 @@
 # or visit <http://www.gnu.org/licenses/>.
 
 from dob import __package_name__, get_version
-
 from dob.details import echo_app_details
 
 

@@ -15,9 +15,8 @@
 # You can find the GNU General Public License reprinted in the file titled 'LICENSE',
 # or visit <http://www.gnu.org/licenses/>.
 
-from freezegun import freeze_time
 import pytest
-
+from freezegun import freeze_time
 from nark.tests.helpers.conftest import factoid_fixture
 
 from dob.facts.add_fact import add_fact

@@ -25,7 +25,6 @@ from easy_as_pypi_termio.style import attr
 from .echo_fact import echo_fact, write_fact_block_format
 from .simple_prompts import mend_facts_confirm_and_save_maybe
 
-
 __all__ = ("prompt_and_save_confirmer",)
 
 

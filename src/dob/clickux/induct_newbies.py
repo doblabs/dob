@@ -15,9 +15,8 @@
 # You can find the GNU General Public License reprinted in the file titled 'LICENSE',
 # or visit <http://www.gnu.org/licenses/>.
 
-from gettext import gettext as _
-
 from functools import update_wrapper
+from gettext import gettext as _
 
 from dob_bright.crud.fact_dressed import FactDressed
 from easy_as_pypi_termio import click_echo, echo_block_header, exit_warning

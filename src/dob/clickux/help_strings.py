@@ -20,12 +20,10 @@
 from gettext import gettext as _
 
 from easy_as_pypi_config.fileboss import default_config_path, default_config_path_abbrev
-
 from easy_as_pypi_termio import attr, bg, coloring, fg, highlight_value
 
-from ..copyright import assemble_copyright
-
 from .. import __arg0name__, __package_name__
+from ..copyright import assemble_copyright
 
 # Note that the help formatter reformats paragraphs when the help is
 # displayed, to a width determined by the terminal and max_content_width.

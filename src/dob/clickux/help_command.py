@@ -17,7 +17,7 @@
 
 from gettext import gettext as _
 
-from easy_as_pypi_termio import attr, fg, click_echo, echo_exit
+from easy_as_pypi_termio import attr, click_echo, echo_exit, fg
 
 from ..run_cli import run
 

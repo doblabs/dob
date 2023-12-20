@@ -18,13 +18,10 @@
 from gettext import gettext as _
 
 import click_hotoffthehamster as click
-
-from easy_as_pypi_termio.errors import echo_warning, exit_warning
-
 from dob_bright.crud.fact_dressed import FactDressed
 from dob_bright.crud.interrogate import ask_edit_with_editor
-
 from dob_prompt.prompters.triple_prompter import ask_user_for_edits
+from easy_as_pypi_termio.errors import echo_warning, exit_warning
 
 from .save_backedup import prompt_and_save_backedup
 from .simple_prompts import mend_facts_confirm_and_save_maybe

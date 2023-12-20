@@ -21,7 +21,6 @@ from gettext import gettext as _
 
 import click_hotoffthehamster as click
 from click_hotoffthehamster.core import Option
-
 from easy_as_pypi_termio.style import attr
 
 from ._ansitextwrap import AnsiTextWrapper

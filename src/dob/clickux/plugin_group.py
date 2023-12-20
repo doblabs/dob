@@ -17,16 +17,13 @@
 
 """Click Group wrapper adds plugin support."""
 
-from functools import update_wrapper
 import glob
 import os
-
+from functools import update_wrapper
 from gettext import gettext as _
 
 import click_hotoffthehamster as click
-
 from easy_as_pypi_appdirs import AppDirs
-
 from easy_as_pypi_termio import echo_warning
 
 from ..helpers.path import compile_and_eval_source

@@ -15,9 +15,8 @@
 # You can find the GNU General Public License reprinted in the file titled 'LICENSE',
 # or visit <http://www.gnu.org/licenses/>.
 
-from click_hotoffthehamster import ClickException
-
 import pytest
+from click_hotoffthehamster import ClickException
 
 from dob.facts.cancel_fact import cancel_fact
 

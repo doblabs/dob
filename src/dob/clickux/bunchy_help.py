@@ -19,8 +19,8 @@
 
 from gettext import gettext as _
 
-from .help_header import help_header_format
 from ..run_cli import run
+from .help_header import help_header_format
 
 __all__ = (
     "cmd_bunch_group_add_fact",

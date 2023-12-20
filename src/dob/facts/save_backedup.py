@@ -18,18 +18,15 @@
 import os
 import platform
 import traceback
-
 from gettext import gettext as _
 
 from easy_as_pypi_appdirs import AppDirs
 from easy_as_pypi_appdirs.expand_and_mkdirs import must_ensure_appdirs_path
-
 from easy_as_pypi_termio.echoes import click_echo, highlight_value
 from easy_as_pypi_termio.errors import echo_warning, exit_warning
 
 from .echo_fact import write_fact_block_format
 from .save_confirmed import prompt_and_save_confirmed
-
 
 __all__ = (
     # (lb): aka 'prompt_and_save_paranoid'

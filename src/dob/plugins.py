@@ -20,12 +20,10 @@
 import os
 import shutil
 import sys
-
 from gettext import gettext as _
 
 from easy_as_pypi_appdirs import AppDirs
 from easy_as_pypi_appdirs.expand_and_mkdirs import must_ensure_appdirs_path
-
 from easy_as_pypi_termio.errors import exit_warning
 
 from .clickux.plugin_group import PLUGINS_DIRNAME

@@ -18,20 +18,17 @@
 import os
 
 import fauxfactory
-import pytest
-
 import nark
-from nark.tests.conftest import *  # noqa: F401, F403
-from nark.tests.backends.sqlalchemy.conftest import *  # noqa: F401, F403
-
+import pytest
 from dob_bright.crud.fact_dressed import FactDressed
 from dob_bright.reports import render_results
 from dob_bright.reports.tabulate_results import report_table_columns
+from nark.tests.backends.sqlalchemy.conftest import *  # noqa: F401, F403
+from nark.tests.conftest import *  # noqa: F401, F403
 
 from dob.cmds_list.fact import list_facts
 
 from .. import truncate_to_whole_seconds
-
 
 # ***
 

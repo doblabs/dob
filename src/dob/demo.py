@@ -17,17 +17,15 @@
 
 """dob-demo command"""
 
-from gettext import gettext as _
-
 import os
 import tempfile
 from datetime import timedelta
 from functools import update_wrapper
-
-from nark.items.activity import Activity
-from nark.items.category import Category
+from gettext import gettext as _
 
 from dob_bright.crud.fact_dressed import FactDressed
+from nark.items.activity import Activity
+from nark.items.category import Category
 
 # We could use the wrapper method and tell it to Carousel:
 #  from .facts.save_confirmed import prompt_and_save_confirmed

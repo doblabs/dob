@@ -16,18 +16,14 @@
 # or visit <http://www.gnu.org/licenses/>.
 
 import traceback
-
 from gettext import gettext as _
 
-from inflector import English, Inflector
-
 import click_hotoffthehamster as click
-
+from dob_bright.crud.fix_times import mend_fact_timey_wimey
 from easy_as_pypi_termio.echoes import click_echo
 from easy_as_pypi_termio.errors import exit_warning
 from easy_as_pypi_termio.style import attr, fg
-
-from dob_bright.crud.fix_times import mend_fact_timey_wimey
+from inflector import English, Inflector
 
 from .echo_fact import echo_fact
 

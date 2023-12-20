@@ -27,7 +27,6 @@ Fixtures available to the tests/.
 """
 
 import pytest
-
 from dob_bright.crud.fact_dressed import FactDressed
 
 # We leave this conftest out of pytest_plugins, otherwise its

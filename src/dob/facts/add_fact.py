@@ -16,15 +16,12 @@
 # or visit <http://www.gnu.org/licenses/>.
 
 import random
-
 from gettext import gettext as _
-
-from easy_as_pypi_termio.errors import exit_warning
 
 from dob_bright.crud.fact_from_factoid import must_create_fact_from_factoid
 from dob_bright.crud.fix_times import mend_fact_timey_wimey
-
 from dob_prompt.prompters.triple_prompter import ask_user_for_edits
+from easy_as_pypi_termio.errors import exit_warning
 
 from .save_backedup import prompt_and_save_backedup
 

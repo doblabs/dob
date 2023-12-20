@@ -24,21 +24,17 @@ from nark.helpers.dev.profiling import profile_elapsed
 # E402 module level import not at top of file
 profile_elapsed("To dob:   _top")  # noqa: E402
 
-from gettext import gettext as _
-
 import os
 import re
 import sys
 from functools import update_wrapper
+from gettext import gettext as _
 
 import click_hotoffthehamster as click
-
 from easy_as_pypi_termio.errors import exit_warning
 from easy_as_pypi_termio.paging import click_echo, flush_pager
 
 # Set app-wide AppDirs.appname and KeyChainedValue._envvar_prefix.
-from . import config  # noqa: F401
-
 from dob_bright.crud.fact_dressed import FactDressed
 from dob_bright.styling.ignore_cmds import (
     create_ignore_conf,
@@ -48,8 +44,8 @@ from dob_bright.styling.ignore_cmds import (
 )
 from dob_bright.styling.rules_cmds import (
     create_rules_conf,
-    echo_rules_conf,
     echo_rule_names,
+    echo_rules_conf,
     echo_rules_table,
     edit_rules_conf,
 )
@@ -61,17 +57,18 @@ from dob_bright.styling.styles_cmds import (
     edit_styles_conf,
 )
 
-from .clickux import help_strings
-from .clickux import help_string_add_fact
+# DUNNO/2023-12-20 02:01: `isort` just added this line...?
+from . import config  # noqa: F401
+from .clickux import help_string_add_fact, help_strings
 from .clickux.add_fact_help_group import ClickAddFactHelpGroup
 from .clickux.aliasable_bunchy_plugin import ClickAliasableBunchyPluginGroup
 from .clickux.bunchy_help import (
-    cmd_bunch_group_introducing,
-    cmd_bunch_group_edit,
-    cmd_bunch_group_get_meta,
-    cmd_bunch_group_generate_report,
-    cmd_bunch_group_dbms,
     cmd_bunch_group_add_fact,
+    cmd_bunch_group_dbms,
+    cmd_bunch_group_edit,
+    cmd_bunch_group_generate_report,
+    cmd_bunch_group_get_meta,
+    cmd_bunch_group_introducing,
     cmd_bunch_group_ongoing_fact,
     cmd_bunch_group_personalize,
 )
@@ -82,10 +79,10 @@ from .clickux.cmd_options import (
     cmd_options_fact_edit,
     cmd_options_fact_import,
     cmd_options_factoid,
+    cmd_options_factoid_verify_both,
+    cmd_options_factoid_verify_end,
     cmd_options_factoid_verify_none,
     cmd_options_factoid_verify_start,
-    cmd_options_factoid_verify_end,
-    cmd_options_factoid_verify_both,
     cmd_options_rule_name,
     cmd_options_styles_internal,
     cmd_options_styles_named,

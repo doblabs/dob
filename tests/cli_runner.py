@@ -16,8 +16,8 @@
 # repository (read the 'LICENSE' file), see <http://www.gnu.org/licenses/>.
 
 import os
-import pytest
 
+import pytest
 from click_hotoffthehamster.testing import CliRunner
 
 import dob.dob as dob  # for dob.run

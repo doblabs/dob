@@ -18,7 +18,6 @@
 from gettext import gettext as _
 
 import click_hotoffthehamster as click
-
 from dob_bright.reports.tabulate_results import report_table_columns
 from easy_as_pypi_termio import echo_warning, exit_warning
 

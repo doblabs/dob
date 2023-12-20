@@ -24,11 +24,10 @@ import pytest
 # We need it to fake output to Carousel so we can test a callback method
 # that's embedded (out of scope) inside another method (so we cannot call
 # directly).
-from prompt_toolkit.input.defaults import create_pipe_input
-from prompt_toolkit.output import DummyOutput
-
 from dob_viewer.ptkui import re_confirm
 from dob_viewer.traverser import save_confirmer as viewer_confirmer
+from prompt_toolkit.input.defaults import create_pipe_input
+from prompt_toolkit.output import DummyOutput
 
 from dob.facts import save_confirmer as proper_confirmer
 from dob.facts.import_facts import import_facts

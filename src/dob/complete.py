@@ -19,7 +19,6 @@ import os
 import random
 import re
 import sys
-
 from gettext import gettext as _
 
 import click_hotoffthehamster as click

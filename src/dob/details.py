@@ -16,23 +16,19 @@
 # or visit <http://www.gnu.org/licenses/>.
 
 import os
-
 from gettext import gettext as _
 
 # Profiling: load AppDirs: ~ 0.011 secs.
 #  [before being moved to new package; when profiled was at:]
 #  from dob_bright.config.app_dirs import AppDirs
 from easy_as_pypi_appdirs.app_dirs_with_mkdir import AppDirsWithMkdir
-
 from easy_as_pypi_termio import ascii_art
 from easy_as_pypi_termio.echoes import click_echo, highlight_value
 from easy_as_pypi_termio.style import attr, fg
-
 from nark.items.fact import Fact
 
+from . import __package_name__, get_version
 from .clickux.plugin_group import ClickPluginGroup
-
-from . import get_version, __package_name__
 
 __all__ = (
     "echo_app_details",

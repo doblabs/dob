@@ -18,7 +18,6 @@
 from gettext import gettext as _
 
 from ..clickux.query_assist import error_exit_no_results
-
 from . import generate_usage_table
 
 __all__ = ("usage_activities",)

@@ -15,19 +15,15 @@
 # If you lost the GNU General Public License that ships with this software
 # repository (read the 'LICENSE' file), see <http://www.gnu.org/licenses/>.
 
-import pytest
-
 from unittest.mock import PropertyMock
 
+import pytest
 from easy_as_pypi_config.urable import ConfigUrable
-
-from nark.tests.conftest import *  # noqa: F401, F403
-from nark.tests.backends.sqlalchemy.conftest import *  # noqa: F401, F403
-
-from nark.backends.sqlalchemy import objects
-from nark.backends.sqlalchemy import storage
+from nark.backends.sqlalchemy import objects, storage
 from nark.backends.sqlalchemy.managers.migrate import MigrationsManager
 from nark.control import NarkControl
+from nark.tests.backends.sqlalchemy.conftest import *  # noqa: F401, F403
+from nark.tests.conftest import *  # noqa: F401, F403
 
 # (lb): Note that using pytest_plugins = (...) only works from root conftest.py.
 # One options is to *-import necessary files, e.g.,

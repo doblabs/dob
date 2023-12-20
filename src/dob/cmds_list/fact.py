@@ -15,18 +15,14 @@
 # You can find the GNU General Public License reprinted in the file titled 'LICENSE',
 # or visit <http://www.gnu.org/licenses/>.
 
+import sys
 from gettext import gettext as _
 
-import sys
-
-from inflector import English, Inflector
-
+from dob_bright.reports import render_results
 from easy_as_pypi_termio.echoes import click_echo, highlight_value
 from easy_as_pypi_termio.errors import echo_warning, exit_warning
-
+from inflector import English, Inflector
 from nark.managers.query_terms import QueryTerms
-
-from dob_bright.reports import render_results
 
 from ..clickux.cmd_options_search import cmd_options_output_format_facts_only
 from ..clickux.query_assist import error_exit_no_results

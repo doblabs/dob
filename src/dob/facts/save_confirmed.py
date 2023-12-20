@@ -15,10 +15,8 @@
 # You can find the GNU General Public License reprinted in the file titled 'LICENSE',
 # or visit <http://www.gnu.org/licenses/>.
 
-from gettext import gettext as _
-
 import sys
-
+from gettext import gettext as _
 
 __all__ = ("prompt_and_save_confirmed",)
 

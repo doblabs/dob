@@ -18,7 +18,6 @@
 from functools import update_wrapper
 
 import click_hotoffthehamster as click
-
 from easy_as_pypi_termio import click_echo, echo_exit
 
 __all__ = (

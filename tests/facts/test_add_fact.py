@@ -38,12 +38,10 @@ class TestAddFact(object):
         """
         Test input validation and assignment of start/end time(s).
 
-        To test just this function -- and the parametrize, above -- try:
+        To test just this function — and nark's factoid_fixture — try:
 
-          workon dob
-          cdproject
-          py.test --pdb -vv -k test_add_new_fact tests/
-
+          pytest --pdb -s -vv \
+            tests/facts/test_add_fact.py::TestAddFact::test_add_new_fact
         """
         controller = controller_with_logging
         mocker.patch.object(controller.facts, "save")

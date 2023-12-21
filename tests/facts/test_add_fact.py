@@ -45,6 +45,13 @@ class TestAddFact(object):
             tests/facts/test_add_fact.py::TestAddFact::test_add_new_fact
         """
 
+        # HINT: To test a specific factoid from factoid_fixture,
+        #       you can skip the other tests. Try something like:
+        #
+        #   if (raw_fact, time_hint) != ('Monday-13:00: foo@bar', 'verify_both'):
+        #       return
+        #
+        # - And add a set_trace() below.
         def _test_add_new_fact():
             if "err" in expectation and expectation["err"]:
                 with pytest.raises(SystemExit):

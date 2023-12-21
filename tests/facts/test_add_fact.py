@@ -34,6 +34,7 @@ class TestAddFact(object):
         raw_fact,
         time_hint,
         expectation,
+        capsys,
     ):
         """
         Test input validation and assignment of start/end time(s).
@@ -45,6 +46,19 @@ class TestAddFact(object):
         """
 
         def _test_add_new_fact():
+            if "err" in expectation and expectation["err"]:
+                with pytest.raises(SystemExit):
+                    _test_add_new_fact_and_validate()
+                out, err = capsys.readouterr()
+                # There may or may not be stdout.
+                #   assert not out and err
+                assert expectation["err"] in err or expectation["err"] in out
+            else:
+                _test_add_new_fact_and_validate()
+                out, err = capsys.readouterr()
+                assert out and not err
+
+        def _test_add_new_fact_and_validate():
             controller = controller_with_logging
             mocker.patch.object(controller.facts, "save")
             add_fact(controller, raw_fact, time_hint=time_hint, use_carousel=False)

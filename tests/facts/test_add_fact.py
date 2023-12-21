@@ -43,25 +43,29 @@ class TestAddFact(object):
           pytest --pdb -s -vv \
             tests/facts/test_add_fact.py::TestAddFact::test_add_new_fact
         """
-        controller = controller_with_logging
-        mocker.patch.object(controller.facts, "save")
-        add_fact(controller, raw_fact, time_hint=time_hint, use_carousel=False)
-        assert controller.facts.save.called
-        args, kwargs = controller.facts.save.call_args
-        fact = args[0]
-        assert fact.start == expectation["start"]
-        assert fact.end == expectation["end"]
-        assert fact.activity_name == expectation["activity"]
-        assert fact.category_name == expectation["category"]
-        expecting_tags = ""
-        tagnames = list(expectation["tags"])
-        if tagnames:
-            tagnames.sort()
-            expecting_tags = ["#{}".format(name) for name in tagnames]
-            expecting_tags = "{}".format(" ".join(expecting_tags))
-        assert fact.tagnames() == expecting_tags
-        expect_description = expectation.get("description", None) or None
-        assert fact.description == expect_description
+
+        def _test_add_new_fact():
+            controller = controller_with_logging
+            mocker.patch.object(controller.facts, "save")
+            add_fact(controller, raw_fact, time_hint=time_hint, use_carousel=False)
+            assert controller.facts.save.called
+            args, kwargs = controller.facts.save.call_args
+            fact = args[0]
+            assert fact.start == expectation["start"]
+            assert fact.end == expectation["end"]
+            assert fact.activity_name == expectation["activity"]
+            assert fact.category_name == expectation["category"]
+            expecting_tags = ""
+            tagnames = list(expectation["tags"])
+            if tagnames:
+                tagnames.sort()
+                expecting_tags = ["#{}".format(name) for name in tagnames]
+                expecting_tags = "{}".format(" ".join(expecting_tags))
+            assert fact.tagnames() == expecting_tags
+            expect_description = expectation.get("description", None) or None
+            assert fact.description == expect_description
+
+        _test_add_new_fact()
 
 
 # ***

@@ -40,6 +40,7 @@ def add_fact(
     edit_meta=False,
     yes=False,
     dry=False,
+    lenient=False,
 ):
     """
     Start or add a fact.
@@ -100,6 +101,7 @@ def add_fact(
             controller,
             factoid,
             time_hint,
+            lenient=lenient,
         )
         return new_fact
 

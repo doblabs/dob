@@ -53,13 +53,21 @@ class TestAddFact(object):
         #
         # - And add a set_trace() below.
         def _test_add_new_fact():
-            if "err" in expectation and expectation["err"]:
+            check_for_error = None
+            try:
+                check_for_error = expectation["err_inclusive"]
+            except KeyError:
+                try:
+                    check_for_error = expectation["err"]
+                except KeyError:
+                    pass
+            if check_for_error:
                 with pytest.raises(SystemExit):
                     _test_add_new_fact_and_validate()
                 out, err = capsys.readouterr()
                 # There may or may not be stdout.
                 #   assert not out and err
-                assert expectation["err"] in err or expectation["err"] in out
+                assert check_for_error in err or check_for_error in out
             else:
                 _test_add_new_fact_and_validate()
                 out, err = capsys.readouterr()

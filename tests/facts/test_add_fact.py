@@ -97,6 +97,11 @@ class TestStop(object):
             factoid="",
             time_hint="verify_end",
             use_carousel=False,
+            # Enable lenient, otherwise raises exception:
+            #   "Expected to find an "@" indicating the activity."
+            # - Well, use lenient, or specifiy time and activity, e.g.,
+            #     factoid="now: foo@bar",
+            lenient=True,
         )
         assert controller_with_logging.facts.save.called
 

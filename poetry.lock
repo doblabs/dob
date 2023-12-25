@@ -778,13 +778,13 @@ readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd
 
 [[package]]
 name = "easy-as-pypi-config"
-version = "1.0.1"
+version = "1.0.2"
 description = "Bootstrapped Config engine for your next Python CLI based on easy-as-pypi"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "easy_as_pypi_config-1.0.1-py3-none-any.whl", hash = "sha256:a5089b1669013883057e9c079a4cd0aa547b52636a888463400c1bb9fbc2cf70"},
-    {file = "easy_as_pypi_config-1.0.1.tar.gz", hash = "sha256:7fa4e0d39725babb9b1cbe532097df70ca515e3dba0633d15d3efcec5040372b"},
+    {file = "easy_as_pypi_config-1.0.2-py3-none-any.whl", hash = "sha256:3c2d59a7c71147ab8b5f7db2c04bcbc663c0b46f6f15d26f69bd6f42933971f1"},
+    {file = "easy_as_pypi_config-1.0.2.tar.gz", hash = "sha256:c3fad34e35732dfd105b4efea439cca083997c53755b2f219dd2a8b6783b23ea"},
 ]
 
 [package.dependencies]

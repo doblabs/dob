@@ -399,20 +399,20 @@ readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd
 
 [[package]]
 name = "click-hotoffthehamster-alias"
-version = "1.0.4"
+version = "1.0.6"
 description = "Add aliases to click-hotoffthehamster commands"
 optional = false
-python-versions = "*"
+python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "click-hotoffthehamster-alias-1.0.4.tar.gz", hash = "sha256:bbd37c8452ab8e4cb63395112f0cc83331c75ea9d61184cd656faaade6c3fc03"},
-    {file = "click_hotoffthehamster_alias-1.0.4-py2.py3-none-any.whl", hash = "sha256:a0cb11ceb30902d0a7c7eb2e4b6f711e56db6b38e2a3d69a6e6e09eaac652fdb"},
+    {file = "click_hotoffthehamster_alias-1.0.6-py3-none-any.whl", hash = "sha256:0fd9e9f8d489c61a8c3e3f6ef43ae0d8a94deb20e1b03f3d69376dba6a3c799d"},
+    {file = "click_hotoffthehamster_alias-1.0.6.tar.gz", hash = "sha256:af5899f2ddc2b8313f417ad0cbf66a244d0cc806b03d521884a68fa692782e4c"},
 ]
 
 [package.dependencies]
-click-hotoffthehamster = ">=7.1.1,<8"
+click-hotoffthehamster = ">=7.8.0,<8.0.0"
 
 [package.extras]
-dev = ["coveralls", "flake8", "flake8-import-order", "pytest (>=5.4.3)", "pytest-cov (>=2.10.0)", "tox-travis", "wheel"]
+readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd-theme (>=2.0.0rc4,<3.0.0)", "tomli (>=2.0.1)"]
 
 [[package]]
 name = "codecov"

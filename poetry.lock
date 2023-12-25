@@ -799,13 +799,13 @@ readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd
 
 [[package]]
 name = "easy-as-pypi-getver"
-version = "1.0.2"
+version = "1.0.4"
 description = "Determine package version from what pip last installed and what Git says"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "easy_as_pypi_getver-1.0.2-py3-none-any.whl", hash = "sha256:fd9f646cb6544ac3df51204cc25d922033282142fd793d308267fb1cb08bdb2e"},
-    {file = "easy_as_pypi_getver-1.0.2.tar.gz", hash = "sha256:7eb40acdf2151e12626f6352fd3e96bb7c52046bc0a45d281acf0addb676ccfb"},
+    {file = "easy_as_pypi_getver-1.0.4-py3-none-any.whl", hash = "sha256:91026e661b2f1b7189cbeff30d18dfe839a586fcc905c7ec290cd564e4d4767c"},
+    {file = "easy_as_pypi_getver-1.0.4.tar.gz", hash = "sha256:8c57328324d97f08d1a96417151b457b691cc877c0604c4f9871fe4b5b262d6e"},
 ]
 
 [package.extras]

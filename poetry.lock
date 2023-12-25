@@ -1073,17 +1073,20 @@ tests = ["flake8 (>=3.0.0)", "pytest (>=4.4.1)", "responses (>=0.5.0)"]
 
 [[package]]
 name = "human-friendly-pedantic-timedelta"
-version = "2.0.11"
+version = "2.0.13"
 description = "Human-friendly Pedantic `timedelta`"
 optional = false
-python-versions = "*"
+python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "human-friendly_pedantic-timedelta-2.0.11.tar.gz", hash = "sha256:0b92fc6747390114d94bb26eb2c3bb4d2e6418bb9197e3fe824adc66ffaac0ec"},
-    {file = "human_friendly_pedantic_timedelta-2.0.11-py3-none-any.whl", hash = "sha256:87a27521f19bc83d1699a84c5318569caad9fec7799753ee59356db9fb16fdd4"},
+    {file = "human_friendly_pedantic_timedelta-2.0.13-py3-none-any.whl", hash = "sha256:30134567b1c92825554acb5a56cd5bb0286a5aad92d27fef92af0e18910fa02c"},
+    {file = "human_friendly_pedantic_timedelta-2.0.13.tar.gz", hash = "sha256:e25ae5959eaa5c2d85987e757bea0fe69d2679f756edf8c4e76e4b1d49d06182"},
 ]
 
 [package.dependencies]
 Inflector = ">=3.0.1,<4"
+
+[package.extras]
+readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd-theme (>=2.0.0rc4,<3.0.0)", "tomli (>=2.0.1)"]
 
 [[package]]
 name = "icalendar"

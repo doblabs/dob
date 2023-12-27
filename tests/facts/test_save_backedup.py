@@ -37,6 +37,7 @@ from dob.facts.import_facts import import_facts
 # FIXME/2020-02-01: Could probably simply this test module and use 1 or 2
 # Facts from Fact factory -- then moved IMPORT_PATH et al to new module,
 # test_import_facts.
+# - CXREF: ~/.kit/py/dob-viewer/tests/fixtures/test-import-fixture.rst
 IMPORT_PATH = "./tests/fixtures/test-import-fixture.rst"
 """Path to the import file fixture, which is full of Factoids."""
 

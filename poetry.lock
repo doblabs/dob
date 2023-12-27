@@ -382,13 +382,13 @@ colorama = {version = "*", markers = "platform_system == \"Windows\""}
 
 [[package]]
 name = "click-hotoffthehamster"
-version = "7.8.2"
+version = "7.8.3"
 description = "Composable command line interface toolkit"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "click_hotoffthehamster-7.8.2-py3-none-any.whl", hash = "sha256:4020ed5d9b0c0067ad69e867ac4deac4890af5b41dab34115e9f6ed8103676ec"},
-    {file = "click_hotoffthehamster-7.8.2.tar.gz", hash = "sha256:4d6c289fcdf4e8456d181f4e0a86f76a5e3c76c2390330f23459507335c87336"},
+    {file = "click_hotoffthehamster-7.8.3-py3-none-any.whl", hash = "sha256:6007f77fdb705376c1856ecb656e34a7b9bdb013c08836db2e960568ffe5b011"},
+    {file = "click_hotoffthehamster-7.8.3.tar.gz", hash = "sha256:601141eeb8110a4a48c28ac50429858d212e1123ae56d703a45327d22fd44185"},
 ]
 
 [package.dependencies]
@@ -399,20 +399,20 @@ readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd
 
 [[package]]
 name = "click-hotoffthehamster-alias"
-version = "1.0.4"
+version = "1.0.6"
 description = "Add aliases to click-hotoffthehamster commands"
 optional = false
-python-versions = "*"
+python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "click-hotoffthehamster-alias-1.0.4.tar.gz", hash = "sha256:bbd37c8452ab8e4cb63395112f0cc83331c75ea9d61184cd656faaade6c3fc03"},
-    {file = "click_hotoffthehamster_alias-1.0.4-py2.py3-none-any.whl", hash = "sha256:a0cb11ceb30902d0a7c7eb2e4b6f711e56db6b38e2a3d69a6e6e09eaac652fdb"},
+    {file = "click_hotoffthehamster_alias-1.0.6-py3-none-any.whl", hash = "sha256:0fd9e9f8d489c61a8c3e3f6ef43ae0d8a94deb20e1b03f3d69376dba6a3c799d"},
+    {file = "click_hotoffthehamster_alias-1.0.6.tar.gz", hash = "sha256:af5899f2ddc2b8313f417ad0cbf66a244d0cc806b03d521884a68fa692782e4c"},
 ]
 
 [package.dependencies]
-click-hotoffthehamster = ">=7.1.1,<8"
+click-hotoffthehamster = ">=7.8.0,<8.0.0"
 
 [package.extras]
-dev = ["coveralls", "flake8", "flake8-import-order", "pytest (>=5.4.3)", "pytest-cov (>=2.10.0)", "tox-travis", "wheel"]
+readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd-theme (>=2.0.0rc4,<3.0.0)", "tomli (>=2.0.1)"]
 
 [[package]]
 name = "codecov"
@@ -614,6 +614,20 @@ files = [
 ]
 
 [[package]]
+name = "dek"
+version = "1.3.0"
+description = "🎴 The decorator-decorator 🎴"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "dek-1.3.0-py3-none-any.whl", hash = "sha256:decba02e75242c1b8841b3cd1a33f6724245a675559e642366d3de726c38acec"},
+    {file = "dek-1.3.0.tar.gz", hash = "sha256:7dc66c0a8654dcb0ff1ae6043ab5cd7ed9f2d75a12885f5191d36b88857da4a9"},
+]
+
+[package.dependencies]
+xmod = "*"
+
+[[package]]
 name = "distlib"
 version = "0.3.8"
 description = "Distribution utilities"
@@ -626,13 +640,13 @@ files = [
 
 [[package]]
 name = "dob-bright"
-version = "1.2.6"
+version = "1.2.8"
 description = "journal and time tracker, supercharged for the terminal"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "dob_bright-1.2.6-py3-none-any.whl", hash = "sha256:b265b311c0c07d75b26f3855afb572d7e3fde3113f43c4d49a7cfa22dba24ace"},
-    {file = "dob_bright-1.2.6.tar.gz", hash = "sha256:e5c88d9d95f7589763a20f9237e87a7b3e23e15742c553d5e6edbd60ca85330a"},
+    {file = "dob_bright-1.2.8-py3-none-any.whl", hash = "sha256:e1c6916f4c0070ca98d8ea0c259f34f20df33499b4a81a31df81c555320c772a"},
+    {file = "dob_bright-1.2.8.tar.gz", hash = "sha256:33255b064db75f5489a6c0b9ea85fcf5bfa29bd2f4d07a88be82f2db3ba7bda0"},
 ]
 
 [package.dependencies]
@@ -642,21 +656,21 @@ easy-as-pypi-appdirs = ">0"
 easy-as-pypi-config = ">0"
 easy-as-pypi-getver = ">0"
 easy-as-pypi-termio = ">0"
+editor = ">=1.0.4,<2.0.0"
 nark = ">0"
-python-editor = ">=1.0.4,<2.0.0"
 
 [package.extras]
 readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd-theme (>=2.0.0rc4,<3.0.0)", "tomli (>=2.0.1)"]
 
 [[package]]
 name = "dob-prompt"
-version = "1.1.5"
+version = "1.1.7"
 description = "journal and time tracker, supercharged for the terminal"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "dob_prompt-1.1.5-py3-none-any.whl", hash = "sha256:bfa30d6e60cdbaee704954a3b15c017ae5b0492160b0f7e79c2fdd4a6cc1f1d5"},
-    {file = "dob_prompt-1.1.5.tar.gz", hash = "sha256:3df958afae081e901f488668ab536ed02c6c4f1e55de9c622854e815f4d20c43"},
+    {file = "dob_prompt-1.1.7-py3-none-any.whl", hash = "sha256:6ce04a1944d474ede9ad81e19cde32bd1330434a9642635a9821b339dc79ad53"},
+    {file = "dob_prompt-1.1.7.tar.gz", hash = "sha256:a259e4d7d90c8bd4cd2fe561c4b756b6ef1335eb275dba032e780bd4717e9a5b"},
 ]
 
 [package.dependencies]
@@ -761,13 +775,13 @@ packaging = ">=20.9"
 
 [[package]]
 name = "easy-as-pypi-appdirs"
-version = "1.1.3"
+version = "1.1.5"
 description = "AppDirs overlay with mkdir -p side effect and Singleton access"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "easy_as_pypi_appdirs-1.1.3-py3-none-any.whl", hash = "sha256:16a7bd4d50ecf84f59e2094b9555193e0b5e6e1326e421bc8d596fc5b6bfbacd"},
-    {file = "easy_as_pypi_appdirs-1.1.3.tar.gz", hash = "sha256:3e6abe39f62810a237c864ed8c2d4d00ceac87b2407cda69ec33b99f4c6c248f"},
+    {file = "easy_as_pypi_appdirs-1.1.5-py3-none-any.whl", hash = "sha256:c8864244621f87f58450364ea0a32e1bfcd87b4f19aad3dbe25ba690123adea5"},
+    {file = "easy_as_pypi_appdirs-1.1.5.tar.gz", hash = "sha256:93cd97f2ecd33489d5277ec4a768ba5ae915afcaac412a3caea0c839a316c64a"},
 ]
 
 [package.dependencies]
@@ -778,13 +792,13 @@ readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd
 
 [[package]]
 name = "easy-as-pypi-config"
-version = "1.0.1"
+version = "1.0.2"
 description = "Bootstrapped Config engine for your next Python CLI based on easy-as-pypi"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "easy_as_pypi_config-1.0.1-py3-none-any.whl", hash = "sha256:a5089b1669013883057e9c079a4cd0aa547b52636a888463400c1bb9fbc2cf70"},
-    {file = "easy_as_pypi_config-1.0.1.tar.gz", hash = "sha256:7fa4e0d39725babb9b1cbe532097df70ca515e3dba0633d15d3efcec5040372b"},
+    {file = "easy_as_pypi_config-1.0.2-py3-none-any.whl", hash = "sha256:3c2d59a7c71147ab8b5f7db2c04bcbc663c0b46f6f15d26f69bd6f42933971f1"},
+    {file = "easy_as_pypi_config-1.0.2.tar.gz", hash = "sha256:c3fad34e35732dfd105b4efea439cca083997c53755b2f219dd2a8b6783b23ea"},
 ]
 
 [package.dependencies]
@@ -799,13 +813,13 @@ readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd
 
 [[package]]
 name = "easy-as-pypi-getver"
-version = "1.0.2"
+version = "1.0.4"
 description = "Determine package version from what pip last installed and what Git says"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "easy_as_pypi_getver-1.0.2-py3-none-any.whl", hash = "sha256:fd9f646cb6544ac3df51204cc25d922033282142fd793d308267fb1cb08bdb2e"},
-    {file = "easy_as_pypi_getver-1.0.2.tar.gz", hash = "sha256:7eb40acdf2151e12626f6352fd3e96bb7c52046bc0a45d281acf0addb676ccfb"},
+    {file = "easy_as_pypi_getver-1.0.4-py3-none-any.whl", hash = "sha256:91026e661b2f1b7189cbeff30d18dfe839a586fcc905c7ec290cd564e4d4767c"},
+    {file = "easy_as_pypi_getver-1.0.4.tar.gz", hash = "sha256:8c57328324d97f08d1a96417151b457b691cc877c0604c4f9871fe4b5b262d6e"},
 ]
 
 [package.extras]
@@ -813,13 +827,13 @@ readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd
 
 [[package]]
 name = "easy-as-pypi-termio"
-version = "1.0.2"
+version = "1.0.3"
 description = "Click CLI conveniences for your next Python CLI based on easy-as-pypi"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "easy_as_pypi_termio-1.0.2-py3-none-any.whl", hash = "sha256:b54e3b981c762e80a29200e9d7effee0f500e4a3732b3d9973b833ff99fbaeeb"},
-    {file = "easy_as_pypi_termio-1.0.2.tar.gz", hash = "sha256:ecc4d18eb5583eb2d9f399098411124e1c4f3df67a684bc4a652ae8f534adbef"},
+    {file = "easy_as_pypi_termio-1.0.3-py3-none-any.whl", hash = "sha256:2bdae273ed58cdda581e66ae6b25e52cb7f065fccb5ee0f5f8a79ed8f7c4a3e7"},
+    {file = "easy_as_pypi_termio-1.0.3.tar.gz", hash = "sha256:3d7756ebc833a5e31ff75ef1a816038c0c3836639107b9129db42ded9e2a465d"},
 ]
 
 [package.dependencies]
@@ -832,6 +846,21 @@ texttable = ">=1.6.7,<2.0.0"
 
 [package.extras]
 readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd-theme (>=2.0.0rc4,<3.0.0)", "tomli (>=2.0.1)"]
+
+[[package]]
+name = "editor"
+version = "1.4.0"
+description = "🖋 Open the default text editor 🖋"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "editor-1.4.0-py3-none-any.whl", hash = "sha256:3411aab71b5edb39706ce6802b82cab01fc8302b295a8b802c9887b49e2def94"},
+    {file = "editor-1.4.0.tar.gz", hash = "sha256:c9a4efcb9d49cf1c42df699e299442973526dfec40f07b6cdfbdfbd921ab8f0f"},
+]
+
+[package.dependencies]
+runs = ">=1.1.0,<2.0.0"
+xmod = ">=1.3.2,<2.0.0"
 
 [[package]]
 name = "exceptiongroup"
@@ -1073,17 +1102,20 @@ tests = ["flake8 (>=3.0.0)", "pytest (>=4.4.1)", "responses (>=0.5.0)"]
 
 [[package]]
 name = "human-friendly-pedantic-timedelta"
-version = "2.0.11"
+version = "2.0.13"
 description = "Human-friendly Pedantic `timedelta`"
 optional = false
-python-versions = "*"
+python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "human-friendly_pedantic-timedelta-2.0.11.tar.gz", hash = "sha256:0b92fc6747390114d94bb26eb2c3bb4d2e6418bb9197e3fe824adc66ffaac0ec"},
-    {file = "human_friendly_pedantic_timedelta-2.0.11-py3-none-any.whl", hash = "sha256:87a27521f19bc83d1699a84c5318569caad9fec7799753ee59356db9fb16fdd4"},
+    {file = "human_friendly_pedantic_timedelta-2.0.13-py3-none-any.whl", hash = "sha256:30134567b1c92825554acb5a56cd5bb0286a5aad92d27fef92af0e18910fa02c"},
+    {file = "human_friendly_pedantic_timedelta-2.0.13.tar.gz", hash = "sha256:e25ae5959eaa5c2d85987e757bea0fe69d2679f756edf8c4e76e4b1d49d06182"},
 ]
 
 [package.dependencies]
 Inflector = ">=3.0.1,<4"
+
+[package.extras]
+readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd-theme (>=2.0.0rc4,<3.0.0)", "tomli (>=2.0.1)"]
 
 [[package]]
 name = "icalendar"
@@ -1495,13 +1527,13 @@ files = [
 
 [[package]]
 name = "nark"
-version = "3.2.5"
+version = "3.2.6"
 description = "Back end framework for journaling and time tracking apps (like `dob`!)"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "nark-3.2.5-py3-none-any.whl", hash = "sha256:b5383d8e2882263b7a6fbfdb9bf2ace6c595c309901e1e23de051a1324cb5b28"},
-    {file = "nark-3.2.5.tar.gz", hash = "sha256:3c10f1fd867af3ad3c8d89c959d0ccc1491f98378ffde7746bbe80170f30d110"},
+    {file = "nark-3.2.6-py3-none-any.whl", hash = "sha256:d24add9b104e569fc2811342767e97acee363da0ab0193d6d9163c058eb55879"},
+    {file = "nark-3.2.6.tar.gz", hash = "sha256:33bd71b6f11c402e06ffcbc946a6ddb08d946d0c7da4ab36f3cace88ee613012"},
 ]
 
 [package.dependencies]
@@ -2164,6 +2196,20 @@ typing-extensions = {version = ">=4.0.0,<5.0", markers = "python_version < \"3.9
 jupyter = ["ipywidgets (>=7.5.1,<9)"]
 
 [[package]]
+name = "runs"
+version = "1.1.0"
+description = "Runs a block of text as a subrprocess"
+optional = false
+python-versions = "*"
+files = [
+    {file = "runs-1.1.0-py3-none-any.whl", hash = "sha256:702a31bec6d3336175ab6dcadd605ebd39b75d792a98303202b090d4556883e3"},
+    {file = "runs-1.1.0.tar.gz", hash = "sha256:c8685f129e54086f103b365c8d20c3f117f7518d0717962905c96248643530ef"},
+]
+
+[package.dependencies]
+xmod = "*"
+
+[[package]]
 name = "secretstorage"
 version = "3.3.3"
 description = "Python bindings to FreeDesktop.org Secret Service API"
@@ -2591,22 +2637,24 @@ sqlcipher = ["sqlcipher3-binary"]
 
 [[package]]
 name = "sqlalchemy-migrate-hotoffthehamster"
-version = "0.13.0"
+version = "0.14.2"
 description = "Database schema migration for SQLAlchemy"
 optional = false
-python-versions = "*"
+python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "sqlalchemy-migrate-hotoffthehamster-0.13.0.tar.gz", hash = "sha256:78201cdd657391c99a1548d8ead7910853e4b69a989d778c863a8560b7da3274"},
-    {file = "sqlalchemy_migrate_hotoffthehamster-0.13.0-py3-none-any.whl", hash = "sha256:ce5c9552214ec05fbead5ee3bccb225ba82594cdc760994bdb24a4ff883e7a69"},
+    {file = "sqlalchemy_migrate_hotoffthehamster-0.14.2-py3-none-any.whl", hash = "sha256:ca6d8985a135b76661c0c60e1876b0306f5c1fba9206e560da810cf5ba9b6076"},
+    {file = "sqlalchemy_migrate_hotoffthehamster-0.14.2.tar.gz", hash = "sha256:e526bf023da83e7b2cea525cbb34869893609f85a6a34348b25f43980f819787"},
 ]
 
 [package.dependencies]
-decorator = "*"
-pbr = ">=1.8"
+decorator = ">=5.1.1"
 six = ">=1.7.0"
-SQLAlchemy = ">=0.9.6"
-sqlparse = "*"
-Tempita = ">=0.4"
+sqlalchemy = ">=1.4.50,<1.5.0"
+sqlparse = ">=0.4.4,<0.5.0"
+tempita-hotoffthehamster = ">0"
+
+[package.extras]
+readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd-theme (>=2.0.0rc4,<3.0.0)", "tomli (>=2.0.1)"]
 
 [[package]]
 name = "sqlparse"
@@ -2653,15 +2701,18 @@ files = [
 widechars = ["wcwidth"]
 
 [[package]]
-name = "tempita"
-version = "0.5.2"
+name = "tempita-hotoffthehamster"
+version = "1.0.2"
 description = "A very small text templating language"
 optional = false
-python-versions = "*"
+python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "Tempita-0.5.2-py3-none-any.whl", hash = "sha256:f4554840cb59c6b4a5df4fad27eea4e3cb47ca7089bfeefb5890ff1bb8af2117"},
-    {file = "Tempita-0.5.2.tar.gz", hash = "sha256:cacecf0baa674d356641f1d406b8bff1d756d739c46b869a54de515d08e6fc9c"},
+    {file = "tempita_hotoffthehamster-1.0.2-py3-none-any.whl", hash = "sha256:06a3a08b858d06364b26ea8fa56dee44a13d7c1e2f96d14603f46a8db061bf97"},
+    {file = "tempita_hotoffthehamster-1.0.2.tar.gz", hash = "sha256:d4dbb16d695a85fc1b5b147e658e59dfa83b1152832c41bac465d6f17961a41b"},
 ]
+
+[package.extras]
+readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd-theme (>=2.0.0rc4,<3.0.0)", "tomli (>=2.0.1)"]
 
 [[package]]
 name = "texttable"
@@ -2905,6 +2956,20 @@ files = [
     {file = "xmltodict-0.13.0-py2.py3-none-any.whl", hash = "sha256:aa89e8fd76320154a40d19a0df04a4695fb9dc5ba977cbb68ab3e4eb225e7852"},
     {file = "xmltodict-0.13.0.tar.gz", hash = "sha256:341595a488e3e01a85a9d8911d8912fd922ede5fecc4dce437eb4b6c8d037e56"},
 ]
+
+[[package]]
+name = "xmod"
+version = "1.6.0"
+description = "🌱 Turn any object into a module 🌱"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "xmod-1.6.0-py3-none-any.whl", hash = "sha256:e8309df5de74ba1baeb28510592910ac17284aaaff49fc795c1cf6c1641dd392"},
+    {file = "xmod-1.6.0.tar.gz", hash = "sha256:87efbacbf2ef18e534740ecf802f9f6b9811543d9436c1a3ab2ea4dfbf9273af"},
+]
+
+[package.dependencies]
+dek = "*"
 
 [[package]]
 name = "yamllint"

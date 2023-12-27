@@ -93,7 +93,8 @@ class TestPromptAndSaveBackedUpViaImportFacts(object):
         mocker.patch.object(proper_confirmer, "prompt_and_save_confirmer")
         mocker.patch.object(viewer_confirmer, "prompt_and_save_confirmer")
 
-        input_stream = open(IMPORT_PATH, "r")
+        # Linux & macOS default UTF-8. Windows defaults cp1252 and dies on '”'.
+        input_stream = open(IMPORT_PATH, "r", encoding="utf-8")
 
         # (lb): A somewhat roundabout route to test prompt_and_save_backedup.
         # - Also tests parse_input!
@@ -121,7 +122,8 @@ def _feed_cli_with_input(
     mocker,
 ):
     inp_gen = create_pipe_input()
-    input_stream = open(IMPORT_PATH, "r")
+    # Linux & macOS default UTF-8. Windows defaults cp1252 and dies on '”'.
+    input_stream = open(IMPORT_PATH, "r", encoding="utf-8")
     # Because the key_sequence force-quits, Carousel prompts "Ok?".
     mocker.patch.object(re_confirm, "confirm", return_value=True)
     with closing(next(inp_gen.gen)) as inp:

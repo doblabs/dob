@@ -109,7 +109,7 @@ def prompt_and_save_backedup(
 
     def backup_file_open(backup_path):
         try:
-            backup_f = open(backup_path, "w")
+            backup_f = open(backup_path, "w", encoding="utf-8")
         except Exception as err:
             msg = 'Failed to create temporary backup file at "{}": {}'.format(
                 backup_path, str(err)

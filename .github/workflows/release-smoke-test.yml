@@ -222,7 +222,9 @@ jobs:
           max_attempts: 5
           retry_wait_seconds: 5
           timeout_seconds: 60
-          # Use eval, because of "quotes" in INDEX_PIPX.
+          # The `eval` necessary because "quotes" in $INDEX_PIPX
+          # - If not: 'pipx: error: unrecognized arguments: --pre"'
+          #   (at least for pre-release release smoke test).
           command: |
             echo "eval pipx install $INDEX_PIPX $PACKAGE_NAME==$VERSION"
             eval pipx install $INDEX_PIPX $PACKAGE_NAME==$VERSION

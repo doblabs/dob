@@ -694,13 +694,13 @@ readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd
 
 [[package]]
 name = "dob-viewer"
-version = "1.2.7a8"
+version = "1.2.7a9"
 description = "journal and time tracker, supercharged for the terminal"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "dob_viewer-1.2.7a8-py3-none-any.whl", hash = "sha256:f82179c672f778fcf6911672b1791c3cfddb0307ce20e3100f8ccf1f4e9e56a8"},
-    {file = "dob_viewer-1.2.7a8.tar.gz", hash = "sha256:10b65e77105f7cf32a8c9fe3bacddfc1fd2a76a5ab6f79f5e6c7a2073ec3c6da"},
+    {file = "dob_viewer-1.2.7a9-py3-none-any.whl", hash = "sha256:6d575281601e4cf808a6aaa2bc71b0fa386c07a153075619c35fa312aa293797"},
+    {file = "dob_viewer-1.2.7a9.tar.gz", hash = "sha256:f596239502503cfe767456633dd57c4ad3720b16322ea32171dd94c596b5c58f"},
 ]
 
 [package.dependencies]

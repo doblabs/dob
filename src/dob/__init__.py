@@ -42,6 +42,10 @@ __author_link__ = "https://tallybark.com"
 # (And it's also used for making the `dob version` output.)
 __package_name__ = "dob"
 
+# This version is substituted on poetry-build by poetry-dynamic-versioning.
+# - Consequently, __version__ remains empty when installed in 'editable' mode.
+__version__ = ""
+
 
 def get_version(include_head=False):
     return _get_version(

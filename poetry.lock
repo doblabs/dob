@@ -614,20 +614,6 @@ files = [
 ]
 
 [[package]]
-name = "dek"
-version = "1.3.0"
-description = "🎴 The decorator-decorator 🎴"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "dek-1.3.0-py3-none-any.whl", hash = "sha256:decba02e75242c1b8841b3cd1a33f6724245a675559e642366d3de726c38acec"},
-    {file = "dek-1.3.0.tar.gz", hash = "sha256:7dc66c0a8654dcb0ff1ae6043ab5cd7ed9f2d75a12885f5191d36b88857da4a9"},
-]
-
-[package.dependencies]
-xmod = "*"
-
-[[package]]
 name = "distlib"
 version = "0.3.8"
 description = "Distribution utilities"
@@ -640,13 +626,13 @@ files = [
 
 [[package]]
 name = "dob-bright"
-version = "1.2.8"
+version = "1.2.9"
 description = "journal and time tracker, supercharged for the terminal"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "dob_bright-1.2.8-py3-none-any.whl", hash = "sha256:e1c6916f4c0070ca98d8ea0c259f34f20df33499b4a81a31df81c555320c772a"},
-    {file = "dob_bright-1.2.8.tar.gz", hash = "sha256:33255b064db75f5489a6c0b9ea85fcf5bfa29bd2f4d07a88be82f2db3ba7bda0"},
+    {file = "dob_bright-1.2.9-py3-none-any.whl", hash = "sha256:d811388712a6f923b9afec2709f8858479f8310ddefb21679d904427c102f6f9"},
+    {file = "dob_bright-1.2.9.tar.gz", hash = "sha256:3625d11a7e9eb44a6d4b571069de5a4bd7cb8214a9f4db953539633a12cb215f"},
 ]
 
 [package.dependencies]
@@ -656,21 +642,21 @@ easy-as-pypi-appdirs = ">0"
 easy-as-pypi-config = ">0"
 easy-as-pypi-getver = ">0"
 easy-as-pypi-termio = ">0"
-editor = ">=1.0.4,<2.0.0"
 nark = ">0"
+python-editor-hotoffthehamster = ">0"
 
 [package.extras]
 readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd-theme (>=2.0.0rc4,<3.0.0)", "tomli (>=2.0.1)"]
 
 [[package]]
 name = "dob-prompt"
-version = "1.1.7"
+version = "1.1.8"
 description = "journal and time tracker, supercharged for the terminal"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "dob_prompt-1.1.7-py3-none-any.whl", hash = "sha256:6ce04a1944d474ede9ad81e19cde32bd1330434a9642635a9821b339dc79ad53"},
-    {file = "dob_prompt-1.1.7.tar.gz", hash = "sha256:a259e4d7d90c8bd4cd2fe561c4b756b6ef1335eb275dba032e780bd4717e9a5b"},
+    {file = "dob_prompt-1.1.8-py3-none-any.whl", hash = "sha256:d53ef5755dedb876c85a6631d55b1b92434fc85375f254cb979fdab44951e68e"},
+    {file = "dob_prompt-1.1.8.tar.gz", hash = "sha256:54fd00dfbd29be8f7f21ae63cde99575ea391cc0ebd0471240a73d49c037b04b"},
 ]
 
 [package.dependencies]
@@ -846,21 +832,6 @@ texttable = ">=1.6.7,<2.0.0"
 
 [package.extras]
 readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd-theme (>=2.0.0rc4,<3.0.0)", "tomli (>=2.0.1)"]
-
-[[package]]
-name = "editor"
-version = "1.4.0"
-description = "🖋 Open the default text editor 🖋"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "editor-1.4.0-py3-none-any.whl", hash = "sha256:3411aab71b5edb39706ce6802b82cab01fc8302b295a8b802c9887b49e2def94"},
-    {file = "editor-1.4.0.tar.gz", hash = "sha256:c9a4efcb9d49cf1c42df699e299442973526dfec40f07b6cdfbdfbd921ab8f0f"},
-]
-
-[package.dependencies]
-runs = ">=1.1.0,<2.0.0"
-xmod = ">=1.3.2,<2.0.0"
 
 [[package]]
 name = "exceptiongroup"
@@ -1902,6 +1873,20 @@ files = [
 ]
 
 [[package]]
+name = "python-editor-hotoffthehamster"
+version = "1.1.1"
+description = "Programmatically open an editor, capture the result"
+optional = false
+python-versions = ">=3.8.1,<4.0.0"
+files = [
+    {file = "python_editor_hotoffthehamster-1.1.1-py3-none-any.whl", hash = "sha256:8f9cb6d4a53aea4ddce8c4d6b5fd773d5bb1d4c7338dadc88d9737d1ced643c2"},
+    {file = "python_editor_hotoffthehamster-1.1.1.tar.gz", hash = "sha256:e40a2b258c2cbb5678338d52445c20fe0c7ef0737c0c14392572c41ba99072be"},
+]
+
+[package.extras]
+readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd-theme (>=2.0.0rc4,<3.0.0)", "tomli (>=2.0.1)"]
+
+[[package]]
 name = "pytz"
 version = "2023.3.post1"
 description = "World timezone definitions, modern and historical"
@@ -2194,20 +2179,6 @@ typing-extensions = {version = ">=4.0.0,<5.0", markers = "python_version < \"3.9
 
 [package.extras]
 jupyter = ["ipywidgets (>=7.5.1,<9)"]
-
-[[package]]
-name = "runs"
-version = "1.1.0"
-description = "Runs a block of text as a subrprocess"
-optional = false
-python-versions = "*"
-files = [
-    {file = "runs-1.1.0-py3-none-any.whl", hash = "sha256:702a31bec6d3336175ab6dcadd605ebd39b75d792a98303202b090d4556883e3"},
-    {file = "runs-1.1.0.tar.gz", hash = "sha256:c8685f129e54086f103b365c8d20c3f117f7518d0717962905c96248643530ef"},
-]
-
-[package.dependencies]
-xmod = "*"
 
 [[package]]
 name = "secretstorage"
@@ -2956,20 +2927,6 @@ files = [
     {file = "xmltodict-0.13.0-py2.py3-none-any.whl", hash = "sha256:aa89e8fd76320154a40d19a0df04a4695fb9dc5ba977cbb68ab3e4eb225e7852"},
     {file = "xmltodict-0.13.0.tar.gz", hash = "sha256:341595a488e3e01a85a9d8911d8912fd922ede5fecc4dce437eb4b6c8d037e56"},
 ]
-
-[[package]]
-name = "xmod"
-version = "1.6.0"
-description = "🌱 Turn any object into a module 🌱"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "xmod-1.6.0-py3-none-any.whl", hash = "sha256:e8309df5de74ba1baeb28510592910ac17284aaaff49fc795c1cf6c1641dd392"},
-    {file = "xmod-1.6.0.tar.gz", hash = "sha256:87efbacbf2ef18e534740ecf802f9f6b9811543d9436c1a3ab2ea4dfbf9273af"},
-]
-
-[package.dependencies]
-dek = "*"
 
 [[package]]
 name = "yamllint"

@@ -11,7 +11,7 @@ dob
 
 .. CXREF: https://app.codecov.io/github.com/doblabs/dob/settings/badge
 
-.. image:: https://codecov.io/gh/doblabs/dob/branch/release/graph/badge.svg?token=XXX
+.. image:: https://codecov.io/gh/doblabs/dob/branch/release/graph/badge.svg?token=WREsPsHUcW
   :target: https://app.codecov.io/gh/doblabs/dob
   :alt: Coverage Status
 

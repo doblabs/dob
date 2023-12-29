@@ -626,13 +626,13 @@ files = [
 
 [[package]]
 name = "dob-bright"
-version = "1.2.9"
+version = "1.2.11"
 description = "journal and time tracker, supercharged for the terminal"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "dob_bright-1.2.9-py3-none-any.whl", hash = "sha256:d811388712a6f923b9afec2709f8858479f8310ddefb21679d904427c102f6f9"},
-    {file = "dob_bright-1.2.9.tar.gz", hash = "sha256:3625d11a7e9eb44a6d4b571069de5a4bd7cb8214a9f4db953539633a12cb215f"},
+    {file = "dob_bright-1.2.11-py3-none-any.whl", hash = "sha256:3305fe470602b8a850989ae497c05c53434f048b6ef258f2d587053eba957439"},
+    {file = "dob_bright-1.2.11.tar.gz", hash = "sha256:c22144980b03d46e62b72b3c761b2ee8bb85e3a40a84fd24a5d7d4df9efdea7d"},
 ]
 
 [package.dependencies]
@@ -650,13 +650,13 @@ readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd
 
 [[package]]
 name = "dob-prompt"
-version = "1.1.8"
+version = "1.1.10"
 description = "journal and time tracker, supercharged for the terminal"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "dob_prompt-1.1.8-py3-none-any.whl", hash = "sha256:d53ef5755dedb876c85a6631d55b1b92434fc85375f254cb979fdab44951e68e"},
-    {file = "dob_prompt-1.1.8.tar.gz", hash = "sha256:54fd00dfbd29be8f7f21ae63cde99575ea391cc0ebd0471240a73d49c037b04b"},
+    {file = "dob_prompt-1.1.10-py3-none-any.whl", hash = "sha256:4d69c1d63587c2c6fca8eaaff76d8665baf463ff13a259582a583daa4b3ca6da"},
+    {file = "dob_prompt-1.1.10.tar.gz", hash = "sha256:7f692e05f3b0885878ee89dc598d471cfa5ab48c78b0deee5a48047ed455da3d"},
 ]
 
 [package.dependencies]
@@ -674,26 +674,29 @@ readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd
 
 [[package]]
 name = "dob-viewer"
-version = "1.0.10"
+version = "1.2.8"
 description = "journal and time tracker, supercharged for the terminal"
 optional = false
-python-versions = "*"
+python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "dob-viewer-1.0.10.tar.gz", hash = "sha256:680b41fd303daf31f755bf1004ef712ae494a1ccbbb4ec3f2d2db8a0178ddd90"},
-    {file = "dob_viewer-1.0.10-py3-none-any.whl", hash = "sha256:8ec7815716ec988136aded5049f9cbb0bb57079ea40bb0eab288b568c3c95d80"},
+    {file = "dob_viewer-1.2.8-py3-none-any.whl", hash = "sha256:07f9a1ba44834f78bf3b2af665d4e6a8b3f1b79679baf50f795f1055bc716bf3"},
+    {file = "dob_viewer-1.2.8.tar.gz", hash = "sha256:eb88e8142e93a4c16f441beeeeb67f565d07344ff30c1f97bb475a5e98d132aa"},
 ]
 
 [package.dependencies]
-click-hotoffthehamster = ">=7.1.1,<8"
-configobj = ">=5.0.6"
-dob-bright = ">=1.0.9,<2"
-dob-prompt = ">=1.0.5,<2"
-Inflector = ">=3.0.1,<4"
-nark = ">=3.0.8,<4"
-prompt-toolkit = ">=3.0.5,<4"
-pygments = ">=2.6.1,<3"
-python-editor = ">=1.0.4,<2"
-sortedcontainers = ">=2.1.0,<3"
+click-hotoffthehamster = ">0"
+dob-bright = ">0"
+dob-prompt = ">0"
+easy-as-pypi-getver = ">0"
+easy-as-pypi-termio = ">0"
+Inflector = ">=3.0.1,<4.0.0"
+nark = ">0"
+prompt-toolkit = ">=3.0.5,<4.0.0"
+pygments = ">=2.6.1,<3.0.0"
+sortedcontainers = ">=2.1.0,<3.0.0"
+
+[package.extras]
+readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd-theme (>=2.0.0rc4,<3.0.0)", "tomli (>=2.0.1)"]
 
 [[package]]
 name = "doc8"
@@ -761,13 +764,13 @@ packaging = ">=20.9"
 
 [[package]]
 name = "easy-as-pypi-appdirs"
-version = "1.1.5"
+version = "1.1.6"
 description = "AppDirs overlay with mkdir -p side effect and Singleton access"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "easy_as_pypi_appdirs-1.1.5-py3-none-any.whl", hash = "sha256:c8864244621f87f58450364ea0a32e1bfcd87b4f19aad3dbe25ba690123adea5"},
-    {file = "easy_as_pypi_appdirs-1.1.5.tar.gz", hash = "sha256:93cd97f2ecd33489d5277ec4a768ba5ae915afcaac412a3caea0c839a316c64a"},
+    {file = "easy_as_pypi_appdirs-1.1.6-py3-none-any.whl", hash = "sha256:188aa82a8a1a19a2b9b84d7c0d6b1219555d6c7c94e02c4c046b4d984da2442d"},
+    {file = "easy_as_pypi_appdirs-1.1.6.tar.gz", hash = "sha256:0f3219fdd90c90b999d09bb62e4aca23a0a2333996aea978fedc8bef413f05b7"},
 ]
 
 [package.dependencies]
@@ -778,13 +781,13 @@ readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd
 
 [[package]]
 name = "easy-as-pypi-config"
-version = "1.0.2"
+version = "1.0.4"
 description = "Bootstrapped Config engine for your next Python CLI based on easy-as-pypi"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "easy_as_pypi_config-1.0.2-py3-none-any.whl", hash = "sha256:3c2d59a7c71147ab8b5f7db2c04bcbc663c0b46f6f15d26f69bd6f42933971f1"},
-    {file = "easy_as_pypi_config-1.0.2.tar.gz", hash = "sha256:c3fad34e35732dfd105b4efea439cca083997c53755b2f219dd2a8b6783b23ea"},
+    {file = "easy_as_pypi_config-1.0.4-py3-none-any.whl", hash = "sha256:5d18e08878883c3470cc9b4053791bb7009204439d75fe5953dad924fbc63882"},
+    {file = "easy_as_pypi_config-1.0.4.tar.gz", hash = "sha256:3af6b5beeb254650bfacef8bd9db4d389f8eb5c98e42fc583f4689b6b37ca31c"},
 ]
 
 [package.dependencies]
@@ -799,13 +802,13 @@ readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd
 
 [[package]]
 name = "easy-as-pypi-getver"
-version = "1.0.4"
+version = "1.0.5"
 description = "Determine package version from what pip last installed and what Git says"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "easy_as_pypi_getver-1.0.4-py3-none-any.whl", hash = "sha256:91026e661b2f1b7189cbeff30d18dfe839a586fcc905c7ec290cd564e4d4767c"},
-    {file = "easy_as_pypi_getver-1.0.4.tar.gz", hash = "sha256:8c57328324d97f08d1a96417151b457b691cc877c0604c4f9871fe4b5b262d6e"},
+    {file = "easy_as_pypi_getver-1.0.5-py3-none-any.whl", hash = "sha256:80d8a557d4d9da61b9b68c2cd2eb1c6ccc2d57d01e19b413e19606fede981a21"},
+    {file = "easy_as_pypi_getver-1.0.5.tar.gz", hash = "sha256:08462b7ae3ed7e5e44ac09671a4fdacded08557172b63462b38ef832d86bd14d"},
 ]
 
 [package.extras]
@@ -813,13 +816,13 @@ readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd
 
 [[package]]
 name = "easy-as-pypi-termio"
-version = "1.0.3"
+version = "1.0.4"
 description = "Click CLI conveniences for your next Python CLI based on easy-as-pypi"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "easy_as_pypi_termio-1.0.3-py3-none-any.whl", hash = "sha256:2bdae273ed58cdda581e66ae6b25e52cb7f065fccb5ee0f5f8a79ed8f7c4a3e7"},
-    {file = "easy_as_pypi_termio-1.0.3.tar.gz", hash = "sha256:3d7756ebc833a5e31ff75ef1a816038c0c3836639107b9129db42ded9e2a465d"},
+    {file = "easy_as_pypi_termio-1.0.4-py3-none-any.whl", hash = "sha256:8fe419b8de1dfcac1541d5cd3e1ea00e7327bf7edca192aa787ef9e7f3d1199f"},
+    {file = "easy_as_pypi_termio-1.0.4.tar.gz", hash = "sha256:df3fa149e70dcbeca29ad1a3e9f7740758f29bb1ece3b600db67e921b691f2ba"},
 ]
 
 [package.dependencies]
@@ -1498,13 +1501,13 @@ files = [
 
 [[package]]
 name = "nark"
-version = "3.2.6"
+version = "3.2.8"
 description = "Back end framework for journaling and time tracking apps (like `dob`!)"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "nark-3.2.6-py3-none-any.whl", hash = "sha256:d24add9b104e569fc2811342767e97acee363da0ab0193d6d9163c058eb55879"},
-    {file = "nark-3.2.6.tar.gz", hash = "sha256:33bd71b6f11c402e06ffcbc946a6ddb08d946d0c7da4ab36f3cace88ee613012"},
+    {file = "nark-3.2.8-py3-none-any.whl", hash = "sha256:630e02aa24d3c4d88a26d0348ef6150733f0a5b92e763ecab56d17cca2caca16"},
+    {file = "nark-3.2.8.tar.gz", hash = "sha256:8816a93f3208cd07954b4104b70cbf24ce80a365958763ff281e16479ddba347"},
 ]
 
 [package.dependencies]
@@ -1859,18 +1862,6 @@ files = [
 
 [package.dependencies]
 six = ">=1.5"
-
-[[package]]
-name = "python-editor"
-version = "1.0.4"
-description = "Programmatically open an editor, capture the result."
-optional = false
-python-versions = "*"
-files = [
-    {file = "python-editor-1.0.4.tar.gz", hash = "sha256:51fda6bcc5ddbbb7063b2af7509e43bd84bfc32a4ff71349ec7847713882327b"},
-    {file = "python_editor-1.0.4-py2-none-any.whl", hash = "sha256:5f98b069316ea1c2ed3f67e7f5df6c0d8f10b689964a4a811ff64f0106819ec8"},
-    {file = "python_editor-1.0.4-py3-none-any.whl", hash = "sha256:1bf6e860a8ad52a14c3ee1252d5dc25b2030618ed80c022598f00176adc8367d"},
-]
 
 [[package]]
 name = "python-editor-hotoffthehamster"

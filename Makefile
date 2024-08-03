@@ -22,7 +22,7 @@ SOURCE_DIR = src
 #   not a reasonable default we can assume. TL/DR, I'll allow this.
 #   - See MAKEFILE_LOCAL, below, for an easy way to customize this,
 #     without having to edit this file.
-EDITABLES_ROOT ?= $(shell echo ~/.kit/py)
+EDITABLES_ROOT ?= $(shell echo ~/.kit/dob)
 
 # Local dir wherein to place editable pyproject.toml,
 #   e.g., `.pyproject-editable/pyproject.toml`.
@@ -240,6 +240,25 @@ EAPP_MAKEFILE_COVERAGE_DISABLE ?=
 
 # Local-only (CI never linkcheck's).
 EAPP_MAKEFILE_LINKCHECK_DISABLE ?=
+
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+
+# GNU Make 4.3 (Debian) prints "Entering directory" and "Leaving directory"
+# lines for each sub-make (`make -C` call), but GNU Make 4.4 (macOS Homebrew)
+# does not print those lines by default.
+# - Our recipes handle progress messages themselves (and most recipes use
+#   the '@' prefix to suppress echoing the line). So let's inhibit the
+#   entering/leaving directory messages, too.
+# - To treat every line as though it were '@'-prefixed, define the special
+#   .SILENT target:
+#     .SILENT:
+#   Or, add the --silent flag:
+#     MAKEFLAGS += --silent
+ifndef VERBOSE
+MAKEFLAGS += --no-print-directory
+else
+MAKEFLAGS += --print-directory
+endif
 
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 
@@ -610,7 +629,7 @@ _depends_active_venv_unless_ci:
 # - Caveat: You need to clone dependencies to the same directory
 #           and tell make where to find it, e.g.,
 #
-#             EDITABLES_ROOT=~/.kit/py make develop
+#             EDITABLES_ROOT=~/.kit/dob make develop
 
 ifndef EAPP_MAKEFILE_DEVELOP_DEFINED
 
@@ -658,7 +677,6 @@ EDITABLE_PJS = \
 	easy-as-pypi-getver \
 	easy-as-pypi-termio \
 	human-friendly_pedantic-timedelta \
-	pep440-version-compare-cli \
 	python-editor-hotoffthehamster \
 	sqlalchemy-migrate-hotoffthehamster \
 	tempita-hotoffthehamster \
@@ -667,20 +685,15 @@ EDITABLE_PJS = \
 	dob-prompt \
 	dob-viewer \
 	nark \
-	\
-	dob-plugin-git-hip \
-	dob-plugin-hamster-dance \
-	dob-plugin-my-post-processor \
-	dob-plugin-stale-fact-goader \
 
 # ***
 
 # USAGE: Run `EDITABLES_ROOT=<path> make editable` to create dev-friendly
 # `.pyproject-editable/pyproject.toml` that installs project in editable mode.
 #
-# - E.g., after you've cloned EDITABLE_PJS projects to ~/.kit/py, run:
+# - E.g., after you've cloned EDITABLE_PJS projects to ~/.kit/dob, run:
 #
-#     EDITABLES_ROOT=~/.kit/py make editable
+#     EDITABLES_ROOT=~/.kit/dob make editable
 #
 # to create `.pyproject-editable/pyproject.toml` with the correct local paths.
 #
@@ -783,11 +796,11 @@ editable:
 # - This is called by `make develop` to prep all the dependencies, but
 #   you can also call it yourself, e.g.,
 #
-#     EDITABLES_ROOT=~/.kit/py make editables
+#     EDITABLES_ROOT=~/.kit/dob make editables
 editables:
 	@for project in $(EDITABLE_PJS); do \
+		echo "make editable -C \"$(EDITABLES_ROOT)/$${project}"\"; \
 		make editable -C "$(EDITABLES_ROOT)/$${project}"; \
-		echo; \
 	done
 .PHONY: editables
 

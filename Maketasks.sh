@@ -1,4 +1,4 @@
-# vim:tw=0:ts=2:sw=2:et:ft=sh
+# vim:tw=0:ts=2:sw=2:et:ft=bash
 # Author: Landon Bouma <https://tallybark.com/>
 # Project: https://github.com/<varies>
 # Pattern: https://github.com/doblabs/easy-as-pypi#🥧
@@ -304,6 +304,8 @@ make_editable () {
   # ***
 
   ensure_pyproject_dir_src_symlink "${EDITABLE_DIR}" "${SOURCE_DIR}"
+
+  echo "Editable project ready at: $(pwd)/${EDITABLE_DIR}/pyproject.toml"
 }
 
 ensure_pyproject_dir_src_symlink () {
@@ -349,7 +351,8 @@ poetry_install_to_venv () {
   local venv_default="$4"
   local pyproject_dir="${5:-.}"
 
-  command -v deactivate >/dev/null 2>&1 && deactivate  
+  # ALTLY: typeset -f deactivate >/dev/null && deactivate
+  test "$(command -v deactivate)" = "deactivate" && deactivate
 
   eval "$($(which pyenv) init -)"
 
@@ -610,7 +613,8 @@ gvim_verify_servername_running () {
 _pyenv_prepare_shell () {
   local venv_pyver="$1"
 
-  command -v deactivate >/dev/null 2>&1 && deactivate
+  # ALTLY: typeset -f deactivate >/dev/null && deactivate
+  test "$(command -v deactivate)" = "deactivate" && deactivate
 
   eval "$(~/.local/bin/pyenv init -)"
 

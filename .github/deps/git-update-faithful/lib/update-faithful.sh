@@ -38,7 +38,9 @@ UPDEPS_TEMP_PREFIX="update-faithful-sh-"
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 
 source_deps () {
-  # Ensure coreutils installed (from Linux pkg mgr, or from macOS Homebrew).
+  # Check for coreutils, macOS, or Homebrew `realpath`.
+  # - Lowest common denominator is macOS, which supports most basic
+  #   usage, e.g., `realpath <path>`, so avoid `realpath -s`, etc.
   _upful_insist_cmd 'realpath'
 
   # Load the logger library, from github.com/landonb/sh-logger.
@@ -74,8 +76,8 @@ source_dep_git_put_wise () {
   local put_wise_bin="$(dirname -- "$(realpath -- "$(command -v git-put-wise)")")"
 
   # CXREF: https://github.com/landonb/sh-git-nubs#🌰
-  #   ~/.kit/sh/sh-git-nubs/bin/git-nubs.sh
-  . "${put_wise_bin}/../deps/sh-git-nubs/bin/git-nubs.sh"
+  #   ~/.kit/sh/sh-git-nubs/lib/git-nubs.sh
+  . "${put_wise_bin}/../deps/sh-git-nubs/lib/git-nubs.sh"
 
   . "${put_wise_bin}/../lib/common_put_wise.sh"
   . "${put_wise_bin}/../lib/dep_apply_confirm_patch_base.sh"
@@ -421,6 +423,10 @@ examine_and_update_local_from_canon () {
 
 # ***
 
+# MAYBE/2024-04-02: Replace this block (and possibly remove
+# GPW sourcing, `source_dep_git_put_wise`) and replace with
+# new `git put-wise --scope` command.
+# - But hey, this currently works, why rock the boat.
 print_head_sha () {
   local any_repo_file_path="$1"
   local use_scoping="${2:-false}"
@@ -442,9 +448,10 @@ print_head_sha () {
     fi
 
     # identify-scope postfixes '^' parent shortcut, but we'll
-    # deference for the commit message.
+    # deference so caller doesn't have to (and can call, e.g.,
+    # git_sha_shorten).
 
-    printf "%s" "$(git rev-parse "${canon_head}")"
+    printf "%s" "$(git rev-parse --verify --end-of-options "${canon_head}")"
   )
 }
 
@@ -929,7 +936,12 @@ apply_canon_permissions_to_follower () {
   local canon_file_absolute="$2"
 
   # Copy file modes.
-  command chmod --reference="${canon_file_absolute}" -- "${local_file}"
+  $(chmod_kludge) --reference="${canon_file_absolute}" -- "${local_file}"
+}
+
+# Because `chmod --reference` and `chmod -- <>`.
+chmod_kludge () {
+  command -v gchmod || command -v chmod
 }
 
 stage_follower () {
@@ -982,7 +994,18 @@ print_update_faithful_progress_info () {
   fi
 
   info " ${action_preamble} $(font_emphasize "${what_happn}")" \
-    "$(font_highlight "$(realpath -s "${local_file}")")"
+    "$(font_highlight "$(realpath_s "${local_file}")")"
+}
+
+# All because macOS built-in does not support `realpath -s`.
+realpath_s () {
+  local local_file="$1"
+  
+  (
+    cd "$(dirname -- "${local_file}")"
+
+    printf "%s/%s" "$(pwd -L)" "$(basename -- "${local_file}")"
+  )
 }
 
 # ***
@@ -1297,6 +1320,8 @@ venv_activate () {
   local throwaway_dir
   throwaway_dir=$(mktemp -d -t ${UPDEPS_VENV_PREFIX}--venv_activate--XXXX)
 
+  trap_add "cd && command rm -rf -- \"${throwaway_dir}\"" EXIT
+
   cd "${throwaway_dir}"
 
   venv_deactivate
@@ -1309,14 +1334,15 @@ venv_activate () {
   # ALTLY:
   #   python3 -m pip install --upgrade --quiet pip
 
-  trap "command rm -rf -- \"${throwaway_dir}\"" EXIT
-
   cd - >/dev/null
 }
 
+# Note that `deactivate` might be on PATH, e.g.,
+#   /opt/homebrew/Cellar/pyenv-virtualenv/1.2.3/shims/deactivate
+# So only call if it's defined as a shell function.
+# - ALTLY: Check: [ -n "${VIRTUAL_ENV}" ]
 venv_deactivate () {
-  # Aka 'off'.
-  type deactivate >/dev/null 2>&1 && deactivate || true
+  typeset -f deactivate >/dev/null && deactivate || true
 }
 
 # TRACK/2023-10-17 19:36: Using single -q so only warnings or worse printed:
@@ -1469,7 +1495,13 @@ update_faithfuls_commit_changes () {
 
   local versiony=""
   if command -v git-bump-version-tag > /dev/null; then
-    versiony=" [$(cd "${canon_base_absolute}" && git-bump-version-tag -c)]"
+    local version
+    version="$(cd "${canon_base_absolute}" && git-bump-version-tag --cur -)"
+
+    if [ -z "${version}" ]; then
+      version="n/a"
+    fi
+    versiony=" [${version}]"
   fi
 
   local sourcery=""
@@ -1523,6 +1555,44 @@ handle_failed_state () {
 
   git reset HEAD > /dev/null
 }
+
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+
+# REFER: https://stackoverflow.com/questions/3338030/multiple-bash-traps-for-the-same-signal
+#   https://stackoverflow.com/a/7287873/5332257
+
+# Not POSIX-friendly: `trap -p` is not POSIX.
+#
+# "appends a command to a trap
+#  - 1st arg: code to add
+#  - remaining args: names of traps to modify"
+trap_add () {
+  trap_add_cmd="$1"
+
+  shift \
+    || fatal "${FUNCNAME} usage error"
+
+  for trap_add_name in "$@"; do
+    trap -- "$(
+      # helper fn to get existing trap command from output
+      # of trap -p
+      extract_trap_cmd () { printf '%s\n' "$3"; }
+      # print existing trap command with newline
+      eval "extract_trap_cmd $(trap -p "${trap_add_name}")"
+      # print the new trap command
+      printf '%s\n' "${trap_add_cmd}"
+    )" "${trap_add_name}" \
+      || fatal "unable to add to trap ${trap_add_name}"
+  done
+}
+
+# `declare` is also not POSIX.
+#
+# "set the trace attribute for the above function. this is
+#  required to modify DEBUG or RETURN traps because functions
+#  don't inherit them unless the trace attribute is set"
+#
+declare -f -t trap_add
 
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 

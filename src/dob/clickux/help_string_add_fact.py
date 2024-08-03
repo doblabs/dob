@@ -452,12 +452,12 @@ def ADD_FACT_COMMON(ctx):
         This is because you'd probably need to escape the pound symbol to use it.
         That is, because Bash and other shells interpret an octothorpe
         as the start of a comment, you have to use quotes around it ({codehi}"#"{reset})
-        or escape it ({codehi}\#{reset}) to use it.
+        or escape it ({codehi}\\#{reset}) to use it.
 
         E.g., these are all acceptable tags:
 
          \b
-         {codehi}@tag1 @"tag2 too" "#tag3" @give-it-up-for-tag4 \#tag5 '#'tag6{reset}
+         {codehi}@tag1 @"tag2 too" "#tag3" @give-it-up-for-tag4 \\#tag5 '#'tag6{reset}
 
         Also be aware that you need to use quotes if a tag contains whitespace.
         E.g., these are all acceptable ways to specify tags:
@@ -501,7 +501,7 @@ def ADD_FACT_COMMON(ctx):
         Use a tag to remember what mode you used to travel.
 
          \b
-         {codehi}{rawname} until 09:15 Commuting \#bike{reset}
+         {codehi}{rawname} until 09:15 Commuting \\#bike{reset}
 
         - Start working on a ticket.
 
